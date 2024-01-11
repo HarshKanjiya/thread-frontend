@@ -26,7 +26,23 @@
   </button>
 
   @if (isOpen) {
-  <div @dropBody class="flex flex-col gap-3 px-4 py-3 absolute z-10 top-[100%]">
+  <div
+    @dropBody
+    class="absolute z-10 top-[100%] flex flex-col justify-between gap-1 bg-white dark:bg-black rounded-2xl w-full border border-stone-300 dark:border-stone-900"
+  >
+    @for (item of Options; track $index) {
+    <button
+      type="button"
+      class="px-4 py-2 w-full flex justify-start items-center"
+      (click)="clickHandler(item)"
+    >
+      {{ item }}
+    </button>
+    @if ($index + 1 !== Options.length) {
+    <hr class="w-full border-stone-300 dark:border-stone-900" />
+
+    } }
+
     <ng-content></ng-content>
   </div>
   }

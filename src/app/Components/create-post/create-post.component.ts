@@ -1,14 +1,19 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
-import { DropdownComponent } from '../../UI/dropdown/dropdown.component';
+import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
+import { Observable } from 'rxjs';
 
 
 interface IOptionType {
   option: string,
   id: number
+}
+
+const replyMapper = {
+  "Any one": "ANY", "Following": "FOLLOWING", "Mentioned": "MENTIONED", "None": "NONE"
 }
 
 const defaultOptions = [{ id: 0, option: "Yes" }, { id: 1, option: "No" }]
@@ -40,17 +45,27 @@ const defaultOptions = [{ id: 0, option: "Yes" }, { id: 1, option: "No" }]
 })
 export class CreatePostComponent {
 
+  @Input() PostType_FromParent: string | null = null
+  @Input() postTypeHelperId_FromParent: string | null = null
+
   threadInputText: string = ""
   count: number = 0
 
-  threadType: "TEXT" | "POLL" = "POLL"
+  threadType: "TEXT" | "POLL" = "TEXT"
 
-  replyAccess: "ANY" | "FOLLOWING" | "MENTIONED" = "ANY"
+  replyAccess: "ANY" | "FOLLOWING" | "MENTIONED" | "NONE" = "ANY"
 
   postType: "PARENT" | "CHILD" | "QUOTE" | "REPOST" = "PARENT"
   postTypeHelperId: string | null = null
 
   options: IOptionType[] = defaultOptions
+
+  replyOptions = ["Any one", "Following", "Mentioned", "None"]
+  selectedReplyOption: "Any one" | "Following" | "Mentioned" | "None" = "Any one"
+
+  selectedFile: File[] = [];
+  selectedFileBase64: File[] = [];
+
 
 
   constructor(public dialog: DialogService) { }
@@ -79,16 +94,38 @@ export class CreatePostComponent {
   changeThreadType(type: "TEXT" | "POLL") {
     this.options = defaultOptions
     this.threadType = type
+  }
 
+  changeSelectedOption(e: any) {
+    this.selectedReplyOption = e
   }
 
   stopPropagation(e: any) {
     e.stopPropagation()
   }
 
+  onFileChange(event: any) {
+    this.selectedFile.push(event.target.files[0])
+    // this.selectedFileBase64
 
+    console.log('====================================');
+    console.log(this.getFileAsBase64(event.target.files[0]));
+    console.log('====================================');
+  }
+
+  getFileAsBase64(file: File) {
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        return reader.result as string
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   SubmitThread($e: any) {
+    console.log('$e :>> ', $e);
+    console.log(':>> ', this.selectedFile);
     let _temp: any = {
       authorId: "ID",
       type: this.postType,
@@ -104,8 +141,6 @@ export class CreatePostComponent {
     }
 
     _temp["content"] = _content
-
-    console.log('option :>> ', $e, _temp);
   }
 }
 

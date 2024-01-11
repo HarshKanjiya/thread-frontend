@@ -1,12 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
   imports: [],
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss',
   animations: [
     trigger("dropBody", [
       transition(":enter", [
@@ -30,10 +29,19 @@ export class DropdownComponent {
   @Input() label!: string
   @Input() opnerClass!: string
   @Input() itemsClass!: string
+  @Input() Options!: string[]
 
+  @Output() selectedOption = new EventEmitter<string>()
   isOpen: boolean = false
 
   setIsOpen() {
     this.isOpen = !this.isOpen;
+  }
+
+  clickHandler(value: string) {
+    console.log(value);
+
+    this.setIsOpen();
+    this.selectedOption.emit(value)
   }
 }
