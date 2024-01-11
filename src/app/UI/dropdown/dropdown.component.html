@@ -1,0 +1,33 @@
+<div class="relative">
+  <button
+    type="button"
+    (click)="setIsOpen()"
+    class="py-3 px-4 inline-flex items-center gap-x-2 bg-white dark:bg-black {{
+      opnerClass
+    }}"
+  >
+    @if (label && label.length > 0) {
+    {{ label }}
+    }@else { Action }
+    <svg
+      class="hs-dropdown-open:rotate-180 w-4 h-4"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </button>
+
+  @if (isOpen) {
+  <div @dropBody class="flex flex-col gap-3 px-4 py-3 absolute z-10 top-[100%]">
+    <ng-content></ng-content>
+  </div>
+  }
+</div>

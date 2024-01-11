@@ -5,6 +5,6 @@ import { HostBinding, Injectable, signal } from '@angular/core';
 })
 export class ThemeService {
 
-  darkTheme = signal<boolean>(false)
+  darkTheme = signal<boolean>(true)
 
 }

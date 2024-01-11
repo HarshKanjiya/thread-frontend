@@ -1,13 +1,168 @@
-<div class="w-full px-5 py-2 flex gap-5 justify-center items-center">
-  <a [routerLink]="['feed']" routerLinkActive="router-link-active">home</a>
-  <a [routerLink]="['search']" routerLinkActive="router-link-active">search</a>
-  <a [routerLink]="['activity']" routerLinkActive="router-link-active"
-    >activity</a
-  >
-  <a [routerLink]="['@harxh_here']" routerLinkActive="router-link-active"
-    >profile</a
-  >
-  <a [routerLink]="['admin']" routerLinkActive="router-link-active">admin</a>
-  <a [routerLink]="['login']" routerLinkActive="router-link-active">login</a>
-  <a [routerLink]="['signup']" routerLinkActive="router-link-active">signup</a>
+<div
+  class="hidden w-full px-5 py-4 sm:flex gap-5 justify-center items-center bg-[rgba(0,0,0,0.05)] backdrop-blur-md"
+>
+  <div class="container">
+    <div class="flex w-full justify-between items-center">
+      <div>
+        <a
+          class="w-10 h-10 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <!-- logo -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            shape-rendering="geometricPrecision"
+            text-rendering="geometricPrecision"
+            image-rendering="optimizeQuality"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            viewBox="0 0 512 512"
+            class="fill-black dark:fill-white"
+          >
+            <path
+              fill-rule="nonzero"
+              d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <div class="flex sm:gap-5 md:gap-10 items-center">
+        <a
+          [routerLink]="['']"
+          routerLinkActive="router-link-active"
+          class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            xmlns:xlink="http://www.w3.org/2000/svg"
+            x="0"
+            y="0"
+            viewBox="0 0 110 110"
+            xml:space="preserve"
+            class="fill-black dark:fill-white"
+          >
+            <g>
+              @if (router.url === "/") {
+              <path
+                d="M 83.5 100 L 16.5 100 C 7.5 100 0 92.4 0 83.3 L 0 46.8 C 0 42.2 2 37.7 5.5 34.6 L 39 4.2 C 45.5 -1.4 54.5 -1.4 61 4.2 L 94.5 34.6 C 98 37.6 100 42.2 100 46.8 L 100 83.3 C 99.5 92.9 92.5 100 83.5 100 Z"
+                opacity="1"
+              ></path>
+              }@else{
+              <path
+                d="M83.5 100h-67C7.5 100 0 92.4 0 83.3V46.8c0-4.6 2-9.1 5.5-12.2L39 4.2c6.5-5.6 15.5-5.6 22 0l33.5 30.4c3.5 3 5.5 7.6 5.5 12.2v36.5c-.5 9.6-7.5 16.7-16.5 16.7zM50 10.3c-1.5 0-3 .5-4.5 1.5L12 42.2c-1.5 1-2 3-2 5.1v36.5c0 3.5 3 6.6 6.5 6.6H83c3.5 0 6.5-3 6.5-6.6V47.3c0-2-1-3.5-2-5.1L54 11.8c-1-1-2.5-1.5-4-1.5z"
+                opacity="1"
+              ></path>
+              }
+            </g>
+          </svg>
+        </a>
+
+        <a
+          [routerLink]="['search']"
+          routerLinkActive="router-link-active"
+          class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 42 44"
+            xml:space="preserve"
+            class="fill-black mb-[0.1rem] dark:fill-white"
+          >
+            <g>
+              <path
+                d="m40.285 37.46-6.486-6.486a14.738 14.738 0 0 0 3.044-8.988c0-3.97-1.546-7.701-4.353-10.508a14.763 14.763 0 0 0-10.508-4.353c-3.969 0-7.7 1.546-10.508 4.353-5.793 5.794-5.793 15.222 0 21.016a14.762 14.762 0 0 0 10.508 4.353c3.294 0 6.415-1.079 8.989-3.045l6.486 6.487c.39.39.902.586 1.414.586s1.024-.196 1.414-.586a2 2 0 0 0 0-2.829zm-25.982-7.794c-4.235-4.235-4.234-11.125 0-15.36a10.792 10.792 0 0 1 7.68-3.18 10.79 10.79 0 0 1 7.679 3.18 10.79 10.79 0 0 1 3.181 7.68c0 2.901-1.13 5.628-3.181 7.68s-4.778 3.18-7.68 3.18c-2.9 0-5.628-1.13-7.68-3.18z"
+                opacity="1"
+              ></path>
+            </g>
+            @if (router.url === "/search") { }
+          </svg>
+        </a>
+
+        <button
+          (click)="openDialog()"
+          class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-black dark:stroke-white"
+          >
+            <path
+              d="M18.9445 9.1875L14.9445 5.1875M18.9445 9.1875L13.946 14.1859C13.2873 14.8446 12.4878 15.3646 11.5699 15.5229C10.6431 15.6828 9.49294 15.736 8.94444 15.1875C8.39595 14.639 8.44915 13.4888 8.609 12.562C8.76731 11.6441 9.28735 10.8446 9.946 10.1859L14.9445 5.1875M18.9445 9.1875C18.9445 9.1875 21.9444 6.1875 19.9444 4.1875C17.9444 2.1875 14.9445 5.1875 14.9445 5.1875M20.5 12C20.5 18.5 18.5 20.5 12 20.5C5.5 20.5 3.5 18.5 3.5 12C3.5 5.5 5.5 3.5 12 3.5"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        <a
+          [routerLink]="['/activity']"
+          routerLinkActive="router-link-active"
+          class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="stroke-black dark:stroke-white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.7 4C18.87 4 21 6.98 21 9.76C21 15.39 12.16 20 12 20C11.84 20 3 15.39 3 9.76C3 6.98 5.13 4 8.3 4C10.12 4 11.31 4.91 12 5.71C12.69 4.91 13.88 4 15.7 4Z"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+
+        <a
+          [routerLink]="['/' + userName]"
+          routerLinkActive="router-link-active"
+          class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 20 20"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            class="fill-black dark:fill-white"
+          >
+            <g id="Page-1" stroke="none" stroke-width="1">
+              <g
+                id="Dribbble-Light-Preview"
+                transform="translate(-140.000000, -2159.000000)"
+              >
+                <g id="icons" transform="translate(56.000000, 160.000000)">
+                  <path
+                    d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598"
+                    id="profile_round-[#1342]"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </a>
+      </div>
+      <div>
+        <button (click)="changeTheme()">switch</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+@if(dialog.dialogVisible()){
+<app-create-post />
+}

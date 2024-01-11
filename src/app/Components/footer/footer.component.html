@@ -1,0 +1,19 @@
+<div
+  class="sm:hidden w-full px-5 py-2 flex gap-5 justify-center items-center fixed bottom-0"
+>
+  <a [routerLink]="['']" routerLinkActive="router-link-active">home</a>
+  <a [routerLink]="['search']" routerLinkActive="router-link-active">search</a>
+  <a [routerLink]="['activity']" routerLinkActive="router-link-active"
+    >activity</a
+  >
+  <a [routerLink]="['@harxh_here']" routerLinkActive="router-link-active"
+    >profile</a
+  >
+  <a [routerLink]="['admin']" routerLinkActive="router-link-active">admin</a>
+  <a [routerLink]="['login']" routerLinkActive="router-link-active">login</a>
+  <a [routerLink]="['signup']" routerLinkActive="router-link-active">signup</a>
+
+  <div>
+    <button class="bg-white" (click)="changeTheme()">switch</button>
+  </div>
+</div>

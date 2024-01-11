@@ -16,24 +16,24 @@ export const routes: Routes = [
     path: "admin",
     component: AdminComponent,
     children: [
-      { path: "dashboard", component: AdminHomeComponent, pathMatch: "full" },
-      { path: "subscriptions", component: AdminSubscriptionsComponent, pathMatch: "full" },
-      { path: "reports", component: AdminReportsComponent, pathMatch: "full" },
+      { path: "dashboard", component: AdminHomeComponent, pathMatch: "full", title: "Admin | Dashboard" },
+      { path: "subscriptions", component: AdminSubscriptionsComponent, pathMatch: "full", title: "Admin | Income" },
+      { path: "reports", component: AdminReportsComponent, pathMatch: "full", title: "Admin | Reports" },
     ]
   },
 
-  { path: "login", component: LoginPageComponent, pathMatch: "full" },
-  { path: "signup", component: SignUpPageComponent, pathMatch: "full" },
+  { path: "login", component: LoginPageComponent, pathMatch: "full", title: "Threads | Login" },
+  { path: "signup", component: SignUpPageComponent, pathMatch: "full", title: "Threads | Signup" },
+
 
   {
     path: "",
     component: IndexComponent,
     children: [
-      { path: "feed", component: HomePageComponent, pathMatch: "full" },
-      { path: "search", component: SearchPageComponent, pathMatch: "full" },
-      { path: "activity", component: ActivityComponent, pathMatch: "full" },
-      { path: ":id", component: ProfilePageComponent },
+      { path: "", component: HomePageComponent, pathMatch: "full", title: "Threads | Feed" },
+      { path: "search", component: SearchPageComponent, pathMatch: "full", title: "Threads | Search" },
+      { path: "activity", component: ActivityComponent, pathMatch: "full", title: "Threads | Activity" },
+      { path: ":id", component: ProfilePageComponent, title: "Threads | Profile" },
     ]
-  },
-
+  }
 ];
