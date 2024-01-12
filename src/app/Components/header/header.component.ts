@@ -3,10 +3,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DialogService } from '../../Services/dialog.service';
 import { ThemeService } from '../../Services/theme.service';
 import { CreatePostComponent } from '../create-post/create-post.component';
+import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CreatePostComponent],
+  imports: [RouterLink, CreatePostPopUpComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

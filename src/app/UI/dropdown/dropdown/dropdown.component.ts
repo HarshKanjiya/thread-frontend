@@ -30,8 +30,9 @@ export class DropdownComponent {
   @Input() opnerClass!: string
   @Input() itemsClass!: string
   @Input() Options!: string[]
+  @Input() OptionsMap!: any
 
-  @Output() selectedOption = new EventEmitter<string>()
+  @Output() selectedOption = new EventEmitter<any>()
   isOpen: boolean = false
 
   setIsOpen() {
@@ -39,9 +40,8 @@ export class DropdownComponent {
   }
 
   clickHandler(value: string) {
-    console.log(value);
-
     this.setIsOpen();
-    this.selectedOption.emit(value)
+
+    this.selectedOption.emit({ label: value, code: this.OptionsMap[value] })
   }
 }

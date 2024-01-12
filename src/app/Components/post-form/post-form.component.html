@@ -15,8 +15,33 @@
       <h2 class="text-white font-bold">New Thread</h2> -->
 <div
   (click)="stopPropagation($event)"
-  class="relative px-5 py-5 flex flex-col border-2 border-stone-300 dark:border-[#232323] transform rounded-xl mx-auto bg-white dark:bg-black text-left shadow-xl sm:my-8 w-full"
+  class="relative flex flex-col gap-3 mx-auto bg-white dark:bg-black text-left shadow-xl py-2 w-full"
 >
+  <button
+    class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-white dark:bg-black rounded-full m-1"
+    type="button"
+    (click)="RemoveMeHandler()"
+  >
+    <div class="">
+      <svg
+        class="fill-stone-400 dark:fill-stone-600"
+        viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z"
+          ></path>
+        </g>
+      </svg>
+    </div>
+  </button>
   <div class="flex gap-3">
     <div class="flex flex-col justify-between gap-2 items-center min-h-max">
       <img
@@ -26,7 +51,7 @@
       <div
         class="w-[2.5px] rounded-md h-max flex-1 content-[' '] bg-stone-300 dark:bg-stone-800"
       ></div>
-      @if( !AddToThreadButton ){
+      @if (!AddToThreadButton) {
       <img
         class="h-4 w-4 rounded-full"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACUCAMAAAA02EJtAAAAMFBMVEXk5ueutLfn6eqqsLTM0NLq7O26v8KnrrHf4eLHy82xt7rS1dfY29zU2Nnb3t/DyMryEXPkAAAD7klEQVR4nO2c2XLkIAwAQdz4+v+/XRg7GydxPICwoCr0U3bz0iULcYkwNhgMBoPBYDAYDAaDwaArlAJm54B9/dgtwGanPT/wWlro0RbYOmlh+Jnwz21hndmCmjcv+E+E0M6q1nonwOoLzf+4bvIA7GbuTLngUx9pAMvlp/8qq20Hrmp75/nCz81drX4b0h0jm5umiUZX1zSukCwaEC1drX8veI7r1s41/esfrrKRq9oSR9SJNnUApvvCf4lfW5iu+aJxLmgR1txE3TELuSvI/ETdseSqhaJcUFes8qDSj6xS0RhWUlFEUIMrqSpLXU9dQTtnzeWiAU+oCg4RVE46vULeiuoHjm4Pawtm/zOazBQ1/iN+plJVZdP/J4JsIaCQplyQbQktWpVswsJV1QjVuIIJreqpVCValVOpOrSpIFpfQ9op1R1mqP5tVbJcxVcAqo0AerXCyYoVW9CmZKtA/BqATBWwCSAclapC7le4mKjWq+iZlW4XwFbs3orwiA0ZVcITNig4Wj9Deca64FTpRLNvgb4iNOWtO+okiGpZdagW3Vkc0J2tvECcWoiFVpWx4tJKHFRMvaK/ECwsArTDf6f04KLFbWBZCpCPqZ0C01bdC9nFtc1lcAQyN1mC6lTtyjWvJcCT3wSfUBlloHVbGCzJ5VW3brYD+77NLmJoL4F/IekIi2yPeot637/YRfdiBKwTN7LGN5qiLoHfs0D4qbXdNxST2n+Lbfin35ZuWoI/iY3hmxbGiJelMVy7pc8edsZehdMuUjonp9ke/9EpEFA78ccuTeF4ZjFNMaYBKeW0zOv+i24I0YtZ6i+nWK83OXeQCADWLk7zfSj9Wq7Cr8MIW9sNMVA2xvKu+H8pXCG+UxNbYFPJqUV8gkOqCXbSt9/8Jrom2FLlLrDl+mlNKsZvJA9FACbspUXEy6dlwcrEYfQOIdyTWRuWJB55YXGW9c/JKlnj05/x8pniNet6Ef1APHCDcbN2RspulbMgYftUjJcVjzFDSOt/+09MvU0irJh25QSEr5SxKv0ApZwqSQDuyY//QZVmBuR1aoYrMgng4TQ9uyKng+dq1E88qhCQxTSCOYCt0KaW6Vqqim1QKKCwDoCkqFLfKLosAnxHdQFFbU2JB+fVXfNvYRTp4D+Rna6AbKRBkPsaC9VHgyQvBbAPqjDkdgw0E+WxYygjBUoeflcka9JqUPzPpG8KVMNMjeQ8HGo4/HdSi0CFlz9I0l+6th1UEZ9Yr1qW/wOTGNS5eVC5SMyACo8p0KTNWOinnzVI6x1Sjev/i7S/dwBdqCZNWNim/zokjavJiPak/ZmmVfZA2tMR6IIk1cEf4h/bxDWtKov23AAAAABJRU5ErkJggg=="
@@ -225,6 +250,7 @@
           <input
             placeholder="type your option"
             name="option {{ item.id }}"
+            (keyup)="this.SubmitThread()"
             [(ngModel)]="options[$index].option"
             class="rounded-lg w-full text-sm px-4 py-2 bg-white outline-none dark:bg-black placeholder:text-[#676767]"
           />
@@ -289,36 +315,13 @@
       </div>
     </div>
   </div>
-
-  @if(AddToThreadButton){
-  <app-post-form
-    [allowAddToThread]="AddToThreadButton"
-    (RemoveMe)="removeMeFromChildThread($event)"
-    (submitionFromChild)="childSubmissionHandler($event)"
-    [childLevel]="0"
-  ></app-post-form>
-  }
-
-  <div class="flex justify-between items-center mt-7">
-    <div class="">
-      <app-dropdown
-        opnerClass="text-stone-600 dark:text-stone-400 text-sm font-light"
-        [label]="selectedReplyOption + ' can Reply'"
-        [Options]="replyOptions"
-        [OptionsMap]="replyOptionsMap"
-        (selectedOption)="changeSelectedReplyOption($event)"
-      >
-      </app-dropdown>
-    </div>
-    <button
-      (click)="SubmitThread()"
-      type="submit"
-      class="disabled:opacity-40 disabled:hover:bg-white bg-black text-white dark:text-black border border-gray-300 focus:outline-none font-medium rounded-full text-sm px-4 py-2 dark:bg-white hover:bg-[#202020] dark:hover:bg-slate-100"
-    >
-      Post
-    </button>
-  </div>
 </div>
-<!-- </div>
-  </div>
-</div> -->
+
+@if (AddToThreadButton) {
+<app-post-form
+  [allowAddToThread]="allowAddToThread"
+  (RemoveMe)="removeMeFromChildThread($event)"
+  (submitionFromChild)="childSubmissionHandler($event)"
+  [childLevel]="childLevel"
+></app-post-form>
+}

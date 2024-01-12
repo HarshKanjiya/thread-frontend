@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
-import { PostFormComponent } from '../post-form/post-form.component';
 
 
 interface IOptionType {
@@ -17,38 +16,24 @@ interface IOptionType {
 const defaultOptions = [{ id: 0, option: "Yes" }, { id: 1, option: "No" }]
 
 @Component({
-  selector: 'app-create-post',
+  selector: 'app-post-form',
   standalone: true,
-  imports: [FormsModule, TextareaAutoresizeDirective, DropdownComponent, PostFormComponent],
-  templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.scss',
-  animations: [
-    trigger("inOutPaneAnimation", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "scale(0.97)" }),
-        animate(
-          "150ms ease-in-out",
-          style({ opacity: 1, transform: "scale(1)" })
-        )
-      ]),
-      transition(":leave", [
-        style({ opacity: 1, transform: "scale(1)" }),
-        animate(
-          "1000ms ease-in-out",
-          style({ opacity: 0, transform: "scale(0.97)" })
-        )
-      ])
-    ])
-  ]
+  imports: [FormsModule, TextareaAutoresizeDirective, DropdownComponent], templateUrl: './post-form.component.html',
+  styleUrl: './post-form.component.scss'
 })
-export class CreatePostComponent {
-
+export class PostFormComponent {
   @Input() PostType_FromParent: string | null = null
   @Input() postTypeHelperId_FromParent: string | null = null
   @Input() allowAddToThread: boolean = true
+  @Input() childLevel: number = 1
 
+  ngOnInit() {
+    this.childLevel++
+  }
 
   @Output() submition = new EventEmitter<any>()
+  @Output() submitionFromChild = new EventEmitter<any>()
+  @Output() RemoveMe = new EventEmitter<boolean>()
 
   threadInputText: string = ""
   count: number = 0
@@ -59,7 +44,7 @@ export class CreatePostComponent {
 
   replyAccess: "ANY" | "FOLLOWING" | "MENTIONED" | "NONE" = "ANY"
 
-  postType: "PARENT" | "CHILD" | "QUOTE" | "REPOST" = "PARENT"
+  postType: "PARENT" | "CHILD" | "QUOTE" | "REPOST" = "CHILD"
   postTypeHelperId: string | null = null
 
   options: IOptionType[] = defaultOptions
@@ -74,8 +59,6 @@ export class CreatePostComponent {
   selectedFile: File[] = [];
   selectedFileBase64: string[] = []
 
-  dataBeforeSubmit: any[] = []
-
 
   constructor(public dialog: DialogService) { }
 
@@ -84,12 +67,18 @@ export class CreatePostComponent {
     this.AddToThreadButton = !this.AddToThreadButton
   }
 
+  RemoveMeHandler() {
+    this.RemoveMe.emit(false)
+  }
+
   removeMeFromChildThread(e: boolean) {
     this.AddToThreadButton = e
   }
 
   textAreaCounter(e: any) {
     this.count = e.target.value.length
+
+    this.SubmitThread()
   }
 
   addOption() {
@@ -111,11 +100,15 @@ export class CreatePostComponent {
   changeThreadType(type: "TEXT" | "POLL") {
     this.options = defaultOptions
     this.threadType = type
+
+    this.SubmitThread()
   }
 
   changeSelectedReplyOption(e: any) {
     this.replyAccess = e.code
     this.selectedReplyOption = e.label
+
+    this.SubmitThread()
   }
 
   stopPropagation(e: any) {
@@ -132,6 +125,8 @@ export class CreatePostComponent {
       }
     }
     this.getFileAsBase64(event)
+
+    this.SubmitThread()
   }
 
   getFileAsBase64(event: any) {
@@ -172,40 +167,22 @@ export class CreatePostComponent {
 
     this.selectedFile = [...this.selectedFile.slice(0, index), ...this.selectedFile.slice(index + 1)]
     this.selectedFileBase64 = [...this.selectedFileBase64.slice(0, index), ...this.selectedFileBase64.slice(index + 1)]
+
+
+    this.SubmitThread()
   }
 
 
-  childSubmissionHandler(event: any) {
-
-
-
-    // this.dataBeforeSubmit = this.dataBeforeSubmit.map((thread) => {
-    //   if (thread.level !== event.level) {
-    //     this.dataBeforeSubmit.push(event)
-    //   }
-    //   else {
-    //     thread = event
-    //   }
-    // })
-
-    let _temp = [...this.dataBeforeSubmit]
-
-    _temp = _temp.filter((i: any) => i.level !== event.level)
-
-    _temp.push(event)
-
-    this.dataBeforeSubmit = _temp
-    // console.log('_temp :>> ', event);
-
+  childSubmissionHandler(e: any) {
+    console.log('e :>> ', e);
+    this.submitionFromChild.emit(e)
   }
-
-
 
   SubmitThread() {
     let _temp: any = {
+      level: this.childLevel,
       authorId: "ID",
       type: this.postType,
-      replyAccess: this.replyAccess,
     }
 
     if (this.postType !== "PARENT") _temp["typeHelperId"] = this.postTypeHelperId
@@ -235,12 +212,7 @@ export class CreatePostComponent {
 
 
     _temp["content"] = _content
-    _temp["child"] = this.dataBeforeSubmit
 
-
-
-    this.submition.emit(_temp)
+    this.submitionFromChild.emit(_temp)
   }
 }
-
-
