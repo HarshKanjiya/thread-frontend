@@ -1,10 +1,10 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DialogService } from '../../Services/dialog.service';
 import { ThemeService } from '../../Services/theme.service';
-import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -36,34 +36,44 @@ export class HeaderComponent {
 
   visible: boolean = false;
 
-  isOpen: boolean = true
-
-  @ViewChild('toggleButton') toggleButton!: ElementRef;
-  @ViewChild('menu') menu!: ElementRef;
+  isOpen: boolean = false
 
 
-
-
-  constructor(private themeService: ThemeService, private activatedRoute: ActivatedRoute, public router: Router, public dialog: DialogService, private renderer: Renderer2) {
-    this.renderer.listen('window', 'click', (e: Event) => {
-      console.log("click");
-
-
-      if (e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement) {
-        console.log("click outside");
-        this.isOpen = false;
-      }
-    });
+  @ViewChild("menu") menu !: ElementRef
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    if (!this.menu.nativeElement.contains(event.target) && this.isOpen) {
+      // Clicked outside the element, handle it here
+      this.setIsOpen()
+    }
   }
+
+
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService) { }
 
 
   setIsOpen() {
     this.isOpen = !this.isOpen
-    console.log('object :>> ', this.isOpen);
   }
 
-  menuClickHandler(item: string) {
-    console.log('item :>> ', item);
+  menuClickHandler(val: string) {
+
+    switch (val) {
+      case 'theme':
+        this.changeTheme()
+        break
+      case 'setting':
+        break
+      case 'about':
+        break
+      case 'report':
+        break
+      case 'logout':
+        break
+    }
+
+    this.setIsOpen()
+
   }
 
   showDialog() {
@@ -77,4 +87,9 @@ export class HeaderComponent {
   openDialog() {
     this.dialog.dialogVisible.set(true)
   }
+
+  removePopUp() {
+    this.dialog.dialogVisible.set(false)
+  }
+
 }

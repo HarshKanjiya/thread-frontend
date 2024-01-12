@@ -1,12 +1,12 @@
 <div
-  class="hidden w-full px-5 py-1 sm:flex fixed gap-5 justify-center z-[1000] items-center bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg"
+  class="hidden w-full px-5 py-1 sm:flex fixed z-20 gap-5 justify-center items-center bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg"
 >
   <div class="w-full max-w-[1220px]">
     <div class="flex w-full justify-between items-center">
       <!-- logo -->
       <div>
         <div
-          class="w-10 h-10 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+          class="w-12 h-12 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
         >
           <!-- logo -->
           <svg
@@ -30,8 +30,9 @@
       <!-- menu -->
       <div class="flex gap-1 justify-center items-center">
         <button
+          (click)="removePopUp()"
           [routerLink]="['']"
-          class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+          class="rounded-lg px-6 py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
         >
           <div
             class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -54,6 +55,7 @@
 
         <button
           [routerLink]="['search']"
+          (click)="removePopUp()"
           class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
         >
           <div
@@ -125,11 +127,12 @@
         </button>
 
         <button
-          [routerLink]="['/activity']"
+          [routerLink]="['activity']"
+          (click)="removePopUp()"
           class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
         >
           <div
-            class="w-11 h-11 p-[0.6rem] mt-[5px] transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+            class="w-10 h-10 p-2 pt-3 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +171,8 @@
         </button>
 
         <button
-          [routerLink]="['/' + userName]"
+          [routerLink]="[userName]"
+          (click)="removePopUp()"
           class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
         >
           <div
@@ -210,12 +214,12 @@
           </div>
         </button>
       </div>
-      <div>
-        <div #toggleButton class="relative">
+      <div #menu>
+        <div class="relative">
           <button
             type="button"
             (click)="setIsOpen()"
-            class="py-3 px-4 inline-flex items-center gap-x-2 bg-white dark:bg-black"
+            class="py-3 px-4 inline-flex items-center gap-x-2"
           >
             <svg
               width="534"
@@ -237,48 +241,47 @@
           @if (isOpen) {
           <div
             @dropBody
-            #menu
-            class="absolute z-10 top-[100%] right-[10%] w-min flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-stone-300 dark:border-stone-800"
+            class="absolute z-10 top-[100%] right-[10%] w-min flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-zinc-300 dark:border-zinc-800"
           >
             <div
               type="button"
-              class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
               (click)="menuClickHandler('theme')"
             >
               <span>Switch</span>
               <span>appearance</span>
             </div>
-            <hr class="w-full border-stone-300 dark:border-stone-700" />
+            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
-              (click)="menuClickHandler('theme')"
+              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('setting')"
             >
               Settings
             </div>
-            <hr class="w-full border-stone-300 dark:border-stone-700" />
+            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
-              (click)="menuClickHandler('theme')"
+              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('about')"
             >
               About
             </div>
-            <hr class="w-full border-stone-300 dark:border-stone-700" />
+            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
-              (click)="menuClickHandler('theme')"
+              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('report')"
             >
               <span>Report</span>
               <span>a</span>
               <span>problem</span>
             </div>
-            <hr class="w-full border-stone-300 dark:border-stone-700" />
+            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
-              (click)="menuClickHandler('theme')"
+              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
+              (click)="menuClickHandler('logout')"
             >
               <span>Log out</span>
             </div>
