@@ -1,1 +1,87 @@
-<p>search-page works!</p>
+<div class="flex flex-col gap-5">
+  <div class="w-full relative">
+    <div
+      class="left-3 absolute top-1/2 -translate-y-1/2 w-9 h-9 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="stroke-stone-500 dark:stroke-stone-700"
+      >
+        <!-- @if(router.url === "/search"){ -->
+
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+            stroke-width="1.9919999999999998"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <input
+      placeholder="Search"
+      class="bg-white w-full dark:bg-[rgba(0,0,0,0.3)] shadow-md rounded-xl border border-stone-400 dark:border-stone-700 placeholder:text-stone-400 dark:placeholder:text-stone-600 px-5 py-4 pl-12 outline-none focus:ring-2 ring-offset-3 focus:ring-stone-300 dark:focus:ring-stone-700"
+    />
+  </div>
+
+  <div class="flex flex-col mt-5">
+    @for (item of feedData; track $index) {
+
+    <div class="flex gap-3 py-2">
+      <div
+        class="h-9 w-9 rounded-full overflow-hidden border border-stone-300 dark:border-stone-700"
+      >
+        <img src="{{ item.avatar }}" />
+      </div>
+
+      <div
+        class="flex justify-between items-start flex-1 border-b border-stone-300 dark:border-stone-700 pb-3"
+      >
+        <div class="flex flex-col gap-3">
+          <div class="text-sm">
+            <div class="flex items-center gap-1">
+              <h2>{{ item.name }}</h2>
+              @if (item.verified) {
+              <img class="w-4 h-4" src="/assets/verified-icon.svg" alt="" />
+              }
+            </div>
+            <h2 class="opacity-50 dark:opacity-30">{{ item.username }}</h2>
+          </div>
+
+          <div class="flex items-center">
+            <div class="flex -space-x-2 overflow-hidden">
+              @for (url of item.friendsFollowing; track $index) {
+              <img
+                class="inline-block h-5 w-5 rounded-full border-2 border-white dark:border-black"
+                src="{{ url }}"
+                alt=""
+              />
+              } @if(item.friendsFollowing.length > 0){
+              <div class="w-4"></div>
+              }
+            </div>
+            <p class="text-sm">{{ item.followersCount }} followers</p>
+          </div>
+        </div>
+        <div>
+          <button
+            class="px-6 py-2 text-xs font-bold rounded-lg border border-stone-300 dark:border-stone-800"
+          >
+            @if(item.amIFollowing){ Unfollow }@else{ Follow }
+          </button>
+        </div>
+      </div>
+    </div>
+
+    }
+  </div>
+</div>

@@ -7,11 +7,7 @@ import { FooterComponent } from '../../Components/footer/footer.component';
   selector: 'app-admin-subscriptions',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
-  template: `
-  <app-header />
-  <router-outlet></router-outlet>
-  <app-footer/>
-  `,
+  templateUrl:'./index.component.html',
 })
 export class IndexComponent {
 }

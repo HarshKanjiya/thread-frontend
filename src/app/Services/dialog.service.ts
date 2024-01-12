@@ -7,6 +7,6 @@ export class DialogService {
 
   constructor() { }
 
-  dialogVisible = signal<boolean>(true)
+  dialogVisible = signal<boolean>(false)
 
 }

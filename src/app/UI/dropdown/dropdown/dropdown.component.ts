@@ -31,6 +31,8 @@ export class DropdownComponent {
   @Input() itemsClass!: string
   @Input() Options!: string[]
   @Input() OptionsMap!: any
+  @Input() icon: boolean = true
+
 
   @Output() selectedOption = new EventEmitter<any>()
   isOpen: boolean = false

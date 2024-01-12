@@ -8,7 +8,7 @@
   >
     @if (label && label.length > 0) {
     {{ label }}
-    }@else { Action }
+    }@else { Action } @if(icon){
     <svg
       class=" w-4 h-4 transition-all duration-200 {{
         isOpen ? 'rotate-180' : ''
@@ -25,6 +25,7 @@
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
+    }
   </button>
 
   @if (isOpen) {
