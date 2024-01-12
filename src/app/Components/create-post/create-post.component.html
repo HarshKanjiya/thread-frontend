@@ -223,15 +223,16 @@
           class="border w-full border-stone-300 dark:border-stone-800 bg-white outline-none dark:bg-black flex justify-between rounded-lg overflow-hidden"
         >
           <input
+          (keyup)="validationHandler($event)"
             placeholder="type your option"
             name="option {{ item.id }}"
-            [(ngModel)]="options[$index].option"
+            [(ngModel)]="optionsObject['0 option ' + $index]"
             class="rounded-lg w-full text-sm px-4 py-2 bg-white outline-none dark:bg-black placeholder:text-[#676767]"
           />
           <button
             class="h-full hover:bg-stone-100 dark:hover:bg-[#232323] transition-all duration-150 group relative"
             type="button"
-            (click)="removeOption(item.id)"
+            (click)="removeOption($index)"
           >
             <div
               class="absolute h-[50%] group-hover:h-full transition-all duration-400 -translate-y-1/2 transform top-1/2 w-[1px] bg-stone-300 dark:bg-[#343434] left-0"
@@ -259,9 +260,10 @@
         </div>
         }
         <button
+          [disabled]="options.length === 4"
           type="button"
           (click)="addOption()"
-          class="rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-stone-300 dark:border-stone-800 bg-white outline-none dark:bg-black"
+          class="disabled:opacity-60 disabled:cursor-not-allowed rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-stone-300 dark:border-stone-800 bg-white outline-none dark:bg-black"
         >
           Add another Option
         </button>
@@ -292,7 +294,6 @@
 
   @if(AddToThreadButton){
   <app-post-form
-    [allowAddToThread]="AddToThreadButton"
     (RemoveMe)="removeMeFromChildThread($event)"
     (submitionFromChild)="childSubmissionHandler($event)"
     [childLevel]="0"
@@ -311,6 +312,7 @@
       </app-dropdown>
     </div>
     <button
+    [disabled]="formDisable"
       (click)="SubmitThread()"
       type="submit"
       class="disabled:opacity-40 disabled:hover:bg-white bg-black text-white dark:text-black border border-gray-300 focus:outline-none font-medium rounded-full text-sm px-4 py-2 dark:bg-white hover:bg-[#202020] dark:hover:bg-slate-100"

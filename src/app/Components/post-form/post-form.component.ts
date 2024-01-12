@@ -24,7 +24,7 @@ const defaultOptions = [{ id: 0, option: "Yes" }, { id: 1, option: "No" }]
 export class PostFormComponent {
   @Input() PostType_FromParent: string | null = null
   @Input() postTypeHelperId_FromParent: string | null = null
-  @Input() allowAddToThread: boolean = true
+  @Input() allowAddToThread: boolean = false
   @Input() childLevel: number = 1
 
   ngOnInit() {
@@ -48,6 +48,8 @@ export class PostFormComponent {
   postTypeHelperId: string | null = null
 
   options: IOptionType[] = defaultOptions
+
+  optionsObject :any = {}
 
   replyOptions = ["Any one", "Following", "Mentioned", "None"]
   replyOptionsMap = {
@@ -78,27 +80,41 @@ export class PostFormComponent {
   textAreaCounter(e: any) {
     this.count = e.target.value.length
 
+    if (e.target.value.length > 0) {
+      this.allowAddToThread = true
+    } else {
+      this.allowAddToThread = false
+    }
     this.SubmitThread()
   }
 
   addOption() {
     this.options.push({ id: this.options.length, option: "" })
+
+    if (Object.keys(this.optionsObject).length < 4) {
+
+      this.optionsObject[`0 option ${Object.keys(this.optionsObject).length}`] = ""
+    }
+
+    console.log(this.optionsObject);
+    console.log(this.options);
   }
   removeOption(id: number) {
-    this.options = this.options.filter((i: IOptionType) => i.id !== id)
-  }
 
-  closeDialog() {
-    this.options = defaultOptions
-    this.postType = 'PARENT'
-    this.replyAccess = "ANY"
-    this.threadType = "TEXT"
-    this.postTypeHelperId = null
-    this.dialog.dialogVisible.set(false)
+    this.options = this.options.filter((i: IOptionType) => i.id !== id)
+
+    delete this.optionsObject[`0 option ${id}`]
   }
 
   changeThreadType(type: "TEXT" | "POLL") {
-    this.options = defaultOptions
+    if(type === "POLL"){
+      this.options = defaultOptions
+      this.optionsObject[`${this.childLevel} option 0`] = "Yes"
+      this.optionsObject[`${this.childLevel} option 1`] = "No"
+    }else{
+      this.optionsObject = {}
+      this.options = []
+    }
     this.threadType = type
 
     this.SubmitThread()
@@ -115,66 +131,65 @@ export class PostFormComponent {
     e.stopPropagation()
   }
 
-  onFileChange(event: any) {
+  // onFileChangeChild(event: any) {
 
-    const fileList: File[] = event.target.files;
+  //   const fileList: File[] = event.target.files;
 
-    for (let key in fileList) {
-      if (fileList.hasOwnProperty(key)) {
-        this.selectedFile.push(fileList[key])
-      }
-    }
-    this.getFileAsBase64(event)
+  //   for (let key in fileList) {
+  //     if (fileList.hasOwnProperty(key)) {
+  //       this.selectedFile.push(fileList[key])
+  //     }
+  //   }
+  //   this.getFileAsBase64(event)
 
-    this.SubmitThread()
-  }
+  //   this.SubmitThread()
+  // }
 
-  getFileAsBase64(event: any) {
-    const input = event.target;
-    const files = input.files && input.files.length > 0 ? input.files : null;
+  // getFileAsBase64(event: any) {
+  //   const input = event.target;
+  //   const files = input.files && input.files.length > 0 ? input.files : null;
 
-    if (files) {
-      let _temp: any[] = []
-      let rawFiles: any[] = []
+  //   if (files) {
+  //     let _temp: any[] = []
+  //     let rawFiles: any[] = []
 
-      for (let key in files) {
-        if (files.hasOwnProperty(key)) {
-          rawFiles.push(files[key])
-        }
-      }
+  //     for (let key in files) {
+  //       if (files.hasOwnProperty(key)) {
+  //         rawFiles.push(files[key])
+  //       }
+  //     }
 
-      const promises = rawFiles.map((file: File) => {
+  //     const promises = rawFiles.map((file: File) => {
 
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            _temp = [..._temp, reader.result as string]
-            resolve(reader.result as string)
-          };
-          reader.readAsDataURL(file);
-        })
-      })
+  //       return new Promise((resolve, reject) => {
+  //         const reader = new FileReader();
+  //         reader.onloadend = () => {
+  //           _temp = [..._temp, reader.result as string]
+  //           resolve(reader.result as string)
+  //         };
+  //         reader.readAsDataURL(file);
+  //       })
+  //     })
 
-      Promise.all(promises).then((res: any) => {
-        this.selectedFileBase64 = [...this.selectedFileBase64, ...res]
-        console.log('this.sele  :>> ', this.selectedFileBase64);
-      })
+  //     Promise.all(promises).then((res: any) => {
+  //       this.selectedFileBase64 = [...this.selectedFileBase64, ...res]
+  //       console.log('this.sele  :>> ', this.selectedFileBase64);
+  //     })
 
-    }
-  }
+  //   }
+  // }
 
-  removeFile(index: number) {
+  // removeFile(index: number) {
 
-    this.selectedFile = [...this.selectedFile.slice(0, index), ...this.selectedFile.slice(index + 1)]
-    this.selectedFileBase64 = [...this.selectedFileBase64.slice(0, index), ...this.selectedFileBase64.slice(index + 1)]
+  //   this.selectedFile = [...this.selectedFile.slice(0, index), ...this.selectedFile.slice(index + 1)]
+  //   this.selectedFileBase64 = [...this.selectedFileBase64.slice(0, index), ...this.selectedFileBase64.slice(index + 1)]
 
 
-    this.SubmitThread()
-  }
+  //   this.SubmitThread()
+  // }
 
 
   childSubmissionHandler(e: any) {
-    console.log('e :>> ', e);
     this.submitionFromChild.emit(e)
   }
 
@@ -193,11 +208,12 @@ export class PostFormComponent {
     }
 
     if (this.threadType === "POLL") {
-      _content["options"] = this.options
+      _content["options"] = this.optionsObject
     }
 
     if (this.selectedFile.length > 0) {
       _content["selectedFile"] = this.selectedFile
+      _content["selectedFileBase64"] = this.selectedFileBase64
     }
 
 

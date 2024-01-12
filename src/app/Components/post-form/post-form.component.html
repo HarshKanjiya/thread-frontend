@@ -15,7 +15,7 @@
       <h2 class="text-white font-bold">New Thread</h2> -->
 <div
   (click)="stopPropagation($event)"
-  class="relative flex flex-col gap-3 mx-auto bg-white dark:bg-black text-left shadow-xl py-2 w-full"
+  class="relative flex flex-col gap-3 mx-auto bg-white dark:bg-black text-left py-2 w-full"
 >
   <button
     class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-white dark:bg-black rounded-full m-1"
@@ -69,7 +69,7 @@
           class="bg-white text-black dark:text-stone-400 h-[28px] overflow-hidden no-scrollbar placeholder:text-stone-400 dark:placeholder:text-stone-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none resize-none"
           [(ngModel)]="threadInputText"
           name="text"
-          placeholder="start new Thread..."
+          placeholder="start a Thread..."
         ></textarea>
       </div>
 
@@ -79,7 +79,7 @@
 
       @if (threadType === "TEXT") {
       <div class="flex items-center gap-2">
-        <label for="file-upload" class="relative h-5 w-5 rounded-full">
+        <!-- <label for="file-upload" class="relative h-5 w-5 rounded-full">
           <svg
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -91,13 +91,13 @@
           </svg>
           <input
             multiple
-            (change)="onFileChange($event)"
+            (change)="onFileChangeChild($event)"
             accept="image/png, image/jpeg, image/jpg, application/pdf"
             id="file-upload"
             class="absolute z-0 hidden top-0 left-0 bg-transparent bg-opacity-0 border-none outline-none"
             type="file"
           />
-        </label>
+        </label> -->
         <button class="h-5 w-5 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@
 
       @if (selectedFileBase64.length > 0) {
 
-      <div class="h-32 w-full relative">
+      <!-- <div class="h-32 w-full relative">
         <div class="flex h-full w-max gap-3 no-scrollbar">
           @for (file of selectedFileBase64; track $index) {
           @if(file.indexOf("image") > -1){
@@ -239,7 +239,7 @@
 
           } }
         </div>
-      </div>
+      </div> -->
       } } @else if (threadType === "POLL") {
 
       <div class="flex flex-col w-full gap-2">
@@ -250,8 +250,8 @@
           <input
             placeholder="type your option"
             name="option {{ item.id }}"
-            (keyup)="this.SubmitThread()"
-            [(ngModel)]="options[$index].option"
+            (keyup)="SubmitThread()"
+            [(ngModel)]="optionsObject[childLevel + ' option ' + $index]"
             class="rounded-lg w-full text-sm px-4 py-2 bg-white outline-none dark:bg-black placeholder:text-[#676767]"
           />
           <button
@@ -285,9 +285,10 @@
         </div>
         }
         <button
+          [disabled]="options.length === 4"
           type="button"
           (click)="addOption()"
-          class="rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-stone-300 dark:border-stone-800 bg-white outline-none dark:bg-black"
+          class="disabled:opacity-60 disabled:cursor-not-allowed rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-stone-300 dark:border-stone-800 bg-white outline-none dark:bg-black"
         >
           Add another Option
         </button>
@@ -319,7 +320,6 @@
 
 @if (AddToThreadButton) {
 <app-post-form
-  [allowAddToThread]="allowAddToThread"
   (RemoveMe)="removeMeFromChildThread($event)"
   (submitionFromChild)="childSubmissionHandler($event)"
   [childLevel]="childLevel"

@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Type, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
@@ -47,7 +47,6 @@ export class CreatePostComponent {
   @Input() postTypeHelperId_FromParent: string | null = null
   @Input() allowAddToThread: boolean = true
 
-
   @Output() submition = new EventEmitter<any>()
 
   threadInputText: string = ""
@@ -63,6 +62,8 @@ export class CreatePostComponent {
   postTypeHelperId: string | null = null
 
   options: IOptionType[] = defaultOptions
+  optionsObject: any = {}
+
 
   replyOptions = ["Any one", "Following", "Mentioned", "None"]
   replyOptionsMap = {
@@ -76,6 +77,7 @@ export class CreatePostComponent {
 
   dataBeforeSubmit: any[] = []
 
+  formDisable: boolean = false
 
   constructor(public dialog: DialogService) { }
 
@@ -89,14 +91,33 @@ export class CreatePostComponent {
   }
 
   textAreaCounter(e: any) {
-    this.count = e.target.value.length
+    this.count = e.target.value.trim().length
+
+    if (e.target.value.trim().length === 0) {
+      this.formDisable = true
+    } else{
+      this.formDisable = false
+    }
   }
 
   addOption() {
     this.options.push({ id: this.options.length, option: "" })
+
+    if (Object.keys(this.optionsObject).length < 4) {
+
+      this.optionsObject[`0 option ${Object.keys(this.optionsObject).length}`] = ""
+    }
+
+    console.log(this.optionsObject);
+    console.log(this.options);
   }
   removeOption(id: number) {
+
+    console.log('id :>> ', id);
     this.options = this.options.filter((i: IOptionType) => i.id !== id)
+    console.log('id :>> ', this.options);
+
+    delete this.optionsObject[`0 option ${id}`]
   }
 
   closeDialog() {
@@ -109,8 +130,17 @@ export class CreatePostComponent {
   }
 
   changeThreadType(type: "TEXT" | "POLL") {
-    this.options = defaultOptions
+    if (type === "POLL") {
+      this.options = defaultOptions
+      this.optionsObject[`0 option 0`] = "Yes"
+      this.optionsObject[`0 option 1`] = "No"
+    } else {
+      this.optionsObject = {}
+      this.options = []
+    }
     this.threadType = type
+
+    this.SubmitThread()
   }
 
   changeSelectedReplyOption(e: any) {
@@ -162,7 +192,6 @@ export class CreatePostComponent {
 
       Promise.all(promises).then((res: any) => {
         this.selectedFileBase64 = [...this.selectedFileBase64, ...res]
-        console.log('this.sele  :>> ', this.selectedFileBase64);
       })
 
     }
@@ -175,18 +204,16 @@ export class CreatePostComponent {
   }
 
 
+  validationHandler(e:any) {
+    if (e.target.value.trim().length === 0) {
+      this.formDisable = true
+    } else {
+      this.formDisable = false
+    }
+}
+
   childSubmissionHandler(event: any) {
 
-
-
-    // this.dataBeforeSubmit = this.dataBeforeSubmit.map((thread) => {
-    //   if (thread.level !== event.level) {
-    //     this.dataBeforeSubmit.push(event)
-    //   }
-    //   else {
-    //     thread = event
-    //   }
-    // })
 
     let _temp = [...this.dataBeforeSubmit]
 
@@ -195,8 +222,34 @@ export class CreatePostComponent {
     _temp.push(event)
 
     this.dataBeforeSubmit = _temp
-    // console.log('_temp :>> ', event);
 
+    let bool = true
+
+    this.dataBeforeSubmit.map((item: any) => {
+      for (let key in item.content) {
+        if (item.content.hasOwnProperty(key)) {
+
+          if (item.content.text.trim().length === 0) {
+            bool = false
+            return
+          }
+
+          if (item.content.type === "POLL") {
+
+            let options = item.content.options
+
+            for (let opt in options){
+              if (options.hasOwnProperty(opt)) {
+                if (options[opt].trim().length === 0){
+                  bool = false
+                  return
+                }
+              }
+            }
+          }
+        }
+      }
+    })
   }
 
 
@@ -216,11 +269,13 @@ export class CreatePostComponent {
     }
 
     if (this.threadType === "POLL") {
-      _content["options"] = this.options
+      _content["options"] = this.optionsObject
     }
 
     if (this.selectedFile.length > 0) {
       _content["selectedFile"] = this.selectedFile
+      _content["selectedFileBase64"] = this.selectedFileBase64
+
     }
 
 
