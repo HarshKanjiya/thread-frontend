@@ -35,3 +35,24 @@
     Verifieds
   </button>
 </div>
+
+<div class="py-3 flex flex-col">
+  @for (item of data; track $index) {
+  <div class="flex gap-3">
+    <div>
+      <img class="h-9 w-9 rounded-full" src="{{ item.avatar }}" />
+    </div>
+    <div
+      class="flex flex-col flex-1 gap-1 border-b border-zinc-400 dark:border-zinc-700 py-2 my-2"
+    >
+      <div class="text-sm flex gap-1 items-center">
+        <p>{{ item.username }}</p>
+        @if (item.verifiedSender) {
+        <img class="h-4 w-4" src="/assets/verified-icon.svg" />
+        }
+        <p>{{ timeDifference(item.createAt) }}</p>
+      </div>
+    </div>
+  </div>
+  }
+</div>

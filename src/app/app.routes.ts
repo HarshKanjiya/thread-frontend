@@ -10,6 +10,8 @@ import { AdminSubscriptionsComponent } from './Pages/Admin/admin-subscriptions/a
 import { AdminHomeComponent } from './Pages/Admin/admin-home/admin-home.component';
 import { AdminComponent } from './Pages/Admin/admin.component';
 import { IndexComponent } from './Pages/Index/index.component';
+import { SettingPageComponent } from './Pages/Index/setting/setting-page.component';
+import { AboutPageComponent } from './Pages/Index/about/about-page.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,8 @@ export const routes: Routes = [
       { path: "", component: HomePageComponent, pathMatch: "full", title: "Threads | Feed" },
       { path: "search", component: SearchPageComponent, pathMatch: "full", title: "Threads | Search" },
       { path: "activity", component: ActivityComponent, pathMatch: "full", title: "Threads | Activity" },
+      { path: "setting", component: SettingPageComponent, pathMatch: "full", title: "Threads | Settings" },
+      { path: "about", component: AboutPageComponent, pathMatch: "full", title: "Threads | About me" },
       { path: ":id", component: ProfilePageComponent, title: "Threads | Profile" },
     ]
   }
