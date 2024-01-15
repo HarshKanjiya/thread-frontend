@@ -5,6 +5,7 @@ import { DialogService } from '../../Services/dialog.service';
 import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -49,7 +50,7 @@ export class HeaderComponent {
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService) { }
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location) { }
 
 
   setIsOpen() {
@@ -90,6 +91,13 @@ export class HeaderComponent {
 
   removePopUp() {
     this.dialog.dialogVisible.set(false)
+  }
+
+  BackButtonClick() {
+
+    this.location.back()
+    this.removePopUp()
+
   }
 
 }
