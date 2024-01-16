@@ -66,7 +66,7 @@
           <button
             (click)="removePopUp()"
             [routerLink]="['']"
-            class="rounded-lg px-6 py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg px-6 py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
           >
             <div
               class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -90,7 +90,7 @@
           <button
             [routerLink]="['search']"
             (click)="removePopUp()"
-            class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
           >
             <div
               class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -125,7 +125,7 @@
 
           <button
             (click)="openDialog()"
-            class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
           >
             <div
               class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -165,7 +165,7 @@
           <button
             [routerLink]="['activity']"
             (click)="removePopUp()"
-            class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
           >
             <div
               class="w-10 h-10 p-2 pt-3 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -209,7 +209,7 @@
           <button
             [routerLink]="[userName]"
             (click)="removePopUp()"
-            class="rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
           >
             <div
               class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -337,4 +337,56 @@
 
 @if(dialog.dialogVisible() === "CREATE_THREAD"){
 <app-create-post-pop-up></app-create-post-pop-up>
+
+<!--  -->
+} @if(dialog.dialogVisible() === "REPORT_BUG"){
+
+<custom-popup>
+  <p class="text-sm font-bold text-white py-3">Report a problem</p>
+
+  <div
+    class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800"
+  >
+    <div class="py-4 px-6">
+      <textarea
+        textareaAutoresize
+        placeholder="Please include as many details as possible..."
+        class="bg-white text-black dark:text-zinc-400 min-h-24 overflow-hidden no-scrollbar placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none focus:ring-0 focus:outline-none resize-none"
+      ></textarea>
+    </div>
+
+    <div class="flex items-center justify-between p-6">
+      <div class="rounded-full overflow-hidden">
+        <label for="file-upload" class="relative h-5 w-5 rounded-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.1"
+            class="stroke-zinc-400 dark:stroke-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-900 p-1.5 h-8 w-8 transition-all duration-200"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
+            />
+          </svg>
+          <input
+            multiple
+            accept="image/png, image/jpeg, image/jpg, application/pdf"
+            id="file-upload"
+            class="absolute z-0 hidden top-0 left-0 bg-transparent bg-opacity-0 border-none outline-none"
+            type="file"
+          />
+        </label>
+      </div>
+
+      <button
+        class="no-animation px-4 py-1.5 rounded-lg text-sm font-semibold border-2 border-zinc-400 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-200"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</custom-popup>
 }

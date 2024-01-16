@@ -9,14 +9,12 @@
     class="fixed z-auto inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-[2px]"
   ></div>
 
-  <div
-    class="fixed inset-0 z-10 w-screen overflow-hidden flex justify-center items-start"
-  >
+  <div class="fixed inset-0 z-10 w-screen flex justify-center items-start">
     <div
       @inOutPaneAnimation
-      class="flex min-h-full w-full justify-start mt-20 sm:mt-32 p-4 text-center items-center sm:p-0 flex-col"
+      class="flex min-h-full w-full justify-start p-4 text-center items-center overflow-y-scroll sm:p-0 flex-col"
     >
-      <h2 class="text-white font-bold">New Thread</h2>
+      <h2 class="text-white font-bold pb-2 pt-20 sm:pt-32">New Thread</h2>
       <app-create-post
         class="w-[90%] sm:w-[450px] md:w-[600px]"
         (submition)="submitThread($event)"

@@ -221,12 +221,24 @@ export class ActivityComponent {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
 
-    if (hours > 0) {
-      return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
-    } else if (minutes > 0) {
-      return `${minutes}m ${seconds % 60}s`;
-    } else {
+    if (hours >= 8760) {
+      return `${Math.floor(hours / 8760)}y`
+    }
+    if (hours >= 720 && hours < 8760) {
+      return `${Math.floor(hours / 720)}m`
+    }
+    if (hours >= 24 && hours < 168) {
+      return `${Math.floor(hours / 24)}d`
+    }
+    if (hours > 0 && hours < 24) {
+      return `${hours}h`;
+    }
+    if (hours <= 0 && minutes > 0) {
+      return `${minutes}m`;
+    }
+    if (hours < 0 && minutes < 0) {
       return `${seconds}s`;
     }
+    return "1y"
   }
 }

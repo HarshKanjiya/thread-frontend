@@ -6,10 +6,12 @@ import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { Location } from '@angular/common';
+import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
+import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CreatePostPopUpComponent, DropdownComponent],
+  imports: [RouterLink, CreatePostPopUpComponent, DropdownComponent, CustomPopupComponent, TextareaAutoresizeDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
@@ -63,11 +65,8 @@ export class HeaderComponent {
       case 'theme':
         this.changeTheme()
         break
-      case 'setting':
-        break
-      case 'about':
-        break
       case 'report':
+        this.dialog.openDialog("REPORT_BUG")
         break
       case 'logout':
         break

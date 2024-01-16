@@ -1,1 +1,32 @@
-<p>login-page works!</p>
+<div class="flex items-center justify-center relative w-full min-h-screen">
+  <img
+    class="hidden sm:block sm:absolute top-0 h-1/2 object-cover -z-0"
+    src="/assets/login-bg.webp"
+  />
+
+  <div class="flex flex-col gap-3 w-full p-4 sm:w-[400px]">
+    <p class="font-bold pb-4">Login with your instagram account</p>
+    <input
+      class="bg-zinc-100 dark:bg-zinc-800 px-3 py-3 rounded-xl"
+      placeholder="Username, phone or email"
+    />
+    <input
+      class="bg-zinc-100 dark:bg-zinc-800 px-3 py-3 rounded-xl"
+      placeholder="Password"
+    />
+    <button
+      class="bg-black text-white dark:text-black dark:bg-white px-3 py-3 rounded-xl"
+    >
+      Login
+    </button>
+    <div class="flex items-center justify-center">
+      <a
+        class="py-1 text-zinc-500 dark:text-zinc-500 text-sm relative hover:border-b hover:border-b-black dark:hover:border-b-zinc-500 border-b-white dark:border-b-black border-b cursor-pointer transition-all duration-200"
+      >
+        Forgot password?
+      </a>
+    </div>
+
+    <div>email</div>
+  </div>
+</div>
