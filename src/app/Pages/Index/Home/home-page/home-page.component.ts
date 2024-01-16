@@ -14,6 +14,6 @@ export class HomePageComponent {
   constructor(public dialog: DialogService) { }
 
   openDialog() {
-    this.dialog.dialogVisible.set(true)
+    this.dialog.openDialog("CREATE_THREAD")
   }
 }

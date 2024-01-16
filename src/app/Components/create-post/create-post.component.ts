@@ -95,7 +95,7 @@ export class CreatePostComponent {
 
     if (e.target.value.trim().length === 0) {
       this.formDisable = true
-    } else{
+    } else {
       this.formDisable = false
     }
   }
@@ -126,7 +126,7 @@ export class CreatePostComponent {
     this.replyAccess = "ANY"
     this.threadType = "TEXT"
     this.postTypeHelperId = null
-    this.dialog.dialogVisible.set(false)
+    this.dialog.closeDialog()
   }
 
   changeThreadType(type: "TEXT" | "POLL") {
@@ -204,13 +204,13 @@ export class CreatePostComponent {
   }
 
 
-  validationHandler(e:any) {
+  validationHandler(e: any) {
     if (e.target.value.trim().length === 0) {
       this.formDisable = true
     } else {
       this.formDisable = false
     }
-}
+  }
 
   childSubmissionHandler(event: any) {
 
@@ -238,9 +238,9 @@ export class CreatePostComponent {
 
             let options = item.content.options
 
-            for (let opt in options){
+            for (let opt in options) {
               if (options.hasOwnProperty(opt)) {
-                if (options[opt].trim().length === 0){
+                if (options[opt].trim().length === 0) {
                   bool = false
                   return
                 }

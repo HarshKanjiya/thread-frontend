@@ -86,11 +86,11 @@ export class HeaderComponent {
   }
 
   openDialog() {
-    this.dialog.dialogVisible.set(true)
+    this.dialog.openDialog("CREATE_THREAD")
   }
 
   removePopUp() {
-    this.dialog.dialogVisible.set(false)
+    this.dialog.closeDialog()
   }
 
   BackButtonClick() {

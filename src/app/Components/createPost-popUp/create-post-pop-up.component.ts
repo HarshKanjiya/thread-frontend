@@ -37,7 +37,7 @@ export class CreatePostPopUpComponent {
 
 
   closeDialog() {
-    this.dialog.dialogVisible.set(false)
+    this.dialog.closeDialog()
   }
 
 

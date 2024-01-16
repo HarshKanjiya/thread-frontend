@@ -1,1 +1,24 @@
-<p>custom-popup works!</p>
+<div
+  class="relative z-[110000] text-black dark:text-[#787878]"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+  (click)="closeDialog()"
+>
+  <div
+    class="fixed z-auto inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-[2px]"
+  ></div>
+
+  <div
+    class="fixed inset-0 z-10 w-screen overflow-y-auto flex justify-center items-start"
+  >
+    <div
+      @inOutPaneAnimation
+      class="flex w-full h-full justify-center p-4 text-center items-center sm:p-0 flex-col"
+    >
+      <div (click)="stopPropagation($event)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
