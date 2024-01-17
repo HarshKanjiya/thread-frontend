@@ -279,50 +279,50 @@
           @if (isOpen) {
           <div
             @dropBody
-            class="absolute z-10 top-[100%] right-[10%] w-min flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-zinc-300 dark:border-zinc-800"
+            class="absolute z-10 top-[100%] right-[10%] w-min flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800"
           >
             <div
               type="button"
-              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
               (click)="menuClickHandler('theme')"
             >
               <span>Switch</span>
               <span>appearance</span>
             </div>
-            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <div
               [routerLink]="['/setting']"
               routerLinkActive="router-link-active"
               type="button"
-              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
               (click)="menuClickHandler('setting')"
             >
               Settings
             </div>
-            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <div
               [routerLink]="['/about']"
               routerLinkActive="router-link-active"
               type="button"
-              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
               (click)="menuClickHandler('about')"
             >
               About
             </div>
-            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
               (click)="menuClickHandler('report')"
             >
               <span>Report</span>
               <span>a</span>
               <span>problem</span>
             </div>
-            <hr class="w-full border-zinc-300 dark:border-zinc-700" />
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <div
               type="button"
-              class="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
               (click)="menuClickHandler('logout')"
             >
               <span>Log out</span>
@@ -345,13 +345,13 @@
   <p class="text-sm font-bold text-white py-3">Report a problem</p>
 
   <div
-    class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800"
+    class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-neutral-300 dark:border-neutral-800"
   >
     <div class="py-4 px-6">
       <textarea
         textareaAutoresize
         placeholder="Please include as many details as possible..."
-        class="bg-white text-black dark:text-zinc-400 min-h-24 overflow-hidden no-scrollbar placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none focus:ring-0 focus:outline-none resize-none"
+        class="bg-white text-black dark:text-neutral-400 min-h-24 overflow-hidden no-scrollbar placeholder:text-neutral-400 dark:placeholder:text-neutral-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none focus:ring-0 focus:outline-none resize-none"
       ></textarea>
     </div>
 
@@ -363,7 +363,7 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.1"
-            class="stroke-zinc-400 dark:stroke-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-900 p-1.5 h-8 w-8 transition-all duration-200"
+            class="stroke-neutral-400 dark:stroke-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-900 p-1.5 h-8 w-8 transition-all duration-200"
           >
             <path
               stroke-linecap="round"
@@ -382,7 +382,7 @@
       </div>
 
       <button
-        class="no-animation px-4 py-1.5 rounded-lg text-sm font-semibold border-2 border-zinc-400 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-200"
+        class="no-animation px-4 py-1.5 rounded-lg text-sm font-semibold border-2 border-neutral-400 dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all duration-200"
       >
         Submit
       </button>

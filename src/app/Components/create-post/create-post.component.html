@@ -15,7 +15,7 @@
       <h2 class="text-white font-bold">New Thread</h2> -->
 <div
   (click)="stopPropagation($event)"
-  class="h-[600px] relative px-5 py-5 flex flex-col border-2 border-zinc-300 dark:border-[#232323] transform rounded-xl mx-auto bg-white dark:bg-black text-left shadow-xl w-full"
+  class="relative px-5 py-5 flex flex-col border-2 border-neutral-300 dark:border-[#232323] transform rounded-xl mx-auto bg-white dark:bg-black text-left shadow-xl w-full"
 >
   <div class="flex gap-3">
     <div class="flex flex-col justify-between gap-2 items-center min-h-max">
@@ -24,7 +24,7 @@
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACUCAMAAAA02EJtAAAAMFBMVEXk5ueutLfn6eqqsLTM0NLq7O26v8KnrrHf4eLHy82xt7rS1dfY29zU2Nnb3t/DyMryEXPkAAAD7klEQVR4nO2c2XLkIAwAQdz4+v+/XRg7GydxPICwoCr0U3bz0iULcYkwNhgMBoPBYDAYDAaDwaArlAJm54B9/dgtwGanPT/wWlro0RbYOmlh+Jnwz21hndmCmjcv+E+E0M6q1nonwOoLzf+4bvIA7GbuTLngUx9pAMvlp/8qq20Hrmp75/nCz81drX4b0h0jm5umiUZX1zSukCwaEC1drX8veI7r1s41/esfrrKRq9oSR9SJNnUApvvCf4lfW5iu+aJxLmgR1txE3TELuSvI/ETdseSqhaJcUFes8qDSj6xS0RhWUlFEUIMrqSpLXU9dQTtnzeWiAU+oCg4RVE46vULeiuoHjm4Pawtm/zOazBQ1/iN+plJVZdP/J4JsIaCQplyQbQktWpVswsJV1QjVuIIJreqpVCValVOpOrSpIFpfQ9op1R1mqP5tVbJcxVcAqo0AerXCyYoVW9CmZKtA/BqATBWwCSAclapC7le4mKjWq+iZlW4XwFbs3orwiA0ZVcITNig4Wj9Deca64FTpRLNvgb4iNOWtO+okiGpZdagW3Vkc0J2tvECcWoiFVpWx4tJKHFRMvaK/ECwsArTDf6f04KLFbWBZCpCPqZ0C01bdC9nFtc1lcAQyN1mC6lTtyjWvJcCT3wSfUBlloHVbGCzJ5VW3brYD+77NLmJoL4F/IekIi2yPeot637/YRfdiBKwTN7LGN5qiLoHfs0D4qbXdNxST2n+Lbfin35ZuWoI/iY3hmxbGiJelMVy7pc8edsZehdMuUjonp9ke/9EpEFA78ccuTeF4ZjFNMaYBKeW0zOv+i24I0YtZ6i+nWK83OXeQCADWLk7zfSj9Wq7Cr8MIW9sNMVA2xvKu+H8pXCG+UxNbYFPJqUV8gkOqCXbSt9/8Jrom2FLlLrDl+mlNKsZvJA9FACbspUXEy6dlwcrEYfQOIdyTWRuWJB55YXGW9c/JKlnj05/x8pniNet6Ef1APHCDcbN2RspulbMgYftUjJcVjzFDSOt/+09MvU0irJh25QSEr5SxKv0ApZwqSQDuyY//QZVmBuR1aoYrMgng4TQ9uyKng+dq1E88qhCQxTSCOYCt0KaW6Vqqim1QKKCwDoCkqFLfKLosAnxHdQFFbU2JB+fVXfNvYRTp4D+Rna6AbKRBkPsaC9VHgyQvBbAPqjDkdgw0E+WxYygjBUoeflcka9JqUPzPpG8KVMNMjeQ8HGo4/HdSi0CFlz9I0l+6th1UEZ9Yr1qW/wOTGNS5eVC5SMyACo8p0KTNWOinnzVI6x1Sjev/i7S/dwBdqCZNWNim/zokjavJiPak/ZmmVfZA2tMR6IIk1cEf4h/bxDWtKov23AAAAABJRU5ErkJggg=="
       />
       <div
-        class="w-[2.5px] rounded-md h-max flex-1 content-[' '] bg-zinc-300 dark:bg-zinc-800"
+        class="w-[2.5px] rounded-md h-max flex-1 content-[' '] bg-neutral-300 dark:bg-neutral-800"
       ></div>
       @if( !AddToThreadButton ){
       <img
@@ -41,7 +41,7 @@
           (keyup)="textAreaCounter($event)"
           textareaAutoresize
           autofocus
-          class="bg-white text-black dark:text-zinc-400 h-[28px] overflow-hidden no-scrollbar placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none resize-none"
+          class="bg-white text-black dark:text-neutral-400 h-[28px] overflow-hidden no-scrollbar placeholder:text-neutral-400 dark:placeholder:text-neutral-600 text-sm dark:bg-black w-full text-md px-0 py-1 border-none outline-none resize-none"
           [(ngModel)]="threadInputText"
           name="text"
           placeholder="start new Thread..."
@@ -124,7 +124,7 @@
           @for (file of selectedFileBase64; track $index) {
           @if(file.indexOf("image") > -1){
           <div
-            class="relative h-32 w-32 overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-800"
+            class="relative h-32 w-32 overflow-hidden rounded-lg border border-neutral-300 dark:border-neutral-800"
           >
             <img
               src="{{ file }}"
@@ -132,7 +132,7 @@
               alt="image"
             />
             <button
-              class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all duration-150 rounded-full m-1"
+              class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all duration-150 rounded-full m-1"
               type="button"
               (click)="removeFile($index)"
             >
@@ -159,7 +159,7 @@
           </div>
           }@else {
           <div
-            class="relative h-32 w-32 overflow-hidden rounded-lg border flex justify-center items-center flex-col border-zinc-300 dark:border-zinc-800"
+            class="relative h-32 w-32 overflow-hidden rounded-lg border flex justify-center items-center flex-col border-neutral-300 dark:border-neutral-800"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +169,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="h-7 w-7 mt-3 mb-2 stroke-zinc-500 dark:stroke-zinc-700 fill-none"
+              class="h-7 w-7 mt-3 mb-2 stroke-neutral-500 dark:stroke-neutral-700 fill-none"
             >
               <path
                 d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
@@ -179,14 +179,18 @@
               <line x1="16" x2="8" y1="17" y2="17" />
               <line x1="10" x2="8" y1="9" y2="9" />
             </svg>
-            <p class="font-medium text-sm text-zinc-500 dark:text-zinc-700">
+            <p
+              class="font-medium text-sm text-neutral-500 dark:text-neutral-700"
+            >
               PDF File
             </p>
-            <p class="font-medium text-sm text-zinc-500 dark:text-zinc-700">
+            <p
+              class="font-medium text-sm text-neutral-500 dark:text-neutral-700"
+            >
               {{ selectedFile[$index].name }}
             </p>
             <button
-              class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all duration-150 rounded-full m-1"
+              class="top-0 absolute right-0 z-20 h-6 w-6 p-1 bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all duration-150 rounded-full m-1"
               type="button"
               (click)="removeFile($index)"
             >
@@ -220,7 +224,7 @@
       <div class="flex flex-col w-full gap-2">
         @for (item of options; track $index) {
         <div
-          class="border w-full border-zinc-300 dark:border-zinc-800 bg-white outline-none dark:bg-black flex justify-between rounded-lg overflow-hidden"
+          class="border w-full border-neutral-300 dark:border-neutral-800 bg-white outline-none dark:bg-black flex justify-between rounded-lg overflow-hidden"
         >
           <input
             (keyup)="validationHandler($event)"
@@ -230,16 +234,16 @@
             class="rounded-lg w-full text-sm px-4 py-2 bg-white outline-none dark:bg-black placeholder:text-[#676767]"
           />
           <button
-            class="h-full hover:bg-zinc-100 dark:hover:bg-[#232323] transition-all duration-150 group relative"
+            class="h-full hover:bg-neutral-100 dark:hover:bg-[#232323] transition-all duration-150 group relative"
             type="button"
             (click)="removeOption($index)"
           >
             <div
-              class="absolute h-[50%] group-hover:h-full transition-all duration-400 -translate-y-1/2 transform top-1/2 w-[1px] bg-zinc-300 dark:bg-[#343434] left-0"
+              class="absolute h-[50%] group-hover:h-full transition-all duration-400 -translate-y-1/2 transform top-1/2 w-[1px] bg-neutral-300 dark:bg-[#343434] left-0"
             ></div>
             <div class="w-10 group my-3 py-0 p-2.5">
               <svg
-                class="fill-zinc-400 dark:fill-zinc-300"
+                class="fill-neutral-400 dark:fill-neutral-300"
                 viewBox="0 0 1024 1024"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -263,14 +267,14 @@
           [disabled]="options.length === 4"
           type="button"
           (click)="addOption()"
-          class="disabled:opacity-60 disabled:cursor-not-allowed rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-zinc-300 dark:border-zinc-800 bg-white outline-none dark:bg-black"
+          class="disabled:opacity-60 disabled:cursor-not-allowed rounded-lg w-full px-4 py-2 border text-xs h-[42px] border-dashed text-start border-neutral-300 dark:border-neutral-800 bg-white outline-none dark:bg-black"
         >
           Add another Option
         </button>
       </div>
 
       <div
-        class="flex text-zinc-400 dark:text-zinc-600 items-center justify-between"
+        class="flex text-neutral-400 dark:text-neutral-600 items-center justify-between"
       >
         <p class="text-xs">Ends in 24h</p>
         <p class="text-xs cursor-pointer" (click)="changeThreadType('TEXT')">
@@ -284,7 +288,7 @@
         <button
           (click)="changeNewThread()"
           [disabled]="!allowAddToThread"
-          class="text-sm text-zinc-400 dark:text-zinc-600 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+          class="text-sm text-neutral-400 dark:text-neutral-600 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         >
           Add to thread
         </button>
@@ -303,7 +307,7 @@
   <div class="flex justify-between items-center mt-7">
     <div class="">
       <app-dropdown
-        opnerClass="text-zinc-600 dark:text-zinc-400 text-sm font-light"
+        opnerClass="text-neutral-600 dark:text-neutral-400 text-sm font-light"
         [label]="selectedReplyOption + ' can Reply'"
         [Options]="replyOptions"
         [OptionsMap]="replyOptionsMap"

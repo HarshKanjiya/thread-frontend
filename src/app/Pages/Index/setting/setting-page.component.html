@@ -1,12 +1,12 @@
 <p class="text-2xl font-bold mt-3">Settings</p>
 <div
-  class="relative border-b border-zinc-400 dark:border-zinc-700 flex justify-around text-sm"
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm"
 >
   <button
     class="flex-1 py-4 {{
       selectedTab === 'PRIVACY'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('PRIVACY')"
   >
@@ -16,7 +16,7 @@
     class="flex-1 py-4 {{
       selectedTab === 'ACCOUNT'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('ACCOUNT')"
   >
@@ -26,7 +26,7 @@
     class="flex-1 py-4 {{
       selectedTab === 'HELP'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('HELP')"
   >

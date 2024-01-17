@@ -36,7 +36,7 @@
             class="block h-6 rounded-full box w-[44px] peer-checked:bg-primary transition-all duration-200 {{
               isPrivacyButtonChecked
                 ? 'bg-black dark:bg-white'
-                : 'bg-zinc-200 dark:bg-zinc-800 '
+                : 'bg-neutral-200 dark:bg-neutral-800 '
             }}"
           ></div>
           <div
@@ -73,7 +73,7 @@
       <p class="font-light">Mentions</p>
     </div>
     <div
-      class="flex icon gap-3 items-center text-xs text-zinc-400 dark:text-zinc-600"
+      class="flex icon gap-3 items-center text-xs text-neutral-400 dark:text-neutral-600"
     >
       <p>{{ "Everyone" }}</p>
       <div class="">
@@ -85,7 +85,7 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="stroke-zinc-400 dark:stroke-zinc-600 h-5 w-5"
+          class="stroke-neutral-400 dark:stroke-neutral-600 h-5 w-5"
         >
           <path d="m9 18 6-6-6-6" />
         </svg>
@@ -137,12 +137,12 @@
     </div>
   </div>
 
-  <div class="w-full h-[1px] bg-zinc-300 dark:bg-zinc-700"></div>
+  <div class="w-full h-[1px] bg-neutral-300 dark:bg-neutral-700"></div>
 
   <div class="flex flex-col w-full">
     <div>
       <h2 class="font-semibold">Other privacy settings</h2>
-      <h2 class="text-sm text-zinc-600 dark:text-zinc-500">
+      <h2 class="text-sm text-neutral-600 dark:text-neutral-500">
         some settings, like restricting others, effecting both users.
       </h2>
     </div>
@@ -174,7 +174,7 @@
 @if (dialog.dialogVisible() === "PRIVATE_ACCOUNT") {
 <custom-popup>
   <div
-    class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800"
+    class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-neutral-300 dark:border-neutral-800"
   >
     <div class="p-4">
       <h2 class="text-xl font-semibold text-black dark:text-white dark">
@@ -185,16 +185,16 @@
         will be able to see and interact with your content.
       </p>
     </div>
-    <div class="flex border-t border-t-zinc-300 dark:border-t-zinc-800">
+    <div class="flex border-t border-t-neutral-300 dark:border-t-neutral-800">
       <button
         (click)="dialog.closeDialog()"
-        class="flex-1 p-4 text-black dark:text-white font-medium border-r border-r-zinc-300 dark:border-r-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-200"
+        class="flex-1 p-4 text-black dark:text-white font-medium border-r border-r-neutral-300 dark:border-r-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all duration-200"
       >
         Cancel
       </button>
       <button
         (click)="AccountPrivacyConfirmation()"
-        class="flex-1 p-4 text-black dark:text-white font-medium hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-200"
+        class="flex-1 p-4 text-black dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all duration-200"
       >
         OK
       </button>
@@ -206,7 +206,7 @@
 @if (dialog.dialogVisible() === "MENTION_ACCESS") {
 <custom-popup>
   <div
-    class="p-4 flex flex-col rounded-xl overflow-hidden sm:w-[500px] bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800"
+    class="p-4 flex flex-col rounded-xl overflow-hidden sm:w-[500px] bg-white dark:bg-black border border-neutral-300 dark:border-neutral-800"
   >
     <div class="flex flex-col items-start gap-3 sm:gap-5">
       <h2 class="text-black dark:text-white font-semibold text-lg">Mentions</h2>
@@ -233,7 +233,7 @@
             >Everyone</label
           >
           <div
-            class="group  relative flex items-center justify-center rounded-full border border-zinc-400 dark:border-zinc-700 h-5 w-5 {{
+            class="group  relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
               selectedMentionAccess === 'ALL'
                 ? 'bg-black dark:bg-white'
                 : 'bg-white dark:bg-black'
@@ -258,7 +258,7 @@
             >Profiles that you follow</label
           >
           <div
-            class="group  relative flex items-center justify-center rounded-full border border-zinc-400 dark:border-zinc-700 h-5 w-5 {{
+            class="group  relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
               selectedMentionAccess === 'FOLLOW'
                 ? 'bg-black dark:bg-white'
                 : 'bg-white dark:bg-black'
@@ -283,7 +283,7 @@
             >No one</label
           >
           <div
-            class="group  relative flex items-center justify-center rounded-full border border-zinc-400 dark:border-zinc-700 h-5 w-5 {{
+            class="group  relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
               selectedMentionAccess === 'NONE'
                 ? 'bg-black dark:bg-white'
                 : 'bg-white dark:bg-black'

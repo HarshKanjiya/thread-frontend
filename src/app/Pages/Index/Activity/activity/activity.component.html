@@ -1,36 +1,36 @@
 <div class="flex gap-2 pb-4">
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     All
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Follow
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Replies
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Mentions
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Quotes
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Reposts
   </button>
   <button
-    class="flex-1 px-4 py-2 text-sm border border-zinc-400 dark:border-zinc-700 rounded-lg"
+    class="flex-1 px-4 py-2 text-sm border border-neutral-400 dark:border-neutral-700 rounded-lg"
   >
     Verifieds
   </button>
@@ -43,19 +43,19 @@
       <img class="h-9 w-9 rounded-full" src="{{ item.avatar }}" />
     </div>
     <div
-      class="flex flex-col justify-start flex-1 gap-1 border-b border-zinc-400 dark:border-zinc-800 pb-3"
+      class="flex flex-col justify-start flex-1 gap-1 border-b border-neutral-400 dark:border-neutral-800 pb-3"
     >
       <div class="text-sm flex gap-1 items-center">
         <p>{{ item.username }}</p>
         @if (item.verifiedSender) {
         <img class="h-4 w-4" src="/assets/verified-icon.svg" />
         }
-        <p class="ml-1 text-zinc-600 dark:text-zinc-500">
+        <p class="ml-1 text-neutral-600 dark:text-neutral-500">
           {{ timeDifference(item.createAt) }}
         </p>
       </div>
 
-      <p class="text-zinc-600 dark:text-zinc-500 text-sm">
+      <p class="text-neutral-600 dark:text-neutral-500 text-sm">
         {{ item.type === "FOLLOW" && "Started following you." }}
         {{ item.type === "REPLIED" && "Replied to your thread." }}
         {{ item.type === "MENTION" && "Mentioned you in their's thread." }}

@@ -46,3 +46,15 @@
 .modal-open {
   overflow: hidden;
 }
+input,
+textarea,
+button,
+input:focus,
+textarea:focus,
+button:focus {
+  --tw-ring-shadow: 0 0 #000 !important;
+}
+
+.datepicker {
+  background: #101010 !important;
+}

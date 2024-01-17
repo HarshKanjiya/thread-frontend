@@ -34,19 +34,19 @@
 </div>
 
 <button
-  class="w-full bg-white dark:bg-black border border-zinc-400 dark:border-zinc-800 rounded-lg py-2 text-sm"
+  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm"
 >
   Edit Profile
 </button>
 
 <div
-  class="relative border-b border-zinc-400 dark:border-zinc-700 flex justify-around text-sm mt-3"
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3"
 >
   <button
     class="flex-1 py-4 {{
       selectedTab === 'THREADS'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('THREADS')"
   >
@@ -56,7 +56,7 @@
     class="flex-1 py-4 {{
       selectedTab === 'REPLIES'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('REPLIES')"
   >
@@ -66,7 +66,7 @@
     class="flex-1 py-4 {{
       selectedTab === 'REPOSTS'
         ? 'text-black dark:text-white'
-        : 'text-zinc-400 dark:text-zinc-600'
+        : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
     (click)="setSelectedTab('REPOSTS')"
   >
