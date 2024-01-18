@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { DialogService } from '../../Services/dialog.service';
 import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
@@ -30,7 +30,8 @@ import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresiz
           style({ opacity: 0, transform: "translateY(-20px)" })
         )
       ])
-    ])
+    ]),
+
   ]
 })
 export class HeaderComponent {
@@ -38,7 +39,7 @@ export class HeaderComponent {
   userName: string = "@harxh_here"
 
   visible: boolean = false;
-
+  backButtonVisibility: boolean = false
   isOpen: boolean = false
 
 
@@ -52,11 +53,27 @@ export class HeaderComponent {
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location) { }
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location) {
+    this.router.events.subscribe(
+      (ev) => {
+        if (ev instanceof NavigationEnd) {
+          if (["/", "/search", "/activity", "/@" + 'harxh_here'].indexOf(ev.url) !== -1) {
+            this.backButtonVisibility = false
+          } else {
+            this.backButtonVisibility = true
+          }
+        }
+      }
+    )
+  }
 
 
   setIsOpen() {
     this.isOpen = !this.isOpen
+  }
+
+  ngOnChange() {
+    console.log('object :>> ',);
   }
 
   menuClickHandler(val: string) {

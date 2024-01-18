@@ -6,9 +6,40 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './accounts-tab.component.html',
-  styleUrl: './accounts-tab.component.scss',
+  animations: [
+    trigger("childData", [
+      transition(":enter", [
+        sequence([
+          style({ opacity: 0, }),
+          animate(
+            "200ms  ease-in-out",
+            style({ opacity: 1, })
+          )
+        ])
+      ]),
+      transition(":leave", [
+        sequence([
+          style({ opacity: 1, }),
+          animate(
+            "200ms  ease-in-out",
+            style({ opacity: 0, })
+          )
+        ])
+      ])
+    ])
+  ]
 
 })
 export class AccountsTabComponent {
 
+  openChildData: string | null = ""
+
+
+  setOpenChildData(val: string) {
+    if (this.openChildData !== val) {
+      this.openChildData = val
+    } else {
+      this.openChildData = null;
+    }
+  }
 }

@@ -31,8 +31,8 @@
       <div
         class="flex gap-1 justify-center items-center transition-all duration-200"
       >
-        @if (router.url === '/') {
-        <div class="transition-all duration-200">
+        @if (backButtonVisibility) {
+        <div>
           <button
             (click)="BackButtonClick()"
             class="p-1 mr-3 rounded-full flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
@@ -66,7 +66,9 @@
           <button
             (click)="removePopUp()"
             [routerLink]="['']"
-            class="button-anim rounded-lg px-6 py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            }}"
           >
             <div
               class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -76,7 +78,7 @@
                 viewBox="0 0 24 24"
                 width="512"
                 height="512"
-                class="fill-black dark:fill-white stroke-black dark:stroke-white {{
+                class="fill-black dark:fill-white stroke-black dark:stroke-white  {{
                   router.url === '/' ? 'opacity-100' : 'opacity-20'
                 }} "
               >
@@ -90,7 +92,9 @@
           <button
             [routerLink]="['search']"
             (click)="removePopUp()"
-            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            }}"
           >
             <div
               class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -125,7 +129,9 @@
 
           <button
             (click)="openDialog()"
-            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            }}"
           >
             <div
               class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -134,9 +140,7 @@
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                class=" stroke-black dark:stroke-white {{
-                  router.url === '/search' ? 'opacity-100' : 'opacity-30'
-                }} "
+                class="stroke-black dark:stroke-white opacity-30"
               >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g
@@ -165,7 +169,9 @@
           <button
             [routerLink]="['activity']"
             (click)="removePopUp()"
-            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            }}"
           >
             <div
               class="w-10 h-10 p-2 pt-3 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
@@ -209,7 +215,9 @@
           <button
             [routerLink]="[userName]"
             (click)="removePopUp()"
-            class="button-anim rounded-lg px-6 py-2 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)]"
+            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            }}"
           >
             <div
               class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"

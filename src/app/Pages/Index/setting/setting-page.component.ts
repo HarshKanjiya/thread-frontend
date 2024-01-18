@@ -2,12 +2,12 @@ import { trigger, transition, style, animate, sequence, state } from '@angular/a
 import { Component } from '@angular/core';
 import { PrivacyTabComponent } from './privacy-tab/privacy-tab.component';
 import { AccountsTabComponent } from './accounts-tab/accounts-tab.component';
-import { HelpTabComponent } from './help-tab/help-tab.component';
+import { SecurityTabComponent } from './security-tab/security-tab.component';
 
 @Component({
   selector: 'app-setting-page',
   standalone: true,
-  imports: [PrivacyTabComponent, AccountsTabComponent, HelpTabComponent],
+  imports: [PrivacyTabComponent, AccountsTabComponent, SecurityTabComponent],
   templateUrl: './setting-page.component.html',
   animations: [
     trigger("body", [
@@ -34,10 +34,10 @@ import { HelpTabComponent } from './help-tab/help-tab.component';
 })
 export class SettingPageComponent {
 
-  selectedTab: "PRIVACY" | "ACCOUNT" | "HELP" = "PRIVACY"
+  selectedTab: "PRIVACY" | "ACCOUNT" | "SECURITY" = "ACCOUNT"
 
 
-  setSelectedTab(val: "PRIVACY" | "ACCOUNT" | "HELP") {
+  setSelectedTab(val: "PRIVACY" | "ACCOUNT" | "SECURITY") {
     this.selectedTab = val
   }
 

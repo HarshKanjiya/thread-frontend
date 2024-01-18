@@ -24,30 +24,32 @@
   </button>
   <button
     class="flex-1 py-4 {{
-      selectedTab === 'HELP'
+      selectedTab === 'SECURITY'
         ? 'text-black dark:text-white'
         : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
-    (click)="setSelectedTab('HELP')"
+    (click)="setSelectedTab('SECURITY')"
   >
-    Help
+    Security
   </button>
 
   <div
     class="absolute bottom-0 w-[33%] h-[2px] bg-black dark:bg-white transition-all duration-200
     {{ selectedTab === 'PRIVACY' ? 'left-0' : '' }}
     {{ selectedTab === 'ACCOUNT' ? 'left-[33%]' : '' }}
-    {{ selectedTab === 'HELP' ? 'left-[67%]' : '' }} "
+    {{ selectedTab === 'SECURITY' ? 'left-[67%]' : '' }} "
   ></div>
 </div>
 
-<div class="relative w-full">
-  @if (selectedTab === "PRIVACY") {
-  <app-privacy-tab @body class="absolute w-full"></app-privacy-tab> }
-  <!--  -->
-  @if (selectedTab === "ACCOUNT") {
-  <app-accounts-tab @body class="absolute w-full"></app-accounts-tab>}
-  <!--  -->
-  @if (selectedTab === "HELP") {
-  <app-help-tab @body class="absolute w-full"></app-help-tab> }
+<div class="h-full w-full">
+  <div class="relative w-full">
+    @if (selectedTab === "PRIVACY") {
+    <app-privacy-tab @body class="absolute w-full"></app-privacy-tab> }
+    <!--  -->
+    @if (selectedTab === "ACCOUNT") {
+    <app-accounts-tab @body class="absolute w-full"></app-accounts-tab>}
+    <!--  -->
+    @if (selectedTab === "SECURITY") {
+    <app-setting-tab @body class="absolute w-full"></app-setting-tab> }
+  </div>
 </div>
