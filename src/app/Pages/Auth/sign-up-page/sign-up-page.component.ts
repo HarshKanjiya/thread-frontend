@@ -12,7 +12,7 @@ import { UserDataComponent } from './user-data/user-data.component';
 })
 export class SignUpPageComponent {
 
-  currentForm: "USERNAME" | "USERDATA" = "USERDATA"
+  currentForm: "USERNAME" | "USERDATA" = "USERNAME"
   username: string = ""
 
   userNameReceived(e: string) {

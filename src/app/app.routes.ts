@@ -12,6 +12,7 @@ import { AdminComponent } from './Pages/Admin/admin.component';
 import { IndexComponent } from './Pages/Index/index.component';
 import { SettingPageComponent } from './Pages/Index/setting/setting-page.component';
 import { AboutPageComponent } from './Pages/Index/about/about-page.component';
+import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,9 @@ export const routes: Routes = [
       { path: "activity", component: ActivityComponent, pathMatch: "full", title: "Threads | Activity" },
       { path: "setting", component: SettingPageComponent, pathMatch: "full", title: "Threads | Settings" },
       { path: "about", component: AboutPageComponent, pathMatch: "full", title: "Threads | About me" },
-      { path: ":id", component: ProfilePageComponent, title: "Threads | Profile" },
+      { path: "user/" + ":id", component: ProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
     ]
-  }
+  },
+
+  { path: "**", component: NotfoundPageComponent, title: "404 | Not Found" }
 ];

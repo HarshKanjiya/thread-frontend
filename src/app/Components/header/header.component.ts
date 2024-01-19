@@ -36,7 +36,7 @@ import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
 })
 export class HeaderComponent {
 
-  userName: string = "@harxh_here"
+  userName: string = "harxh_here"
 
   visible: boolean = false;
   backButtonVisibility: boolean = false
@@ -57,7 +57,7 @@ export class HeaderComponent {
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {
-          if (["/", "/search", "/activity", "/@" + 'harxh_here'].indexOf(ev.url) !== -1) {
+          if (["/", "/search", "/activity", "/user/" + 'harxh_here'].indexOf(ev.url) !== -1) {
             this.backButtonVisibility = false
           } else {
             this.backButtonVisibility = true
@@ -72,9 +72,6 @@ export class HeaderComponent {
     this.isOpen = !this.isOpen
   }
 
-  ngOnChange() {
-    console.log('object :>> ',);
-  }
 
   menuClickHandler(val: string) {
 

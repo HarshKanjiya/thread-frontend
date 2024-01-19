@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Moirai+One&family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
@@ -24,6 +24,10 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+.font-moirai {
+  font-family: "Moirai One", system-ui;
 }
 
 ::-webkit-scrollbar {
@@ -57,13 +61,12 @@ button:focus {
   --tw-ring-shadow: 0 0 #000 !important;
 }
 
-.calendar .p-inputtext,
-.calendar .p-inputtext:focus {
+.calendar .p-inputtext {
   background: #1e1e1e;
-  border: none;
+  border: none !important;
   width: 100%;
   padding: 0;
-  outline: none;
+  box-shadow: none;
 }
 
 .calendar .p-inputtext::placeholder {
@@ -100,4 +103,8 @@ button:focus {
 .calendar .p-focus {
   border: none;
   outline: none;
+}
+
+body {
+  background-color: #101010 !important;
 }
