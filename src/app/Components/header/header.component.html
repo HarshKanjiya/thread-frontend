@@ -60,18 +60,16 @@
         </div>
         }
 
-        <div
-          class="flex gap-1 justify-center items-center transition-all duration-200"
-        >
+        <div class="flex gap-1 justify-center items-center">
           <button
             (click)="removePopUp()"
             [routerLink]="['']"
-            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
-              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            class="button-anim rounded-lg  py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"
           >
             <div
-              class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+              class="w-10 h-10 p-2 flex items-center justify-center overflow-hidden rounded-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,12 +90,12 @@
           <button
             [routerLink]="['search']"
             (click)="removePopUp()"
-            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
-              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            class="button-anim rounded-lg py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"
           >
             <div
-              class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+              class="w-11 h-11 p-2 flex items-center justify-center overflow-hidden rounded-lg"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -129,12 +127,12 @@
 
           <button
             (click)="openDialog()"
-            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
-              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            class="button-anim rounded-lg  py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"
           >
             <div
-              class="w-11 h-11 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+              class="w-11 h-11 p-2 flex items-center justify-center overflow-hidden rounded-lg"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -169,12 +167,12 @@
           <button
             [routerLink]="['activity']"
             (click)="removePopUp()"
-            class="button-anim rounded-lg flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
-              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            class="button-anim rounded-lg py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"
           >
             <div
-              class="w-10 h-10 p-2 pt-3 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+              class="w-10 h-10 p-2 pt-3 flex items-center justify-center overflow-hidden rounded-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -215,12 +213,12 @@
           <button
             [routerLink]="[userName]"
             (click)="removePopUp()"
-            class="button-anim rounded-lg  flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
-              backButtonVisibility ? 'h-[66px] w-[66px] ' : 'px-6 py-3'
+            class="button-anim rounded-lg  py-3 h-auto flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
+              backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"
           >
             <div
-              class="w-10 h-10 p-2 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+              class="w-10 h-10 p-2 flex items-center justify-center overflow-hidden rounded-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

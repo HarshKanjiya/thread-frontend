@@ -1,13 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Location } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
 import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
-import { Location } from '@angular/common';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
-import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 @Component({
   selector: 'app-header',
   standalone: true,
