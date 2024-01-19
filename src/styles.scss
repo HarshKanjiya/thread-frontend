@@ -26,17 +26,6 @@
   }
 }
 
-/* Order */
-@layer reset, primeng;
-
-/* Reset CSS */
-@layer reset {
-  button,
-  input {
-    /* CSS to Reset */
-  }
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -68,6 +57,47 @@ button:focus {
   --tw-ring-shadow: 0 0 #000 !important;
 }
 
-.datepicker {
-  background: #101010 !important;
+.calendar .p-inputtext,
+.calendar .p-inputtext:focus {
+  background: #1e1e1e;
+  border: none;
+  width: 100%;
+  padding: 0;
+  outline: none;
+}
+
+.calendar .p-inputtext::placeholder {
+  color: #737373;
+  font-size: 0.875rem;
+}
+
+.calendar .p-datepicker {
+  padding: 1rem;
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 1rem;
+  overflow: hidden !important;
+  border: 2px solid #2e2e2e;
+}
+
+.calendar .p-datepicker-header {
+  background: #1e1e1e;
+  color: #fff;
+  padding-bottom: 1rem;
+}
+
+.calendar .p-highlight {
+  background: #2e2e2e;
+  color: #fff;
+}
+
+.calendar .p-element:hover {
+  background: #2e2e2e;
+}
+
+.calendar .p-component,
+.calendar .p-component:focus,
+.calendar .p-focus {
+  border: none;
+  outline: none;
 }

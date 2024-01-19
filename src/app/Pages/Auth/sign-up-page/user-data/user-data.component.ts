@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { AuthServiceService } from '../../service/auth-service.service';
 
@@ -34,16 +34,16 @@ export class UserDataComponent {
   AllowSubmit: boolean = true
   isOpen: boolean = false
   passwordVisiblity: boolean = false
-  date: Date | undefined;
+  date: any;
 
   @Input() username !: string
 
-  formData: { username: string, name: string, email: string, phone: string, gender: string, birthDate: string, password: string, avatar: File | null } = { birthDate: "", email: "", gender: "", name: "", password: "", phone: '', username: "", avatar: null }
+  formData: { username: string, name: string, email: string, phone: string, gender: string, birthDate: any, password: string, avatar: File | null } = { birthDate: "", email: "", gender: "", name: "", password: "", phone: '', username: "", avatar: null }
   errorData: { username: string, name: string, email: string, phone: string, gender: string, birthDate: string, password: string } = { birthDate: "", email: "", gender: "", name: "", password: "", phone: "", username: "" }
 
 
 
-  constructor(public auth: AuthServiceService, private fb: FormBuilder) { }
+  constructor(public auth: AuthServiceService,) { }
 
 
 

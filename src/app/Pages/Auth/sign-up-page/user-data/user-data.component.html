@@ -114,20 +114,20 @@
         <path d="M17 4h0.01" />
       </svg>
 
-      <!-- <p-input
-        [(ngModel)]="date"
-        (change)="birthDateChangeHandler($event)"
-        type="text"
-        class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+      <p-calendar
         placeholder="Birth date"
-      ></p-input> -->
-      <input
+        styleClass="calendar"
+        class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+        [(ngModel)]="formData.birthDate"
+      ></p-calendar>
+
+      <!-- <input
         datepicker
         datepicker-autohide
         type="text"
         class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
         placeholder="Birth date"
-      />
+      /> -->
     </div>
 
     <!-- gender -->
@@ -146,7 +146,7 @@
 
       <button
         (click)="openGenderBox()"
-        class="pl-12 h-[48px] bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+        class="pl-12 h-[48px] bg-neutral-100 dark:bg-[#1e1e1e] text-left px-3 py-3 w-full rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
       >
         @if (formData.gender === "") {
         <p class="text-sm text-neutral-400 dark:text-neutral-500">Gender</p>
@@ -248,9 +248,12 @@
     </svg>
 
     <label
-      class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+      class="pl-12 h-[48px] bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full  rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500 {{
+        formData.avatar?.name ??
+          'text-sm text-neutral-400 dark:text-neutral-500'
+      }}"
       for="profilePic"
-      >{{ formData.avatar?.name ?? "chose Avatar" }}</label
+      >{{ formData.avatar?.name ?? "Chose avatar" }}</label
     >
     <input
       id="profilePic"
