@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AuthServiceService } from '../../service/auth-service.service';
 
 @Component({
   selector: 'app-unique-user-name',
@@ -18,10 +17,11 @@ export class UniqueUserNameComponent {
   AllowSubmit: boolean = false
   invalidInput: boolean = false
   AlertMessage: string = ""
+  loading = signal<boolean>(false)
 
   @Output() username = new EventEmitter<string>()
 
-  constructor(public auth: AuthServiceService) { }
+  // constructor(public auth: AuthServiceService) { }
 
   onTextKeyUp() {
 

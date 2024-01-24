@@ -3,14 +3,14 @@ import {
   ActionReducerMap,
   MetaReducer
 } from '@ngrx/store';
-import { UserReducer } from './UserReducer';
+import { UserReducer } from './User/UserReducer';
 
 export interface State {
 
 }
 
 export const reducers: ActionReducerMap<State> = {
-  form: formReducer
+  User: UserReducer
 };
 
 

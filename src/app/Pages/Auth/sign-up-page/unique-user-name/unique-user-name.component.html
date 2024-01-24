@@ -27,9 +27,9 @@
   <button
     (click)="submit()"
     class="bg-black text-white dark:text-black dark:bg-white px-3 py-3 rounded-xl flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-neutral-400 dark:disabled:bg-neutral-500 transition-all duration-200"
-    [disabled]="auth.loading()"
+    [disabled]="loading()"
   >
-    @if (auth.loading()) {
+    @if (loading()) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"

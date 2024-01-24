@@ -1,8 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { AuthServiceService } from '../../service/auth-service.service';
 
 @Component({
   selector: 'app-user-data',
@@ -35,6 +34,7 @@ export class UserDataComponent {
   isOpen: boolean = false
   passwordVisiblity: boolean = false
   date: any;
+  loading = signal<boolean>(false)
 
   @Input() username !: string
 
@@ -43,7 +43,7 @@ export class UserDataComponent {
 
 
 
-  constructor(public auth: AuthServiceService,) { }
+  // constructor(public auth: AuthServiceService,) { }
 
 
 
