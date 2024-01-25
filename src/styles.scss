@@ -108,3 +108,16 @@ button:focus {
 body {
   background-color: #101010 !important;
 }
+
+.ng-otp-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng-otp-input-wrapper > input {
+  background: #101010;
+  border: 2px solid #2e2e2e !important;
+  border-radius: 0.4rem !important;
+  font-size: 1rem !important;
+}

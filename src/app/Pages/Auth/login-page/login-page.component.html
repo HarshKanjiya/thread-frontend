@@ -29,6 +29,13 @@
       ></app-email-login-form>
       }
       <!--  -->
+      @if(currentForm === "EMAIL_LOGIN_VERIFY"){
+      <app-otp-verify
+        class="w-full"
+        (formChange)="onFormChange($event)"
+      ></app-otp-verify>
+      }
+      <!--  -->
     </div>
   </div>
 </div>

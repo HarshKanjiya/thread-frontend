@@ -17,16 +17,7 @@ export class UserService {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post("auth/login", data).subscribe((res: any) => {
 
-        if (res.Success) {
-          this.store.dispatch(SET_USER_DATA({ data: res.Data }))
-          this.toast.makeToast('MESSAGE', res.Message ?? "Logged in Successfully")
-        } else {
-          this.store.dispatch(SET_USER_DATA({ data: null }))
-          this.toast.makeToast('ERROR', res.Message ?? "Logged in Failed")
-        }
-      })
 
     } catch (e: any) {
       console.log('Error in Login :', e.loading);

@@ -1,24 +1,109 @@
 <div class="flex flex-col gap-3 w-full p-4 sm:w-[400px]">
   <p class="font-bold pb-4 text-center">Login with your instagram account</p>
-  <input
-    type="text"
-    class="bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-    placeholder="Username, phone or email"
-    [(ngModel)]="id"
-    (keyup)="onTextKeyUp()"
-  />
-  <input
-    type="password"
-    class="bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-    placeholder="Password"
-    [(ngModel)]="password"
-    (keyup)="onTextKeyUp()"
-  />
+
+  <div class="flex flex-col gap-1 relative">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="stroke-black dark:stroke-neutral-500 absolute top-1/2 -translate-y-1/2 left-3 origin-center"
+    >
+      <path d="M18 20a6 6 0 0 0-12 0" />
+      <circle cx="12" cy="10" r="4" />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    <input
+      [(ngModel)]="id"
+      (keyup)="onTextKeyUp()"
+      type="text"
+      class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+      placeholder="Username, phone or email"
+    />
+  </div>
+  <div class="flex flex-col gap-1 relative rounded-xl overflow-hidden">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="stroke-black dark:stroke-neutral-500 absolute top-1/2 -translate-y-1/2 left-3 origin-center"
+    >
+      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+
+    <input
+      [(ngModel)]="password"
+      (keyup)="onTextKeyUp()"
+      type="{{ passwordVisiblity ? 'text' : 'Password' }}"
+      class="pl-12 bg-neutral-100 dark:bg-[#1e1e1e] px-3 py-3 w-full h-min rounded-xl border-none focus:outline focus:outline-offset-0 focus:outline-[0.5px] focus:outline-neutral-400 dark:focus:outline-neutral-700 placeholder:text-sm placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+      placeholder="Password"
+    />
+    <button
+      (click)="setPasswordVisiblity()"
+      class="h-[48px] w-[48px] transition-all duration-200 group hover:bg-neutral-900 flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-0 origin-center bg-transparent"
+    >
+      <div
+        class="w-[1px] h-[50%] group-hover:h-full transition-all duration-200 origin-center top-1/2 -translate-y-1/2 contents-[' '] rounded-full bg-neutral-500 group-hover:bg-neutral-300 absolute left-0"
+      ></div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-black dark:stroke-neutral-500 h-6 w-6"
+      >
+        <line
+          x1="2"
+          x2="22"
+          y1="2"
+          y2="22"
+          class="duration-200 transition-all {{
+            passwordVisiblity ? 'scale-100' : 'scale-0'
+          }} "
+        />
+
+        <circle cx="12" cy="12" r="3" />
+
+        @if (passwordVisiblity) {
+        <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+        <path
+          d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"
+        />
+        <path
+          d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"
+        />
+        }@else {
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+
+        }
+      </svg>
+      <!-- } -->
+    </button>
+  </div>
   <button
     class="transition-all duration-200 bg-black text-white dark:text-black flex items-center justify-center gap-3 dark:bg-white px-3 py-3 rounded-xl disabled:bg-neutral-400 dark:disabled:bg-neutral-500 disabled:cursor-not-allowed"
-    [disabled]="!AllowSubmit || loading()"
+    [disabled]="!AllowSubmit || UserState.loading()"
+    (click)="submit()"
   >
-    @if (loading()) {
+    @if (UserState.loading()) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"

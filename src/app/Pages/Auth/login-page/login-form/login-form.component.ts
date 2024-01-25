@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { UserService } from '../../../../reducers/User/User.service';
 import { Store } from '@ngrx/store';
-import { IUserInitialState } from '../../../../reducers/User/UserTypes';
+import { UserStateService } from '../../../../Services/state/user-state.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,27 +15,20 @@ export class LoginFormComponent {
   id: string = ""
   password: string = ""
   AllowSubmit: boolean = false
+  passwordVisiblity: boolean = false
+
   loading = signal<boolean>(false)
   @Output() formChange = new EventEmitter<"LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN">()
 
   // idSignal = signal<{ email?: string, password?: string }>({})
 
-  constructor(private UserService: UserService, private store: Store<any>) {
-
-    console.log('loading :>> 1', this.loading);
-    // store.select(state => state.).subscribe((res: any) => {
-    //   console.log('res :>> ', res);
-    //   this.loading = res
-    // })
-
+  constructor(public UserState: UserStateService, private store: Store<any>) {
     this.store.select("User").subscribe((res: any) => {
-      this.loading.set(res.success)
+      this.loading.set(res.loading)
     })
-
-
-    console.log('loading :>> ', this.loading);
-
   }
+
+  setPasswordVisiblity() { this.passwordVisiblity = !this.passwordVisiblity }
 
 
   onFormChange(type: "LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN") {
@@ -53,7 +45,7 @@ export class LoginFormComponent {
   }
 
   submit() {
-    this.UserService.loginUser({
+    this.UserState.loginUser({
       uniqueId: this.id, password: this.password
     })
   }
