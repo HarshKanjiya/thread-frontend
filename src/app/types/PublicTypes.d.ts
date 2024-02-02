@@ -1,3 +1,0 @@
-// export enum ILoginCurrentScreen {
-//   LOGIN, SIGNUP, FORGOT_PASS, EMAIL_LOGIN_SEND_ME_OTP, EMAIL_LOGIN_I_HAVE_OTP
-// }

@@ -36,7 +36,7 @@ import { OtpVerifyComponent } from './otp-verify/otp-verify.component';
 export class LoginPageComponent {
 
 
-  currentForm: "LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN" | "EMAIL_LOGIN_VERIFY" = "EMAIL_LOGIN"
+  currentForm: "LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN" | "EMAIL_LOGIN_VERIFY" = "LOGIN"
 
   onFormChange(form: "LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN" | "EMAIL_LOGIN_VERIFY") {
     this.currentForm = form

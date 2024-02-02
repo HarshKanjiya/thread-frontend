@@ -13,11 +13,13 @@ import { IndexComponent } from './Pages/Index/index.component';
 import { SettingPageComponent } from './Pages/Index/setting/setting-page.component';
 import { AboutPageComponent } from './Pages/Index/about/about-page.component';
 import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
+import { AuthGuard } from './Utils/AuthGuard';
 
 export const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: AdminHomeComponent, pathMatch: "full", title: "Admin | Dashboard" },
       { path: "subscriptions", component: AdminSubscriptionsComponent, pathMatch: "full", title: "Admin | Income" },
@@ -32,6 +34,7 @@ export const routes: Routes = [
   {
     path: "",
     component: IndexComponent,
+    canActivate:[AuthGuard],
     children: [
       { path: "", component: HomePageComponent, pathMatch: "full", title: "Threads | Feed" },
       { path: "search", component: SearchPageComponent, pathMatch: "full", title: "Threads | Search" },

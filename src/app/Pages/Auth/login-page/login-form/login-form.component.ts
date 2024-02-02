@@ -17,15 +17,15 @@ export class LoginFormComponent {
   AllowSubmit: boolean = false
   passwordVisiblity: boolean = false
 
-  loading = signal<boolean>(false)
+  // loading = signal<boolean>(false)
   @Output() formChange = new EventEmitter<"LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN">()
 
   // idSignal = signal<{ email?: string, password?: string }>({})
 
   constructor(public UserState: UserStateService, private store: Store<any>) {
-    this.store.select("User").subscribe((res: any) => {
-      this.loading.set(res.loading)
-    })
+    // this.store.select("User").subscribe((res: any) => {
+      // this.loading.set(res.loading)
+    // })
   }
 
   setPasswordVisiblity() { this.passwordVisiblity = !this.passwordVisiblity }

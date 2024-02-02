@@ -2,6 +2,7 @@ import { Component, HostBinding, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './Services/theme.service';
+import { UserStateService } from './Services/state/user-state.service';
 
 
 @Component({
@@ -12,7 +13,12 @@ import { ThemeService } from './Services/theme.service';
 })
 export class AppComponent {
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private themeService: ThemeService, public UserState: UserStateService) {
+  }
+
+  ngOnInit(){
+    this.UserState.getMySession();
+  }
 
   @HostBinding("class.dark") get mode() {
     return this.themeService.darkTheme()

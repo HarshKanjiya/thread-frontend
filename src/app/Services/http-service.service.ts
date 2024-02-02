@@ -1,28 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BaseURL } from '../Utils/Endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  readonly uri = "https://localhost:7206/"
+  readonly uri = BaseURL;
 
-  constructor(private http: HttpClient) { }
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + "token"
+  });
+
+
+
+
+  constructor(private http: HttpClient) {}
+
   get(path: string) {
-    return this.http.get(this.uri + path)
+    return this.http.get(this.uri + path, { headers: this.headers, withCredentials: true })
   }
   post(path: string, payload: any) {
-    return this.http.post(this.uri + path, payload)
+    return this.http.post(this.uri + path, payload, { headers: this.headers,withCredentials:true })
   }
   put(path: string, payload: any) {
-    return this.http.post(this.uri + path, payload)
+    return this.http.post(this.uri + path, payload, { headers: this.headers ,withCredentials:true })
   }
   patch(path: string, payload: any) {
-    return this.http.post(this.uri + path, payload)
+    return this.http.post(this.uri + path, payload, { headers: this.headers,withCredentials:true  })
   }
   delete(path: string) {
 
-    return this.http.delete(this.uri + path)
+    return this.http.delete(this.uri + path, { headers: this.headers,withCredentials:true  })
   }
 }
