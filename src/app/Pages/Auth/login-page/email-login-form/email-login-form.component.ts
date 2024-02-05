@@ -63,12 +63,12 @@ export class EmailLoginFormComponent {
   submit() {
     this.UserState.sendMeOTP({ email: this.id })?.subscribe((res: any) => {
       this.UserState.loading.set(false)
-      if (res.success) {
-        this.toast.makeToast("MESSAGE", res.message ?? "")
+      if (res.Success) {
+        this.toast.makeToast("MESSAGE", res.Message ?? "")
         this.UserState.temp.set(this.id)
         this.formChange.emit("EMAIL_LOGIN_VERIFY")
       } else {
-        this.toast.makeToast("MESSAGE", res.message ?? "")
+        this.toast.makeToast("MESSAGE", res.Message ?? "")
       }
     })
   }

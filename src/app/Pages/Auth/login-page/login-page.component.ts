@@ -4,6 +4,9 @@ import { EmailLoginFormComponent } from './email-login-form/email-login-form.com
 import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { OtpVerifyComponent } from './otp-verify/otp-verify.component';
+import { Router } from '@angular/router';
+import { UserStateService } from '../../../Services/state/user-state.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-page',
@@ -42,5 +45,11 @@ export class LoginPageComponent {
     this.currentForm = form
   }
 
+  constructor(private router: Router, private userState: UserStateService,private cookie: CookieService) {
 
+    if (this.cookie.get('RefreshToken') && this.cookie.get('UserName')){
+      router.navigate(["/"]);
+    }{
+    }
+  }
 }

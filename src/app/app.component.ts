@@ -2,8 +2,7 @@ import { Component, HostBinding, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './Services/theme.service';
-import { UserStateService } from './Services/state/user-state.service';
-
+import { UserStateService } from "./Services/state/user-state.service"
 
 @Component({
   selector: 'app-root',

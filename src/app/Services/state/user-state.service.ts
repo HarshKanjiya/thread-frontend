@@ -2,8 +2,14 @@ import { Injectable, signal } from '@angular/core';
 import { ILoginUser, ISendMeOtp } from '../../reducers/User/UserTypes';
 import { ToastService } from '../toast.service';
 import { HttpService } from '../http-service.service';
-import { GetSessionDataAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
+import { GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
 import { Router } from '@angular/router';
+
+// export interface IResponse{
+//   Success: boolean
+//   Message : string
+//   Data ?: Object
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -18,25 +24,18 @@ export class UserStateService {
   message = signal<string | null>(null)
   temp = signal<any>(null)
 
-  isuserLoggedin(){
-    if(this.UserData() !== null){
-      return true;
-    }else{
-      console.log('userda :>> ', this.UserData());
-      return false
-    }
-  }
-
   getMySession(){
     this.loading.set(true)
     try {
       this.http.get(GetSessionDataAPI).subscribe((res: any) => {
         this.loading.set(false)
-        if (res.success) {
+        console.log('res :>> ', res);
+        if (res.Success) {
           this.UserData.set(res.Data)
           return true
         } else {
           this.UserData.set(null)
+
           return false
         }
       })
@@ -53,7 +52,7 @@ export class UserStateService {
     try {
       this.http.post(LoginAPI, data).subscribe((res: any) => {
         this.loading.set(false)
-        if (res.success) {
+        if (res.Success) {
           this.UserData.set(res.Data)
           this.router.navigate(['/'])
           this.toast.makeToast("MESSAGE", res.Message ?? "User Logged in")
@@ -95,6 +94,18 @@ export class UserStateService {
 
     }
 
+  }
+  signOut(){
+    this.loading.set(true)
+    this.http.get(LogOutAPI).subscribe((res:any) =>{
+      this.loading.set(false)
+      console.log('res :>> ', res);
+      if(res.Success === true){
+        this.toast.makeToast("MESSAGE",res.Message)
+        this.router.navigate(["/login"])
+        this.UserData.set(null)
+      }
+    })
   }
 
   sendMeOTP(data: ISendMeOtp) {

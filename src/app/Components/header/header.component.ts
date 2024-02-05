@@ -8,6 +8,7 @@ import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
+import { UserStateService } from '../../Services/state/user-state.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -53,7 +54,7 @@ export class HeaderComponent {
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location) {
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location,public userState:UserStateService) {
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {
@@ -77,17 +78,16 @@ export class HeaderComponent {
 
     switch (val) {
       case 'theme':
-        this.changeTheme()
+        this.changeTheme();
+        this.setIsOpen()
         break
       case 'report':
         this.dialog.openDialog("REPORT_BUG")
+        this.setIsOpen()
         break
       case 'logout':
-        break
+        this.userState.signOut()
     }
-
-    this.setIsOpen()
-
   }
 
   showDialog() {

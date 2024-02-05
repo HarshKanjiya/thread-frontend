@@ -326,13 +326,30 @@
               <span>problem</span>
             </div>
             <hr class="w-full border-neutral-300 dark:border-neutral-700" />
-            <div
+            <button
+              [disabled]="userState.loading()"
               type="button"
-              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:hover:bg-white disabled:opacity-50 dark:disabled:hover:bg-black dark:disabled:opacity-30 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
               (click)="menuClickHandler('logout')"
             >
+              @if (userState.loading()) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+              }
               <span>Log out</span>
-            </div>
+            </button>
           </div>
           }
         </div>
@@ -396,3 +413,129 @@
   </div>
 </custom-popup>
 }
+
+
+
+
+<!-- FOR SMALL SCREEN SIZE -->
+<div class="w-full sm:hidden flex p-3 fixed " >
+  <div></div>
+  <div>
+        <div
+          class="w-12 h-12 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+        >
+          <!-- logo -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            shape-rendering="geometricPrecision"
+            text-rendering="geometricPrecision"
+            image-rendering="optimizeQuality"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            viewBox="0 0 512 512"
+            class="fill-black dark:fill-white"
+          >
+            <path
+              fill-rule="nonzero"
+              d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z"
+            />
+          </svg>
+        </div>
+      </div>
+   <div #menu>
+        <div class="relative">
+          <button
+            type="button"
+            (click)="setIsOpen()"
+            class="py-3 px-4 inline-flex items-center gap-x-2"
+          >
+            <svg
+              width="534"
+              height="234"
+              viewBox="0 0 534 234"
+              fill="none"
+              class="stroke-black dark:stroke-white h-7 w-7"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M233.667 200.667H500.334M33.667 34H500.334"
+                stroke-width="66.6667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          @if (isOpen) {
+          <div
+            @dropBody
+            class="absolute z-10 top-[100%] right-[10%] w-min flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800"
+          >
+            <div
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('theme')"
+            >
+              <span>Switch</span>
+              <span>appearance</span>
+            </div>
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+            <div
+              [routerLink]="['/setting']"
+              routerLinkActive="router-link-active"
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('setting')"
+            >
+              Settings
+            </div>
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+            <div
+              [routerLink]="['/about']"
+              routerLinkActive="router-link-active"
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('about')"
+            >
+              About
+            </div>
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+            <div
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('report')"
+            >
+              <span>Report</span>
+              <span>a</span>
+              <span>problem</span>
+            </div>
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+            <button
+              [disabled]="userState.loading()"
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:hover:bg-white disabled:opacity-50 dark:disabled:hover:bg-black dark:disabled:opacity-30 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
+              (click)="menuClickHandler('logout')"
+            >
+              @if (userState.loading()) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+              }
+              <span>Log out</span>
+            </button>
+          </div>
+          }
+        </div>
+      </div>
+</div>
