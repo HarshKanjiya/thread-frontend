@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Signal, ViewChild, computed } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
@@ -37,7 +37,7 @@ import { UserStateService } from '../../Services/state/user-state.service';
 })
 export class HeaderComponent {
 
-  userName: string = "harxh_here"
+  userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
 
   visible: boolean = false;
   backButtonVisibility: boolean = false
@@ -58,7 +58,7 @@ export class HeaderComponent {
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {
-          if (["/", "/search", "/activity", "/user/" + 'harxh_here'].indexOf(ev.url) !== -1) {
+          if (["/", "/search", "/activity", "/user/" + this.userName()].indexOf(ev.url) !== -1) {
             this.backButtonVisibility = false
           } else {
             this.backButtonVisibility = true

@@ -1,0 +1,83 @@
+<div class="flex items-center justify-between py-4">
+  <div class="flex flex-col">
+    <p class="text-2xl font-bold">{{ userDataSignal()?.Name }}</p>
+    <p class="text-sm">{{ userDataSignal()?.UserName }}</p>
+  </div>
+  <div>
+    @if (userDataSignal()?.AvatarURL.trim().length > 0) {
+    <img class="w-20 h-20 rounded-full" [src]="userDataSignal()?.AvatarURL" />
+    }@else {
+    <img class="w-20 h-20 rounded-full" src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=" />
+    }
+  </div>
+</div>
+
+<div class="py-2">{{userDataSignal()?.Bio}}</div>
+
+<div class="flex items-center justify-between py-4">
+  <div class="flex items-center">
+    <div class="flex -space-x-2 overflow-hidden">
+      <img
+        class="inline-block h-6 w-6 rounded-full border-2 border-white dark:border-black"
+        src="https://imgs.search.brave.com/HBl_T5KkQuwZdTbyhCnScuHZSxrbjYnoPxf1GoRGzPk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbHVm/ZnktMTI3MC14LTEy/NzAtcGljdHVyZS1x/ODAzNGQxNnkzM296/NXljLmpwZw"
+        alt=""
+      />
+      <img
+        class="inline-block h-6 w-6 rounded-full border-2 border-white dark:border-black"
+        src="https://imgs.search.brave.com/HBl_T5KkQuwZdTbyhCnScuHZSxrbjYnoPxf1GoRGzPk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbHVm/ZnktMTI3MC14LTEy/NzAtcGljdHVyZS1x/ODAzNGQxNnkzM296/NXljLmpwZw"
+        alt=""
+      />
+    </div>
+    <div class="w-2"></div>
+
+    <p class="text-sm">{{userDataSignal()?.FollowersCount}} Followers</p>
+  </div>
+</div>
+
+<button
+  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm"
+>
+  Edit Profile
+</button>
+
+<div
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3"
+>
+  <button
+    class="flex-1 py-4 {{
+      selectedTab === 'THREADS'
+        ? 'text-black dark:text-white'
+        : 'text-neutral-400 dark:text-neutral-600'
+    }} transition-all duration-200"
+    (click)="setSelectedTab('THREADS')"
+  >
+    Threads
+  </button>
+  <button
+    class="flex-1 py-4 {{
+      selectedTab === 'REPLIES'
+        ? 'text-black dark:text-white'
+        : 'text-neutral-400 dark:text-neutral-600'
+    }} transition-all duration-200"
+    (click)="setSelectedTab('REPLIES')"
+  >
+    Replies
+  </button>
+  <button
+    class="flex-1 py-4 {{
+      selectedTab === 'REPOSTS'
+        ? 'text-black dark:text-white'
+        : 'text-neutral-400 dark:text-neutral-600'
+    }} transition-all duration-200"
+    (click)="setSelectedTab('REPOSTS')"
+  >
+    Reposts
+  </button>
+
+  <div
+    class="absolute bottom-0 w-[33%] h-[2px] bg-black dark:bg-white transition-all duration-200
+    {{ selectedTab === 'THREADS' ? 'left-0' : '' }}
+    {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }}
+    {{ selectedTab === 'REPOSTS' ? 'left-[66%]' : '' }} "
+  ></div>
+</div>

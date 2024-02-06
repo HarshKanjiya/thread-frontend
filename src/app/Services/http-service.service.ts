@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseURL } from '../Utils/Endpoints';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,11 @@ export class HttpService {
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + "token"
+    'Authorization': 'Bearer ' + this.cookie.get("AccessToken")
+
   });
 
-
-
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookie: CookieService) {}
 
   get(path: string) {
     return this.http.get(this.uri + path, { headers: this.headers, withCredentials: true })

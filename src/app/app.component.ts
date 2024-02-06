@@ -13,16 +13,15 @@ import { UserStateService } from "./Services/state/user-state.service"
 export class AppComponent {
 
   constructor(private themeService: ThemeService, public UserState: UserStateService) {
+    this.UserState.getMySession();
   }
 
   ngOnInit(){
-    this.UserState.getMySession();
   }
 
   @HostBinding("class.dark") get mode() {
     return this.themeService.darkTheme()
   }
-
 
 
 }

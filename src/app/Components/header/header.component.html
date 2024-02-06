@@ -211,7 +211,7 @@
           </button>
 
           <button
-            [routerLink]="['user/' + userName]"
+            [routerLink]="['user/' + userName()]"
             (click)="removePopUp()"
             class="button-anim rounded-lg  py-3 h-auto flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
               backButtonVisibility ? 'px-3.5' : 'px-6'

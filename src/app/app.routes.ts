@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './Pages/Auth/login-page/login-page.component';
-import { SignUpPageComponent } from './Pages/Auth/sign-up-page/sign-up-page.component';
-import { SearchPageComponent } from './Pages/Index/Search/search-page/search-page.component';
-import { ProfilePageComponent } from './Pages/Index/Profile/profile-page/profile-page.component';
-import { ActivityComponent } from './Pages/Index/Activity/activity/activity.component';
-import { HomePageComponent } from './Pages/Index/Home/home-page/home-page.component';
+import { AdminHomeComponent } from './Pages/Admin/admin-home/admin-home.component';
 import { AdminReportsComponent } from './Pages/Admin/admin-reports/admin-reports.component';
 import { AdminSubscriptionsComponent } from './Pages/Admin/admin-subscriptions/admin-subscriptions.component';
-import { AdminHomeComponent } from './Pages/Admin/admin-home/admin-home.component';
 import { AdminComponent } from './Pages/Admin/admin.component';
+import { LoginPageComponent } from './Pages/Auth/login-page/login-page.component';
+import { SignUpPageComponent } from './Pages/Auth/sign-up-page/sign-up-page.component';
+import { ActivityComponent } from './Pages/Index/Activity/activity/activity.component';
+import { HomePageComponent } from './Pages/Index/Home/home-page/home-page.component';
+import { ProfilePageComponent } from './Pages/Index/Profile/profile-page.component';
+import { SearchPageComponent } from './Pages/Index/Search/search-page/search-page.component';
+import { AboutPageComponent } from './Pages/Index/about/about-page.component';
 import { IndexComponent } from './Pages/Index/index.component';
 import { SettingPageComponent } from './Pages/Index/setting/setting-page.component';
-import { AboutPageComponent } from './Pages/Index/about/about-page.component';
 import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
 import { AuthGuard } from './Utils/AuthGuard';
 

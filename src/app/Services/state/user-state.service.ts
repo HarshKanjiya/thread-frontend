@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { ILoginUser, ISendMeOtp } from '../../reducers/User/UserTypes';
 import { ToastService } from '../toast.service';
 import { HttpService } from '../http-service.service';
-import { GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
+import { GetPostsOfSignleUserAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
 import { Router } from '@angular/router';
 
 // export interface IResponse{
@@ -16,15 +16,20 @@ import { Router } from '@angular/router';
 })
 export class UserStateService {
 
-  constructor(private toast: ToastService, private http: HttpService,private router:Router) { }
+  constructor(private toast: ToastService, private http: HttpService, private router: Router) { }
 
   loading = signal<boolean>(false)
   success = signal<boolean>(false)
-  UserData = signal<Object | null>(null)
+  UserData = signal<any>(null)
+  MyPosts = signal<any[]>([])
+  OthersPosts = signal<any[]>([])
+
   message = signal<string | null>(null)
   temp = signal<any>(null)
 
-  getMySession(){
+
+  // auth logic
+  getMySession() {
     this.loading.set(true)
     try {
       this.http.get(GetSessionDataAPI).subscribe((res: any) => {
@@ -46,7 +51,6 @@ export class UserStateService {
       return false
     }
   }
-
   loginUser(data: ILoginUser): boolean {
     this.loading.set(true)
     try {
@@ -95,19 +99,18 @@ export class UserStateService {
     }
 
   }
-  signOut(){
+  signOut() {
     this.loading.set(true)
-    this.http.get(LogOutAPI).subscribe((res:any) =>{
+    this.http.get(LogOutAPI).subscribe((res: any) => {
       this.loading.set(false)
       console.log('res :>> ', res);
-      if(res.Success === true){
-        this.toast.makeToast("MESSAGE",res.Message)
+      if (res.Success === true) {
+        this.toast.makeToast("MESSAGE", res.Message)
         this.router.navigate(["/login"])
         this.UserData.set(null)
       }
     })
   }
-
   sendMeOTP(data: ISendMeOtp) {
     this.loading.set(true)
 
@@ -118,6 +121,22 @@ export class UserStateService {
       this.loading.set(false)
       this.toast.makeToast('ERROR', "Something went Wrong")
       return null
+    }
+  }
+
+  // posts
+  getAllMyPosts() {
+    // this.loading.set(true)
+    try {
+      this.http.get(GetPostsOfSignleUserAPI + this.UserData()?.UserId)
+      .subscribe((res:any) => {
+        this.loading.set(false)
+        console.log('res :>> ', res);
+
+      })
+    } catch (e: any) {
+      this.loading.set(false)
+      this.toast.makeToast('ERROR', "Something went Wrong")
     }
   }
 }

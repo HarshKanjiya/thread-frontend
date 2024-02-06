@@ -24,6 +24,7 @@ export const DeleteThreadAPI = "thread/" // + USER_ID + THREAD_ID // DELETE
 export const VotePollAPI = "poll" // POST
 export const GetThreadDataAPI = ""
 export const EditThreadAPI = ""
+export const GetPostsOfSignleUserAPI = "thread/user/" // + USER_ID // GET
 
 // Action // POST
 export const LikeAPI = "action/like"
