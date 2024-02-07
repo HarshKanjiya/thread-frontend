@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+// import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-thread',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './thread.component.scss'
 })
 export class ThreadComponent {
+  @Input() ThreadData : any
+  @Input() UserData : any
 
+  ngAfterViewInit(){
+    console.log('object :>> ', this.ThreadData,this.UserData);
+  }
 }

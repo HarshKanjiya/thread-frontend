@@ -126,13 +126,14 @@ export class UserStateService {
 
   // posts
   getAllMyPosts() {
-    // this.loading.set(true)
+    this.loading.set(true)
     try {
-      this.http.get(GetPostsOfSignleUserAPI + this.UserData()?.UserId)
+      this.http.get(GetPostsOfSignleUserAPI + this.UserData()?.UserId + "?pageNumber=2&pageSize=3")
       .subscribe((res:any) => {
         this.loading.set(false)
-        console.log('res :>> ', res);
-
+        if(res?.Success){
+          this.MyPosts.set(res.Data)
+        }
       })
     } catch (e: any) {
       this.loading.set(false)

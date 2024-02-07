@@ -7,12 +7,15 @@
     @if (userDataSignal()?.AvatarURL.trim().length > 0) {
     <img class="w-20 h-20 rounded-full" [src]="userDataSignal()?.AvatarURL" />
     }@else {
-    <img class="w-20 h-20 rounded-full" src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=" />
+    <img
+      class="w-20 h-20 rounded-full"
+      src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
+    />
     }
   </div>
 </div>
 
-<div class="py-2">{{userDataSignal()?.Bio}}</div>
+<div class="py-2">{{ userDataSignal()?.Bio }}</div>
 
 <div class="flex items-center justify-between py-4">
   <div class="flex items-center">
@@ -30,7 +33,7 @@
     </div>
     <div class="w-2"></div>
 
-    <p class="text-sm">{{userDataSignal()?.FollowersCount}} Followers</p>
+    <p class="text-sm">{{ userDataSignal()?.FollowersCount }} Followers</p>
   </div>
 </div>
 
@@ -80,4 +83,10 @@
     {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }}
     {{ selectedTab === 'REPOSTS' ? 'left-[66%]' : '' }} "
   ></div>
+</div>
+
+<div>
+  @for (item of myThreads(); track $index) {
+  <app-thread [ThreadData]="item" [UserData]="userDataSignal()"></app-thread>
+  }
 </div>
