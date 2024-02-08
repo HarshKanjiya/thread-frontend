@@ -58,7 +58,7 @@ export class HeaderComponent {
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {
-          if (["/", "/search", "/activity", "/user/" + this.userName()].indexOf(ev.url) !== -1) {
+          if (["/", "/search", "/activity"].indexOf(ev.url) > -1 || router.url.indexOf("user") > -1) {
             this.backButtonVisibility = false
           } else {
             this.backButtonVisibility = true

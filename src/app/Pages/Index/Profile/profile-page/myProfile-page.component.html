@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between py-4">
+<div #stickyMenu class="flex items-center justify-between py-4">
   <div class="flex flex-col">
     <p class="text-2xl font-bold">{{ userDataSignal()?.Name }}</p>
     <p class="text-sm">{{ userDataSignal()?.UserName }}</p>
@@ -44,7 +44,9 @@
 </button>
 
 <div
-  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3"
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
+    sticky ? 'sticky top-[75px] z-50' : 'w-full'
+  }} "
 >
   <button
     class="flex-1 py-4 {{

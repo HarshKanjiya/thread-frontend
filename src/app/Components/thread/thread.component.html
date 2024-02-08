@@ -1,5 +1,47 @@
+@if(ThreadData?.Type == "REPOST"){
 <div
-  class="flex gap-3 w-full border-t-[1px] border-neutral-400 dark:border-neutral-700 py-4 cursor-pointer"
+  class="flex items-center gap-3 border-t-[1px] border-neutral-400 dark:border-neutral-700 py-2"
+>
+  <div
+    class="w-6 h-6 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="512"
+      height="512"
+      x="0"
+      y="0"
+      viewBox="0 0 24 24"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      xml:space="preserve"
+      class="fill-black dark:fill-white"
+    >
+      <g
+        transform="matrix(6.123233995736767e-17,-1.0000000000000002,1.0000000000000002,6.123233995736767e-17,-0.5000102519989014,24.499989748001113)"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M1.293 9.793a1 1 0 0 0 1.414 1.414L4 9.914V15.5a3 3 0 0 0 3 3h5a1 1 0 1 0 0-2H7a1 1 0 0 1-1-1V9.914l1.293 1.293a1 1 0 0 0 1.414-1.414l-3-3a1 1 0 0 0-1.414 0zm21.414 5.414a1 1 0 0 0-1.414-1.414L20 15.086V9.5a3 3 0 0 0-3-3h-5a1 1 0 1 0 0 2h5a1 1 0 0 1 1 1v5.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.414 0z"
+          clip-rule="evenodd"
+          opacity="1"
+        ></path>
+      </g>
+    </svg>
+  </div>
+  <p>Reposted</p>
+</div>
+}
+
+<div
+  class="flex gap-3 w-full py-4 cursor-pointer {{
+    ThreadData?.Type !== 'REPOST'
+      ? 'border-t-[1px] border-neutral-400 dark:border-neutral-700'
+      : ''
+  }} "
 >
   <div class="flex flex-col justify-between gap-2 items-center min-h-max">
     <img
@@ -28,22 +70,116 @@
       <p class="font-semibold">{{ UserData?.UserName }}</p>
 
       <div class="flex gap-3 items-center">
-        <p class="text-sm text-neutral-400 dark:text-neutral-500">9h</p>
-        <div class="h-6 w-6 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="fill-neutral-700 dark:fill-neutral-300"
-          >
-            <circle cx="12" cy="12" r="1.5" />
-            <circle cx="18" cy="12" r="1.5" />
-            <circle cx="6" cy="12" r="1.5" />
-          </svg>
+        <p class="text-sm text-neutral-400 dark:text-neutral-500">
+          {{ timeDifference(ThreadData.CreatedAt) }}
+        </p>
+
+        <div #menu>
+          <div class="relative">
+            <button
+              type="button"
+              (click)="setIsOpen()"
+              class="h-6 w-6 rounded-full"
+            >
+              <div class="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="fill-neutral-700 dark:fill-neutral-300"
+                >
+                  <circle cx="12" cy="12" r="1.5" />
+                  <circle cx="18" cy="12" r="1.5" />
+                  <circle cx="6" cy="12" r="1.5" />
+                </svg>
+              </div>
+            </button>
+
+            @if (isOpen) {
+            <div
+              @dropBody
+              class="absolute z-10 top-[100%] right-[10%] w-min min-w-[100px] flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800"
+            >
+              <button
+                type="button"
+                class="editBtn relative cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3 after:hover:bg-black dark:after:bg-white"
+                (click)="menuClickHandler('edit')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4 stroke-black dark:stroke-white"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+
+                <span>Edit</span>
+              </button>
+              <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+              <button
+                type="button"
+                class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3"
+                (click)="menuClickHandler('delete')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4 stroke-black dark:stroke-white"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                </svg>
+                <span>Delete</span>
+              </button>
+              <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+              <button
+                type="button"
+                class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3"
+                (click)="menuClickHandler('report')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4 stroke-red-500"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
+                  <path d="M12 7v2" />
+                  <path d="M12 13h.01" />
+                </svg>
+                <span class="text-red-500">Report</span>
+              </button>
+            </div>
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -54,24 +190,64 @@
       {{ ThreadData?.Content?.Text }}
     </p>
 
-    <div class="rounded-xl overflow-hidden w-72 h-min">
+    <div class="rounded-xl w-full h-min">
       <!-- <img
         class="w-full h-full"
         src="https://imgs.search.brave.com/2b-Uo-puBDxcXx5DLraCYgOyptGt7vj1ecgCIQw8-Ms/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAzLzQ1LzA1Lzky/LzM2MF9GXzM0NTA1/OTIzMl9DUGllVDhS/SVdPVWs0SnFCa2tX/a0lFVFlBa216MmI3/NS5qcGc"
       /> -->
 
       @if(ThreadData?.Content?.ContentType ==="TEXT"){
+      <app-carousel [slides]="ThreadData?.Content?.Files"></app-carousel>
 
-      <div class="relative overflow-hidden">
-        <div class="flex gap-3 items-center flex-nowrap">
-          @for (File of ThreadData?.Content?.Files; track $index) {
+      <!-- <div class="relative overflow-hidden"> -->
+      <!-- <div class="flex gap-3 items-center flex-nowrap"> -->
+      <!-- @for (File of ThreadData?.Content?.Files; track $index) {
           <img class="w-full h-full" src="{{ File }}" />
-          }
-        </div>
+          } -->
+      <!-- </div>
+      </div> -->
+
+      }@else {
+      <div class="w-full flex flex-col gap-2">
+        @for (item of ThreadData?.Content?.Options; track $index) {
+        <button
+          (click)="choseOption(item, $index)"
+          class="rounded-lg relative outline -outline-offset-2 outline-[1.5px] outline-neutral-400 dark:outline-neutral-800 overflow-hidden flex items-center justify-between"
+        >
+          <!-- class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 w-full origin-left -z-1 opacity-50 scale-x-[{{0.66}}] " -->
+          <div
+            [style.width]="
+              getWidth(
+                demoRatings.TotalResponse,
+                demoRatings.Responses[$index]
+              ) + '%'
+            "
+            class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 origin-left -z-1 opacity-50 transition-all duration-150 ease-in"
+          ></div>
+          <!-- (click)="" -->
+          <div class="p-3 flex gap-3 items-center">
+            <div
+              class="group relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
+                item.OptionId === selectedPollOption?.OptionId
+                  ? 'bg-black dark:bg-white'
+                  : 'bg-white dark:bg-black'
+              }}"
+            >
+              <div
+                class="h-1.5 w-1.5 rounded-full  contents-[' '] group {{
+                  item.OptionId === selectedPollOption?.OptionId
+                    ? 'bg-white dark:bg-black'
+                    : 'w-0 h-0'
+                }}"
+              ></div>
+            </div>
+            <p>{{ item?.Value }}</p>
+          </div>
+          <p class="p-3">{{ demoRatings.Responses[$index] }}</p>
+        </button>
+        }
       </div>
-
-
-      }@else { }
+      }
     </div>
 
     <div class="flex py-1 gap-2">
@@ -169,11 +345,11 @@
     <div
       class="flex gap-3 items-center text-sm font-light text-neutral-400 dark:text-neutral-500"
     >
-      <p>{{ThreadData.Replies}} replies</p>
+      <p>{{ ThreadData.Replies }} replies</p>
       <div
         class="w-[3px] h-[3px] rounded-full bg-neutral-400 dark:bg-neutral-500"
       ></div>
-      <p>{{ThreadData.Likes}} likes</p>
+      <p>{{ ThreadData.Likes }} likes</p>
     </div>
   </div>
 </div>
