@@ -48,7 +48,7 @@ export class MyProfilePageComponent {
   menuPosition: any;
 
   ngAfterViewInit() {
-    this.userState.getAllMyPosts()
+    this.getPosts()
     this.menuPosition = this.menuElement.nativeElement.offsetTop
   }
 
@@ -62,6 +62,20 @@ export class MyProfilePageComponent {
   constructor(private userState: UserStateService, private router: Router) {
   }
 
+  getPosts() {
+    let type = "";
+    switch (this.selectedTab) {
+      case "THREADS":
+        type = "PARENT"
+        break;
+      case "REPLIES":
+        type = "REPLY"
+        break;
+      case "REPOSTS":
+        type = "REPOST"
+    }
+    this.userState.getAllMyPosts(type, 1)
+  }
 
   PrivacyProtactionHandler() {
     this.isPrivacyButtonChecked = !this.isPrivacyButtonChecked
@@ -69,5 +83,6 @@ export class MyProfilePageComponent {
 
   setSelectedTab(val: "THREADS" | "REPLIES" | "REPOSTS") {
     this.selectedTab = val
+    this.getPosts()
   }
 }

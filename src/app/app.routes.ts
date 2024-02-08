@@ -14,6 +14,7 @@ import { IndexComponent } from './Pages/Index/index.component';
 import { SettingPageComponent } from './Pages/Index/setting/setting-page.component';
 import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
 import { AuthGuard } from './Utils/AuthGuard';
+import { ThreadPageComponent } from './Pages/Index/Thread/threadPage.component';
 
 export const routes: Routes = [
   {
@@ -34,7 +35,7 @@ export const routes: Routes = [
   {
     path: "",
     component: IndexComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: "", component: HomePageComponent, pathMatch: "full", title: "Threads | Feed" },
       { path: "search", component: SearchPageComponent, pathMatch: "full", title: "Threads | Search" },
@@ -42,6 +43,8 @@ export const routes: Routes = [
       { path: "setting", component: SettingPageComponent, pathMatch: "full", title: "Threads | Settings" },
       { path: "about", component: AboutPageComponent, pathMatch: "full", title: "Threads | About me" },
       { path: "user/" + ":id", component: ProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
+      { path: "thread/" + ":id", component: ThreadPageComponent, title: "Threads ", pathMatch: "full" },
+
     ]
   },
 

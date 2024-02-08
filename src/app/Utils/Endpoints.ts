@@ -22,7 +22,7 @@ export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET
 export const NewThreadAPI = "thread" // POST
 export const DeleteThreadAPI = "thread/" // + USER_ID + THREAD_ID // DELETE
 export const VotePollAPI = "poll" // POST
-export const GetThreadDataAPI = ""
+export const GetThreadDataAPI = "thread/" // + THREAD_ID // GET
 export const EditThreadAPI = ""
 export const GetPostsOfSignleUserAPI = "thread/user/" // + USER_ID // GET
 

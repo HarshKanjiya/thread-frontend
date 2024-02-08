@@ -1,12 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { CarouselComponent } from '../carousel/carousel.component';
+import { RouterLink } from '@angular/router';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [CarouselComponent],
+  imports: [CarouselComponent, RouterLink],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
   animations: [
