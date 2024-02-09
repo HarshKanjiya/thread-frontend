@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ThemeService } from '../../Services/theme.service';
 import { DialogService } from '../../Services/dialog.service';
+import { UserStateService } from '../../Services/state/user-state.service';
+import { ThemeService } from '../../Services/theme.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,10 +16,11 @@ export class FooterComponent {
   isOpen: boolean = false
   visible: boolean = false;
 
+  userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
 
 
-  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router) {
-  }
+
+  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router, public userState: UserStateService) { }
 
   showDialog() {
     this.visible = !this.visible;

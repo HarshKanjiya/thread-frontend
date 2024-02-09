@@ -1,0 +1,31 @@
+.editBtn {
+  transition: all 0.3s;
+}
+
+
+.editBtn svg {
+  height: 17px;
+  z-index: 3;
+  transition: all 0.2s;
+  transform-origin: bottom;
+}
+.editBtn:hover svg {
+  transform: rotate(-15deg) translateX(5px);
+}
+.editBtn::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  position: absolute;
+  bottom: 9px;
+  left: -5px;
+  z-index: 2;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+}
+.editBtn:hover::after {
+  transform: scaleX(1);
+  left: 0px;
+  transform-origin: right;
+}

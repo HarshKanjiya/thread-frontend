@@ -6,11 +6,11 @@ import { UserStateService } from '../../Services/state/user-state.service';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
-  selector: 'app-thread',
+  selector: 'app-reply',
   standalone: true,
   imports: [CarouselComponent, RouterLink],
-  templateUrl: './thread.component.html',
-  styleUrl: './thread.component.scss',
+  templateUrl: './reply.component.html',
+  styleUrl: './reply.component.scss',
   animations: [
     trigger("dropBody", [
       transition(":enter", [
@@ -31,7 +31,7 @@ import { UserStateService } from '../../Services/state/user-state.service';
 
   ]
 })
-export class ThreadComponent {
+export class ReplyComponent {
   @Input() ThreadData: any
   // @Input() UserData: any
   selectedPollOption: any

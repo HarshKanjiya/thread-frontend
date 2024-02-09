@@ -1,2 +1,10 @@
-<p>thread works!</p>
-<p>qwq{{ postData()?.AuthorId }}</p>
+<app-thread [ThreadData]="postData"></app-thread>
+
+@if (postRepliesData()?.length > 0) {
+<div>
+  @for (item of postRepliesData(); track $index) {
+  <app-reply [ThreadData]="item"></app-reply>
+  }
+</div>
+
+}

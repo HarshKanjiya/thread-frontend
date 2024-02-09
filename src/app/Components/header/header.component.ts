@@ -45,16 +45,17 @@ export class HeaderComponent {
 
 
   @ViewChild("menu") menu !: ElementRef
+  @ViewChild("mobileMenu") mobileMenu !: ElementRef
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
-    if (!this.menu.nativeElement.contains(event.target) && this.isOpen) {
+    if (!this.menu.nativeElement.contains(event.target) && !this.mobileMenu.nativeElement.contains(event.target) && this.isOpen) {
       // Clicked outside the element, handle it here
       this.setIsOpen()
     }
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location,public userState:UserStateService) {
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, public userState: UserStateService) {
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {
@@ -72,6 +73,7 @@ export class HeaderComponent {
   setIsOpen() {
     this.isOpen = !this.isOpen
   }
+
 
 
   menuClickHandler(val: string) {

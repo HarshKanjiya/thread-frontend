@@ -44,8 +44,8 @@
 </button>
 
 <div
-  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
-    sticky ? 'sticky top-[75px] z-50' : 'w-full'
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-2 sm:mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
+    sticky ? 'sticky top-[40px] sm:top-[75px] z-50 ' : 'w-full'
   }} "
 >
   <button
@@ -58,7 +58,7 @@
   >
     Threads
   </button>
-  <button
+  <!-- <button
     class="flex-1 py-4 {{
       selectedTab === 'REPLIES'
         ? 'text-black dark:text-white'
@@ -67,7 +67,7 @@
     (click)="setSelectedTab('REPLIES')"
   >
     Replies
-  </button>
+  </button> -->
   <button
     class="flex-1 py-4 {{
       selectedTab === 'REPOSTS'
@@ -79,16 +79,21 @@
     Reposts
   </button>
 
+  <!-- {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }} -->
   <div
-    class="absolute bottom-0 w-[33%] h-[2px] bg-black dark:bg-white transition-all duration-200
+    class="absolute bottom-0 w-[50%] h-[2px] bg-black dark:bg-white transition-all duration-200
     {{ selectedTab === 'THREADS' ? 'left-0' : '' }}
-    {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }}
-    {{ selectedTab === 'REPOSTS' ? 'left-[66%]' : '' }} "
+    {{ selectedTab === 'REPOSTS' ? 'left-[50%]' : '' }} "
   ></div>
 </div>
 
 <div>
   @for (item of myThreads(); track $index) {
-  <app-thread [ThreadData]="item" [UserData]="userDataSignal()"></app-thread>
+  <app-thread [ThreadData]="item"></app-thread>
   }
+</div>
+
+<div class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm">
+  <p>You have reached the depth of the Earth 🌍</p>
+  <p>There are no more threads to show.</p>
 </div>
