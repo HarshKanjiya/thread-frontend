@@ -1,8 +1,9 @@
 import { animate, sequence, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserStateService } from '../../../../Services/state/user-state.service';
-import { ToastService } from '../../../../Services/toast.service';
+import { Store } from '@ngrx/store';
+import { UserService } from '../../../../reducers/User/User.service';
+import { IUserInitialState } from '../../../../reducers/User/UserTypes';
 
 @Component({
   selector: 'app-email-login-form',
@@ -34,8 +35,13 @@ import { ToastService } from '../../../../Services/toast.service';
 })
 export class EmailLoginFormComponent {
 
-  constructor(public UserState: UserStateService, private toast: ToastService) { }
+  constructor(private store: Store<any>, private userService: UserService) {
+    store.select("User").subscribe((res: IUserInitialState) => {
+      this.loading = res.loading
+    })
+  }
 
+  loading: boolean = false
   id: string = ""
   disableButton: boolean = true
   typingTimeout: any;
@@ -61,15 +67,9 @@ export class EmailLoginFormComponent {
   }
 
   submit() {
-    this.UserState.sendMeOTP({ email: this.id })?.subscribe((res: any) => {
-      this.UserState.loading.set(false)
-      if (res.Success) {
-        this.toast.makeToast("MESSAGE", res.Message ?? "")
-        this.UserState.temp.set(this.id)
-        this.formChange.emit("EMAIL_LOGIN_VERIFY")
-      } else {
-        this.toast.makeToast("MESSAGE", res.Message ?? "")
-      }
+    var res = this.userService.sendMeOtp({
+      Email: this.id
     })
+    console.log('res :>> ', res);
   }
 }

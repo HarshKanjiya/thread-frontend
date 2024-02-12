@@ -2,62 +2,95 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
-import { SET_USER_DATA, SET_USER_LOADING } from './UserActions';
-import { ICheckValidUsername, ILoginUser, ISendMeOtp, IUserInitialState, IVerifyMyOtp } from './UserTypes';
+import { SET_USER_DATA, SET_USER_LOADING, SET_USER_TEMP } from './UserActions';
+import { ICheckValidUsername, ILoginUser, ISendMeOtp, ISignupUser, IUserInitialState, IVerifyMyOtp } from './UserTypes';
+import { CheckUserNameAPI, GetSessionDataAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpService, private store: Store<IUserInitialState>, private toast: ToastService) { }
+  constructor(private http: HttpService, private store: Store<IUserInitialState>, private toast: ToastService, private router: Router) { }
 
 
+  getMySession() {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+      this.http.get(GetSessionDataAPI).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+        console.log('res :>> ', res);
+        if (res.Success) {
+          this.store.dispatch(SET_USER_DATA({ data: res.Data }))
+          return true
+        } else {
+          this.store.dispatch(SET_USER_DATA({ data: null }))
+          return false
+        }
+      })
+      return false
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      this.toast.makeToast('ERROR', "Something went Wrong")
+      return false
+    }
+  }
   loginUser(data: ILoginUser) {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
-
-
-
+      this.http.post(LoginAPI, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+        if (res.Success) {
+          this.store.dispatch(SET_USER_DATA({ data: res.Data }))
+          this.router.navigate(['/'])
+          this.toast.makeToast("MESSAGE", res.Message ?? "User Logged in")
+        } else {
+          this.store.dispatch(SET_USER_DATA({ data: null }))
+          this.toast.makeToast("MESSAGE", res.Message ?? "failed to login")
+        }
+      })
     } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
       console.log('Error in Login :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
-
-    }
-    finally {
-      this.store.dispatch(SET_USER_LOADING({ loading: false }))
     }
   }
-  checkUserNameAvaibility(data: ICheckValidUsername) {
+  checkUserNameAvaibility(data: ICheckValidUsername): boolean {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post("auth/username", data).subscribe((res: any) => {
+      this.http.post(CheckUserNameAPI, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
 
         if (res.Success) {
+          this.store.dispatch(SET_USER_TEMP({ UserName: res.Data }))
           return true
         } else {
+          this.store.dispatch(SET_USER_TEMP({ UserName: null }))
           return false
         }
       })
 
     } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
       console.log('Error in Username Look up :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
+      return false
 
     }
-    finally {
-      this.store.dispatch(SET_USER_LOADING({ loading: false }))
-    }
+    return false
   }
-  registerUser(data: ILoginUser) {
+  registerUser(data: ISignupUser) {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post("auth/register", data).subscribe((res: any) => {
+      this.http.post(RegisterAPI, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
 
         if (res.Success) {
           this.store.dispatch(SET_USER_DATA({ data: res.Data }))
+          this.router.navigate(["/"])
           this.toast.makeToast('MESSAGE', res.Message ?? "Account created Successfully")
         } else {
           this.store.dispatch(SET_USER_DATA({ data: null }))
@@ -66,44 +99,46 @@ export class UserService {
       })
 
     } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
       console.log('Error in Signup :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
-
-    }
-    finally {
-      this.store.dispatch(SET_USER_LOADING({ loading: false }))
     }
   }
   sendMeOtp(data: ISendMeOtp) {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post("otp/create", data).subscribe((res: any) => {
+      this.http.post(SendOtpAPI, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
 
         if (res.Success) {
+          this.store.dispatch(SET_USER_TEMP({ otpSent: true, Email: data.Email }))
           this.toast.makeToast("MESSAGE", res.Message ?? "Otp sent")
+          return true
         } else {
+          this.store.dispatch(SET_USER_TEMP({ otpSent: false }))
           this.toast.makeToast("MESSAGE", res.Message ?? "Couldn't send OTP")
+          return false
         }
       })
 
     } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      this.store.dispatch(SET_USER_TEMP({ otpSent: false }))
       console.log('Error in sending OTP :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
-
-    }
-    finally {
-      this.store.dispatch(SET_USER_LOADING({ loading: false }))
     }
   }
   VerifyMyOtp(data: IVerifyMyOtp) {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post("otp/verify", data).subscribe((res: any) => {
+      this.http.post(VerifyOtpAPI, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
 
         if (res.Success) {
           this.store.dispatch(SET_USER_DATA({ data: res.Data }))
+          this.router.navigate(['/'])
           this.toast.makeToast('MESSAGE', res.Message ?? "Logged in Successfully")
         } else {
           this.store.dispatch(SET_USER_DATA({ data: null }))
@@ -112,12 +147,9 @@ export class UserService {
       })
 
     } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
       console.log('Error in Verification of OTP :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
-
-    }
-    finally {
-      this.store.dispatch(SET_USER_LOADING({ loading: false }))
     }
   }
 

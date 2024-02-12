@@ -46,7 +46,7 @@ export class LoginFormComponent {
 
   submit() {
     this.UserState.loginUser({
-      uniqueId: this.id, password: this.password
+      UniqueId: this.id, Password: this.password
     })
   }
 }

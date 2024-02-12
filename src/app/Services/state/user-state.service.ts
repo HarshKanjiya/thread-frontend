@@ -124,6 +124,11 @@ export class UserStateService {
     }
   }
 
+  // register
+  checkUserNameAvaibility(){
+
+  }
+
   // posts
   getAllMyPosts(type: string, page: number) {
     this.loading.set(true)

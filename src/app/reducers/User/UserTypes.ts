@@ -3,6 +3,7 @@ export interface IUserInitialState {
   loading: boolean,
   success: boolean,
   message: string | null,
+  temp: any
   // TaskSuccess: boolean
 }
 
@@ -11,34 +12,37 @@ export const UserInitialState: IUserInitialState = {
   loading: false,
   success: false,
   message: null,
+  temp: null
   // TaskSuccess: false
 }
 
 
 export interface ILoginUser {
-  uniqueId: string,
-  password: string
+  UniqueId: string,
+  Password: string
 }
 
 export interface ISignupUser {
-  username: string,
-  name: string
-  phoneNumber: string
-  password: string,
-  gender: "MALE" | "FEMALE"
-  birthDate: string
-  avatar: string
+  Email: string
+  UserName: string,
+  Name: string
+  PhoneNumber: string
+  Password: string,
+  Gender: "MALE" | "FEMALE"
+  BirthDate: string
+  Avatar: string
 }
 
 export interface ICheckValidUsername {
-  username: string
+  UserName: string
 }
 
 export interface ISendMeOtp {
-  email: string
+  Email: string
 }
 export interface IVerifyMyOtp {
-  otp: string
+  Otp: string
+  Email: string
 }
 
 // // RESPONSES

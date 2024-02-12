@@ -7,6 +7,7 @@ import { OtpVerifyComponent } from './otp-verify/otp-verify.component';
 import { Router } from '@angular/router';
 import { UserStateService } from '../../../Services/state/user-state.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login-page',
@@ -45,11 +46,20 @@ export class LoginPageComponent {
     this.currentForm = form
   }
 
-  constructor(private router: Router, private userState: UserStateService,private cookie: CookieService) {
 
-    if (this.cookie.get('RefreshToken') && this.cookie.get('UserName')){
+  constructor(private router: Router, private userState: UserStateService, private cookie: CookieService, private store: Store<any>) {
+
+    if (this.cookie.get('RefreshToken') && this.cookie.get('UserName')) {
       router.navigate(["/"]);
-    }{
+    } {
     }
+
+    store.select("User").subscribe((res: any) => {
+      if (res?.temp?.otpSent === true) {
+        this.currentForm = "EMAIL_LOGIN_VERIFY"
+      }
+    })
+
+
   }
 }

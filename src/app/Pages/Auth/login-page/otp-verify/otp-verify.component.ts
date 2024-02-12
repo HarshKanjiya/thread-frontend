@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { UserStateService } from '../../../../Services/state/user-state.service';
 import { NgOtpInputModule, NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
 import { map, take, timer } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { UserService } from '../../../../reducers/User/User.service';
 
 @Component({
   selector: 'app-otp-verify',
@@ -24,8 +26,10 @@ export class OtpVerifyComponent {
   secondsTimer: any
   allowResendOtp: boolean = false
 
-  constructor(public UserState: UserStateService) {
-    this.email = this.UserState.temp()
+  constructor(public UserState: UserStateService, private store: Store<any>, private userService: UserService) {
+    store.select("User").subscribe((res: any) => {
+      this.email = res.temp?.Email
+    })
   }
 
   ngOnInit() {
@@ -42,31 +46,6 @@ export class OtpVerifyComponent {
     }, 1000)
   }
 
-  // timer() {
-
-  //   let seconds: number = 60;
-  //   let textSec: any = "0";
-  //   let statSec: number = 60;
-
-  //   const timer = setInterval(() => {
-  //     seconds--;
-  //     if (statSec != 0) statSec--;
-  //     else statSec = 59;
-
-  //     if (statSec < 10) {
-  //       textSec = "0" + statSec;
-  //     } else textSec = statSec;
-
-  //     this.secondsLeft = textSec
-
-  //     if (seconds == 0) {
-  //       this.allowResendOtp = true
-  //       clearInterval(timer);
-  //     }
-  //   }, 1000);
-  // }
-
-
 
   @Output() formChange = new EventEmitter<"LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN" | "EMAIL_LOGIN_VERIFY">()
 
@@ -77,5 +56,12 @@ export class OtpVerifyComponent {
   onOtpChange(e: any) {
     console.log('e :>> ', e);
     this.otp = e
+  }
+
+  submit() {
+    this.userService.VerifyMyOtp({
+      Email: this.email,
+      Otp: this.otp
+    })
   }
 }

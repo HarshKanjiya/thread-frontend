@@ -4,3 +4,4 @@ export const SET_USER_MESSAGE = createAction("[USER] set message", props<{ messa
 export const SET_USER_SUCCESS = createAction("[USER] set success", props<{ success: boolean }>())
 export const SET_USER_LOADING = createAction("[USER] set loading", props<{ loading: boolean }>())
 export const SET_USER_DATA = createAction("[USER] set data", props<{ data: Object | null }>())
+export const SET_USER_TEMP = createAction("[USER] set temp", props<any>())

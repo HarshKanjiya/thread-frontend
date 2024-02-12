@@ -10,8 +10,8 @@ export const GetNewAccessTokenAPI = "auth/token" // GET
 export const GetSessionDataAPI = "auth/session"
 
 //Otp
-export const SendOtoAPI = "otp/create" // POST
-export const VerifyOtoAPI = "otp/verify" // POST
+export const SendOtpAPI = "otp/create" // POST
+export const VerifyOtpAPI = "otp/verify" // POST
 
 // Profile
 export const UpdateProfileAPI = "auth/user/" // + USER_ID // PUT
