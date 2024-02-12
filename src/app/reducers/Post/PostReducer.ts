@@ -1,11 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
 import { PostInitialState } from "./PostTypes";
-import { SET_POST_DATA, SET_POST_LOADING, SET_POST_MESSAGE, SET_POST_SUCCESS, SET_POST_TEMP } from "./PostActions";
+import { SET_POST_FEED, SET_POST_LOADING, SET_POST_MESSAGE, SET_POST_MY_THREADS, SET_POST_SUCCESS, SET_POST_TEMP } from "./PostActions";
 
 
 
 
-export const UserReducer = createReducer(
+export const PostReducer = createReducer(
   PostInitialState,
   on(SET_POST_LOADING, (state: any, { loading }) => {
 
@@ -19,9 +19,13 @@ export const UserReducer = createReducer(
 
     return { ...state, message: message }
   }),
-  on(SET_POST_DATA, (state: any, { data }) => {
+  on(SET_POST_MY_THREADS, (state: any, { threads }) => {
 
-    return { ...state, data: data }
+    return { ...state, myThreads: threads }
+  }),
+  on(SET_POST_FEED, (state: any, { threads }) => {
+
+    return { ...state, Feed: threads }
   }),
   on(SET_POST_TEMP, (state: any, { data }) => {
 

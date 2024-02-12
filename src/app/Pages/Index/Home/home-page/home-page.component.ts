@@ -1,9 +1,7 @@
-import { Component, Signal, computed } from '@angular/core';
-import { DialogService } from '../../../../Services/dialog.service';
-import { ThreadComponent } from '../../../../Components/thread/thread.component';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserStateService } from '../../../../Services/state/user-state.service';
-import { PostsStateService } from '../../../../Services/state/posts-state.service';
+import { ThreadComponent } from '../../../../Components/thread/thread.component';
+import { DialogService } from '../../../../Services/dialog.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,16 +11,12 @@ import { PostsStateService } from '../../../../Services/state/posts-state.servic
 })
 export class HomePageComponent {
 
-  myThreads: Signal<any> = computed(() => this.userState.MyFeed())
-  UserData: Signal<any> = computed(() => this.userState.UserData())
 
-  constructor(private postState: PostsStateService, private userState: UserStateService, private router: Router, public dialog: DialogService) {
+  constructor(private router: Router, public dialog: DialogService) {
   }
 
   ngAfterViewInit() {
-    if (this.UserData()) {
-      this.userState.getMyFeed()
-    }
+
   }
 
   openDialog() {

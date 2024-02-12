@@ -1,8 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, Input, Signal, ViewChild, computed } from '@angular/core';
-import { CarouselComponent } from '../carousel/carousel.component';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { UserStateService } from '../../Services/state/user-state.service';
+import { Store } from '@ngrx/store';
+import { CarouselComponent } from '../carousel/carousel.component';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
@@ -33,16 +33,19 @@ import { UserStateService } from '../../Services/state/user-state.service';
 })
 export class ThreadComponent {
   @Input() ThreadData: any
-  // @Input() UserData: any
   selectedPollOption: any
 
   likeCount: number = 0;
   liked: boolean = false
 
 
-  UserData: Signal<any> = computed(() => this.userState.UserData())
+  UserData: any = null
 
-  constructor(private userState: UserStateService) { }
+  constructor(private store: Store<any>) {
+    store.select("User").subscribe((res: any) => {
+      this.UserData = res.userData
+    })
+  }
 
   @ViewChild("menu") menu !: ElementRef
   @HostListener('document:click', ['$event'])

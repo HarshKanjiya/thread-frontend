@@ -1,16 +1,20 @@
 export interface IPostInitialState {
-  userData: Object | null,
   loading: boolean,
   success: boolean,
   message: string | null,
+
+  myThreads: any[],
+  Feed: any[],
+
   temp: any
 }
 export const PostInitialState: IPostInitialState = {
-  userData: null,
   loading: false,
   success: false,
   message: null,
-  temp: null
+  myThreads: [],
+  Feed: [],
+  temp: null,
 }
 
 

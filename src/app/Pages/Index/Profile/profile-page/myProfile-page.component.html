@@ -88,7 +88,7 @@
 </div>
 
 <div>
-  @for (item of myThreads(); track $index) {
+  @for (item of myThreads; track $index) {
   <app-thread [ThreadData]="item"></app-thread>
   }
 </div>

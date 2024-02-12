@@ -1,11 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, Input, ViewChild, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import moment from "moment";
 import { CalendarModule } from 'primeng/calendar';
 import { UserService } from '../../../../reducers/User/User.service';
-import { DatePipe } from '@angular/common';
-import moment, { } from "moment"
 
 @Component({
   selector: 'app-user-data',
@@ -38,7 +38,7 @@ export class UserDataComponent {
   isOpen: boolean = false
   passwordVisiblity: boolean = false
   date: any;
-  loading = signal<boolean>(false)
+  loading: boolean = false
 
 
   @ViewChild("menu") menu !: ElementRef
@@ -77,6 +77,7 @@ export class UserDataComponent {
       if (res?.temp?.UserNameAvailable === true) {
         // this.formData.username = res.temp.UserName
         this.UserName = res.temp.UserName
+        this.loading = res.loading
       }
     })
   }

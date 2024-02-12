@@ -1,9 +1,8 @@
-import { Component, HostBinding, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, HostBinding } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ThemeService } from './Services/theme.service';
-import { UserStateService } from "./Services/state/user-state.service"
 import { CookieService } from 'ngx-cookie-service';
+import { ThemeService } from './Services/theme.service';
 import { UserService } from './reducers/User/User.service';
 
 @Component({
@@ -14,10 +13,9 @@ import { UserService } from './reducers/User/User.service';
 })
 export class AppComponent {
 
-  constructor(private themeService: ThemeService, public UserState: UserStateService, private userService: UserService, private cookie: CookieService) {
+  constructor(private themeService: ThemeService, private userService: UserService, private cookie: CookieService) {
 
     if (cookie.get("RefreshToken")) {
-      // this.UserState.getMySession();
       this.userService.getMySession()
     }
   }

@@ -1,15 +1,15 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, ElementRef, HostListener, Signal, ViewChild, computed } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
+import { UserStateService } from '../../Services/state/user-state.service';
 import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
-import { UserStateService } from '../../Services/state/user-state.service';
-import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -38,7 +38,6 @@ import { Store } from '@ngrx/store';
 })
 export class HeaderComponent {
 
-  // userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
   userName: string = ""
 
   visible: boolean = false;
@@ -60,7 +59,6 @@ export class HeaderComponent {
   constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, public userState: UserStateService, private store: Store<any>) {
 
     store.select("User").subscribe((res: any) => {
-      console.log('res :>> ', res);
       if (res?.userData) {
         this.userName = res.userData.UserName
       }

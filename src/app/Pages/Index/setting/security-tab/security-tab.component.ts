@@ -1,5 +1,5 @@
-import { Component, Signal, computed } from '@angular/core';
-import { UserStateService } from '../../../../Services/state/user-state.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import moment from 'moment';
 
 @Component({
@@ -10,15 +10,13 @@ import moment from 'moment';
 })
 export class SecurityTabComponent {
 
+  userData: any = null
 
-  Devices: Signal<any> = computed(() => {
-    return this.UserState.UserData()?.Devices.reverse()
-  })
-
-  userData: Signal<any> = computed(() => {
-    return this.UserState.UserData()
-  })
-  constructor(private UserState: UserStateService) { }
+  constructor(private store: Store<any>) {
+    store.select("User").subscribe((res: any) => {
+      this.userData = res.userData
+    })
+  }
 
 
   getTime(time: string) {

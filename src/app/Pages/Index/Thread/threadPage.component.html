@@ -1,8 +1,8 @@
 <app-thread [ThreadData]="postData"></app-thread>
 
-@if (postRepliesData()?.length > 0) {
+@if (postRepliesData?.length > 0) {
 <div>
-  @for (item of postRepliesData(); track $index) {
+  @for (item of postRepliesData; track $index) {
   <app-reply [ThreadData]="item"></app-reply>
   }
 </div>

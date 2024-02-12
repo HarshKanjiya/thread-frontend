@@ -126,27 +126,6 @@ export class UserStateService {
     }
   }
 
-  // register
-  checkUserNameAvaibility(){
-
-  }
-
-  // posts
-  getAllMyPosts(type: string, page: number) {
-    this.loading.set(true)
-    try {
-      this.http.get(GetPostsOfSignleUserAPI + this.UserData()?.UserId + "?type=" + type + "&pageNumber=" + page + "&pageSize=5")
-        .subscribe((res: any) => {
-          this.loading.set(false)
-          if (res?.Success) {
-            this.MyPosts.set(res.Data)
-          }
-        })
-    } catch (e: any) {
-      this.loading.set(false)
-      this.toast.makeToast('ERROR', "Something went Wrong")
-    }
-  }
 
   getMyFeed() {
 

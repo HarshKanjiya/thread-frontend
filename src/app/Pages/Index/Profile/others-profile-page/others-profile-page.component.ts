@@ -1,6 +1,6 @@
-import { Component, Signal, computed } from '@angular/core';
-import { UserStateService } from '../../../../Services/state/user-state.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-others-profile-page',
@@ -13,9 +13,12 @@ export class OthersProfilePageComponent {
   selectedTab: "THREADS" | "REPLIES" | "REPOSTS" = "THREADS"
 
   myProfile: boolean = false
-  userDataSignal: Signal<any> = computed(() => this.userState.UserData())
+  userData: any = null
 
-  constructor(private userState: UserStateService, private router: Router) {
+  constructor(private store: Store<any>, private router: Router) {
+    store.select("User").subscribe((res: any) => {
+      this.userData = res.userData
+    })
   }
 
 

@@ -1,5 +1,6 @@
-import { Component, Signal, computed } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { DialogService } from '../../Services/dialog.service';
 import { UserStateService } from '../../Services/state/user-state.service';
 import { ThemeService } from '../../Services/theme.service';
@@ -16,11 +17,16 @@ export class FooterComponent {
   isOpen: boolean = false
   visible: boolean = false;
 
-  userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
+  userName: string = ""
 
 
-
-  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router, public userState: UserStateService) { }
+  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router, public userState: UserStateService, private store: Store<any>) {
+    store.select("User").subscribe((res: any) => {
+      if (res?.userData) {
+        this.userName = res.userData.UserName
+      }
+    })
+  }
 
   showDialog() {
     this.visible = !this.visible;

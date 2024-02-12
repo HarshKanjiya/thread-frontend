@@ -4,13 +4,15 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { UserReducer } from './User/UserReducer';
+import { PostReducer } from './Post/PostReducer';
 
 export interface State {
 
 }
 
 export const reducers: ActionReducerMap<State> = {
-  User: UserReducer
+  User: UserReducer,
+  Post: PostReducer
 };
 
 

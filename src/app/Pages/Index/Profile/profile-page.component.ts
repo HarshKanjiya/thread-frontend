@@ -15,9 +15,6 @@ export class ProfilePageComponent {
 
   UserName: string = "";
 
-  // userDataSignal: Signal<any> = computed(() => this.userState.UserData())
-  // myProfile: Signal<boolean> = computed(() => this.userDataSignal()?.UserName === this.UserName ? true : false )
-
   userName: string = ""
 
   constructor(public userState: UserStateService, private store: Store<any>, public router: Router, public route: ActivatedRoute) {

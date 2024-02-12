@@ -4,6 +4,7 @@ import { UserStateService } from '../../../../Services/state/user-state.service'
 import { Router } from '@angular/router';
 import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { Store } from '@ngrx/store';
+import { PostService } from '../../../../reducers/Post/Post.service';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -56,35 +57,33 @@ export class MyProfilePageComponent {
   }
 
   myProfile: boolean = false
-  // userDataSignal: Signal<any> = computed(() => this.userState.UserData())
 
 
   userData: any = null
 
 
-  myThreads: Signal<any> = computed(() => {
-    return this.userState.MyPosts()
-  })
+  myThreads: any[] = []
 
-  constructor(private userState: UserStateService, private store: Store<any>, private router: Router) {
+
+  constructor(private store: Store<any>, private router: Router, private postService: PostService) {
     store.select("User").subscribe((res: any) => {
       this.userData = res.userData
+    })
+    store.select("Post").subscribe((res: any) => {
+      this.myThreads = res.myThreads
     })
   }
 
   getPosts() {
-    let type = "";
+    let type: "PARENT" | "REPOST" = "PARENT";
     switch (this.selectedTab) {
       case "THREADS":
         type = "PARENT"
         break;
-      case "REPLIES":
-        type = "REPLY"
-        break;
       case "REPOSTS":
         type = "REPOST"
     }
-    this.userState.getAllMyPosts(type, 1)
+    this.postService.getMyThreads(this.userData.UserId, 2, type);
   }
 
   PrivacyProtactionHandler() {
