@@ -36,6 +36,9 @@ export class ThreadComponent {
   // @Input() UserData: any
   selectedPollOption: any
 
+  likeCount: number = 0;
+  liked: boolean = false
+
 
   UserData: Signal<any> = computed(() => this.userState.UserData())
 
@@ -160,6 +163,13 @@ export class ThreadComponent {
     })
 
     console.log('option :>> ', this.demoRatings.Responses);
+  }
+
+
+  likeThread(e: any) {
+    e.stopPropagation()
+    this.liked ? this.likeCount-- : this.likeCount++;
+    this.liked = !this.liked;
   }
 
   menuClickHandler(type: string) {

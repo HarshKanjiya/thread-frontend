@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { ILoginUser, ISendMeOtp } from '../../reducers/User/UserTypes';
 import { ToastService } from '../toast.service';
 import { HttpService } from '../http-service.service';
-import { GetPostsOfSignleUserAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
+import { GetFeedAPI, GetPostsOfSignleUserAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI } from '../../Utils/Endpoints';
 import { Router } from '@angular/router';
 
 // export interface IResponse{
@@ -21,6 +21,8 @@ export class UserStateService {
   loading = signal<boolean>(false)
   success = signal<boolean>(false)
   UserData = signal<any>(null)
+
+  MyFeed = signal<any[]>([])
   MyPosts = signal<any[]>([])
   OthersPosts = signal<any[]>([])
 
@@ -143,6 +145,23 @@ export class UserStateService {
     } catch (e: any) {
       this.loading.set(false)
       this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+
+  getMyFeed() {
+
+    console.log('object :>> ', this.UserData());
+    this.loading.set(true);
+    try {
+
+      this.http.get(GetFeedAPI + this.UserData()?.UserId).subscribe((res: any) => {
+        this.loading.set(false)
+        if (res.Success) {
+          this.MyFeed.set(res.Data)
+        }
+      })
+    } catch (err: any) {
+      this.loading.set(false)
     }
   }
 }

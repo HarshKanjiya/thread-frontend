@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { ToastService } from '../toast.service';
 import { HttpService } from '../http-service.service';
-import { GetPostRepliesAPI, GetThreadDataAPI } from '../../Utils/Endpoints';
+import { GetFeedAPI, GetPostRepliesAPI, GetThreadDataAPI } from '../../Utils/Endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class PostsStateService {
   postData = signal<any>(null)
   postRepliesData = signal<any[]>([])
 
+  MyFeed = signal<any[]>([])
   MyPosts = signal<any[]>([])
   OthersPosts = signal<any[]>([])
 
@@ -58,6 +59,21 @@ export class PostsStateService {
         console.log('res :>> ', res?.Data);
         if (res.Success) {
           this.postRepliesData.set(res.Data)
+        }
+      })
+    } catch (err: any) {
+      this.loading.set(false)
+    }
+  }
+
+  getMyFeed(id: string) {
+    this.loading.set(true);
+    try {
+
+      this.http.get(GetFeedAPI + id).subscribe((res: any) => {
+        this.loading.set(false)
+        if (res.Success) {
+          this.MyFeed.set(res.Data)
         }
       })
     } catch (err: any) {

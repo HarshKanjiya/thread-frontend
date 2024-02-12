@@ -34,7 +34,7 @@ import { SecurityTabComponent } from './security-tab/security-tab.component';
 })
 export class SettingPageComponent {
 
-  selectedTab: "PRIVACY" | "ACCOUNT" | "SECURITY" = "ACCOUNT"
+  selectedTab: "PRIVACY" | "ACCOUNT" | "SECURITY" = "PRIVACY"
 
 
   setSelectedTab(val: "PRIVACY" | "ACCOUNT" | "SECURITY") {
