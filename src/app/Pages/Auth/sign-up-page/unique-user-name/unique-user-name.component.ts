@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { UserService } from '../../../../reducers/User/User.service';
 
 @Component({
   selector: 'app-unique-user-name',
@@ -17,11 +19,13 @@ export class UniqueUserNameComponent {
   AllowSubmit: boolean = false
   invalidInput: boolean = false
   AlertMessage: string = ""
-  loading = signal<boolean>(false)
+  loading: boolean = false
 
-  @Output() username = new EventEmitter<string>()
-
-  // constructor(public auth: AuthServiceService) { }
+  constructor(private userService: UserService, private store: Store<any>) {
+    store.select('User').subscribe((res: any) => {
+      this.loading = res.loading
+    })
+  }
 
   onTextKeyUp() {
 
@@ -45,6 +49,6 @@ export class UniqueUserNameComponent {
   }
 
   submit() {
-    this.username.emit(this.uniqueId)
+    this.userService.checkUserNameAvaibility({ UserName: this.uniqueId })
   }
 }

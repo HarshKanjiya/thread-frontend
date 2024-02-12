@@ -28,7 +28,7 @@ export interface ISignupUser {
   Name: string
   PhoneNumber: string
   Password: string,
-  Gender: "MALE" | "FEMALE"
+  Gender: "MALE" | "FEMALE" | "KEEP_SECRET" | string
   BirthDate: string
   Avatar: string
 }

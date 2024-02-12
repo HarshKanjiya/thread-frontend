@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './Services/theme.service';
 import { UserStateService } from "./Services/state/user-state.service"
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,14 @@ import { UserStateService } from "./Services/state/user-state.service"
 })
 export class AppComponent {
 
-  constructor(private themeService: ThemeService, public UserState: UserStateService) {
-    this.UserState.getMySession();
+  constructor(private themeService: ThemeService, public UserState: UserStateService, private cookie: CookieService) {
+
+    if (cookie.get("RefreshToken")) {
+      this.UserState.getMySession();
+    }
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
   @HostBinding("class.dark") get mode() {

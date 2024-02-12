@@ -4,7 +4,7 @@ import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { SET_USER_DATA, SET_USER_LOADING, SET_USER_TEMP } from './UserActions';
 import { ICheckValidUsername, ILoginUser, ISendMeOtp, ISignupUser, IUserInitialState, IVerifyMyOtp } from './UserTypes';
-import { CheckUserNameAPI, GetSessionDataAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
+import { CheckUserNameAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -60,14 +60,14 @@ export class UserService {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
 
-      this.http.post(CheckUserNameAPI, data).subscribe((res: any) => {
+      this.http.get(CheckUserNameAPI + data.UserName).subscribe((res: any) => {
         this.store.dispatch(SET_USER_LOADING({ loading: false }))
 
         if (res.Success) {
-          this.store.dispatch(SET_USER_TEMP({ UserName: res.Data }))
+          this.store.dispatch(SET_USER_TEMP({ UserNameAvailable: true, UserName: data.UserName }))
           return true
         } else {
-          this.store.dispatch(SET_USER_TEMP({ UserName: null }))
+          this.store.dispatch(SET_USER_TEMP({ UserNameAvailable: false, UserName: null }))
           return false
         }
       })
@@ -149,6 +149,28 @@ export class UserService {
     } catch (e: any) {
       this.store.dispatch(SET_USER_LOADING({ loading: false }))
       console.log('Error in Verification of OTP :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+  signOut() {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+
+      this.http.get(LogOutAPI).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+
+        if (res.Success) {
+          this.store.dispatch(SET_USER_DATA({ data: null }))
+          this.router.navigate(['/login'])
+          this.toast.makeToast('MESSAGE', res.Message ?? "Logged out")
+        } else {
+          this.toast.makeToast('ERROR', res.Message ?? "Try again")
+        }
+      })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      console.log('Error in log out :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
     }
   }

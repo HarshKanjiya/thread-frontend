@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UniqueUserNameComponent } from './unique-user-name/unique-user-name.component';
 import { UserDataComponent } from './user-data/user-data.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -13,11 +14,14 @@ import { UserDataComponent } from './user-data/user-data.component';
 export class SignUpPageComponent {
 
   currentForm: "USERNAME" | "USERDATA" = "USERNAME"
-  username: string = ""
 
-  userNameReceived(e: string) {
-    this.username = e
-    if (e.trim().length > 0) this.currentForm = 'USERDATA'
-
+  constructor(private store: Store<any>) {
+    store.select("User").subscribe((res: any) => {
+      if (res?.temp?.UserNameAvailable === true) {
+        this.currentForm = "USERDATA"
+      }
+    })
   }
+
+
 }

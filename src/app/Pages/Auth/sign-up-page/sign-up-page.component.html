@@ -11,11 +11,9 @@
       <p class="font-bold pb-4 text-center">Create your instagram account</p>
 
       @if (currentForm === "USERNAME") {
-      <app-unique-user-name
-        (username)="userNameReceived($event)"
-      ></app-unique-user-name>
+      <app-unique-user-name></app-unique-user-name>
       }@else {
-      <app-user-data [username]="username"></app-user-data>
+      <app-user-data></app-user-data>
       }
     </div>
   </div>
