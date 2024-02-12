@@ -9,6 +9,7 @@ import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
 import { UserStateService } from '../../Services/state/user-state.service';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -37,7 +38,8 @@ import { UserStateService } from '../../Services/state/user-state.service';
 })
 export class HeaderComponent {
 
-  userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
+  // userName: Signal<string> = computed(() => this.userState.UserData()?.UserName)
+  userName: string = ""
 
   visible: boolean = false;
   backButtonVisibility: boolean = false
@@ -55,7 +57,15 @@ export class HeaderComponent {
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, public userState: UserStateService) {
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, public userState: UserStateService, private store: Store<any>) {
+
+    store.select("User").subscribe((res: any) => {
+      console.log('res :>> ', res);
+      if (res?.userData) {
+        this.userName = res.userData.UserName
+      }
+    })
+
     this.router.events.subscribe(
       (ev) => {
         if (ev instanceof NavigationEnd) {

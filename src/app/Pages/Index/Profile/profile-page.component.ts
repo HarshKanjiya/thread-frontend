@@ -1,8 +1,9 @@
-import { Component, Signal, computed } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { UserStateService } from '../../../Services/state/user-state.service';
-import { MyProfilePageComponent } from './profile-page/myProfile-page.component';
 import { OthersProfilePageComponent } from './others-profile-page/others-profile-page.component';
+import { MyProfilePageComponent } from './profile-page/myProfile-page.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -12,13 +13,23 @@ import { OthersProfilePageComponent } from './others-profile-page/others-profile
 })
 export class ProfilePageComponent {
 
-  UserName:string = "";
+  UserName: string = "";
 
-  userDataSignal: Signal<any> = computed(() => this.userState.UserData())
-  myProfile: Signal<boolean> = computed(() => this.userDataSignal()?.UserName === this.UserName ? true : false )
+  // userDataSignal: Signal<any> = computed(() => this.userState.UserData())
+  // myProfile: Signal<boolean> = computed(() => this.userDataSignal()?.UserName === this.UserName ? true : false )
 
-  constructor(public userState: UserStateService, public router: Router,public route: ActivatedRoute) {
+  userName: string = ""
+
+  constructor(public userState: UserStateService, private store: Store<any>, public router: Router, public route: ActivatedRoute) {
+    store.select("User").subscribe((res: any) => {
+      if (res?.userData) {
+        this.userName = res.userData.UserName
+      }
+    })
+
   }
+
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

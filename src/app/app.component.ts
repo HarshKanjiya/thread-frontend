@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './Services/theme.service';
 import { UserStateService } from "./Services/state/user-state.service"
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from './reducers/User/User.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent {
 
-  constructor(private themeService: ThemeService, public UserState: UserStateService, private cookie: CookieService) {
+  constructor(private themeService: ThemeService, public UserState: UserStateService, private userService: UserService, private cookie: CookieService) {
 
     if (cookie.get("RefreshToken")) {
-      this.UserState.getMySession();
+      // this.UserState.getMySession();
+      this.userService.getMySession()
     }
   }
 

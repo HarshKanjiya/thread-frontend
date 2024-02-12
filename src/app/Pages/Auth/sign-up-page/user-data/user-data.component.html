@@ -232,7 +232,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col gap-1 relative">
+  <div class="flex flex-col gap-1 relative overflow-hidden rounded-xl">
     <div
       class="absolute top-1/2 -translate-y-1/2 left-3 origin-center overflow-hidden flex items-center justify-center"
     >
@@ -274,8 +274,37 @@
     />
 
     @if (Avatar !== "") {
+    <button
+      (click)="removeAvatar()"
+      class="h-[48px] w-[48px] transition-all duration-200 group hover:bg-neutral-900 flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-0 origin-center bg-transparent"
+    >
+      <div
+        class="w-[1px] h-[50%] group-hover:h-full transition-all duration-200 origin-center top-1/2 -translate-y-1/2 contents-[' '] rounded-full bg-neutral-500 group-hover:bg-neutral-300 absolute left-0"
+      ></div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-black dark:stroke-neutral-500"
+      >
+        <path d="M3 6h18" />
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+      </svg>
+    </button>
+    }
+
+    <!--
+    @if (Avatar !== "") {
     <div
-      class="absolute top-1/2 -translate-y-1/2 right-3 origin-center overflow-hidden flex items-center justify-center hover:bg-neutral-700 transition-all duration-150 rounded-full p-1"
+      class="absolute top-1/2 -translate-y-1/2 right-3 origin-center overflow-hidden flex items-center justify-center hover:bg-neutral-700 transition-all duration-150 rounded-full p-1.5"
       (click)="removeAvatar()"
     >
       <svg
@@ -295,7 +324,7 @@
         <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
       </svg>
     </div>
-    }
+    } -->
   </div>
 
   <div class="flex flex-col gap-1 relative rounded-xl overflow-hidden">

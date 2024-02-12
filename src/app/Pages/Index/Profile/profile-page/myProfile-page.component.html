@@ -1,11 +1,11 @@
 <div #stickyMenu class="flex items-center justify-between py-4">
   <div class="flex flex-col">
-    <p class="text-2xl font-bold">{{ userDataSignal()?.Name }}</p>
-    <p class="text-sm">{{ userDataSignal()?.UserName }}</p>
+    <p class="text-2xl font-bold">{{ userData?.Name }}</p>
+    <p class="text-sm">{{ userData?.UserName }}</p>
   </div>
   <div>
-    @if (userDataSignal()?.AvatarURL.trim().length > 0) {
-    <img class="w-20 h-20 rounded-full" [src]="userDataSignal()?.AvatarURL" />
+    @if (userData?.AvatarURL.trim().length > 0) {
+    <img class="w-20 h-20 rounded-full" [src]="userData?.AvatarURL" />
     }@else {
     <img
       class="w-20 h-20 rounded-full"
@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<div class="py-2">{{ userDataSignal()?.Bio }}</div>
+<div class="py-2">{{ userData?.Bio }}</div>
 
 <div class="flex items-center justify-between py-4">
   <div class="flex items-center">
@@ -33,7 +33,7 @@
     </div>
     <div class="w-2"></div>
 
-    <p class="text-sm">{{ userDataSignal()?.FollowersCount }} Followers</p>
+    <p class="text-sm">{{ userData?.FollowersCount }} Followers</p>
   </div>
 </div>
 
@@ -93,7 +93,9 @@
   }
 </div>
 
-<div class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm">
+<div
+  class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm"
+>
   <p>You have reached the depth of the Earth 🌍</p>
   <p>There are no more threads to show.</p>
 </div>

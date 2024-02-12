@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, Signal, ViewChild, computed } from
 import { UserStateService } from '../../../../Services/state/user-state.service';
 import { Router } from '@angular/router';
 import { ThreadComponent } from '../../../../Components/thread/thread.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -30,10 +31,12 @@ import { ThreadComponent } from '../../../../Components/thread/thread.component'
 
 })
 export class MyProfilePageComponent {
+
   isPrivacyButtonChecked: boolean = false
   selectedTab: "THREADS" | "REPLIES" | "REPOSTS" = "THREADS"
 
   sticky: boolean = false;
+
   @ViewChild('stickyMenu') menuElement!: ElementRef;
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
@@ -53,13 +56,20 @@ export class MyProfilePageComponent {
   }
 
   myProfile: boolean = false
-  userDataSignal: Signal<any> = computed(() => this.userState.UserData())
+  // userDataSignal: Signal<any> = computed(() => this.userState.UserData())
+
+
+  userData: any = null
+
 
   myThreads: Signal<any> = computed(() => {
     return this.userState.MyPosts()
   })
 
-  constructor(private userState: UserStateService, private router: Router) {
+  constructor(private userState: UserStateService, private store: Store<any>, private router: Router) {
+    store.select("User").subscribe((res: any) => {
+      this.userData = res.userData
+    })
   }
 
   getPosts() {

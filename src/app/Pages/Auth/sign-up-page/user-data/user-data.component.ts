@@ -58,6 +58,8 @@ export class UserDataComponent {
   BirthDate: Date | null = null
   Password: string = ""
   Avatar: any = ""
+  selectedFile: File | null = null;
+
 
   // formData:
   //   { username: string, name: string, email: string, phone: string, gender: "MALE" | "FEMALE" | "KEEP_SECRET" | "", birthDate: string, password: string, avatar: string }
@@ -114,6 +116,21 @@ export class UserDataComponent {
     }
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.uploadImage();
+  }
+
+  uploadImage() {
+    if (!this.selectedFile) return;
+
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.Avatar = e.target.result;
+
+    };
+    reader.readAsDataURL(this.selectedFile);
+  }
 
 
 
@@ -184,7 +201,7 @@ export class UserDataComponent {
     let _temp = {
       UserName: this.UserName,
       Name: this.Name,
-      PhoneNumber: this.PhoneNumber,
+      PhoneNumber: this.PhoneNumber.toString(),
       Avatar: this.Avatar,
       Email: this.Email,
       BirthDate: moment(this.BirthDate).format("Do MMM, YYYY"),

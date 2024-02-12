@@ -22,7 +22,7 @@ export const UserReducer = createReducer(
   }),
   on(SET_USER_DATA, (state: any, { data }) => {
 
-    return { ...state, data: data }
+    return { ...state, userData: data }
   }),
   on(SET_USER_TEMP, (state: any, data) => {
     return { ...state, temp: data }
