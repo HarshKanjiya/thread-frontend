@@ -5,11 +5,11 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
-import { UserStateService } from '../../Services/state/user-state.service';
 import { ThemeService } from '../../Services/theme.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
+import { UserService } from '../../reducers/User/User.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -44,6 +44,8 @@ export class HeaderComponent {
   backButtonVisibility: boolean = false
   isOpen: boolean = false
 
+  loading: boolean = false
+
 
   @ViewChild("menu") menu !: ElementRef
   @ViewChild("mobileMenu") mobileMenu !: ElementRef
@@ -56,7 +58,7 @@ export class HeaderComponent {
   }
 
 
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, public userState: UserStateService, private store: Store<any>) {
+  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, private store: Store<any>, private userService: UserService) {
 
     store.select("User").subscribe((res: any) => {
       if (res?.userData) {
@@ -96,7 +98,7 @@ export class HeaderComponent {
         this.setIsOpen()
         break
       case 'logout':
-        this.userState.signOut()
+        this.userService.signOut()
     }
   }
 

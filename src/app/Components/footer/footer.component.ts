@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DialogService } from '../../Services/dialog.service';
-import { UserStateService } from '../../Services/state/user-state.service';
 import { ThemeService } from '../../Services/theme.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class FooterComponent {
   userName: string = ""
 
 
-  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router, public userState: UserStateService, private store: Store<any>) {
+  constructor(private themeService: ThemeService, public dialog: DialogService, public router: Router, private store: Store<any>) {
     store.select("User").subscribe((res: any) => {
       if (res?.userData) {
         this.userName = res.userData.UserName

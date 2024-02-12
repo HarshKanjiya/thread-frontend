@@ -1,14 +1,14 @@
 // auth.guard.ts
 import { Injectable } from '@angular/core';
-import {  Router } from '@angular/router';
-import { UserStateService } from '../Services/state/user-state.service';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../reducers/User/User.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard  {
-  constructor(private router: Router, private userState: UserStateService, private cookie: CookieService) { }
+export class AuthGuard {
+  constructor(private router: Router, private userService: UserService, private cookie: CookieService) { }
 
   canActivate() {
 
@@ -16,7 +16,7 @@ export class AuthGuard  {
     let aToken = this.cookie.get("AccessToken")
     let user = this.cookie.get("UserName")
 
-    if(!aToken) this.userState.getMySession();
+    if (!aToken) this.userService.getMySession()
 
     if (rToken && user) {
       return true;

@@ -1,9 +1,8 @@
-import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, ElementRef, HostListener, Signal, ViewChild, computed } from '@angular/core';
-import { UserStateService } from '../../../../Services/state/user-state.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { Store } from '@ngrx/store';
+import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { PostService } from '../../../../reducers/Post/Post.service';
 
 @Component({

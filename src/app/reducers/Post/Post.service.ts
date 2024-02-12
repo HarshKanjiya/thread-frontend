@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { IPostInitialState } from './PostTypes';
-import { SET_POST_LOADING, SET_POST_MY_THREADS } from './PostActions';
-import { GetPostsOfSignleUserAPI } from '../../Utils/Endpoints';
+import { SET_POST_DATA, SET_POST_LOADING, SET_POST_MY_THREADS, SET_POST_REPLIES } from './PostActions';
+import { GetPostRepliesAPI, GetPostsOfSignleUserAPI, GetThreadDataAPI } from '../../Utils/Endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class PostService {
   }
 
   getMyThreads(userId: string, page: number, type: "REPOST" | "PARENT") {
-    console.log('userId :>> ', userId);
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
     try {
       this.http.get(GetPostsOfSignleUserAPI + userId + "?type=" + type + "&pageNumber=" + page + "&pageSize=5")
@@ -37,4 +36,40 @@ export class PostService {
   }
 
   getMyFeed() { }
+
+  getThreadData(id: string) {
+    this.store.dispatch(SET_POST_LOADING({ loading: true }))
+    try {
+      this.http.get(GetThreadDataAPI + id)
+        .subscribe((res: any) => {
+          this.store.dispatch(SET_POST_LOADING({ loading: false }))
+
+          if (res?.Success) {
+            this.store.dispatch(SET_POST_DATA({ data: res.Data }))
+          }
+        })
+    } catch (e: any) {
+      this.store.dispatch(SET_POST_LOADING({ loading: false }))
+      console.log('Error in Login :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+
+  getThreadReplies(id: string) {
+    this.store.dispatch(SET_POST_LOADING({ loading: true }))
+    try {
+      this.http.get(GetPostRepliesAPI + id)
+        .subscribe((res: any) => {
+          this.store.dispatch(SET_POST_LOADING({ loading: false }))
+
+          if (res?.Success) {
+            this.store.dispatch(SET_POST_REPLIES({ replies: res.Data }))
+          }
+        })
+    } catch (e: any) {
+      this.store.dispatch(SET_POST_LOADING({ loading: false }))
+      console.log('Error in Login :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
 }

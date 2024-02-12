@@ -329,12 +329,12 @@
             </div>
             <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <button
-              [disabled]="userState.loading()"
+              [disabled]="loading"
               type="button"
               class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:hover:bg-white disabled:opacity-50 dark:disabled:hover:bg-black dark:disabled:opacity-30 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
               (click)="menuClickHandler('logout')"
             >
-              @if (userState.loading()) {
+              @if (loading) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -513,12 +513,12 @@
         </div>
         <hr class="w-full border-neutral-300 dark:border-neutral-700" />
         <button
-          [disabled]="userState.loading()"
+          [disabled]="loading"
           type="button"
           class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:hover:bg-white disabled:opacity-50 dark:disabled:hover:bg-black dark:disabled:opacity-30 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pb-3"
           (click)="menuClickHandler('logout')"
         >
-          @if (userState.loading()) {
+          @if (loading) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

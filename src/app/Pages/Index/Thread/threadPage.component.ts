@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplyComponent } from '../../../Components/reply/thread.component';
 import { ThreadComponent } from '../../../Components/thread/thread.component';
-import { PostsStateService } from '../../../Services/state/posts-state.service';
+import { PostService } from '../../../reducers/Post/Post.service';
 
 @Component({
   selector: 'app-thread-page',
@@ -19,12 +19,12 @@ export class ThreadPageComponent {
 
   postRepliesData: any = null
 
-  constructor(private postState: PostsStateService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private postService: PostService) { }
 
   ngAfterViewInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      if (id) this.postState.getThreadData(id)
+      if (id) this.postService.getThreadData(id)
     });
 
 

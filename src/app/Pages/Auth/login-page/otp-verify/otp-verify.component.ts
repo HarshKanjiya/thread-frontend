@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UserStateService } from '../../../../Services/state/user-state.service';
-import { NgOtpInputModule, NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
-import { map, take, timer } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { NgOtpInputConfig, NgOtpInputModule } from 'ng-otp-input';
 import { UserService } from '../../../../reducers/User/User.service';
 
 @Component({
@@ -15,6 +13,9 @@ export class OtpVerifyComponent {
 
   otp: string = ""
   email: any = ""
+
+  loading: boolean = false
+
   config: NgOtpInputConfig = {
     allowNumbersOnly: true,
     length: 4,
@@ -26,7 +27,7 @@ export class OtpVerifyComponent {
   secondsTimer: any
   allowResendOtp: boolean = false
 
-  constructor(public UserState: UserStateService, private store: Store<any>, private userService: UserService) {
+  constructor(private store: Store<any>, private userService: UserService) {
     store.select("User").subscribe((res: any) => {
       this.email = res.temp?.Email
     })
