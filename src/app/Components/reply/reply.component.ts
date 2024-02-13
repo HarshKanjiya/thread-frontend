@@ -3,12 +3,15 @@ import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CarouselComponent } from '../carousel/carousel.component';
+import { PostService } from '../../reducers/Post/Post.service';
+import { LoaderComponent } from '../loader/loader.component';
+import { ChildreplyComponent } from '../childreply/childreply.component';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-reply',
   standalone: true,
-  imports: [CarouselComponent, RouterLink],
+  imports: [CarouselComponent, LoaderComponent,ChildreplyComponent],
   templateUrl: './reply.component.html',
   styleUrl: './reply.component.scss',
   animations: [
@@ -33,16 +36,14 @@ import { CarouselComponent } from '../carousel/carousel.component';
 })
 export class ReplyComponent {
   @Input() ThreadData: any
-  // @Input() UserData: any
+  @Input() ParentThreadId: any
   selectedPollOption: any
 
   UserData: any = null
 
-  constructor(private store: Store<any>) {
-    store.select("User").subscribe((res: any) => {
-      this.UserData = res.userData
-    })
-  }
+  loading: boolean = false
+  replies: any[] = []
+  replyReplies: any[] = []
 
   @ViewChild("menu") menu !: ElementRef
   @HostListener('document:click', ['$event'])
@@ -52,6 +53,26 @@ export class ReplyComponent {
     }
   }
 
+  constructor(private store: Store<any>, private postService: PostService) { }
+
+  ngOnInit() {
+    this.store.select("User").subscribe((res: any) => {
+      this.UserData = res.userData
+    })
+    this.store.select("Post").subscribe((res: any) => {
+      this.loading = res.loading
+      this.replyReplies = res.replyReplies
+    })
+  }
+
+
+  getReplies() {
+    this.replyReplies = []
+    this.postService.getRepliesOfaReply(this.ParentThreadId, this.ThreadData.ThreadId)
+  }
+  removeReplies() {
+    this.postService.removeRepliesOfReply()
+  }
 
 
   demoRatings: any = {

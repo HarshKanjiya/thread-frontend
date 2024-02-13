@@ -1,10 +1,18 @@
+
+@if (loading && postData == null) {
+  <loader ></loader>
+}
+
 <app-thread [ThreadData]="postData"></app-thread>
 
-@if (postRepliesData?.length > 0) {
+
+@if (loading && postRepliesData.length === 0) {
+  <loader ></loader>
+}
+
 <div>
   @for (item of postRepliesData; track $index) {
-  <app-reply [ThreadData]="item"></app-reply>
+  <app-reply [ThreadData]="item" ParentThreadId="{{postData?.ThreadId}}" ></app-reply>
   }
 </div>
 
-}

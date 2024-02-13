@@ -11,3 +11,4 @@ export const SET_POST_TEMP = createAction("[POST] set temp", props<any>())
 
 export const SET_POST_DATA = createAction("[POST] set thread data", props<{ data: any }>())
 export const SET_POST_REPLIES = createAction("[POST] set thread replies", props<{ replies: any[] }>())
+export const SET_REPLY_REPLIES = createAction("[POST] set reply replies", props<{ replies: any[] }>())

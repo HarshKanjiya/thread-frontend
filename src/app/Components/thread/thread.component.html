@@ -69,7 +69,7 @@
 
       <div class="flex gap-3 items-center">
         <p class="text-sm text-neutral-400 dark:text-neutral-500">
-          {{ timeDifference(ThreadData.CreatedAt) }}
+          {{ timeDifference(ThreadData?.CreatedAt) }}
         </p>
 
         <div #menu>
@@ -334,7 +334,7 @@
     <div
       class="flex gap-3 items-center text-sm font-light text-neutral-400 dark:text-neutral-500"
     >
-      <p>{{ ThreadData.Replies }} replies</p>
+      <p>{{ ThreadData?.Replies }} replies</p>
       <div
         class="w-[3px] h-[3px] rounded-full bg-neutral-400 dark:bg-neutral-500"
       ></div>

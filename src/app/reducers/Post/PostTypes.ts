@@ -9,7 +9,8 @@ export interface IPostInitialState {
   temp: any,
 
   threadData: any,
-  threadReplies: any
+  threadReplies: any[],
+  replyReplies: any[]
 }
 export const PostInitialState: IPostInitialState = {
   loading: false,
@@ -19,7 +20,8 @@ export const PostInitialState: IPostInitialState = {
   Feed: [],
   temp: null,
   threadData: null,
-  threadReplies: null
+  threadReplies: [],
+  replyReplies: []
 }
 
 

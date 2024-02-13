@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { PostInitialState } from "./PostTypes";
-import { SET_POST_DATA, SET_POST_FEED, SET_POST_LOADING, SET_POST_MESSAGE, SET_POST_MY_THREADS, SET_POST_REPLIES, SET_POST_SUCCESS, SET_POST_TEMP } from "./PostActions";
+import { SET_POST_DATA, SET_POST_FEED, SET_POST_LOADING, SET_POST_MESSAGE, SET_POST_MY_THREADS, SET_POST_REPLIES, SET_POST_SUCCESS, SET_POST_TEMP, SET_REPLY_REPLIES } from "./PostActions";
 
 
 
@@ -37,5 +37,9 @@ export const PostReducer = createReducer(
 
   on(SET_POST_REPLIES, (state: any, { replies }) => {
     return { ...state, threadReplies: replies }
+  }),
+
+  on(SET_REPLY_REPLIES, (state: any, { replies }) => {
+    return { ...state, replyReplies: replies }
   }),
 )

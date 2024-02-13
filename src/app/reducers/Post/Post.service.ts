@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { IPostInitialState } from './PostTypes';
-import { SET_POST_DATA, SET_POST_LOADING, SET_POST_MY_THREADS, SET_POST_REPLIES } from './PostActions';
+import { SET_POST_DATA, SET_POST_LOADING, SET_POST_MY_THREADS, SET_POST_REPLIES, SET_POST_TEMP, SET_REPLY_REPLIES } from './PostActions';
 import { GetPostRepliesAPI, GetPostsOfSignleUserAPI, GetThreadDataAPI } from '../../Utils/Endpoints';
 
 @Injectable({
@@ -87,5 +87,26 @@ export class PostService {
       console.log('Error in Login :', e.loading);
       this.toast.makeToast('ERROR', "Something went Wrong")
     }
+  }
+
+  getRepliesOfaReply(parentThreadId: string, threadId: string) {
+    this.store.dispatch(SET_POST_LOADING({ loading: true }))
+    try {
+      this.http.get(GetPostRepliesAPI + threadId)
+        .subscribe((res: any) => {
+          this.store.dispatch(SET_POST_LOADING({ loading: false }))
+
+          if (res?.Success) {
+            this.store.dispatch(SET_REPLY_REPLIES({ replies: res.Data }))
+          }
+        })
+    } catch (e: any) {
+      this.store.dispatch(SET_POST_LOADING({ loading: false }))
+      console.log('Error in Login :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+  removeRepliesOfReply(){
+    this.store.dispatch(SET_REPLY_REPLIES({replies:[]}))
   }
 }
