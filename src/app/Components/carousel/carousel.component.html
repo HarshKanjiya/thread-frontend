@@ -1,7 +1,7 @@
 <!-- carousel -->
-<div class="relative w-full bg-slate-300">
+<div class="relative w-full min-h-full overflow-hidden">
   @for (item of slides; track $index) {
-  <div>
+  <div class="" >
     @if (slides.indexOf(item) == currentSlide) {
     <img [src]="item" @carouselAnimation />
     }
@@ -10,7 +10,7 @@
 
   <!-- controls -->
   @if (slides.length > 0) {
-    <button class="absolute top-1/2 left-3 z-40" (click)="onPreviousClick()">
+  <button class="absolute top-1/2 left-3 z-40" (click)="onPreviousClick()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"

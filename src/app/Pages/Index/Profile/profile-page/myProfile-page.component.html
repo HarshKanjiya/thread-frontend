@@ -87,6 +87,11 @@
   ></div>
 </div>
 
+<div #loader></div>
+@if (userLoading || postLoading) {
+<loader type="FULL"></loader>
+}
+
 <div>
   @for (item of myThreads; track $index) {
   <app-thread [ThreadData]="item"></app-thread>

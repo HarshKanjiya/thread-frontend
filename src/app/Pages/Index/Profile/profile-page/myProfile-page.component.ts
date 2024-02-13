@@ -1,14 +1,15 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { PostService } from '../../../../reducers/Post/Post.service';
+import { LoaderComponent } from '../../../../Components/loader/loader.component';
 
 @Component({
   selector: 'app-my-profile-page',
   standalone: true,
-  imports: [ThreadComponent],
+  imports: [ThreadComponent, LoaderComponent],
   templateUrl: './myProfile-page.component.html',
   animations: [
     trigger("body", [
@@ -37,7 +38,12 @@ export class MyProfilePageComponent {
 
   sticky: boolean = false;
 
+  userLoading: boolean = false;
+  postLoading: boolean = false;
+
   @ViewChild('stickyMenu') menuElement!: ElementRef;
+  @ViewChild('loader') loaderElement!: ElementRef;
+
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.scrollY;
@@ -48,7 +54,21 @@ export class MyProfilePageComponent {
     }
   }
 
+  constructor(private store: Store<any>, private router: Router, private postService: PostService, private cd: ChangeDetectorRef) { }
+
   menuPosition: any;
+
+  ngOnInit() {
+    this.store.select("User").subscribe((res: any) => {
+      this.userData = res.userData
+      this.userLoading = res.loading
+    })
+    this.store.select("Post").subscribe((res: any) => {
+      this.myThreads = res.myThreads
+      this.postLoading = res.loading
+      this.cd.detectChanges()
+    })
+  }
 
   ngAfterViewInit() {
     this.getPosts()
@@ -64,14 +84,6 @@ export class MyProfilePageComponent {
   myThreads: any[] = []
 
 
-  constructor(private store: Store<any>, private router: Router, private postService: PostService) {
-    store.select("User").subscribe((res: any) => {
-      this.userData = res.userData
-    })
-    store.select("Post").subscribe((res: any) => {
-      this.myThreads = res.myThreads
-    })
-  }
 
   getPosts() {
     let type: "PARENT" | "REPOST" = "PARENT";

@@ -2,21 +2,21 @@
 export const BaseURL = "https://localhost:7210/api/"
 
 // Auth
-export const LoginAPI = "auth/login" // POST
-export const RegisterAPI = "auth/register" // POST
-export const LogOutAPI = "auth/signout" // GET
-export const CheckUserNameAPI = "auth/check/" // + USERNAME // GET
+export const LoginAPI = "auth/login" // POST //& DONE
+export const RegisterAPI = "auth/register" // POST //& DONE
+export const LogOutAPI = "auth/signout" // GET //& DONE
+export const CheckUserNameAPI = "auth/check/" // + USERNAME // GET //& DONE
 export const GetNewAccessTokenAPI = "auth/token" // GET
-export const GetSessionDataAPI = "auth/session"
+export const GetSessionDataAPI = "auth/session" //& DONE
 
 //Otp
-export const SendOtpAPI = "otp/create" // POST
-export const VerifyOtpAPI = "otp/verify" // POST
+export const SendOtpAPI = "otp/create" // POST //& DONE
+export const VerifyOtpAPI = "otp/verify" // POST //& DONE
 
 // Profile
 export const UpdateProfileAPI = "auth/user/" // + USER_ID // PUT
 export const UpdatePasswordAPI = "auth/user/pass/" // + USER_ID // PUT
-export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET
+export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET //& DONE
 
 // Thread
 export const NewThreadAPI = "thread" // POST

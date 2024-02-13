@@ -175,4 +175,16 @@ export class UserService {
     }
   }
 
+  updateProfile(){}
+  updatePassword(){}
+
+  FollowUser(){}
+  MuteUser(){}
+  BlockUser(){}
+
+  getMyNotification(){}
+  MarkAsDoneNotif(){}
+  deleteNotif(){}
+
+
 }

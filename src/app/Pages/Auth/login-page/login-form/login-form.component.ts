@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { UserService } from '../../../../reducers/User/User.service';
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +22,7 @@ export class LoginFormComponent {
   @Output() formChange = new EventEmitter<"LOGIN" | "SIGNUP" | "FORGOT_PASS" | "EMAIL_LOGIN">()
 
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private userService: UserService) {
     this.store.select("User").subscribe((res: any) => {
       this.loading = res.loading
     })
@@ -44,8 +45,8 @@ export class LoginFormComponent {
   }
 
   submit() {
-    // this.UserState.loginUser({
-    //   UniqueId: this.id, Password: this.password
-    // })
+    this.userService.loginUser({
+      UniqueId: this.id, Password: this.password
+    })
   }
 }

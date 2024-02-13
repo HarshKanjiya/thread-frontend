@@ -35,7 +35,23 @@ export class PostService {
     }
   }
 
-  getMyFeed() { }
+  getMyFeed(userId: string, page: number) {
+    this.store.dispatch(SET_POST_LOADING({ loading: true }))
+    try {
+      this.http.get(GetPostsOfSignleUserAPI + userId + "&pageNumber=" + page + "&pageSize=5")
+        .subscribe((res: any) => {
+          this.store.dispatch(SET_POST_LOADING({ loading: false }))
+
+          if (res?.Success) {
+            this.store.dispatch(SET_POST_MY_THREADS({ threads: res.Data }))
+          }
+        })
+    } catch (e: any) {
+      this.store.dispatch(SET_POST_LOADING({ loading: false }))
+      console.log('Error in Login :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
 
   getThreadData(id: string) {
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
