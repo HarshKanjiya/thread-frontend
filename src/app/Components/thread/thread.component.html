@@ -208,8 +208,8 @@
           <div
             [style.width]="
               getWidth(
-                demoRatings.TotalResponse,
-                demoRatings.Responses[$index]
+                ratings?.TotalResponse,
+                ratings?.Responses[$index]
               ) + '%'
             "
             class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 origin-left -z-1 opacity-50 transition-all duration-150 ease-in"
@@ -233,7 +233,7 @@
             </div>
             <p>{{ item?.Value }}</p>
           </div>
-          <p class="p-3">{{ demoRatings.Responses[$index] }}</p>
+          <p class="p-3">{{ ratings?.Responses[$index] }}</p>
         </button>
         }
       </div>

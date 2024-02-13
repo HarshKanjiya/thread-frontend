@@ -38,6 +38,7 @@ export class ThreadComponent {
   likeCount: number = 0;
   liked: boolean = false
 
+  ratings: any = null
 
   UserData: any = null
 
@@ -55,18 +56,16 @@ export class ThreadComponent {
     }
   }
 
+  ngOnInit() {
+    if (this.ThreadData.Content.Ratings) {
+      this.ratings = { ...this.ThreadData.Content.Ratings }
+    }
+    if (this.ThreadData?.ThreadId === "e8d70163-8d1e-42d8-8cb4-08dc2888547a") {
+      console.log('ThreadData :>> ', this.ratings);
+    }
 
+  }
 
-  demoRatings: any = {
-
-    RatingsId: "60cc9ac0-56eb-493a-1fde-08dc288874e8",
-    TotalResponse: 15,
-    Responses: [
-      10,
-      5
-    ]
-
-  };
 
   getWidth(total: any, current: any) {
     return (current / total) * 100
@@ -120,7 +119,7 @@ export class ThreadComponent {
 
 
   choseOption(option: any, index: any) {
-    console.log('option :>> ', option, this.selectedPollOption, this.demoRatings);
+    console.log('option :>> ', option, this.selectedPollOption, this.ratings);
     // this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
     //   if (index === ind) {
     //     if (this.selectedPollOption?.OptionId !== option.OptionId) {
@@ -133,7 +132,7 @@ export class ThreadComponent {
     // }
     // )
 
-    this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
+    this.ratings.Responses = this.ratings.Responses.map((val: number, ind: number) => {
       if (this.selectedPollOption) {
         if (ind == index) {
 
@@ -165,7 +164,7 @@ export class ThreadComponent {
       }
     })
 
-    console.log('option :>> ', this.demoRatings.Responses);
+    console.log('option :>> ', this.ratings.Responses);
   }
 
 
