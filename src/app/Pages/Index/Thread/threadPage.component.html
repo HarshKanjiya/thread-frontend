@@ -3,7 +3,9 @@
   <loader ></loader>
 }
 
-<app-thread [ThreadData]="postData"></app-thread>
+@if(postData){
+  <app-thread [ThreadData]="postData" @threadEnterAnimation></app-thread>
+}
 
 
 @if (loading && postRepliesData.length === 0) {

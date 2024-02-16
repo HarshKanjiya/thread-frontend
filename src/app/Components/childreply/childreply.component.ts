@@ -28,13 +28,30 @@ import { PostService } from '../../reducers/Post/Post.service';
         )
       ])
     ]),
+    trigger("threadEnterAnimation", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(-20px)" })
+        )
+      ])
+    ]),
+
 
   ]
 })
 export class ChildreplyComponent {
   @Input() ThreadData: any
-  selectedPollOption: any
-
+  ratings: any = null
+  selectedPollOptionId: any = null
   UserData: any = null
 
   loading: boolean = false
@@ -50,6 +67,9 @@ export class ChildreplyComponent {
   constructor(private store: Store<any>, private postService: PostService) { }
 
   ngOnInit() {
+    if (this.ThreadData?.Content?.Ratings) {
+      this.ratings = { ...this.ThreadData.Content.Ratings }
+    }
     this.store.select("User").subscribe((res: any) => {
       this.UserData = res.userData
     })
@@ -58,17 +78,6 @@ export class ChildreplyComponent {
     })
   }
 
-
-  demoRatings: any = {
-
-    RatingsId: "60cc9ac0-56eb-493a-1fde-08dc288874e8",
-    TotalResponse: 15,
-    Responses: [
-      10,
-      5
-    ]
-
-  };
 
   getWidth(total: any, current: any) {
     return (current / total) * 100
@@ -122,44 +131,30 @@ export class ChildreplyComponent {
 
 
   choseOption(option: any, index: any) {
-    console.log('option :>> ', option, this.selectedPollOption, this.demoRatings);
-    // this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
-    //   if (index === ind) {
-    //     if (this.selectedPollOption?.OptionId !== option.OptionId) {
-    //       return val += 1
-    //     }else{
-    //       return val  -= 1
-    //     }
-    //   }
-    //   return val
-    // }
-    // )
 
-    this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
-      if (this.selectedPollOption) {
+    let newId = null
+
+    this.ratings.Responses = this.ratings.Responses.map((val: number, ind: number) => {
+      if (this.selectedPollOptionId) {
         if (ind == index) {
 
-          if (this.selectedPollOption.OptionId === option.OptionId) {
-            console.log('POSITION [ repeat ]');
-            this.selectedPollOption = null
+          if (this.selectedPollOptionId === option.OptionId) {
+            newId = null
             return val - 1
           } else {
-            this.selectedPollOption = option
-            console.log('POSITION [ new choice ]');
+            newId = option.OptionId
             return val + 1
           }
         } else {
-          if (this.selectedPollOption.OptionId === option.OptionId) {
+          if (this.selectedPollOptionId === option.OptionId) {
             return val
           } else {
-            this.selectedPollOption = null
             return val - 1
           }
         }
       } else {
         if (ind == index) {
-          console.log('POSITION [ first click ]');
-          this.selectedPollOption = option
+          newId = option.OptionId
           return val + 1
         } else {
           return val
@@ -167,7 +162,9 @@ export class ChildreplyComponent {
       }
     })
 
-    console.log('option :>> ', this.demoRatings.Responses);
+
+
+    this.selectedPollOptionId = newId
   }
 
   menuClickHandler(type: string) {

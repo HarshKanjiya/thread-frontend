@@ -20,7 +20,7 @@ export class PostService {
   getMyThreads(userId: string, page: number, type: "REPOST" | "PARENT") {
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
     try {
-      this.http.get(GetPostsOfSignleUserAPI + userId + "?type=" + type + "&pageNumber=" + page + "&pageSize=5")
+      this.http.get(GetPostsOfSignleUserAPI + userId + "/" + userId + "?type=" + type + "&pageNumber=" + page + "&pageSize=5")
         .subscribe((res: any) => {
           this.store.dispatch(SET_POST_LOADING({ loading: false }))
 
@@ -53,10 +53,10 @@ export class PostService {
     }
   }
 
-  getThreadData(id: string) {
+  getThreadData(userId: string, threadId: string) {
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
     try {
-      this.http.get(GetThreadDataAPI + id)
+      this.http.get(GetThreadDataAPI + userId + '/' + threadId)
         .subscribe((res: any) => {
           this.store.dispatch(SET_POST_LOADING({ loading: false }))
 
@@ -71,10 +71,10 @@ export class PostService {
     }
   }
 
-  getThreadReplies(id: string) {
+  getThreadReplies(userId: string, threadId: string) {
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
     try {
-      this.http.get(GetPostRepliesAPI + id)
+      this.http.get(GetPostRepliesAPI + userId + '/' + threadId)
         .subscribe((res: any) => {
           this.store.dispatch(SET_POST_LOADING({ loading: false }))
 
@@ -89,10 +89,10 @@ export class PostService {
     }
   }
 
-  getRepliesOfaReply(parentThreadId: string, threadId: string) {
+  getRepliesOfaReply(parentThreadId: string, UserId: string, threadId: string) {
     this.store.dispatch(SET_POST_LOADING({ loading: true }))
     try {
-      this.http.get(GetPostRepliesAPI + threadId)
+      this.http.get(GetPostRepliesAPI + UserId + "/" + threadId)
         .subscribe((res: any) => {
           this.store.dispatch(SET_POST_LOADING({ loading: false }))
 
@@ -106,7 +106,7 @@ export class PostService {
       this.toast.makeToast('ERROR', "Something went Wrong")
     }
   }
-  removeRepliesOfReply(){
-    this.store.dispatch(SET_REPLY_REPLIES({replies:[]}))
+  removeRepliesOfReply() {
+    this.store.dispatch(SET_REPLY_REPLIES({ replies: [] }))
   }
 }

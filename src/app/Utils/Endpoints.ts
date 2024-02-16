@@ -21,7 +21,7 @@ export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET //& DONE
 // Thread
 export const NewThreadAPI = "thread" // POST
 export const DeleteThreadAPI = "thread/" // + USER_ID + THREAD_ID // DELETE
-export const VotePollAPI = "poll" // POST
+export const VotePollAPI = "thread/poll" // POST
 export const GetThreadDataAPI = "thread/" // + THREAD_ID // GET
 export const GetPostRepliesAPI = "thread/replies/" // + THREAD_ID // GET
 export const GetFeedAPI = "thread/feed/" // + USER_ID // GET

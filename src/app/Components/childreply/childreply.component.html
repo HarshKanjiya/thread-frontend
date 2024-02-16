@@ -1,4 +1,4 @@
-<div class="flex gap-2">
+<div class="flex gap-2" @threadEnterAnimation>
   <div class="w-4 sm:w-8 h-full"></div>
 
   <div
@@ -173,8 +173,8 @@
             <div
               [style.width]="
                 getWidth(
-                  demoRatings.TotalResponse,
-                  demoRatings.Responses[$index]
+                  ratings.TotalResponse,
+                  ratings.Responses[$index]
                 ) + '%'
               "
               class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 origin-left -z-1 opacity-50 transition-all duration-150 ease-in"
@@ -183,14 +183,14 @@
             <div class="p-3 flex gap-3 items-center">
               <div
                 class="group relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
-                  item.OptionId === selectedPollOption?.OptionId
+                  item.OptionId === selectedPollOptionId?.OptionId
                     ? 'bg-black dark:bg-white'
                     : 'bg-white dark:bg-black'
                 }}"
               >
                 <div
                   class="h-1.5 w-1.5 rounded-full  contents-[' '] group {{
-                    item.OptionId === selectedPollOption?.OptionId
+                    item.OptionId === selectedPollOptionId?.OptionId
                       ? 'bg-white dark:bg-black'
                       : 'w-0 h-0'
                   }}"
@@ -198,7 +198,7 @@
               </div>
               <p>{{ item?.Value }}</p>
             </div>
-            <p class="p-3">{{ demoRatings.Responses[$index] }}</p>
+            <p class="p-3">{{ ratings.Responses[$index] }}</p>
           </button>
           }
         </div>

@@ -2,13 +2,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { UserActionService } from '../../reducers/UserAction/UserAction.service';
 import { CarouselComponent } from '../carousel/carousel.component';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [CarouselComponent, RouterLink],
+  imports: [CarouselComponent, RouterLink,],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
   animations: [
@@ -28,24 +29,20 @@ import { CarouselComponent } from '../carousel/carousel.component';
         )
       ])
     ]),
-
   ]
 })
 export class ThreadComponent {
   @Input() ThreadData: any
-  selectedPollOption: any
 
   likeCount: number = 0;
   liked: boolean = false
 
   ratings: any = null
+  selectedPollOptionId: any = null
 
   UserData: any = null
 
-  constructor(private store: Store<any>) {
-    store.select("User").subscribe((res: any) => {
-      this.UserData = res.userData
-    })
+  constructor(private store: Store<any>, private ActionService: UserActionService) {
   }
 
   @ViewChild("menu") menu !: ElementRef
@@ -57,13 +54,12 @@ export class ThreadComponent {
   }
 
   ngOnInit() {
-    if (this.ThreadData.Content.Ratings) {
+    if (this.ThreadData?.Content?.Ratings) {
       this.ratings = { ...this.ThreadData.Content.Ratings }
     }
-    if (this.ThreadData?.ThreadId === "e8d70163-8d1e-42d8-8cb4-08dc2888547a") {
-      console.log('ThreadData :>> ', this.ratings);
-    }
-
+    this.store.select("User").subscribe((res: any) => {
+      this.UserData = res.userData
+    })
   }
 
 
@@ -75,9 +71,13 @@ export class ThreadComponent {
     e.stopPropagation()
   }
 
-  // ngAfterViewInit() {
-  //   console.log('object :>> ', this.ThreadData);
-  // }
+  ngAfterViewInit() {
+    console.log('object :>> ', this.ThreadData);
+    if (this.ThreadData) {
+      this.liked = this.ThreadData.LikedByMe
+      this.likeCount = this.ThreadData.Likes
+    }
+  }
 
   isOpen: boolean = false;
   setIsOpen() {
@@ -119,44 +119,30 @@ export class ThreadComponent {
 
 
   choseOption(option: any, index: any) {
-    console.log('option :>> ', option, this.selectedPollOption, this.ratings);
-    // this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
-    //   if (index === ind) {
-    //     if (this.selectedPollOption?.OptionId !== option.OptionId) {
-    //       return val += 1
-    //     }else{
-    //       return val  -= 1
-    //     }
-    //   }
-    //   return val
-    // }
-    // )
+
+    let newId = null
 
     this.ratings.Responses = this.ratings.Responses.map((val: number, ind: number) => {
-      if (this.selectedPollOption) {
+      if (this.selectedPollOptionId) {
         if (ind == index) {
 
-          if (this.selectedPollOption.OptionId === option.OptionId) {
-            console.log('POSITION [ repeat ]');
-            this.selectedPollOption = null
+          if (this.selectedPollOptionId === option.OptionId) {
+            newId = null
             return val - 1
           } else {
-            this.selectedPollOption = option
-            console.log('POSITION [ new choice ]');
+            newId = option.OptionId
             return val + 1
           }
         } else {
-          if (this.selectedPollOption.OptionId === option.OptionId) {
+          if (this.selectedPollOptionId === option.OptionId) {
             return val
           } else {
-            this.selectedPollOption = null
             return val - 1
           }
         }
       } else {
         if (ind == index) {
-          console.log('POSITION [ first click ]');
-          this.selectedPollOption = option
+          newId = option.OptionId
           return val + 1
         } else {
           return val
@@ -164,12 +150,21 @@ export class ThreadComponent {
       }
     })
 
-    console.log('option :>> ', this.ratings.Responses);
+
+
+    this.selectedPollOptionId = newId
   }
 
 
   likeThread(e: any) {
     e.stopPropagation()
+
+    if (!this.liked) {
+      this.ActionService.LikeThreadAction({ Status: "LIKE", ThreadId: this.ThreadData.ThreadId, UserId: this.UserData.UserId })
+    } else {
+      this.ActionService.LikeThreadAction({ Status: "DISLIKE", ThreadId: this.ThreadData.ThreadId, UserId: this.UserData.UserId })
+    }
+
     this.liked ? this.likeCount-- : this.likeCount++;
     this.liked = !this.liked;
   }

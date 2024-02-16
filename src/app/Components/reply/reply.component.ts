@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, animateChild, sequence, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -6,12 +6,13 @@ import { CarouselComponent } from '../carousel/carousel.component';
 import { PostService } from '../../reducers/Post/Post.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { ChildreplyComponent } from '../childreply/childreply.component';
+import { query } from 'express';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-reply',
   standalone: true,
-  imports: [CarouselComponent, LoaderComponent,ChildreplyComponent],
+  imports: [CarouselComponent, LoaderComponent, ChildreplyComponent],
   templateUrl: './reply.component.html',
   styleUrl: './reply.component.scss',
   animations: [
@@ -31,13 +32,45 @@ import { ChildreplyComponent } from '../childreply/childreply.component';
         )
       ])
     ]),
-
+    trigger("threadEnterAnimation", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(-20px)" })
+        )
+      ])
+    ]),
+    trigger("inOutAnimation", [
+      transition(":enter", [
+        sequence([
+          style({ opacity: 0, transform: "translateY(-20px)" }),
+          animate("100ms ease-in", style({ opacity: 1, transform: "translateY(10px)" })),
+          animate("200ms ease-in-out", style({ opacity: 1, transform: "translateY(0px)" })),
+        ])
+      ]),
+      transition(":leave", [
+        sequence([
+          style({ opacity: 1, transform: "translateY(0)" }),
+          animate("200ms ease-in-out", style({ opacity: 0, transform: "translateY(-20px)" })),
+        ])
+      ])
+    ])
   ]
 })
 export class ReplyComponent {
   @Input() ThreadData: any
   @Input() ParentThreadId: any
-  selectedPollOption: any
+
+  ratings: any = null
+  selectedPollOptionId: any = null
 
   UserData: any = null
 
@@ -56,6 +89,11 @@ export class ReplyComponent {
   constructor(private store: Store<any>, private postService: PostService) { }
 
   ngOnInit() {
+
+    if (this.ThreadData?.Content?.Ratings) {
+      this.ratings = { ...this.ThreadData.Content.Ratings }
+    }
+
     this.store.select("User").subscribe((res: any) => {
       this.UserData = res.userData
     })
@@ -68,23 +106,12 @@ export class ReplyComponent {
 
   getReplies() {
     this.replyReplies = []
-    this.postService.getRepliesOfaReply(this.ParentThreadId, this.ThreadData.ThreadId)
+    this.postService.getRepliesOfaReply(this.ParentThreadId, this.UserData.UserId, this.ThreadData.ThreadId)
   }
   removeReplies() {
     this.postService.removeRepliesOfReply()
   }
 
-
-  demoRatings: any = {
-
-    RatingsId: "60cc9ac0-56eb-493a-1fde-08dc288874e8",
-    TotalResponse: 15,
-    Responses: [
-      10,
-      5
-    ]
-
-  };
 
   getWidth(total: any, current: any) {
     return (current / total) * 100
@@ -136,46 +163,31 @@ export class ReplyComponent {
     return "1y"
   }
 
-
   choseOption(option: any, index: any) {
-    console.log('option :>> ', option, this.selectedPollOption, this.demoRatings);
-    // this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
-    //   if (index === ind) {
-    //     if (this.selectedPollOption?.OptionId !== option.OptionId) {
-    //       return val += 1
-    //     }else{
-    //       return val  -= 1
-    //     }
-    //   }
-    //   return val
-    // }
-    // )
 
-    this.demoRatings.Responses = this.demoRatings.Responses.map((val: number, ind: number) => {
-      if (this.selectedPollOption) {
+    let newId = null
+
+    this.ratings.Responses = this.ratings.Responses.map((val: number, ind: number) => {
+      if (this.selectedPollOptionId) {
         if (ind == index) {
 
-          if (this.selectedPollOption.OptionId === option.OptionId) {
-            console.log('POSITION [ repeat ]');
-            this.selectedPollOption = null
+          if (this.selectedPollOptionId === option.OptionId) {
+            newId = null
             return val - 1
           } else {
-            this.selectedPollOption = option
-            console.log('POSITION [ new choice ]');
+            newId = option.OptionId
             return val + 1
           }
         } else {
-          if (this.selectedPollOption.OptionId === option.OptionId) {
+          if (this.selectedPollOptionId === option.OptionId) {
             return val
           } else {
-            this.selectedPollOption = null
             return val - 1
           }
         }
       } else {
         if (ind == index) {
-          console.log('POSITION [ first click ]');
-          this.selectedPollOption = option
+          newId = option.OptionId
           return val + 1
         } else {
           return val
@@ -183,7 +195,9 @@ export class ReplyComponent {
       }
     })
 
-    console.log('option :>> ', this.demoRatings.Responses);
+
+
+    this.selectedPollOptionId = newId
   }
 
   menuClickHandler(type: string) {
