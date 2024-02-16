@@ -18,6 +18,9 @@ export const UpdateProfileAPI = "auth/user/" // + USER_ID // PUT
 export const UpdatePasswordAPI = "auth/user/pass/" // + USER_ID // PUT
 export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET //& DONE
 
+// user search
+export const SearchUserAPI = "auth/search/"
+
 // Thread
 export const NewThreadAPI = "thread" // POST
 export const DeleteThreadAPI = "thread/" // + USER_ID + THREAD_ID // DELETE

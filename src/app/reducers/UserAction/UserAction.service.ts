@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { IAddPollResponseAction, ILikeThreadAction, IUserActionInitialState, IUserRelationAction } from './UserActionTypes';
-import { SET_USER_ACTION_LOADING, SET_USER_ACTION_SUCCESS } from './UserActionActions';
-import { BlockAPI, FollowAPI, LikeAPI, MuteAPI, VotePollAPI } from '../../Utils/Endpoints';
+import { SET_USER_ACTION_LOADING, SET_USER_ACTION_SEARCH_RESULTS, SET_USER_ACTION_SUCCESS } from './UserActionActions';
+import { BlockAPI, FollowAPI, LikeAPI, MuteAPI, SearchUserAPI, VotePollAPI } from '../../Utils/Endpoints';
 import { SET_USER_TEMP } from '../User/UserActions';
 
 
@@ -115,4 +115,21 @@ export class UserActionService {
     }
   }
 
+  SearchUserProfiles(text: string) {
+    this.store.dispatch(SET_USER_ACTION_LOADING({ loading: true }))
+    try {
+      this.http.get(SearchUserAPI + text)
+        .subscribe((res: any) => {
+          this.store.dispatch(SET_USER_ACTION_LOADING({ loading: false }))
+          if (res?.Success) {
+            this.store.dispatch(SET_USER_ACTION_SEARCH_RESULTS({ list: res.Data }))
+          }
+        })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_ACTION_LOADING({ loading: false }))
+      console.log('Error in Blocking :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
 }

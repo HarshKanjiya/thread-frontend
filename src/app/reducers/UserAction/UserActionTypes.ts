@@ -2,7 +2,8 @@ export interface IUserActionInitialState {
   loading: boolean,
   success: boolean,
   message: string | null,
-  temp: any
+  temp: any,
+  searchResults:any[]
 
 }
 export const UserActionInitialState: IUserActionInitialState = {
@@ -11,6 +12,7 @@ export const UserActionInitialState: IUserActionInitialState = {
   message: null,
 
   temp: null,
+  searchResults:[]
 }
 
 export interface ILikeThreadAction {

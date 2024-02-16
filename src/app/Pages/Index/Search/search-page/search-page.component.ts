@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Subject, Subscription, debounceTime } from 'rxjs';
+import { UserActionService } from '../../../../reducers/UserAction/UserAction.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-search-page',
@@ -10,31 +13,38 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchPageComponent {
 
-  input=""
+  input = ""
+  feedData: any[] = []
+  loading: boolean = false
 
-  feedData : any = [
-    {
-      avatar:"https://i.pinimg.com/736x/74/2f/d5/742fd5a3639902802e8535953fd2c920.jpg",
-      username:"harxh_here",
-      name:"harsh kanjiya",
-      followersCount: 5000000,
-      verified:true,
-      amIFollowing:true,
-      friendsFollowing:[
-        'https://pbs.twimg.com/media/ElhZ-EIWkAAQ_ZL.jpg',"https://pbs.twimg.com/media/ElhZ-EIWkAAQ_ZL.jpg"
-      ]
-    },
-    {
-      avatar: "https://i.pinimg.com/736x/74/2f/d5/742fd5a3639902802e8535953fd2c920.jpg",
-      username: "harxh_here",
-      name: "harsh kanjiya",
-      followersCount: 5000000,
-      verified: true,
-      amIFollowing: true,
-      friendsFollowing: [
-        'https://pbs.twimg.com/media/ElhZ-EIWkAAQ_ZL.jpg', "https://pbs.twimg.com/media/ElhZ-EIWkAAQ_ZL.jpg"
-      ]
-    }
-  ]
+  private typingSubject = new Subject<string>();
+  private typingSubscription: Subscription;
+
+  constructor(private ActionService: UserActionService, private store: Store<any>) {
+    this.typingSubscription = this.typingSubject.pipe(
+      debounceTime(1000) // Adjust the debounce time as needed (e.g., 1000ms = 1 second)
+    ).subscribe(value => {
+      //fetch
+      this.ActionService.SearchUserProfiles(this.input)
+    });
+
+    this.store.select("Action").subscribe((res: any) => {
+      this.loading = res.loading
+      this.feedData = res.searchResults || []
+    })
+
+  }
+
+  ngOnInit() {
+    this.ActionService.SearchUserProfiles(this.input)
+  }
+
+  inputOnChange(e: any) {
+    this.typingSubject.next(e.target.value);
+  }
+  ngOnDestroy(): void {
+    // Unsubscribe from the subject to prevent memory leaks
+    this.typingSubscription.unsubscribe();
+  }
 
 }

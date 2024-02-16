@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { SET_USER_ACTION_LOADING, SET_USER_ACTION_MESSAGE, SET_USER_ACTION_SUCCESS, SET_USER_ACTION_TEMP } from "./UserActionActions";
+import { SET_USER_ACTION_LOADING, SET_USER_ACTION_MESSAGE, SET_USER_ACTION_SEARCH_RESULTS, SET_USER_ACTION_SUCCESS, SET_USER_ACTION_TEMP } from "./UserActionActions";
 import { UserActionInitialState } from "./UserActionTypes";
 
 
@@ -22,6 +22,10 @@ export const UserActionReducer = createReducer(
 
   on(SET_USER_ACTION_TEMP, (state: any, { temp }) => {
     return { ...state, temp }
+  }),
+
+  on(SET_USER_ACTION_SEARCH_RESULTS, (state: any, { list }) => {
+    return { ...state, searchResults: list }
   }),
 
 )

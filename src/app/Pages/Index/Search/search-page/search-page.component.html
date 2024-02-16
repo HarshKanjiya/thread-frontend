@@ -29,6 +29,7 @@
     </div>
     <input
       [(ngModel)]="input"
+      (input)="inputOnChange($event)"
       placeholder="Search"
       class="bg-white w-full dark:bg-[rgba(0,0,0,0.3)] shadow-md rounded-xl border border-neutral-400 dark:border-neutral-700 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 px-5 py-4 pl-12 outline-none focus:ring-2 ring-offset-3 focus:ring-neutral-300 dark:focus:ring-neutral-700"
     />
