@@ -45,17 +45,281 @@
     </button>
   </div>
 
+  <div class="py-3"></div>
+
+  <div class="flex gap-10 flex-wrap">
+    <div @initAnim class="flex flex-col gap-3">
+      <h1 class="text-lg font-bold">Stripe</h1>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          PUBLIC
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ stripePublic.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(stripePublic.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          SECRET
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ stripeSecret.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(stripeSecret.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div @initAnim class="flex flex-col gap-3">
+      <h1 class="text-lg font-bold">Cloudinary</h1>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          CLOUD
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ cloudinaryCloudName.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(cloudinaryCloudName.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          SECRET
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ cloudinaryApiSecret.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(cloudinaryApiSecret.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          API KEY
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ cloudinaryApiKey.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(cloudinaryApiKey.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div @initAnim class="flex flex-col gap-3">
+      <h1 class="text-lg font-bold">Mail service</h1>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          Mail
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ mailService.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(mailService.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+      >
+        <div
+          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+        >
+          SECRET
+        </div>
+        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
+          <p class="px-3 py-2 truncate">{{ stripeSecret.Value }}</p>
+          <button
+            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+            (click)="copyToClipboard(stripeSecret.Value)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="flex flex-col gap-2 w-full pt-6">
+    <h1 @initAnim class="text-lg font-bold">Other Environment variables</h1>
+
     @for (item of pairs; track $index) {
     <div
-      class="flex items-center w-full max-w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800  text-sm"
+      @initAnim
+      class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
     >
-      <div class="w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900 ">
+      <div
+        class="w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900"
+      >
         {{ item.Key }}
       </div>
       <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-        <p class="px-3 py-2">{{ item.Value }}</p>
-        <button class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200  dark:hover:bg-gray-700  outline-none border-none ">
+        <p class="px-3 truncate py-2">
+          {{ item.Value }}
+        </p>
+        <button
+          class="px-3 py-2 transition-all duration-150 bg-white dark:bg-gray-800 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+          (click)="copyToClipboard(item.Value)"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

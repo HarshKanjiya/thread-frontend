@@ -328,6 +328,14 @@
               <span>problem</span>
             </div>
             <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+            <div
+              type="button"
+              class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3"
+              (click)="menuClickHandler('admin')"
+            >
+              <span>Admin</span>
+            </div>
+            <hr class="w-full border-neutral-300 dark:border-neutral-700" />
             <button
               [disabled]="loading"
               type="button"

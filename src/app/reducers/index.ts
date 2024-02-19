@@ -6,6 +6,7 @@ import {
 import { UserReducer } from './User/UserReducer';
 import { PostReducer } from './Post/PostReducer';
 import { UserActionReducer } from './UserAction/UserActionReducer';
+import { AdminReducer } from './Admin/AdminReducer';
 
 export interface State {
 
@@ -14,7 +15,8 @@ export interface State {
 export const reducers: ActionReducerMap<State> = {
   User: UserReducer,
   Post: PostReducer,
-  Action:UserActionReducer
+  Action: UserActionReducer,
+  Admin: AdminReducer
 };
 
 

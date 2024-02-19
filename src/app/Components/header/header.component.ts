@@ -63,6 +63,7 @@ export class HeaderComponent {
     store.select("User").subscribe((res: any) => {
       if (res?.userData) {
         this.userName = res.userData.UserName
+        console.log('object :>> ', res);
       }
     })
 
@@ -99,6 +100,9 @@ export class HeaderComponent {
         break
       case 'logout':
         this.userService.signOut()
+        break
+      case "admin":
+        this.router.navigate(['admin'])
     }
   }
 

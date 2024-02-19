@@ -54,3 +54,7 @@ export const GetPackageById_AdminAPI = "package/admin/" // + PACKAGE_ID // GET
 export const AddPackage_AdminAPI = "package/admin" // POST
 export const UpdatePackage_AdminAPI = "package/admin" // PUT
 export const DeletePackage_AdminAPI = "package/admin" // DELETE
+
+export const GetConstants_AdminAPI = "admin/env"
+export const GetSingleConstant_AdminAPI = "admin/env/"
+export const SetSingleConstant_AdminAPI = "admin/env"

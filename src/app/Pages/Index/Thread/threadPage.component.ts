@@ -48,7 +48,7 @@ export class ThreadPageComponent {
   constructor(private route: ActivatedRoute, private postService: PostService, private store: Store<any>) {
     store.select("User").subscribe((res: any) => {
       this.userData = res.userData
-      if(res?.userData){
+      if (res?.userData) {
         this.postService.getThreadData(res.userData.UserId, this.id)
         this.postService.getThreadReplies(res.userData.UserId, this.id)
       }
