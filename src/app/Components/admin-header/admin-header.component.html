@@ -1,9 +1,341 @@
-<div class="w-full px-5 py-2 flex gap-5 justify-center items-center">
-  <a [routerLink]="['dashboard']" routerLinkActive="router-link-active">home</a>
-  <a [routerLink]="['reports']" routerLinkActive="router-link-active"
-    >Reports</a
-  >
-  <a [routerLink]="['subscriptions']" routerLinkActive="router-link-active"
-    >subscriptions</a
-  >
+<div
+  class="h-full p-3 flex flex-col gap-3 justify-between items-center border-r-2 border-slate-200 dark:border-gray-800"
+>
+  <div>
+    <a
+      [routerLink]="['../']"
+      routerLinkActive="router-link-active"
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+    >
+      <div class="w-8 h-8">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          shape-rendering="geometricPrecision"
+          text-rendering="geometricPrecision"
+          image-rendering="optimizeQuality"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          viewBox="0 0 512 512"
+          class="fill-black dark:fill-white"
+        >
+          <path
+            fill-rule="nonzero"
+            d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z"
+          />
+        </svg>
+      </div>
+    </a>
+  </div>
+  <div class="flex flex-col gap-3 items-center justify-between">
+    <a
+      [routerLink]="['dashboard']"
+      routerLinkActive="router-link-active"
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        dashboard
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        1
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <rect width="7" height="9" x="3" y="3" rx="1" />
+        <rect width="7" height="5" x="14" y="3" rx="1" />
+        <rect width="7" height="9" x="14" y="12" rx="1" />
+        <rect width="7" height="5" x="3" y="16" rx="1" />
+      </svg>
+    </a>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['bug-reports']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        bugs
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="m8 2 1.88 1.88" />
+        <path d="M14.12 3.88 16 2" />
+        <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1" />
+        <path
+          d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"
+        />
+        <path d="M12 20v-9" />
+        <path d="M6.53 9C4.6 8.8 3 7.1 3 5" />
+        <path d="M6 13H2" />
+        <path d="M3 21c0-2.1 1.7-3.9 3.8-4" />
+        <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4" />
+        <path d="M22 13h-4" />
+        <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4" />
+      </svg>
+    </a>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['reports']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        reports
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+        <line x1="4" x2="4" y1="22" y2="15" />
+      </svg>
+    </a>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['subscriptions']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        subscriptions
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="M17 14h.01" />
+        <path
+          d="M7 7h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14"
+        />
+      </svg>
+    </a>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['packages']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        packages
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="m7.5 4.27 9 5.15" />
+        <path
+          d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
+        />
+        <path d="m3.3 7 8.7 5 8.7-5" />
+        <path d="M12 22V12" />
+      </svg>
+    </a>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['constants']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        env variables
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2" />
+        <path d="M7 7h10" />
+        <path d="M10 7v10" />
+        <path d="M16 17a2 2 0 0 1-2-2V7" />
+      </svg>
+    </a>
+
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['users']"
+      routerLinkActive="router-link-active"
+    >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+      >
+        users
+      </div>
+      <p
+        class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-xs text-center text-white bg-emerald-600"
+      >
+        3
+      </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    </a>
+  </div>
+  <div class="flex flex-col gap-3 items-center justify-center">
+    <div
+      class="relative h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none group"
+      (click)="changeTheme()"
+    >
+      @if (!currentTheme()) {
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem] absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.93 4.93 1.41 1.41" />
+        <path d="m17.66 17.66 1.41 1.41" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="m6.34 17.66-1.41 1.41" />
+        <path d="m19.07 4.93-1.41 1.41" />
+      </svg>
+      } @else{
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem] absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+      </svg>
+      }
+    </div>
+    <a
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      [routerLink]="['settings']"
+      routerLinkActive="router-link-active"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+      >
+        <path d="M20 7h-9" />
+        <path d="M14 17H5" />
+        <circle cx="17" cy="17" r="3" />
+        <circle cx="7" cy="7" r="3" />
+      </svg>
+    </a>
+  </div>
 </div>

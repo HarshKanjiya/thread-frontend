@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AdminHomeComponent } from './Pages/Admin/admin-home/admin-home.component';
-import { AdminReportsComponent } from './Pages/Admin/admin-reports/admin-reports.component';
-import { AdminSubscriptionsComponent } from './Pages/Admin/admin-subscriptions/admin-subscriptions.component';
+import { AdminHomeComponent } from './Pages/Admin/dashboard/admin-home.component';
+import { AdminReportsComponent } from './Pages/Admin/user-reports/admin-reports.component';
+import { AdminSubscriptionsComponent } from './Pages/Admin/subscription/admin-subscriptions.component';
 import { AdminComponent } from './Pages/Admin/admin.component';
 import { LoginPageComponent } from './Pages/Auth/login-page/login-page.component';
 import { SignUpPageComponent } from './Pages/Auth/sign-up-page/sign-up-page.component';
@@ -15,18 +15,13 @@ import { SettingPageComponent } from './Pages/Index/setting/setting-page.compone
 import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
 import { AuthGuard } from './Utils/AuthGuard';
 import { ThreadPageComponent } from './Pages/Index/Thread/threadPage.component';
+import { BugReportsComponent } from './Pages/Admin/bug-reports/bug-reports.component';
+import { SettingComponent } from './Pages/Admin/setting/setting.component';
+import { ConstantsComponent } from './Pages/Admin/constants/constants.component';
+import { UsersComponent } from './Pages/Admin/users/users.component';
+import { PackagesComponent } from './Pages/Admin/packages/packages.component';
 
 export const routes: Routes = [
-  {
-    path: "admin",
-    component: AdminComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: "dashboard", component: AdminHomeComponent, pathMatch: "full", title: "Admin | Dashboard" },
-      { path: "subscriptions", component: AdminSubscriptionsComponent, pathMatch: "full", title: "Admin | Income" },
-      { path: "reports", component: AdminReportsComponent, pathMatch: "full", title: "Admin | Reports" },
-    ]
-  },
 
   { path: "login", component: LoginPageComponent, pathMatch: "full", title: "Threads | Login" },
   { path: "signup", component: SignUpPageComponent, pathMatch: "full", title: "Threads | Signup" },
@@ -45,6 +40,26 @@ export const routes: Routes = [
       { path: "user/" + ":id", component: ProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
       { path: "thread/" + ":id", component: ThreadPageComponent, title: "Threads ", pathMatch: "full" },
 
+    ]
+  },
+  {
+    path: "admin",
+    redirectTo: "admin/dashboard",
+    pathMatch: "full"
+  },
+  {
+    path: "admin",
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: "dashboard", component: AdminHomeComponent, pathMatch: "full", title: "Admin | Dashboard" },
+      { path: "subscriptions", component: AdminSubscriptionsComponent, pathMatch: "full", title: "Admin | Income" },
+      { path: "reports", component: AdminReportsComponent, pathMatch: "full", title: "Admin | Reports" },
+      { path: "bug-reports", component: BugReportsComponent, pathMatch: "full", title: "Admin | Bug reports" },
+      { path: "constants", component: ConstantsComponent, pathMatch: "full", title: "Admin | environment" },
+      { path: "packages", component: PackagesComponent, pathMatch: "full", title: "Admin | Packages" },
+      { path: "users", component: UsersComponent, pathMatch: "full", title: "Admin | Users" },
+      { path: "settings", component: SettingComponent, pathMatch: "full", title: "Admin | Settings" },
     ]
   },
 
