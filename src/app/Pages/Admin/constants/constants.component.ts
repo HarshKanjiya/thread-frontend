@@ -8,7 +8,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { CustomPopupComponent } from '../../../Components/custom-popup/custom-popup.component';
 import { DialogService } from '../../../Services/dialog.service';
 import { HttpService } from '../../../Services/http-service.service';
-import { GetSingleConstant_AdminAPI, SetSingleConstant_AdminAPI } from '../../../Utils/Endpoints';
+import { DeleteConstant_AdminAPI, GetSingleConstant_AdminAPI, SetSingleConstant_AdminAPI, UpdateSingleConstant_AdminAPI } from '../../../Utils/Endpoints';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-constants',
@@ -63,8 +63,10 @@ export class ConstantsComponent {
   tempCheck: boolean = false
   tempSuccess: boolean = false
   tempMessage: string = ""
+  formType: "NEW" | "UPDATE" = "NEW"
   tempMode: "KEYnVALUE" | "VALUE" = "KEYnVALUE"
-  tempData: { Key: string, Value: string, SecretKey: boolean } = {
+  tempData: { VarId: string, Key: string, Value: string, SecretKey: boolean } = {
+    VarId: '',
     Key: '',
     Value: '',
     SecretKey: false
@@ -86,6 +88,9 @@ export class ConstantsComponent {
   mailService: any = {}
 
   ngOnInit() {
+
+    this.dialog.closeDialog()
+
     this.store.select("Admin")
       .subscribe((res: any) => {
         this.loading = res.loading;
@@ -108,6 +113,7 @@ export class ConstantsComponent {
   }
 
   openPopUp() {
+    this.formType = 'NEW'
     this.dialog.openDialog("TEMP")
   }
   tempDataSetSecret(bool: boolean) {
@@ -116,6 +122,17 @@ export class ConstantsComponent {
 
   addNewEnv() {
     this.tempLoading = true
+
+    if (this.tempData.Key.trim().length == 0) {
+      this.tempCheck = true
+      this.tempMessage = "Invalid field values"
+      this.tempSuccess = false
+      setTimeout(() => {
+        this.tempLoading = false
+      }, 1500);
+      return
+    }
+
     try {
       this.http.post(SetSingleConstant_AdminAPI, this.tempData)
         .subscribe((res: any) => {
@@ -123,12 +140,16 @@ export class ConstantsComponent {
           this.tempMessage = res.Message
           if (res.Success) {
             this.tempSuccess = true
-            this.pairs.push(res.Data)
             setTimeout(() => {
               this.tempLoading = false
               this.dialog.closeDialog()
+              this.tempData.Key = ""
+              this.tempData.Value = ""
+              this.tempData.VarId = ""
+              this.tempData.SecretKey = false
               this.tempSuccess = false
-            }, 500);
+              this.pairs.push(res.Data)
+            }, 1500);
           } else {
             this.tempSuccess = false
             setTimeout(() => {
@@ -189,9 +210,92 @@ export class ConstantsComponent {
   }
 
   updateKey(Var: any) {
-
+    this.tempData = { ...Var }
+    this.formType = 'UPDATE'
+    this.dialog.openDialog("TEMP")
   }
+  submitUpdateForm() {
+    this.tempLoading = true
+
+    if (this.tempData.Key.trim().length == 0) {
+      this.tempCheck = true
+      this.tempMessage = "Invalid field values"
+      this.tempSuccess = false
+      setTimeout(() => {
+        this.tempLoading = false
+      }, 1500);
+      return
+    }
+
+    try {
+      this.http.post(UpdateSingleConstant_AdminAPI, this.tempData)
+        .subscribe((res: any) => {
+          this.tempCheck = true
+          this.tempMessage = res.Message
+          if (res.Success) {
+            this.tempSuccess = true
+            setTimeout(() => {
+              this.tempLoading = false
+              this.dialog.closeDialog()
+              this.tempSuccess = false
+              this.tempData.Key = ""
+              this.tempData.Value = ""
+              this.tempData.VarId = ""
+              this.tempData.SecretKey = false
+              this.pairs = this.pairs.map((i: any) => {
+                if (i.VarId === res.Data.VarId) {
+                  return res.Data
+                }
+                return i
+              })
+
+            }, 1500);
+          } else {
+            this.tempSuccess = false
+            setTimeout(() => {
+              this.tempLoading = false
+            }, 1500);
+          }
+        })
+    } catch (err: any) {
+      this.tempSuccess = false
+      this.tempCheck = true
+      this.tempMessage = "Something went wrong"
+      setTimeout(() => {
+        this.tempLoading = false
+        this.tempCheck = false
+      }, 1500);
+
+    }
+  }
+
   deleteKey(VarId: any) {
+    this.loading = true
+
+    try {
+      this.http.delete(DeleteConstant_AdminAPI + VarId).subscribe((res: any) => {
+        this.loading = false
+
+        if (res.Success) {
+          this.pairs = this.pairs.filter((i: any) => {
+            if (i.VarId !== VarId) {
+              return i
+            } else {
+              return null
+            }
+          })
+          this.toast.makeToast("MESSAGE", res.Message)
+        } else {
+          this.toast.makeToast("ERROR", res.Message)
+
+        }
+
+      })
+    } catch (err: any) {
+      this.loading = false
+      this.toast.makeToast('ERROR', "Something went wrong")
+      console.log('err in deleting key :>> ', err.message);
+    }
 
   }
 

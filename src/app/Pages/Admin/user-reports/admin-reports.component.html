@@ -1,5 +1,7 @@
-<div class="flex flex-col gap-2 w-full">
-  <div class="w-full flex items-center justify-between">
+<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+  <div
+    class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
+  >
     <div class="flex items-center gap-3">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +19,7 @@
         <line x1="4" x2="4" y1="22" y2="15" />
       </svg>
       <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
-        User reports
+        Reports
       </h1>
     </div>
 
@@ -43,5 +45,13 @@
       </svg>
       <p>Config</p>
     </button>
+  </div>
+
+  <div
+    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
+  >
+    <div class="flex flex-col gap-3 h-max w-full">
+      <!-- write here -->
+    </div>
   </div>
 </div>

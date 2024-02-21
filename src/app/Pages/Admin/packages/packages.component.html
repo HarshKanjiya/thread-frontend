@@ -1,5 +1,7 @@
-<div class="flex flex-col gap-2 w-full">
-  <div class="w-full flex items-center justify-between">
+<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+  <div
+    class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
+  >
     <div class="flex items-center gap-3">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +28,7 @@
     </div>
 
     <button
+      (click)="openPopUp()"
       class="flex items-center gap-3 rounded-md dark:bg-gray-800 bg-gray-200 px-3 py-2"
     >
       <svg
@@ -45,5 +48,13 @@
       </svg>
       <p>Add new</p>
     </button>
+  </div>
+
+  <div
+    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
+  >
+    <div class="flex flex-col gap-3 h-max w-full">
+      <!-- write here -->
+    </div>
   </div>
 </div>

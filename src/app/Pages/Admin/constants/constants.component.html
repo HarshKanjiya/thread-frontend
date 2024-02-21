@@ -21,13 +21,14 @@
         <path d="M16 17a2 2 0 0 1-2-2V7" />
       </svg>
       <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
-        Environment Variables
+        <p class="hidden sm:block">Environment Variables</p>
+        <p class="">Env Variables</p>
       </h1>
     </div>
 
     <button
       (click)="openPopUp()"
-      class="flex items-center gap-3 rounded-md dark:bg-gray-800 bg-gray-200 px-3 py-2"
+      class="flex items-center gap-3 rounded-md dark:bg-gray-800 bg-gray-200 p-3"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -44,20 +45,22 @@
         <path d="M5 12h14" />
         <path d="M12 5v14" />
       </svg>
-      <p>Add new</p>
+      <p class="hidden sm:block">Add new</p>
     </button>
   </div>
 
-  <div class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full">
+  <div
+    class="overflow-y-scroll overflow-x-hidden custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
+  >
     <div class="flex flex-col gap-3 h-max w-full">
       <div class="flex gap-10 flex-wrap">
-        <div @initAnim class="flex flex-col gap-3">
+        <div @initAnim class="flex flex-col gap-3 w-full">
           <h1 class="text-lg font-bold">Stripe</h1>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               PUBLIC
             </div>
@@ -120,10 +123,10 @@
             </div>
           </div>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               SECRET
             </div>
@@ -207,13 +210,13 @@
           </div>
         </div>
 
-        <div @initAnim class="flex flex-col gap-3">
+        <div @initAnim class="flex flex-col gap-3 w-full">
           <h1 class="text-lg font-bold">Cloudinary</h1>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               CLOUD
             </div>
@@ -224,8 +227,8 @@
                 {{ cloudinaryCloudName?.Value }}
               </p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (mailService.Value && cloudinaryCloudName?.Value?.length >
-                0) {
+                @if (cloudinaryCloudName.Value &&
+                cloudinaryCloudName?.Value?.length > 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
                   (click)="copyToClipboard(cloudinaryCloudName.Value)"
@@ -278,10 +281,10 @@
             </div>
           </div>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               SECRET
             </div>
@@ -395,10 +398,10 @@
             </div>
           </div>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               API KEY
             </div>
@@ -407,7 +410,8 @@
             >
               <p class="px-3 py-2 truncate">{{ cloudinaryApiKey?.Value }}</p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (mailService.Value && cloudinaryApiKey?.Value?.length > 0) {
+                @if (cloudinaryApiKey.Value && cloudinaryApiKey?.Value?.length >
+                0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
                   (click)="copyToClipboard(cloudinaryApiKey.Value)"
@@ -461,13 +465,13 @@
           </div>
         </div>
 
-        <div @initAnim class="flex flex-col gap-3">
+        <div @initAnim class="flex flex-col gap-3 w-full">
           <h1 class="text-lg font-bold">Mail service</h1>
           <div
-            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+            class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
             <div
-              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+              class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
               Mail
             </div>
@@ -479,7 +483,7 @@
                 @if (mailService.Value && mailService?.Value?.length > 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-                  (click)="copyToClipboard(mailService.Value)"
+                  (click)="copyToClipboard(cloudinaryApiKey.Value)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -537,10 +541,10 @@
         } @for (item of pairs; track $index) { @if (true ) {
         <div
           @initAnim
-          class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+          class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
         >
           <div
-            class="w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900"
+            class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900"
           >
             {{ item.Key }}
           </div>
@@ -602,7 +606,7 @@
                 class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
               ></div>
               <button
-                class="p-2.5 transition-all duration-150 hover:bg-red-600  outline-none border-none"
+                class="p-2.5 transition-all duration-150 hover:bg-red-600 outline-none border-none"
                 (click)="deleteKey(item.VarId)"
               >
                 <svg
@@ -662,7 +666,8 @@
           <circle cx="12" cy="12" r="10" />
           <path d="m9 12 2 2 4-4" />
         </svg>
-        {{ tempMessage }}
+
+        <p class="text-black dark:text-white">{{ tempMessage }}</p>
       </div>
 
       }@else {
@@ -693,7 +698,7 @@
     }@else {
     <div class="p-4 w-full">
       <h2 class="text-xl font-semibold text-black dark:text-white">
-        Add new Environment variable
+        {{ formType === "NEW" ? "Add new" : "Update" }} environment variable
       </h2>
       <p class="text-sm text-gray-500 pt-2">
         this piece of information will be available to access from anywhere in
@@ -822,7 +827,7 @@
         Cancel
       </button>
       <button
-        (click)="addNewEnv()"
+        (click)="formType === 'NEW' ? addNewEnv() : submitUpdateForm()"
         class="flex-1 p-4 text-black dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-gray-950 fucus:bg-neutral-200 dark:focus:bg-gray-950 transition-all duration-200 outline-none"
       >
         OK

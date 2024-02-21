@@ -1,5 +1,7 @@
-<div class="flex flex-col gap-2 w-full">
-  <div class="w-full flex items-center justify-between">
+<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+  <div
+    class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
+  >
     <div class="flex items-center gap-3">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +15,7 @@
         stroke-linejoin="round"
         class="stroke-neutral-600 dark:stroke-white h-6 w-6"
       >
-         <path d="M17 14h.01" />
+        <path d="M17 14h.01" />
         <path
           d="M7 7h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14"
         />
@@ -21,6 +23,14 @@
       <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
         Subscriptions
       </h1>
+    </div>
+  </div>
+
+  <div
+    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
+  >
+    <div class="flex flex-col gap-3 h-max w-full">
+      <!-- write here -->
     </div>
   </div>
 </div>

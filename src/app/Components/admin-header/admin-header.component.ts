@@ -33,12 +33,14 @@ export class AdminHeaderComponent {
 
   currentTheme: Signal<boolean> = computed(() => this.theme.darkTheme())
 
+
   constructor(public theme: ThemeService, public router: Router) {
   }
 
   changeTheme() {
     this.theme.darkTheme.set(!this.theme.darkTheme())
   }
+
 
 
 }

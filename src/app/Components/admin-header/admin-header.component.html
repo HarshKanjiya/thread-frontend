@@ -1,5 +1,5 @@
 <div
-  class="h-full p-3 flex flex-col gap-3 justify-between items-center border-r-2 border-slate-200 dark:border-gray-800"
+  class="h-full p-3 flex flex-col gap-3 justify-between items-start border-r-2 border-slate-200 dark:border-gray-800 transition-all"
 >
   <div class="flex flex-col gap-3">
     <div>
@@ -31,10 +31,14 @@
       <a
         [routerLink]="['dashboard']"
         routerLinkActive="router-link-active"
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('dashboard') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }} "
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           dashboard
         </div>
@@ -62,12 +66,16 @@
         </svg>
       </a>
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('bug-reports') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }}"
         [routerLink]="['bug-reports']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           bugs
         </div>
@@ -104,12 +112,16 @@
         </svg>
       </a>
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('/reports') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }}"
         [routerLink]="['reports']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           reports
         </div>
@@ -135,12 +147,16 @@
         </svg>
       </a>
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('subscriptions') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }}"
         [routerLink]="['subscriptions']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           subscriptions
         </div>
@@ -168,12 +184,16 @@
         </svg>
       </a>
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('packages') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }}"
         [routerLink]="['packages']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           packages
         </div>
@@ -203,12 +223,16 @@
         </svg>
       </a>
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('constants') > 0
+            ? 'dark:bg-gray-800 bg-gray-200 '
+            : ''
+        }}"
         [routerLink]="['constants']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           env variables
         </div>
@@ -237,12 +261,14 @@
       </a>
 
       <a
-        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+        class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+          router.url.indexOf('users') > 0 ? 'dark:bg-gray-800 bg-gray-200 ' : ''
+        }}"
         [routerLink]="['users']"
         routerLinkActive="router-link-active"
       >
         <div
-          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-black bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden group-hover:block transition-all duration-150"
+          class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
         >
           users
         </div>
@@ -317,10 +343,19 @@
       }
     </div>
     <a
-      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group {{
+        router.url.indexOf('settings') > 0
+          ? 'dark:bg-gray-800 bg-gray-200 '
+          : ''
+      }}"
       [routerLink]="['settings']"
       routerLinkActive="router-link-active"
     >
+      <div
+        class="absolute z-50 whitespace-normal left-full rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
+      >
+        settings
+      </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -340,7 +375,7 @@
       </svg>
     </a>
     <button
-      class="h-12 w-12 hover:dark:bg-gray-800 hover:bg-gray-200 rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer select-none relative group"
+      class="h-12 hover:bg-red-500 rounded-md flex items-center justify-center overflow-hidden transition-all duration-150 cursor-pointer select-none relative group w-12 gap-3"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +387,7 @@
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="stroke-neutral-600 dark:stroke-white h-[1.35rem] w-[1.35rem]"
+        class="h-[1.35rem] w-[1.35rem] stroke-neutral-600 group-hover:stroke-white dark:stroke-white"
       >
         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
         <polyline points="16 17 21 12 16 7" />
