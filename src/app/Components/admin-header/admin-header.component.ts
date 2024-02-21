@@ -1,5 +1,5 @@
 import { Component, Signal, computed } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ThemeService } from '../../Services/theme.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -33,7 +33,7 @@ export class AdminHeaderComponent {
 
   currentTheme: Signal<boolean> = computed(() => this.theme.darkTheme())
 
-  constructor(public theme: ThemeService) {
+  constructor(public theme: ThemeService, public router: Router) {
   }
 
   changeTheme() {

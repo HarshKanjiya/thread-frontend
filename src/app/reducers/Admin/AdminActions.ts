@@ -9,3 +9,4 @@ export const SET_ADMIN_TEMP = createAction("[ADMIN] set temp", props<any>())
 
 export const SET_ADMIN_PACKAGES = createAction("[ADMIN] set active packages", props<{ packages: any[] }>())
 export const SET_ADMIN_CONSTANTS = createAction("[ADMIN] set constants", props<{ constants: any[] }>())
+export const SET_ADMIN_APPEND_CONSTANTS = createAction("[ADMIN] set constants append", props<{ constant: any[] }>())

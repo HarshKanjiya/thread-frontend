@@ -1,5 +1,7 @@
-<div class="flex flex-col gap-2 w-full">
-  <div class="w-full flex items-center justify-between">
+<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+  <div
+    class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
+  >
     <div class="flex items-center gap-3">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +26,7 @@
     </div>
 
     <button
+      (click)="openPopUp()"
       class="flex items-center gap-3 rounded-md dark:bg-gray-800 bg-gray-200 px-3 py-2"
     >
       <svg
@@ -45,280 +48,663 @@
     </button>
   </div>
 
-  <div class="py-3"></div>
+  <div class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full">
+    <div class="flex flex-col gap-3 h-max w-full">
+      <div class="flex gap-10 flex-wrap">
+        <div @initAnim class="flex flex-col gap-3">
+          <h1 class="text-lg font-bold">Stripe</h1>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+          >
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+            >
+              PUBLIC
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
+            >
+              <p class="px-3 py-2 truncate">{{ stripePublic?.Value }}</p>
 
-  <div class="flex gap-10 flex-wrap">
-    <div @initAnim class="flex flex-col gap-3">
-      <h1 class="text-lg font-bold">Stripe</h1>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          PUBLIC
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ stripePublic.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(stripePublic.Value)"
+              <div class="flex items-center bg-white dark:bg-gray-800">
+                @if (mailService.Value && stripePublic?.Value?.length > 0) {
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="copyToClipboard(stripePublic.Value)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+                ></div>
+                }
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="updateKey(stripePublic)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <path
+                      d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"
+                    />
+                    <path d="m15 5 4 4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          SECRET
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ stripeSecret.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(stripeSecret.Value)"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+              SECRET
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
+              @if (!stripeSecret?.Value) {
+              <div class="relative w-full">
+                <P class="px-3 py-2 truncate blur-sm select-none read-only"
+                  >QWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOP</P
+                >
+                @if (secretKeyLoading.STRIPE) {
+                <div
+                  class="absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-150"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-black dark:stroke-white h-6 w-6 animate-spin"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                </div>
+                }@else {
+                <button
+                  (click)="getSecret('STRIPE', stripeSecret.Key)"
+                  class="h-8 w-8 rounded-md cursor-pointer absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:backdrop-blur transition-all duration-150"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-6 w-6"
+                  >
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+                }
+              </div>
+              }@else {
+              <p class="px-3 py-2 truncate">{{ stripeSecret?.Value }}</p>
+              @if (stripeSecret && stripeSecret?.Value?.length > 0) {
+              <button
+                class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                (click)="copyToClipboard(stripeSecret?.Value)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path
+                    d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                  />
+                </svg>
+              </button>
+              }}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div @initAnim class="flex flex-col gap-3">
-      <h1 class="text-lg font-bold">Cloudinary</h1>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          CLOUD
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ cloudinaryCloudName.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(cloudinaryCloudName.Value)"
+        <div @initAnim class="flex flex-col gap-3">
+          <h1 class="text-lg font-bold">Cloudinary</h1>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          SECRET
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ cloudinaryApiSecret.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(cloudinaryApiSecret.Value)"
+              CLOUD
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
+            >
+              <p class="px-3 py-2 truncate">
+                {{ cloudinaryCloudName?.Value }}
+              </p>
+              <div class="flex items-center bg-white dark:bg-gray-800">
+                @if (mailService.Value && cloudinaryCloudName?.Value?.length >
+                0) {
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="copyToClipboard(cloudinaryCloudName.Value)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+                ></div>
+                }
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="updateKey(cloudinaryCloudName)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <path
+                      d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"
+                    />
+                    <path d="m15 5 4 4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          API KEY
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ cloudinaryApiKey.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(cloudinaryApiKey.Value)"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+              SECRET
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+              @if (!cloudinaryApiSecret?.Value) {
+              <div class="relative w-full">
+                <P class="px-3 py-2 truncate blur-sm select-none read-only"
+                  >QWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOP</P
+                >
+                @if (secretKeyLoading.STRIPE) {
+                <div
+                  class="absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:backdrop-blur transition-all duration-150"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-black dark:stroke-white h-6 w-6 animate-spin"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                </div>
+                }@else {
+                <button
+                  (click)="getSecret('STRIPE', cloudinaryApiSecret.Key)"
+                  class="h-8 w-8 rounded-md cursor-pointer absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:backdrop-blur transition-all duration-150"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-6 w-6"
+                  >
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+                }
+              </div>
+              }
 
-    <div @initAnim class="flex flex-col gap-3">
-      <h1 class="text-lg font-bold">Mail service</h1>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
-        <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
-        >
-          Mail
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ mailService.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(mailService.Value)"
+              <p class="px-3 py-2 truncate">
+                {{ cloudinaryApiSecret?.Value }}
+              </p>
+              <div class="flex items-center bg-white dark:bg-gray-800">
+                @if (mailService.Value && cloudinaryApiSecret?.Value?.length >
+                0) {
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="copyToClipboard(cloudinaryApiSecret.Value)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+                ></div>
+                }
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="updateKey(cloudinaryApiSecret)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <path
+                      d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"
+                    />
+                    <path d="m15 5 4 4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
             >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
+              API KEY
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
+            >
+              <p class="px-3 py-2 truncate">{{ cloudinaryApiKey?.Value }}</p>
+              <div class="flex items-center bg-white dark:bg-gray-800">
+                @if (mailService.Value && cloudinaryApiKey?.Value?.length > 0) {
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="copyToClipboard(cloudinaryApiKey.Value)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+                ></div>
+                }
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="updateKey(cloudinaryApiKey)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <path
+                      d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"
+                    />
+                    <path d="m15 5 4 4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div @initAnim class="flex flex-col gap-3">
+          <h1 class="text-lg font-bold">Mail service</h1>
+          <div
+            class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+          >
+            <div
+              class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+            >
+              Mail
+            </div>
+            <div
+              class="text-ellipsis overflow-hidden flex justify-between w-full"
+            >
+              <p class="px-3 py-2 truncate">{{ mailService?.Value }}</p>
+              <div class="flex items-center bg-white dark:bg-gray-800">
+                @if (mailService.Value && mailService?.Value?.length > 0) {
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="copyToClipboard(mailService.Value)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+                ></div>
+                }
+                <button
+                  class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                  (click)="updateKey(mailService)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                  >
+                    <path
+                      d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"
+                    />
+                    <path d="m15 5 4 4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-      >
+
+      <div class="flex flex-col gap-2 w-full pt-6">
+        @if (pairs.length > 0) {
+        <h1 @initAnim class="text-lg font-bold">Other Environment variables</h1>
+        } @for (item of pairs; track $index) { @if (true ) {
         <div
-          class="w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+          @initAnim
+          class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
         >
-          SECRET
-        </div>
-        <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-          <p class="px-3 py-2 truncate">{{ stripeSecret.Value }}</p>
-          <button
-            class="px-3 py-2 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-            (click)="copyToClipboard(stripeSecret.Value)"
+          <div
+            class="w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
-            >
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path
-                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-              />
-            </svg>
-          </button>
+            {{ item.Key }}
+          </div>
+          <div
+            class="text-ellipsis overflow-hidden flex justify-between w-full"
+          >
+            <p class="px-3 truncate py-2">
+              {{ item.Value }}
+            </p>
+            <div class="flex items-center bg-white dark:bg-gray-800">
+              @if (item.Value && item?.Value?.length > 0) {
+              <button
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                (click)="copyToClipboard(item.Value)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path
+                    d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                  />
+                </svg>
+              </button>
+              <div
+                class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+              ></div>
+              }
+              <button
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+                (click)="updateKey(item)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+              <div
+                class="h-5 w-[1px] rounded-full bg-gray-600 contents-[' ']"
+              ></div>
+              <button
+                class="p-2.5 transition-all duration-150 hover:bg-red-600  outline-none border-none"
+                (click)="deleteKey(item.VarId)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                  <!-- <line x1="10" x2="10" y1="11" y2="17" />
+                  <line x1="14" x2="14" y1="11" y2="17" /> -->
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
+        } }
       </div>
     </div>
   </div>
+</div>
 
-  <div class="flex flex-col gap-2 w-full pt-6">
-    <h1 @initAnim class="text-lg font-bold">Other Environment variables</h1>
+<!-- <loader></loader> -->
 
-    @for (item of pairs; track $index) {
-    <div
-      @initAnim
-      class="flex items-center w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
-    >
-      <div
-        class="w-[180px] text-ellipsis overflow-hidden px-3 py-2 bg-gray-200 dark:bg-gray-900"
-      >
-        {{ item.Key }}
+@if (dialog.dialogVisible() === "TEMP") {
+<custom-popup>
+  <div
+    class="flex flex-col rounded-xl justify-between items-center overflow-hidden sm:w-[400px] bg-white dark:bg-gray-900 border border-neutral-300 dark:border-gray-800 height-transition {{
+      tempLoading ? 'h-52' : 'h-[23rem]'
+    }}"
+  >
+    @if(tempLoading){
+    <div class="h-full w-full flex items-center justify-center">
+      @if(tempCheck){ @if (tempSuccess) {
+      <div class="flex flex-col gap-3 justify-center items-center">
+        <svg
+          @rotateEnter
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-7 w-7 stroke-emerald-500"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        {{ tempMessage }}
       </div>
-      <div class="text-ellipsis overflow-hidden flex justify-between w-full">
-        <p class="px-3 truncate py-2">
-          {{ item.Value }}
-        </p>
-        <button
-          class="px-3 py-2 transition-all duration-150 bg-white dark:bg-gray-800 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
-          (click)="copyToClipboard(item.Value)"
+
+      }@else {
+      <div class="flex flex-col gap-3 justify-center items-center">
+        <svg
+          @rotateEnter
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-7 w-7 stroke-red-500"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m15 9-6 6" />
+          <path d="m9 9 6 6" />
+        </svg>
+        {{ tempMessage }}
+      </div>
+      } }@else{
+      <loader />
+      }
+    </div>
+    }@else {
+    <div class="p-4 w-full">
+      <h2 class="text-xl font-semibold text-black dark:text-white">
+        Add new Environment variable
+      </h2>
+      <p class="text-sm text-gray-500 pt-2">
+        this piece of information will be available to access from anywhere in
+        the backend.
+      </p>
+    </div>
+
+    <div class="w-full flex flex-col gap-3 p-3">
+      <div class="relative">
+        <div
+          class="absolute origin-center top-1/2 left-6 -translate-x-1/2 -translate-y-1/2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -330,16 +716,119 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            class="h-5 w-5 dark:stroke-gray-500"
           >
-            <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            <path
+              d="M12.4 2.7c.9-.9 2.5-.9 3.4 0l5.5 5.5c.9.9.9 2.5 0 3.4l-3.7 3.7c-.9.9-2.5.9-3.4 0L8.7 9.8c-.9-.9-.9-2.5 0-3.4Z"
+            />
+            <path d="m14 7 3 3" />
+            <path d="M9.4 10.6 2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4" />
           </svg>
-        </button>
+        </div>
+        <input
+          [autofocus]="true"
+          class="py-3 text-black dark:text-gray-400 w-full rounded-md border border-gray-300 dark:border-gray-700 pl-11 bg-white dark:bg-gray-900 outline-none focus:border-gray-600 dark:focus:border-gray-500"
+          placeholder="Key"
+          [(ngModel)]="tempData.Key"
+        />
       </div>
+      <div class="relative">
+        <div
+          class="absolute origin-center top-1/2 left-6 -translate-x-1/2 -translate-y-1/2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-5 w-5 dark:stroke-gray-500"
+          >
+            <path
+              d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+            />
+            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+            <path d="M10 9H8" />
+            <path d="M16 13H8" />
+            <path d="M16 17H8" />
+          </svg>
+        </div>
+        <input
+          class="py-3 text-black dark:text-gray-400 w-full rounded-md border border-gray-300 dark:border-gray-700 pl-11 bg-white dark:bg-gray-900 outline-none focus:border-gray-600 dark:focus:border-gray-500"
+          placeholder="Value"
+          [(ngModel)]="tempData.Value"
+        />
+      </div>
+      <div class="relative flex gap-3 justify-between items-center py-3 px-1">
+        <p class="dark:text-gray-400">is this Imporant Variable?</p>
+        <div class="flex gap-3 items-center">
+          <button
+            (click)="tempDataSetSecret(true)"
+            class="border-none outline-none flex gap-2 items-center group"
+          >
+            <div
+              class="group group-focus:outline group-focus:outline-offset-2 group-focus:outline-gray-400 dark:group-focus:outline-gray-700 relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
+                tempData.SecretKey === true
+                  ? 'bg-gray-900 dark:bg-white'
+                  : 'bg-white dark:bg-gray-900'
+              }}"
+            >
+              <div
+                class="h-1.5 w-1.5 rounded-full  contents-[' '] group {{
+                  tempData.SecretKey === true
+                    ? 'bg-white dark:bg-gray-900'
+                    : 'w-0 h-0'
+                }}"
+              ></div>
+            </div>
+            <p class="text-md dark:text-gray-400">Yes</p>
+          </button>
+          <button
+            (click)="tempDataSetSecret(false)"
+            class="border-none outline-none flex gap-2 items-center group"
+          >
+            <div
+              class="group group-focus:outline group-focus:outline-offset-2 group-focus:outline-gray-400 dark:group-focus:outline-gray-700  relative flex items-center justify-center rounded-full border border-neutral-400 dark:border-neutral-700 h-5 w-5 {{
+                tempData.SecretKey === false
+                  ? 'bg-gray-900 dark:bg-white'
+                  : 'bg-white dark:bg-gray-900'
+              }}"
+            >
+              <div
+                class="h-1.5 w-1.5 rounded-full  contents-[' '] group {{
+                  tempData.SecretKey === false
+                    ? 'bg-white dark:bg-gray-900'
+                    : 'w-0 h-0'
+                }}"
+              ></div>
+            </div>
+            <p class="text-md dark:text-gray-400">No</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="w-full flex border-t border-t-neutral-300 dark:border-t-gray-800"
+    >
+      <button
+        (click)="dialog.closeDialog()"
+        class="flex-1 p-4 text-black dark:text-white font-medium border-r border-r-neutral-300 dark:border-r-gray-800 hover:bg-neutral-200 dark:hover:bg-gray-950 fucus:bg-neutral-200 dark:focus:bg-gray-950 transition-all duration-200 outline-none"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="addNewEnv()"
+        class="flex-1 p-4 text-black dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-gray-950 fucus:bg-neutral-200 dark:focus:bg-gray-950 transition-all duration-200 outline-none"
+      >
+        OK
+      </button>
     </div>
     }
   </div>
-</div>
-
-<!-- <loader></loader> -->
+</custom-popup>
+}

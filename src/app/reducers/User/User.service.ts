@@ -43,7 +43,11 @@ export class UserService {
         this.store.dispatch(SET_USER_LOADING({ loading: false }))
         if (res.Success) {
           this.store.dispatch(SET_USER_DATA({ data: res.Data }))
-          this.router.navigate(['/'])
+          if (res.Data.Role === "ADMIN") {
+            this.router.navigate(['/admin'])
+          } else {
+            this.router.navigate(['/'])
+          }
           this.toast.makeToast("MESSAGE", res.Message ?? "User Logged in")
         } else {
           this.store.dispatch(SET_USER_DATA({ data: null }))
@@ -175,16 +179,16 @@ export class UserService {
     }
   }
 
-  updateProfile(){}
-  updatePassword(){}
+  updateProfile() { }
+  updatePassword() { }
 
-  FollowUser(){}
-  MuteUser(){}
-  BlockUser(){}
+  FollowUser() { }
+  MuteUser() { }
+  BlockUser() { }
 
-  getMyNotification(){}
-  MarkAsDoneNotif(){}
-  deleteNotif(){}
+  getMyNotification() { }
+  MarkAsDoneNotif() { }
+  deleteNotif() { }
 
 
 }

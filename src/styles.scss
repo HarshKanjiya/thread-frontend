@@ -2,8 +2,6 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,6 +47,37 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #565656;
+}
+
+.custom-scrollbar ::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  overflow: hidden;
+  background: transparent;
+  overflow: hidden;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 5px;
+}
+
+/* Handle */
+.custom-scrollbar-light::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+  background: #232323;
+}
+
+/* Handle on hover */
+.custom-scrollbar-light::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background: red;
 }
 
 .modal-open {
@@ -122,4 +151,8 @@ body {
   border: 2px solid #2e2e2e !important;
   border-radius: 0.4rem !important;
   font-size: 1rem !important;
+}
+
+.height-transition {
+  transition: height 200ms;
 }

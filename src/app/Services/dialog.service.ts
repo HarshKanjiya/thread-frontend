@@ -7,9 +7,9 @@ export class DialogService {
 
   constructor() { }
 
-  dialogVisible = signal<'PRIVATE_ACCOUNT' | 'MENTION_ACCESS' | 'CREATE_THREAD' | 'REPORT_BUG' | ''>('')
+  dialogVisible = signal<'PRIVATE_ACCOUNT' | 'MENTION_ACCESS' | 'CREATE_THREAD' | 'REPORT_BUG' | 'TEMP' | ''>('')
 
-  openDialog(dialogType: 'PRIVATE_ACCOUNT' | 'MENTION_ACCESS' | 'CREATE_THREAD' | 'REPORT_BUG' | '') {
+  openDialog(dialogType: 'PRIVATE_ACCOUNT' | 'MENTION_ACCESS' | 'CREATE_THREAD' | 'REPORT_BUG' | 'TEMP' | '') {
     document.body.classList.add('modal-open');
     this.dialogVisible.set(dialogType)
   }

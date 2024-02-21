@@ -58,3 +58,4 @@ export const DeletePackage_AdminAPI = "package/admin" // DELETE
 export const GetConstants_AdminAPI = "admin/env"
 export const GetSingleConstant_AdminAPI = "admin/env/"
 export const SetSingleConstant_AdminAPI = "admin/env"
+export const UpdateSingleConstant_AdminAPI = "admin/env/new"

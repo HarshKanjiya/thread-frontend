@@ -60,6 +60,12 @@ export class ThreadComponent {
     this.store.select("User").subscribe((res: any) => {
       this.UserData = res.userData
     })
+
+    console.log('object :>> ', this.ThreadData);
+    if (this.ThreadData) {
+      this.liked = this.ThreadData.LikedByMe
+      this.likeCount = this.ThreadData.Likes
+    }
   }
 
 
@@ -72,11 +78,6 @@ export class ThreadComponent {
   }
 
   ngAfterViewInit() {
-    console.log('object :>> ', this.ThreadData);
-    if (this.ThreadData) {
-      this.liked = this.ThreadData.LikedByMe
-      this.likeCount = this.ThreadData.Likes
-    }
   }
 
   isOpen: boolean = false;

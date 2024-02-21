@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { GetAllPackages_AdminAPI, GetConstants_AdminAPI, GetSingleConstant_AdminAPI, SetSingleConstant_AdminAPI } from '../../Utils/Endpoints';
-import { SET_ADMIN_CONSTANTS, SET_ADMIN_LOADING, SET_ADMIN_PACKAGES } from './AdminActions';
+import { SET_ADMIN_APPEND_CONSTANTS, SET_ADMIN_CONSTANTS, SET_ADMIN_LOADING, SET_ADMIN_PACKAGES, SET_ADMIN_SUCCESS } from './AdminActions';
 import { IAdminInitialState } from './AdminTypes';
 
 
@@ -73,7 +73,8 @@ export class AdminService {
         .subscribe((res: any) => {
           this.store.dispatch(SET_ADMIN_LOADING({ loading: false }))
           if (res?.Success) {
-            // this.store.dispatch(SET_ADMIN_CONSTANTS({ constants: res.Data }))
+            this.store.dispatch(SET_ADMIN_SUCCESS({ success: true }))
+            this.store.dispatch(SET_ADMIN_APPEND_CONSTANTS({ constant: res.Data }))
           }
         })
     } catch (e: any) {

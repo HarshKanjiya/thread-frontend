@@ -38,7 +38,7 @@ import { UserService } from '../../reducers/User/User.service';
 })
 export class HeaderComponent {
 
-  userName: string = ""
+  userData: any = null
 
   visible: boolean = false;
   backButtonVisibility: boolean = false
@@ -62,7 +62,7 @@ export class HeaderComponent {
 
     store.select("User").subscribe((res: any) => {
       if (res?.userData) {
-        this.userName = res.userData.UserName
+        this.userData = res.userData
         console.log('object :>> ', res);
       }
     })

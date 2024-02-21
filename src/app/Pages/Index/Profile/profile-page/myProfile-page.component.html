@@ -56,7 +56,7 @@
     }} transition-all duration-200"
     (click)="setSelectedTab('THREADS')"
   >
-    Threads
+    Threads {{ selectedTab === "THREADS" ? "(" + myThreads.length + ")" : "" }}
   </button>
   <!-- <button
     class="flex-1 py-4 {{
@@ -76,7 +76,7 @@
     }} transition-all duration-200"
     (click)="setSelectedTab('REPOSTS')"
   >
-    Reposts
+    Reposts {{  selectedTab === "REPOSTS" ? "(" + myThreads.length + ")" : '' }}
   </button>
 
   <!-- {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }} -->
