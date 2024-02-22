@@ -15,14 +15,17 @@ export class AdminService {
   constructor(private http: HttpService, private store: Store<IAdminInitialState>, private toast: ToastService) { }
 
 
-  getAllPackages() {
+  getAllPackages(type: string) {
     this.store.dispatch(SET_ADMIN_LOADING({ loading: true }))
     try {
-      this.http.get(GetAllPackages_AdminAPI)
+      this.http.get(GetAllPackages_AdminAPI + type)
         .subscribe((res: any) => {
           this.store.dispatch(SET_ADMIN_LOADING({ loading: false }))
           if (res?.Success) {
             this.store.dispatch(SET_ADMIN_PACKAGES({ packages: res.Data }))
+          }else{
+            this.store.dispatch(SET_ADMIN_PACKAGES({ packages: [] }))
+
           }
         })
     } catch (e: any) {

@@ -46,15 +46,116 @@
         <path d="M5 12h14" />
         <path d="M12 5v14" />
       </svg>
-      <p>Add new</p>
+      <p class="hidden sm:block">Add new</p>
     </button>
   </div>
 
-  <div
-    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
-  >
-    <div class="flex flex-col gap-3 h-max w-full">
-      <!-- write here -->
+  <div class="h-full flex-1 w-full">
+    <div class="flex flex-col gap-3 h-full w-full">
+      <div class="flex flex-col">
+        <p class="text-md text-gray-700 dark:text-gray-300">
+          Thease are all packages that users can purchase to enhance their
+          Experiance.
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-600">
+          User will only be able to see Active packages.
+        </p>
+      </div>
+
+      <div class="flex gap-3">
+        <button
+          [disabled]="loading"
+          (click)="setFilterType('ACTIVE')"
+          class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+            filterType === 'ACTIVE'
+              ? 'bg-emerald-500'
+              : 'bg-gray-200 dark:bg-gray-800/60'
+          }}"
+        >
+          <div
+            class="w-2 h-2 bg-emerald-500 rounded-full ring ring-gray-200 dark:ring-gray-800"
+          ></div>
+          <p
+            class="transition-all duration-200 {{
+              filterType === 'ACTIVE' ? 'text-white' : ''
+            }} "
+          >
+            Active
+          </p>
+        </button>
+        <button
+          [disabled]="loading"
+          (click)="setFilterType('INACTIVE')"
+          class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+            filterType === 'INACTIVE'
+              ? 'bg-gray-500'
+              : 'bg-gray-200 dark:bg-gray-800/60'
+          }}"
+        >
+          <div
+            class="w-2 h-2 bg-gray-500 rounded-full ring ring-gray-200 dark:ring-gray-800"
+          ></div>
+          <p
+            class="transition-all duration-200 {{
+              filterType === 'INACTIVE' ? 'text-white' : ''
+            }} "
+          >
+            Inactive
+          </p>
+        </button>
+        <button
+          [disabled]="loading"
+          (click)="setFilterType('DRAFTS')"
+          class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+            filterType === 'DRAFTS'
+              ? 'bg-yellow-500'
+              : 'bg-gray-200 dark:bg-gray-800/60'
+          }}"
+        >
+          <div
+            class="w-2 h-2 bg-yellow-500 rounded-full ring ring-gray-200 dark:ring-gray-800"
+          ></div>
+          <p
+            class="transition-all duration-200 {{
+              filterType === 'DRAFTS' ? 'text-white' : ''
+            }} "
+          >
+            Drafts
+          </p>
+        </button>
+        <button
+          [disabled]="loading"
+          (click)="setFilterType('ALL')"
+          class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+            filterType === 'ALL'
+              ? 'bg-purple-400'
+              : 'bg-gray-200 dark:bg-gray-800/60'
+          }}"
+        >
+          <div
+            class="w-2 h-2 bg-purple-400 rounded-full ring ring-gray-200 dark:ring-gray-800"
+          ></div>
+          <p
+            class="transition-all duration-200 {{
+              filterType === 'ALL' ? 'text-white' : ''
+            }} "
+          >
+            All
+          </p>
+        </button>
+      </div>
+
+      <div class="w-full h-full overflow-x-hidden overflow-y-auto">
+        @if(packages.length > 0){ @for (item of packages; track $index) {
+        <div>
+          <p>{{ item.PackageName }}</p>
+        </div>
+        } }@else { @if(loading){
+        <loader />
+        }@else {
+        <no-data-found message="Packages not found!" />
+        } }
+      </div>
     </div>
   </div>
 </div>

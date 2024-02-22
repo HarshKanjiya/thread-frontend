@@ -277,13 +277,7 @@ export class ConstantsComponent {
         this.loading = false
 
         if (res.Success) {
-          this.pairs = this.pairs.filter((i: any) => {
-            if (i.VarId !== VarId) {
-              return i
-            } else {
-              return null
-            }
-          })
+          this.pairs = this.pairs.filter((i: any) => i.VarId !== VarId ? true : false)
           this.toast.makeToast("MESSAGE", res.Message)
         } else {
           this.toast.makeToast("ERROR", res.Message)

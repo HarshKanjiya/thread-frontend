@@ -49,8 +49,14 @@
   background: #565656;
 }
 
-.custom-scrollbar ::-webkit-scrollbar {
-  width: 5px;
+// .custom-scrollbar ::-webkit-scrollbar {
+//   width: 6px;
+// }
+
+.custom-scrollbar {
+  &:-webkit-scrollbar {
+    width: 6px !important;
+  }
 }
 
 /* Track */
@@ -58,10 +64,12 @@
   overflow: hidden;
   background: transparent;
   overflow: hidden;
+  border-radius: 10px;
+  transform: translateX(10px);
+  left: 20px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  width: 5px;
 }
 
 /* Handle */

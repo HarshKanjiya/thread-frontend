@@ -49,11 +49,11 @@ export const GetPackageByIdAPI = "packages/" // PACKAGE_ID // GET
 export const InitPaymentAPI = "buy/init" // POST
 
 // Admin
-export const GetAllPackages_AdminAPI = "package/admin" // GET
-export const GetPackageById_AdminAPI = "package/admin/" // + PACKAGE_ID // GET
-export const AddPackage_AdminAPI = "package/admin" // POST
-export const UpdatePackage_AdminAPI = "package/admin" // PUT
-export const DeletePackage_AdminAPI = "package/admin" // DELETE
+export const GetAllPackages_AdminAPI = "packages/admin/all/" // GET
+export const GetPackageById_AdminAPI = "packages/admin/" // + PACKAGE_ID // GET
+export const AddPackage_AdminAPI = "packages/admin" // POST
+export const UpdatePackage_AdminAPI = "packages/admin" // PUT
+export const DeletePackage_AdminAPI = "packages/admin" // DELETE
 
 export const GetConstants_AdminAPI = "admin/env"
 export const GetSingleConstant_AdminAPI = "admin/env/"
