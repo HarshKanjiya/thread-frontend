@@ -1,20 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, Output, Type, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { TextareaAutoresizeDirective } from '../../Directives/textarea-autoresize.directive';
 import { DialogService } from '../../Services/dialog.service';
 import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component';
+import { IUserInitialState } from '../../reducers/User/UserTypes';
 import { PostFormComponent } from '../post-form/post-form.component';
 
-
-interface IOptionType {
-  option: string,
-  id: number
-}
-
-
-
-const defaultOptions = [{ id: 0, option: "Yes" }, { id: 1, option: "No" }]
 
 @Component({
   selector: 'app-create-post',
@@ -47,6 +40,7 @@ export class CreatePostComponent {
   @Input() postTypeHelperId_FromParent: string | null = null
   @Input() allowAddToThread: boolean = true
 
+  userData: any = null
   @Output() submition = new EventEmitter<any>()
 
   threadInputText: string = ""
@@ -58,11 +52,14 @@ export class CreatePostComponent {
 
   replyAccess: "ANY" | "FOLLOWING" | "MENTIONED" | "NONE" = "ANY"
 
-  postType: "PARENT" | "CHILD" | "QUOTE" | "REPOST" = "PARENT"
+  postType: "PARENT" | "CHILD" | "REPOST" = "PARENT"
   postTypeHelperId: string | null = null
 
-  options: IOptionType[] = defaultOptions
-  optionsObject: any = {}
+
+
+  // new option sln
+  OptionsArray: { OptionId: string, Option: string, Value: string }[] = []
+
 
 
   replyOptions = ["Any one", "Following", "Mentioned", "None"]
@@ -75,23 +72,32 @@ export class CreatePostComponent {
   selectedFile: File[] = [];
   selectedFileBase64: string[] = []
 
-  dataBeforeSubmit: any[] = []
+  ChildData: any[] = []
 
   formDisable: boolean = false
 
-  constructor(public dialog: DialogService) { }
+  constructor(public dialog: DialogService, store: Store<any>) {
+    store.select("User").subscribe((res: IUserInitialState) => {
+      this.userData = res.userData
+    })
+  }
 
 
   changeNewThread() {
     this.AddToThreadButton = !this.AddToThreadButton
   }
 
-  removeMeFromChildThread(e: boolean) {
-    this.AddToThreadButton = e
+  removeMeFromChildThread(e: any) {
+    if (e == 1) this.AddToThreadButton = false
+    this.ChildData = this.ChildData.splice(e, 1)
   }
 
   textAreaCounter(e: any) {
     this.count = e.target.value.trim().length
+
+    if (this.count < 10) {
+      this.threadInputText = e.target.value.trim()
+    }
 
     if (e.target.value.trim().length === 0) {
       this.formDisable = true
@@ -100,47 +106,56 @@ export class CreatePostComponent {
     }
   }
 
-  addOption() {
-    this.options.push({ id: this.options.length, option: "" })
+  generateId() {
+    let id = '';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    if (Object.keys(this.optionsObject).length < 4) {
-
-      this.optionsObject[`0 option ${Object.keys(this.optionsObject).length}`] = ""
+    for (let i = 0; i < 6; i++) {
+      const randomIndex = Math.floor(Math.random() * alphabet.length);
+      id += alphabet[randomIndex];
     }
 
-    console.log(this.optionsObject);
-    console.log(this.options);
+    return id;
   }
-  removeOption(id: number) {
 
-    console.log('id :>> ', id);
-    this.options = this.options.filter((i: IOptionType) => i.id !== id)
-    console.log('id :>> ', this.options);
+  addOption(Option: string = "") {
+    let id = this.generateId()
 
-    delete this.optionsObject[`0 option ${id}`]
+    this.OptionsArray.map((opt: any) => {
+      if (id === opt.id) {
+        id = this.generateId()
+      }
+    })
+
+    this.OptionsArray.push({ OptionId: id, Option: Option, Value: id })
+  }
+  removeOption(id: string) {
+
+    this.OptionsArray = this.OptionsArray.filter((i: any) => i.OptionId !== id ? true : false)
   }
 
   closeDialog() {
-    this.options = defaultOptions
+    this.OptionsArray = []
     this.postType = 'PARENT'
     this.replyAccess = "ANY"
     this.threadType = "TEXT"
     this.postTypeHelperId = null
+    this.ChildData = []
     this.dialog.closeDialog()
   }
 
   changeThreadType(type: "TEXT" | "POLL") {
     if (type === "POLL") {
-      this.options = defaultOptions
-      this.optionsObject[`0 option 0`] = "Yes"
-      this.optionsObject[`0 option 1`] = "No"
+      if (this.OptionsArray.length == 0) {
+        this.addOption("Yes")
+        this.addOption("No")
+      }
+
     } else {
-      this.optionsObject = {}
-      this.options = []
+      this.OptionsArray = []
     }
     this.threadType = type
 
-    this.SubmitThread()
   }
 
   changeSelectedReplyOption(e: any) {
@@ -213,68 +228,48 @@ export class CreatePostComponent {
   }
 
   childSubmissionHandler(event: any) {
-
-
-    let _temp = [...this.dataBeforeSubmit]
-
-    _temp = _temp.filter((i: any) => i.level !== event.level)
-
-    _temp.push(event)
-
-    this.dataBeforeSubmit = _temp
-
-    let bool = true
-
-    this.dataBeforeSubmit.map((item: any) => {
-      for (let key in item.content) {
-        if (item.content.hasOwnProperty(key)) {
-
-          if (item.content.text.trim().length === 0) {
-            bool = false
-            return
-          }
-
-          if (item.content.type === "POLL") {
-
-            let options = item.content.options
-
-            for (let opt in options) {
-              if (options.hasOwnProperty(opt)) {
-                if (options[opt].trim().length === 0) {
-                  bool = false
-                  return
-                }
-              }
-            }
-          }
+    let ind = event.level - 1
+    if (event.level > this.ChildData.length) {
+      this.ChildData.push(event.data)
+    } else {
+      this.ChildData = this.ChildData.map((item: any, index: number) => {
+        if (index == ind) {
+          return event.data
+        } else {
+          return item
         }
-      }
-    })
+      })
+    }
   }
 
-
+  addTag() {
+    this.threadInputText = this.threadInputText + " #"
+  }
 
   SubmitThread() {
     let _temp: any = {
-      authorId: "ID",
-      type: this.postType,
-      replyAccess: this.replyAccess,
+      AuthorId: this.userData.UserId,
+      Type: this.postType,
+      ReplyAccess: this.replyAccess,
+      ReferenceId: ""
     }
 
-    if (this.postType !== "PARENT") _temp["typeHelperId"] = this.postTypeHelperId
+    if (this.postType !== "PARENT") _temp["ReferenceId"] = this.postTypeHelperId_FromParent
 
     let _content: any = {
-      type: this.threadType,
-      text: this.threadInputText
+      Type: this.threadType,
+      Text: this.threadInputText,
+      Options: [],
+      Files: []
     }
 
     if (this.threadType === "POLL") {
-      _content["options"] = this.optionsObject
+      _content.Options = [...this.OptionsArray]
     }
 
     if (this.selectedFile.length > 0) {
-      _content["selectedFile"] = this.selectedFile
-      _content["selectedFileBase64"] = this.selectedFileBase64
+      // _content["selectedFile"] = this.selectedFile
+      _content["Files"] = [...this.selectedFileBase64]
 
     }
 
@@ -289,8 +284,8 @@ export class CreatePostComponent {
 
 
 
-    _temp["content"] = _content
-    _temp["child"] = this.dataBeforeSubmit
+    _temp["Content"] = _content
+    _temp["Child"] = this.ChildData
 
 
 

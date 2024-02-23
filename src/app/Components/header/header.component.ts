@@ -10,6 +10,7 @@ import { DropdownComponent } from '../../UI/dropdown/dropdown/dropdown.component
 import { CreatePostPopUpComponent } from '../createPost-popUp/create-post-pop-up.component';
 import { CustomPopupComponent } from '../custom-popup/custom-popup.component';
 import { UserService } from '../../reducers/User/User.service';
+import { IUserInitialState } from '../../reducers/User/UserTypes';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -60,7 +61,7 @@ export class HeaderComponent {
 
   constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, private store: Store<any>, private userService: UserService) {
 
-    store.select("User").subscribe((res: any) => {
+    store.select("User").subscribe((res: IUserInitialState) => {
       if (res?.userData) {
         this.userData = res.userData
         console.log('object :>> ', res);

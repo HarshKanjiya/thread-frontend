@@ -31,12 +31,12 @@
   @if (isOpen) {
   <div
     @dropBody
-    class="absolute z-10 top-[100%] flex flex-col justify-between gap-1 bg-white dark:bg-black rounded-2xl w-full border border-neutral-300 dark:border-neutral-900"
+    class="absolute z-10 overflow-hidden top-[100%] flex flex-col justify-between bg-white dark:bg-black rounded-2xl w-full border border-neutral-300 dark:border-neutral-900"
   >
     @for (item of Options; track $index) {
     <button
       type="button"
-      class="px-4 py-2 w-full flex justify-start items-center"
+      class="px-4 py-2.5 w-full flex justify-start items-center transition-all duration-150 hover:bg-neutral-200 dark:hover:bg-neutral-900 hover:text-black dark:hover:text-white "
       (click)="clickHandler(item)"
     >
       {{ item }}

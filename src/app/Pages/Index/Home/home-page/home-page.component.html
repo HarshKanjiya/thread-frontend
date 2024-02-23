@@ -5,15 +5,21 @@
   <div class="flex gap-3 items-center">
     <img
       class="h-9 w-9 rounded-full overflow-hidden"
-      src="https://i.pinimg.com/736x/74/2f/d5/742fd5a3639902802e8535953fd2c920.jpg"
       alt=""
+      src="{{
+        userData
+          ? userData.AvatarURL
+            ? userData.AvatarURL
+            : 'https://i.pinimg.com/736x/74/2f/d5/742fd5a3639902802e8535953fd2c920.jpg'
+          : 'https://i.pinimg.com/736x/74/2f/d5/742fd5a3639902802e8535953fd2c920.jpg'
+      }}"
     />
     <p class="text-sm text-neutral-400 dark:text-neutral-500">
       Start a thread...
     </p>
   </div>
   <div
-    class="px-4 py-2 bg-neutral-500 dark:bg-neutral-600 text-white dark:text-black rounded-[50px] text-sm font-bold"
+    class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-[50px] text-sm font-bold"
   >
     Post
   </div>
