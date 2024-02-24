@@ -285,7 +285,7 @@ export class CreatePostComponent {
 
 
     _temp["Content"] = _content
-    _temp["Child"] = this.ChildData
+    // _temp["Child"] = this.ChildData
 
 
 

@@ -4,7 +4,7 @@ export interface IPostInitialState {
   message: string | null,
 
   myThreads: any[],
-  Feed: any[],
+  feed: any[],
 
   temp: any,
 
@@ -17,7 +17,7 @@ export const PostInitialState: IPostInitialState = {
   success: false,
   message: null,
   myThreads: [],
-  Feed: [],
+  feed: [],
   temp: null,
   threadData: null,
   threadReplies: [],

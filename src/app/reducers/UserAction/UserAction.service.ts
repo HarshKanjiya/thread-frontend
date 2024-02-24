@@ -118,7 +118,7 @@ export class UserActionService {
   SearchUserProfiles(text: string) {
     this.store.dispatch(SET_USER_ACTION_LOADING({ loading: true }))
     try {
-      this.http.get(SearchUserAPI + text)
+      this.http.post(SearchUserAPI, { UserName: text })
         .subscribe((res: any) => {
           this.store.dispatch(SET_USER_ACTION_LOADING({ loading: false }))
           if (res?.Success) {

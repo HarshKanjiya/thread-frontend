@@ -49,9 +49,17 @@ export class ThreadPageComponent {
     store.select("User").subscribe((res: any) => {
       this.userData = res.userData
       if (res?.userData) {
+        this.route.params.subscribe(params => {
+          this.id = params['id'];
+        });
         this.postService.getThreadData(res.userData.UserId, this.id)
         this.postService.getThreadReplies(res.userData.UserId, this.id)
       }
+    })
+    this.store.select("Post").subscribe((res: any) => {
+      this.loading = res.loading
+      this.postData = res.threadData
+      this.postRepliesData = res.threadReplies
     })
   }
 
@@ -59,10 +67,6 @@ export class ThreadPageComponent {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.store.select("Post").subscribe((res: any) => {
-      this.loading = res.loading
-      this.postData = res.threadData
-      this.postRepliesData = res.threadReplies
-    })
+
   }
 }

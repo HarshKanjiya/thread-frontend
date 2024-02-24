@@ -24,7 +24,7 @@ export const PostReducer = createReducer(
   }),
 
   on(SET_POST_FEED, (state: any, { threads }) => {
-    return { ...state, Feed: threads }
+    return { ...state, feed: threads }
   }),
 
   on(SET_POST_TEMP, (state: any, { data }) => {

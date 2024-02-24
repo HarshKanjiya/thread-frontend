@@ -10,7 +10,7 @@ import { GetActivePackagesAPI, GetAllPackages_AdminAPI, GetPackageByIdAPI } from
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class PackageService {
 
   constructor(private http: HttpService, private store: Store<IPackagesInitialState>, private toast: ToastService) { }
 

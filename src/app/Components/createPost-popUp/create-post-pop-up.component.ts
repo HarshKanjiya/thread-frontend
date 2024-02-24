@@ -2,6 +2,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { DialogService } from '../../Services/dialog.service';
 import { CreatePostComponent } from '../create-post/create-post.component';
+import { PostService } from '../../reducers/Post/Post.service';
+import { Store } from '@ngrx/store';
+import { IPostInitialState } from '../../reducers/Post/PostTypes';
+import { SET_POST_SUCCESS } from '../../reducers/Post/PostActions';
 
 @Component({
   selector: 'app-create-post-pop-up',
@@ -31,7 +35,16 @@ import { CreatePostComponent } from '../create-post/create-post.component';
 })
 export class CreatePostPopUpComponent {
 
-  constructor(public dialog: DialogService) { }
+  // success: boolean = false
+  constructor(public dialog: DialogService, private PostService: PostService, private store: Store<any>) {
+    store.select("Post").subscribe((res: IPostInitialState) => {
+      if (res.success) {
+        this.closeDialog()
+        store.dispatch(SET_POST_SUCCESS({ success: false }))
+        PostService.getMyFeed()
+      }
+    })
+  }
 
   allowAddToThread: boolean = true
 
@@ -42,8 +55,7 @@ export class CreatePostPopUpComponent {
 
 
   submitThread(event: any) {
-
-    console.log('event :>> ', event);
+    this.PostService.createNewPost(event)
   }
 
 }

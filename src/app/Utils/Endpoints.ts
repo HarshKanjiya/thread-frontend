@@ -19,7 +19,7 @@ export const UpdatePasswordAPI = "auth/user/pass/" // + USER_ID // PUT
 export const GetUserPRofileAPI = "auth/user/"  // + USERNAME // GET //& DONE
 
 // user search
-export const SearchUserAPI = "auth/search/"
+export const SearchUserAPI = "auth/search"
 
 // Thread
 export const NewThreadAPI = "thread" // POST

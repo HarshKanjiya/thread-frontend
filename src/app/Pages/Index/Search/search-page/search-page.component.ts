@@ -3,13 +3,49 @@ import { FormsModule } from '@angular/forms';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { UserActionService } from '../../../../reducers/UserAction/UserAction.service';
 import { Store } from '@ngrx/store';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './search-page.component.html',
-  styleUrl: './search-page.component.scss'
+  styleUrl: './search-page.component.scss',
+  animations: [
+    trigger("entryAnim", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(-20px)" })
+        )
+      ])
+    ]),
+    trigger("rotateEnter", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "rotate(-360deg)" }),
+        animate(
+          "200ms ease-in-out",
+          style({ opacity: 1, transform: "rotate(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "rotate(0deg)" }),
+        animate(
+          "200ms ease-in-out",
+          style({ opacity: 0, transform: "rotate(-180deg)" })
+        )
+      ])
+    ]),
+
+  ]
 })
 export class SearchPageComponent {
 
