@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './no-data-found.component.html',
 })
 export class NoDataFoundComponent {
-@Input() message = 'No Data Found!';
+  @Input() Color: "NEUTRAL" | "GRAY" = 'GRAY';
+  @Input() message = 'No Data Found!';
 }

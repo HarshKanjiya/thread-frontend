@@ -1,17 +1,21 @@
-<div class="flex items-center justify-between py-4">
+<div #stickyMenu class="flex items-center justify-between py-4">
   <div class="flex flex-col">
     <p class="text-2xl font-bold">{{ userData?.Name }}</p>
-    <p class="text-sm">harxh_here</p>
+    <p class="text-sm">{{ userData?.UserName }}</p>
   </div>
   <div>
+    @if (userData?.AvatarURL.trim().length > 0) {
+    <img class="w-20 h-20 rounded-full" [src]="userData?.AvatarURL" />
+    }@else {
     <img
       class="w-20 h-20 rounded-full"
-      src="https://imgs.search.brave.com/nQ8XyqiLOmuzmYmOWFcxbLjET0a8bN_colJ1CYnF7Sc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWpwZy5jb20v/cGhvdG8vYzhjYzQ0/YmFIUjBjSE02THk5/MGMyVXlMbTF0TG1K/cGJtY3VibVYwTDNS/b1AybGtQVTlKVUM1/S1EyVm5UakZyT0Za/eGNteHhNR04zUlhJ/elFWQm5TR0ZKV2la/d2FXUTlRWEJwLmpw/Zw"
+      src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
     />
+    }
   </div>
 </div>
 
-<div class="py-2">thi is biooo</div>
+<div class="py-2">{{ userData?.Bio }}</div>
 
 <div class="flex items-center justify-between py-4">
   <div class="flex items-center">
@@ -29,7 +33,7 @@
     </div>
     <div class="w-2"></div>
 
-    <p class="text-sm">66 followers</p>
+    <p class="text-sm">{{ userData?.FollowersCount }} Followers</p>
   </div>
 </div>
 
@@ -40,7 +44,9 @@
 </button>
 
 <div
-  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-3"
+  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-2 sm:mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
+    sticky ? 'sticky top-[40px] sm:top-[75px] z-50 ' : 'w-full'
+  }} "
 >
   <button
     class="flex-1 py-4 {{
@@ -50,9 +56,9 @@
     }} transition-all duration-200"
     (click)="setSelectedTab('THREADS')"
   >
-    Threads
+    Threads {{ selectedTab === "THREADS" ? "(" + myThreads.length + ")" : "" }}
   </button>
-  <button
+  <!-- <button
     class="flex-1 py-4 {{
       selectedTab === 'REPLIES'
         ? 'text-black dark:text-white'
@@ -61,7 +67,7 @@
     (click)="setSelectedTab('REPLIES')"
   >
     Replies
-  </button>
+  </button> -->
   <button
     class="flex-1 py-4 {{
       selectedTab === 'REPOSTS'
@@ -70,13 +76,31 @@
     }} transition-all duration-200"
     (click)="setSelectedTab('REPOSTS')"
   >
-    Reposts
+    Reposts {{  selectedTab === "REPOSTS" ? "(" + myThreads.length + ")" : '' }}
   </button>
 
+  <!-- {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }} -->
   <div
-    class="absolute bottom-0 w-[33%] h-[2px] bg-black dark:bg-white transition-all duration-200
+    class="absolute bottom-0 w-[50%] h-[2px] bg-black dark:bg-white transition-all duration-200
     {{ selectedTab === 'THREADS' ? 'left-0' : '' }}
-    {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }}
-    {{ selectedTab === 'REPOSTS' ? 'left-[66%]' : '' }} "
+    {{ selectedTab === 'REPOSTS' ? 'left-[50%]' : '' }} "
   ></div>
+</div>
+
+<div #loader></div>
+@if (userLoading || postLoading) {
+<loader type="FULL"></loader>
+}
+
+<div>
+  @for (item of myThreads; track $index) {
+  <app-thread [ThreadData]="item"></app-thread>
+  }
+</div>
+
+<div
+  class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm"
+>
+  <p>You have reached the depth of the Earth 🌍</p>
+  <p>There are no more threads to show.</p>
 </div>

@@ -1,9 +1,14 @@
+import { INotification } from "../../Interfaces/Common"
+
 export interface IUserInitialState {
   userData: Object | null,
   loading: boolean,
   success: boolean,
   message: string | null,
-  temp: any
+  temp: any,
+  notificatinos: INotification[],
+  otherUserData: any
+
   // TaskSuccess: boolean
 }
 
@@ -12,7 +17,9 @@ export const UserInitialState: IUserInitialState = {
   loading: false,
   success: false,
   message: null,
-  temp: null
+  temp: null,
+  otherUserData: null,
+  notificatinos: []
   // TaskSuccess: false
 }
 

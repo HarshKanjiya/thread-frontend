@@ -64,7 +64,7 @@ export class HeaderComponent {
     store.select("User").subscribe((res: IUserInitialState) => {
       if (res?.userData) {
         this.userData = res.userData
-        console.log('object :>> ', res);
+        // console.log('object :>> ', res);
       }
     })
 

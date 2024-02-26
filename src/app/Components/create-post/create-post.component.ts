@@ -249,9 +249,12 @@ export class CreatePostComponent {
   SubmitThread() {
     let _temp: any = {
       AuthorId: this.userData.UserId,
+      AuthorAvatarURL: this.userData.AvatarURL,
+      AuthorName: this.userData.Name,
+      AuthorUserName: this.userData.UserName,
       Type: this.postType,
       ReplyAccess: this.replyAccess,
-      ReferenceId: ""
+      ReferenceId: "",
     }
 
     if (this.postType !== "PARENT") _temp["ReferenceId"] = this.postTypeHelperId_FromParent
@@ -285,8 +288,16 @@ export class CreatePostComponent {
 
 
     _temp["Content"] = _content
-    // _temp["Child"] = this.ChildData
 
+    this.ChildData = this.ChildData.map((i: any) => {
+      return {
+        ...i, AuthorId: this.userData.UserId,
+        AuthorAvatarURL: this.userData.AvatarURL,
+        AuthorName: this.userData.Name,
+        AuthorUserName: this.userData.UserName,
+      }
+    })
+    _temp["Child"] = this.ChildData
 
 
     this.submition.emit(_temp)

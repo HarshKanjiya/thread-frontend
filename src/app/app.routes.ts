@@ -13,7 +13,8 @@ import { LoginPageComponent } from './Pages/Auth/login-page/login-page.component
 import { SignUpPageComponent } from './Pages/Auth/sign-up-page/sign-up-page.component';
 import { ActivityComponent } from './Pages/Index/Activity/activity/activity.component';
 import { HomePageComponent } from './Pages/Index/Home/home-page/home-page.component';
-import { ProfilePageComponent } from './Pages/Index/Profile/profile-page.component';
+import { OthersProfilePageComponent } from './Pages/Index/Profile/others-profile-page/others-profile-page.component';
+import { MyProfilePageComponent } from './Pages/Index/Profile/profile-page/myProfile-page.component';
 import { SearchPageComponent } from './Pages/Index/Search/search-page/search-page.component';
 import { ThreadPageComponent } from './Pages/Index/Thread/threadPage.component';
 import { AboutPageComponent } from './Pages/Index/about/about-page.component';
@@ -38,7 +39,8 @@ export const routes: Routes = [
       { path: "activity", component: ActivityComponent, pathMatch: "full", title: "Threads | Activity" },
       { path: "setting", component: SettingPageComponent, pathMatch: "full", title: "Threads | Settings" },
       { path: "about", component: AboutPageComponent, pathMatch: "full", title: "Threads | About me" },
-      { path: "user/" + ":id", component: ProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
+      { path: "user/profile", component: MyProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
+      { path: "user/" + ":id", component: OthersProfilePageComponent, title: "Threads | Profile", pathMatch: "full" },
       { path: "thread/" + ":id", component: ThreadPageComponent, title: "Threads ", pathMatch: "full" },
 
     ]

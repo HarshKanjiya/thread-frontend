@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
-import { SET_USER_DATA, SET_USER_LOADING, SET_USER_TEMP } from './UserActions';
+import { CheckUserNameAPI, GetMyNotifAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
+import { SET_USER_DATA, SET_USER_LOADING, SET_USER_NOTIF, SET_USER_TEMP } from './UserActions';
 import { ICheckValidUsername, ILoginUser, ISendMeOtp, ISignupUser, IUserInitialState, IVerifyMyOtp } from './UserTypes';
-import { CheckUserNameAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -186,7 +186,43 @@ export class UserService {
   MuteUser() { }
   BlockUser() { }
 
-  getMyNotification() { }
+  getMyNotification(UserId: String, Type: "FOLLOW" | "REPLY" | "LIKE" | "MENTION" | "ALL" | "REPOST", page: number = 1) {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+      this.http.get(GetMyNotifAPI + UserId + '/' + Type).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+        if (res.Success) {
+          this.store.dispatch(SET_USER_NOTIF({ notifs: res.Data }))
+        } else {
+          this.toast.makeToast('ERROR', res.Message ?? "Something went wrong")
+        }
+      })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      console.log('Error in fetching Notifications :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+
+  getOtherUsersData(UserId: string) {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+      this.http.get(GetMyNotifAPI + UserId).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+        if (res.Success) {
+          this.store.dispatch(SET_USER_NOTIF({ notifs: res.Data }))
+        } else {
+          this.toast.makeToast('ERROR', res.Message ?? "Something went wrong")
+        }
+      })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      console.log('Error in fetching Notifications :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
   MarkAsDoneNotif() { }
   deleteNotif() { }
 
