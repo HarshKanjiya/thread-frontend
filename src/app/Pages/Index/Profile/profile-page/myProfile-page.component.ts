@@ -41,6 +41,8 @@ export class MyProfilePageComponent {
   userLoading: boolean = false;
   postLoading: boolean = false;
 
+  intialLoad: boolean = true
+
   @ViewChild('stickyMenu') menuElement!: ElementRef;
   @ViewChild('loader') loaderElement!: ElementRef;
 
@@ -54,24 +56,30 @@ export class MyProfilePageComponent {
     }
   }
 
-  constructor(private store: Store<any>, private router: Router, private postService: PostService, private cd: ChangeDetectorRef) { }
-
-  menuPosition: any;
-
-  ngOnInit() {
+  constructor(private store: Store<any>, private router: Router, private postService: PostService, private cd: ChangeDetectorRef) {
     this.store.select("User").subscribe((res: any) => {
       this.userData = res.userData
       this.userLoading = res.loading
+
+      if (this.userData && this.intialLoad) {
+        this.getPosts()
+        this.intialLoad = false
+      }
+
     })
     this.store.select("Post").subscribe((res: any) => {
       this.myThreads = res.myThreads
       this.postLoading = res.loading
-      this.cd.detectChanges()
+      // this.cd.detectChanges()
     })
+
   }
 
+  menuPosition: any;
+
+
+
   ngAfterViewInit() {
-    this.getPosts()
     this.menuPosition = this.menuElement.nativeElement.offsetTop
   }
 
@@ -94,7 +102,7 @@ export class MyProfilePageComponent {
       case "REPOSTS":
         type = "REPOST"
     }
-    this.postService.getMyThreads(this.userData.UserId, 2, type);
+    this.postService.getMyThreads(this.userData?.UserId, 2, type);
   }
 
   PrivacyProtactionHandler() {

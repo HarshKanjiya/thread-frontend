@@ -70,6 +70,7 @@
         class="w-full h-full my-4 flex divide-x divide-gray-300 border dark:divide-gray-700 border-gray-300 dark:border-gray-700 rounded-lg"
       >
         <div class="p-2 flex flex-col gap-3 flex-[0.25]">
+          @if(categories.length > 0){
           <div
             @dropBody
             class="w-full p-1 flex items-center justify-between bg-gray-300/60 dark:bg-gray-800/60 rounded-md"
@@ -97,6 +98,7 @@
               </svg>
             </button>
           </div>
+          }
           <div
             class="h-full overflow-y-auto gap-1 overflow-x-hidden flex flex-col justify-start"
           >
@@ -121,7 +123,35 @@
               class="w-[95%] h-[1px] mx-auto bg-gray-300 dark:bg-gray-800/50"
             ></div>
             } } } @else {
-            <no-data-found message="No Categories" />
+            <div
+              @dropBody
+              class="flex flex-col gap-4 items-center justify-center pt-44 w-full"
+            >
+              <no-data-found class="" message="No Categories" />
+              <div class="rounded-md">
+                <button
+                  (click)="openDialog('NEW', 'CATE')"
+                  class="p-2 flex items-center justify-center bg-gray-300 dark:bg-gray-800 rounded-md hover:bg-gray-400/60 dark:hover:bg-gray-950 border-none outline-none focus:bg-gray-300 dark:focus:bg-gray-950 transition-all duration-200"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-5 w-5 stroke-black dark:stroke-white"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                  </svg>
+                </button>
+              </div>
+            </div>
             }
           </div>
         </div>
@@ -183,7 +213,7 @@
                   </svg>
                 </button>
                 <button
-                  (click)="deleteItem('CATE', 'REPORT')"
+                  (click)="deleteItem('CATE', selectedCategory)"
                   class="p-2 flex items-center justify-center bg-gray-300 dark:bg-gray-800 rounded-md dark:hover:bg-red-600 hover:bg-red-600 border-none outline-none focus:bg-red-600 transition-all duration-200"
                 >
                   <svg
@@ -245,7 +275,7 @@
                   ></div>
                   <button
                     class="p-2.5 transition-all duration-150 hover:bg-red-600 outline-none border-none group"
-                    (click)="deleteItem('REPO', item.ReportId)"
+                    (click)="deleteItem('REPORT', item)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +304,7 @@
               class="w-[98%] h-[1px] mx-auto bg-gray-300 dark:bg-gray-800/50"
             ></div>
             } } }@else {
-            <div class="h-full w-full">
+            <div class="pt-44 w-full">
               <no-data-found
                 [message]="
                   categories.length > 0
@@ -349,7 +379,39 @@
       <loader />
       }
     </div>
-    }@else {
+    }@else { @if (formType == "DELETE") {
+    <div
+      class="flex flex-col rounded-xl overflow-hidden sm:w-[400px] bg-white dark:bg-black border border-neutral-300 dark:border-neutral-800"
+    >
+      <div class="p-4">
+        <h2 class="text-xl font-semibold text-black dark:text-white dark">
+          Are you sure you want to delete this
+          {{ fieldType == "CATE" ? "Category" : "Report" }}
+        </h2>
+        <p class="text-sm">
+          {{
+            fieldType == "CATE"
+              ? dataForDeletion.CategoryName
+              : dataForDeletion.Text
+          }}
+        </p>
+      </div>
+      <div class="flex border-t border-t-neutral-300 dark:border-t-neutral-800">
+        <button
+          (click)="dialog.closeDialog()"
+          class="flex-1 p-4 text-black dark:text-white font-medium border-r border-r-neutral-300 dark:border-r-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all duration-200"
+        >
+          Cancel
+        </button>
+        <button
+          (click)="deleteSubmit()"
+          class="flex-1 p-4 text-black dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-neutral-900 transition-all duration-200"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+    }@else{
     <div class="p-4 w-full">
       <h2 class="text-xl font-semibold text-black dark:text-white">
         @if (formType === "NEW") { @if(fieldType === "CATE"){
@@ -400,7 +462,7 @@
         <input
           [autofocus]="true"
           class="py-3 text-black dark:text-gray-400 w-full rounded-md border border-gray-300 dark:border-gray-700 pl-11 bg-white dark:bg-gray-900 outline-none focus:border-gray-600 dark:focus:border-gray-500"
-          placeholder="Text"
+          placeholder="text"
           [(ngModel)]="tempString"
         />
       </div>
@@ -422,7 +484,7 @@
         OK
       </button>
     </div>
-    }
+    } }
   </div>
 </custom-popup>
 

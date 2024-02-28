@@ -1,10 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { PostService } from '../../../../reducers/Post/Post.service';
 import { LoaderComponent } from '../../../../Components/loader/loader.component';
+import { IUserInitialState } from '../../../../reducers/User/UserTypes';
+import { UserService } from '../../../../reducers/User/User.service';
+import { SET_USER_OTHER_USER } from '../../../../reducers/User/UserActions';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -34,7 +37,7 @@ import { LoaderComponent } from '../../../../Components/loader/loader.component'
 export class OthersProfilePageComponent {
 
   isPrivacyButtonChecked: boolean = false
-  selectedTab: "THREADS" | "REPLIES" | "REPOSTS" = "THREADS"
+  selectedTab: "THREADS" | "REPOSTS" = "THREADS"
 
   sticky: boolean = false;
 
@@ -44,7 +47,43 @@ export class OthersProfilePageComponent {
   @ViewChild('stickyMenu') menuElement!: ElementRef;
   @ViewChild('loader') loaderElement!: ElementRef;
 
-  @HostListener('window:scroll', ['$event'])
+  // @HostListener('window:scroll', ['$event'])
+
+
+  menuPosition: any = null;
+  userData: any = null
+  userPosts: any[] = []
+  initialLoad: boolean = true
+  userNameFromURL: string = ""
+
+  constructor(private store: Store<any>, private router: Router, private postService: PostService, private userService: UserService, private cd: ChangeDetectorRef, private route: ActivatedRoute) {
+    this.store.select("User").subscribe((res: IUserInitialState) => {
+      if (res.otherUserData) {
+        this.userData = res.otherUserData.user
+        this.userPosts = [...res.otherUserData?.posts]
+      }
+      if (res.userData !== null && this.initialLoad && this.userNameFromURL !== "") {
+        this.userService.getOtherUsersData(res.userData?.UserId, this.userNameFromURL)
+        this.initialLoad = false
+      }
+    })
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.userNameFromURL = params['id'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(SET_USER_OTHER_USER({ data: null }));
+  }
+
+  ngAfterViewInit() {
+    // this.getPosts()
+    this.menuPosition = this.menuElement.nativeElement.offsetTop
+  }
+
   handleScroll() {
     const windowScroll = window.scrollY;
     if (windowScroll >= this.menuPosition - 150) {
@@ -53,37 +92,6 @@ export class OthersProfilePageComponent {
       this.sticky = false;
     }
   }
-
-  constructor(private store: Store<any>, private router: Router, private postService: PostService, private cd: ChangeDetectorRef) { }
-
-  menuPosition: any;
-
-  ngOnInit() {
-    this.store.select("User").subscribe((res: any) => {
-      this.userData = res.userData
-      this.userLoading = res.loading
-    })
-    this.store.select("Post").subscribe((res: any) => {
-      this.myThreads = res.myThreads
-      this.postLoading = res.loading
-      this.cd.detectChanges()
-    })
-  }
-
-  ngAfterViewInit() {
-    this.getPosts()
-    this.menuPosition = this.menuElement.nativeElement.offsetTop
-  }
-
-  myProfile: boolean = false
-
-
-  userData: any = null
-
-
-  myThreads: any[] = []
-
-
 
   getPosts() {
     let type: "PARENT" | "REPOST" = "PARENT";
@@ -101,7 +109,7 @@ export class OthersProfilePageComponent {
     this.isPrivacyButtonChecked = !this.isPrivacyButtonChecked
   }
 
-  setSelectedTab(val: "THREADS" | "REPLIES" | "REPOSTS") {
+  setSelectedTab(val: "THREADS" | "REPOSTS") {
     this.selectedTab = val
     this.getPosts()
   }

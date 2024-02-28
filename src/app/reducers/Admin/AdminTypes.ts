@@ -7,6 +7,11 @@ export interface IAdminInitialState {
   constants: any[],
   temp: any
 
+  userReports: any[],
+  reports: any[],
+  reportCategories: any[],
+  bugReports: any[],
+
 }
 export const AdminInitialState: IAdminInitialState = {
   loading: false,
@@ -16,4 +21,9 @@ export const AdminInitialState: IAdminInitialState = {
   packages: [],
   constants: [],
   temp: null,
+
+  reportCategories: [],
+  reports: [],
+  userReports: [],
+  bugReports: [],
 }

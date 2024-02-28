@@ -4,11 +4,15 @@ import { Subject, Subscription, debounceTime } from 'rxjs';
 import { UserActionService } from '../../../../reducers/UserAction/UserAction.service';
 import { Store } from '@ngrx/store';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router, RouterLink } from '@angular/router';
+import { SET_USER_OTHER_USER } from '../../../../reducers/User/UserActions';
+import { UserService } from '../../../../reducers/User/User.service';
+import { IUserInitialState } from '../../../../reducers/User/UserTypes';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
   animations: [
@@ -52,11 +56,12 @@ export class SearchPageComponent {
   input = ""
   feedData: any[] = []
   loading: boolean = false
+  userData: any = null
 
   private typingSubject = new Subject<string>();
   private typingSubscription: Subscription;
 
-  constructor(private ActionService: UserActionService, private store: Store<any>) {
+  constructor(private ActionService: UserActionService, private store: Store<any>, private router: Router, private userService: UserService) {
     this.typingSubscription = this.typingSubject.pipe(
       debounceTime(1000) // Adjust the debounce time as needed (e.g., 1000ms = 1 second)
     ).subscribe(value => {
@@ -69,10 +74,15 @@ export class SearchPageComponent {
       this.feedData = res.searchResults || []
     })
 
+    this.store.select("User").subscribe((res: IUserInitialState) => {
+      this.userData = res.userData
+    })
+
   }
 
   ngOnInit() {
     this.ActionService.SearchUserProfiles(this.input)
+    this.store.dispatch(SET_USER_OTHER_USER({ data: null }))
   }
 
   inputOnChange(e: any) {
@@ -81,6 +91,12 @@ export class SearchPageComponent {
   ngOnDestroy(): void {
     // Unsubscribe from the subject to prevent memory leaks
     this.typingSubscription.unsubscribe();
+  }
+
+  clickHandler(item: any) {
+    this.userService.getOtherUsersData(this.userData.UserId, item.UserName)
+
+    this.router.navigate(['../user/' + item.UserName])
   }
 
 }

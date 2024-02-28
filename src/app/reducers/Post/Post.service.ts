@@ -50,7 +50,7 @@ export class PostService {
     }
   }
 
-  UserId: string = ''
+  UserId: string | null = null
   getMyFeed(userId: string = "", page: number = 1) {
 
     if (userId.trim().length > 0) this.UserId = userId
@@ -63,7 +63,6 @@ export class PostService {
       this.http.get(GetFeedAPI + id)
         .subscribe((res: any) => {
           this.store.dispatch(SET_POST_LOADING({ loading: false }))
-
           if (res?.Success) {
             this.store.dispatch(SET_POST_FEED({ threads: res.Data }))
           }

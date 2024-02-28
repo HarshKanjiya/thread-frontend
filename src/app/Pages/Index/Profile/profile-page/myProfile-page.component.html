@@ -18,8 +18,8 @@
 <div class="py-2">{{ userData?.Bio }}</div>
 
 <div class="flex items-center justify-between py-4">
-  <div class="flex items-center">
-    <div class="flex -space-x-2 overflow-hidden">
+  <div class="flex items-center w-full justify-between gap-3.5">
+    <!-- <div class="flex -space-x-2 overflow-hidden">
       <img
         class="inline-block h-6 w-6 rounded-full border-2 border-white dark:border-black"
         src="https://imgs.search.brave.com/HBl_T5KkQuwZdTbyhCnScuHZSxrbjYnoPxf1GoRGzPk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbHVm/ZnktMTI3MC14LTEy/NzAtcGljdHVyZS1x/ODAzNGQxNnkzM296/NXljLmpwZw"
@@ -33,12 +33,22 @@
     </div>
     <div class="w-2"></div>
 
-    <p class="text-sm">{{ userData?.FollowersCount }} Followers</p>
+    <p class="text-sm">{{ userData?.FollowersCount }} Followers</p> -->
+    <button
+      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
+    >
+      <p class="text-sm">{{ userData?.FollowersCount }} Followers</p>
+    </button>
+    <button
+      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
+    >
+      <p class="text-sm">{{ userData?.FollowingCount }} Following</p>
+    </button>
   </div>
 </div>
 
 <button
-  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm"
+  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
 >
   Edit Profile
 </button>
@@ -76,7 +86,7 @@
     }} transition-all duration-200"
     (click)="setSelectedTab('REPOSTS')"
   >
-    Reposts {{  selectedTab === "REPOSTS" ? "(" + myThreads.length + ")" : '' }}
+    Reposts {{ selectedTab === "REPOSTS" ? "(" + myThreads.length + ")" : "" }}
   </button>
 
   <!-- {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }} -->

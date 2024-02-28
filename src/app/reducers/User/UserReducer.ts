@@ -28,7 +28,7 @@ export const UserReducer = createReducer(
     return { ...state, notificatinos: notifs }
   }),
   on(SET_USER_OTHER_USER, (state: any, {data}) => {
-    return { ...state, temp: data }
+    return { ...state, otherUserData: data }
   }),
   on(SET_USER_TEMP, (state: any, data) => {
     return { ...state, temp: data }

@@ -1,7 +1,7 @@
 import { INotification } from "../../Interfaces/Common"
 
 export interface IUserInitialState {
-  userData: Object | null,
+  userData: Object | null | any,
   loading: boolean,
   success: boolean,
   message: string | null,

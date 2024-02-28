@@ -19,6 +19,8 @@ export class AuthGuard {
     if (!aToken) this.userService.getMySession()
 
     if (rToken && user) {
+      this.userService.getMySession()
+
       return true;
     } else {
       this.router.navigate(['/login'])

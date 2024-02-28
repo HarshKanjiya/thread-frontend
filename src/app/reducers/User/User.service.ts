@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
-import { CheckUserNameAPI, GetMyNotifAPI, GetSessionDataAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
-import { SET_USER_DATA, SET_USER_LOADING, SET_USER_NOTIF, SET_USER_TEMP } from './UserActions';
+import { CheckUserNameAPI, GetMyNotifAPI, GetSessionDataAPI, GetUserPRofileAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
+import { SET_USER_DATA, SET_USER_LOADING, SET_USER_NOTIF, SET_USER_OTHER_USER, SET_USER_TEMP } from './UserActions';
 import { ICheckValidUsername, ILoginUser, ISendMeOtp, ISignupUser, IUserInitialState, IVerifyMyOtp } from './UserTypes';
 
 @Injectable({
@@ -205,13 +205,14 @@ export class UserService {
     }
   }
 
-  getOtherUsersData(UserId: string) {
+  getOtherUsersData(MyId: string, userName: string) {
     this.store.dispatch(SET_USER_LOADING({ loading: true }))
     try {
-      this.http.get(GetMyNotifAPI + UserId).subscribe((res: any) => {
+      this.http.get(GetUserPRofileAPI + MyId + '/' + userName).subscribe((res: any) => {
         this.store.dispatch(SET_USER_LOADING({ loading: false }))
+        console.log('res :>> ', res);
         if (res.Success) {
-          this.store.dispatch(SET_USER_NOTIF({ notifs: res.Data }))
+          this.store.dispatch(SET_USER_OTHER_USER({ data: res.Data }))
         } else {
           this.toast.makeToast('ERROR', res.Message ?? "Something went wrong")
         }
