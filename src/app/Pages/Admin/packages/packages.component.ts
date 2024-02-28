@@ -8,13 +8,32 @@ import { IPackage } from '../../../Interfaces/IPackages';
 import { NoDataFoundComponent } from '../../util/no-data-found/no-data-found.component';
 import { IAdminInitialState } from '../../../reducers/Admin/AdminTypes';
 import { LoaderComponent } from '../../../Components/loader/loader.component';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-packages',
   standalone: true,
-  imports: [NoDataFoundComponent, LoaderComponent],
+  imports: [NoDataFoundComponent, LoaderComponent,RouterLink],
   templateUrl: './packages.component.html',
-  styleUrl: './packages.component.scss'
+  animations:[
+    trigger("initAnim", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(20px)" })
+        )
+      ])
+    ]),
+  ]
 })
 export class PackagesComponent {
 

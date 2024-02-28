@@ -145,15 +145,41 @@
         </button>
       </div>
 
-      <div class="w-full h-full overflow-x-hidden overflow-y-auto">
+      <div
+        class="w-full h-full overflow-x-hidden overflow-y-auto flex flex-wrap"
+      >
         @if(packages.length > 0){ @for (item of packages; track $index) {
-        <div>
-          <p>{{ item.PackageName }}</p>
+        <div
+          routerLink="{{ item.PackageId }}"
+          @initAnim
+          class="relative h-36 w-36 flex items-center justify-center overflow-hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-36 w-36 fill-current text-gray-800 -z-0"
+          >
+            <path
+              d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+            />
+          </svg>
+          <p
+            class="absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            {{ item.PackageName }}
+          </p>
         </div>
         } }@else { @if(loading){
-        <loader />
+        <loader class="w-full" />
         }@else {
-        <no-data-found message="Packages not found!" />
+        <no-data-found class="w-full" message="Packages not found!" />
         } }
       </div>
     </div>

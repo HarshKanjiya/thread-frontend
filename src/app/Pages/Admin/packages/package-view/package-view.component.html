@@ -1,0 +1,426 @@
+@if(loading){
+<loader />
+}
+<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+  <div
+    class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
+  >
+    <div class="flex items-center gap-3">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-6 w-6"
+      >
+        <path d="m7.5 4.27 9 5.15" />
+        <path
+          d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
+        />
+        <path d="m3.3 7 8.7 5 8.7-5" />
+        <path d="M12 22V12" />
+      </svg>
+      <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
+        <span class="underline">{{ packageData?.PackageName }}</span> package
+      </h1>
+    </div>
+
+    <!-- <button
+      (click)="openPopUp()"
+      class="flex items-center gap-3 rounded-md dark:bg-gray-800 bg-gray-200 px-3 py-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-neutral-600 dark:stroke-white h-5 w-5"
+      >
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </svg>
+      <p class="hidden sm:block">Add new</p>
+    </button> -->
+  </div>
+
+  <div class="h-full flex-1 w-full">
+    <div class="flex flex-col gap-3 h-full w-full">
+      <div class="flex flex-col">
+        <p class="text-md text-gray-700 dark:text-gray-300">
+          You can Modify package information from here.
+        </p>
+      </div>
+
+      <!-- form -->
+      <div class="flex flex-col gap-4 w-full pt-6">
+        <div
+          class="flex gap-3 items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+        >
+          <div
+            class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+          >
+            Package Name
+          </div>
+          <div
+            class="text-ellipsis overflow-hidden flex gap-3 justify-between w-full"
+          >
+            <input
+              [(ngModel)]="tempObj.PackageName"
+              [readonly]="!editObj.PackageName.edit"
+              maxlength="30"
+              class=" h-min w-full my-auto py-0.5 px-3 truncate outline-none dark:bg-gray-800 border-t-0 border-l-0 border-r-0 {{
+                editObj.PackageName.edit
+                  ? 'border-b border-gray-400 dark:border-gray-700'
+                  : 'border-b border-white dark:border-gray-800'
+              }}"
+            />
+
+            <div class="flex items-center bg-white dark:bg-gray-800">
+              @if(editObj.PackageName.loading){
+              <div
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+              </div>
+              }@else { @if(!editObj.PackageName.edit){
+              <button
+                (click)="enableDisableEdit('PackageName', true)"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+              }@else {
+              <button
+                (click)="saveChanges('PackageName')"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </button>
+              } }
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex gap-3 items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+        >
+          <div
+            class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+          >
+            Price (₹)
+          </div>
+          <div
+            class="text-ellipsis overflow-hidden flex gap-3 justify-between w-full"
+          >
+            <input
+              [(ngModel)]="tempObj.PackagePrice"
+              [readonly]="!editObj.PackagePrice.edit"
+              maxlength="30"
+              class=" h-min w-full my-auto py-0.5 px-3 truncate outline-none dark:bg-gray-800 border-t-0 border-l-0 border-r-0 {{
+                editObj.PackagePrice.edit
+                  ? 'border-b border-gray-400 dark:border-gray-700'
+                  : 'border-b border-white dark:border-gray-800'
+              }}"
+            />
+
+            <div class="flex items-center bg-white dark:bg-gray-800">
+              @if(editObj.PackagePrice.loading){
+              <div
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+              </div>
+              }@else { @if(!editObj.PackagePrice.edit){
+              <button
+                (click)="enableDisableEdit('PackagePrice', true)"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+              }@else {
+              <button
+                (click)="saveChanges('PackagePrice')"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </button>
+              } }
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex gap-3 items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+        >
+          <div
+            class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+          >
+            Discount (%)
+          </div>
+          <div
+            class="text-ellipsis overflow-hidden flex gap-3 justify-between w-full"
+          >
+            <input
+              [(ngModel)]="tempObj.Discount"
+              [readonly]="!editObj.Discount.edit"
+              maxlength="30"
+              class=" h-min w-full my-auto py-0.5 px-3 truncate outline-none dark:bg-gray-800 border-t-0 border-l-0 border-r-0 {{
+                editObj.Discount.edit
+                  ? 'border-b border-gray-400 dark:border-gray-700'
+                  : 'border-b border-white dark:border-gray-800'
+              }}"
+            />
+
+            <div class="flex items-center bg-white dark:bg-gray-800">
+              @if(editObj.Discount.loading){
+              <div
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+              </div>
+              }@else { @if(!editObj.Discount.edit){
+              <button
+                (click)="enableDisableEdit('Discount', true)"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+              }@else {
+              <button
+                (click)="saveChanges('Discount')"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </button>
+              } }
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex gap-3 items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
+        >
+          <div
+            class="w-[150px] sm:w-[180px] text-ellipsis overflow-hidden text-center px-3 py-2 bg-gray-200 dark:bg-gray-900"
+          >
+            Color (HEX)
+          </div>
+          <div
+            class="text-ellipsis overflow-hidden flex gap-3 justify-between w-full"
+          >
+            <div class="flex gap-2 px-3">
+              <input
+                class="w-6 my-auto h-6 bg-white dark:bg-gray-800 border-none outline-none select-none"
+                [disabled]="!editObj.AccentColor.edit"
+                readonly
+                type="color"
+                [(ngModel)]="tempObj.AccentColor"
+              />
+              <input
+                [(ngModel)]="tempObj.AccentColor"
+                [readonly]="!editObj.AccentColor.edit"
+                maxlength="30"
+                class=" h-min w-full my-auto px-0 py-0.5 truncate outline-none bg-white dark:bg-gray-800 border-t-0 border-l-0 border-r-0 {{
+                  editObj.AccentColor.edit
+                    ? 'border-b border-gray-400 dark:border-gray-700'
+                    : 'border-b border-white dark:border-gray-800'
+                }}"
+              />
+            </div>
+
+            <div class="flex items-center bg-white dark:bg-gray-800">
+              @if(editObj.AccentColor.loading){
+              <div
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-black dark:stroke-white h-4 w-4 animate-spin"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+              </div>
+              }@else { @if(!editObj.AccentColor.edit){
+              <button
+                (click)="enableDisableEdit('AccentColor', true)"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+              }@else {
+              <button
+                (click)="saveChanges('AccentColor')"
+                class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </button>
+              } }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

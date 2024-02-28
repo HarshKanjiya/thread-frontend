@@ -36,7 +36,8 @@ import { PostService } from '../../../../reducers/Post/Post.service';
 export class HomePageComponent {
 
   userData: any = null
-  loading: boolean = false
+  userLoading: boolean = false
+  postLoading: boolean = false
   threads: any[] = []
 
   constructor(private router: Router, public dialog: DialogService, private store: Store<any>, private postService: PostService) {
@@ -44,11 +45,12 @@ export class HomePageComponent {
       this.userData = res.userData
       if (res.userData) {
         this.postService.getMyFeed(this.userData?.UserId, 0)
+        this.userLoading = this.userLoading
       }
     })
     store.select("Post").subscribe((res: IPostInitialState) => {
       this.threads = [...res.feed]
-      this.loading = this.loading
+      this.postLoading = this.postLoading
     })
   }
 

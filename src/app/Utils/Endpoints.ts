@@ -53,7 +53,7 @@ export const InitPaymentAPI = "buy/init" // POST
 export const GetAllPackages_AdminAPI = "packages/admin/all/" // GET //& DONE
 export const GetPackageById_AdminAPI = "packages/admin/" // + PACKAGE_ID // GET //& DONE
 export const AddPackage_AdminAPI = "packages/admin" // POST
-export const UpdatePackage_AdminAPI = "packages/admin" // PUT
+export const UpdatePackage_AdminAPI = "packages/admin/" // PUT
 export const DeletePackage_AdminAPI = "packages/admin" // DELETE
 
 export const GetConstants_AdminAPI = "admin/env" //& DONE

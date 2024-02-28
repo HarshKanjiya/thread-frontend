@@ -25,7 +25,7 @@ export class HttpService {
     return this.http.post(this.uri + path, payload, { headers: this.headers,withCredentials:true })
   }
   put(path: string, payload: any) {
-    return this.http.post(this.uri + path, payload, { headers: this.headers ,withCredentials:true })
+    return this.http.put(this.uri + path, payload, { headers: this.headers ,withCredentials:true })
   }
   patch(path: string, payload: any) {
     return this.http.post(this.uri + path, payload, { headers: this.headers,withCredentials:true  })
