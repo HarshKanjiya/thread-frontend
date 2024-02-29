@@ -65,9 +65,11 @@ export class ReportsConfigComponent {
 
   tempCategory: string | null = null
   tempString: string = ""
+  reportId: string = ""
 
   dataForDeletion: any = null
 
+  loading: boolean = true
   tempData: any = null
   tempLoading: boolean = false
   tempCheck: boolean = false
@@ -79,6 +81,7 @@ export class ReportsConfigComponent {
     this.store.select("Admin").subscribe((res: IAdminInitialState) => {
       this.categories = res.reportCategories
       this.reports = res.reports
+      this.loading = res.loading
     })
   }
 
@@ -88,25 +91,6 @@ export class ReportsConfigComponent {
 
     this.adminService.getReportCategories()
     this.adminService.getReports()
-
-    // this.categories = [
-    //   { ReportCategoryId: "1", CategoryName: "one" },
-    //   { ReportCategoryId: "2", CategoryName: "two" },
-    //   { ReportCategoryId: "3", CategoryName: "three" },
-    //   { ReportCategoryId: "4", CategoryName: "fourth" },
-    // ]
-    // this.reports = [
-    //   { ReportCategoryId: "1", ReportId: "1", Text: "report type 1" },
-    //   { ReportCategoryId: "1", ReportId: "2", Text: "report type 2" },
-    //   { ReportCategoryId: "1", ReportId: "3", Text: "report type 3" },
-    //   { ReportCategoryId: "1", ReportId: "4", Text: "report type 4" },
-    //   { ReportCategoryId: "2", ReportId: "5", Text: "report type 5" },
-    //   { ReportCategoryId: "3", ReportId: "6", Text: "report type 6" },
-    //   { ReportCategoryId: "3", ReportId: "7", Text: "report type 7" },
-    //   { ReportCategoryId: "3", ReportId: "8", Text: "report type 8" },
-    //   { ReportCategoryId: "4", ReportId: "7", Text: "report type 9" },
-    //   { ReportCategoryId: "4", ReportId: "8", Text: "report type 10" },
-    // ]
   }
 
   setSelectedCategory(item: IReportCategory) {
@@ -123,6 +107,7 @@ export class ReportsConfigComponent {
       this.tempString = data?.CategoryName || ''
     } else {
       this.tempString = data?.Text || ''
+      if (FormT == "UPDATE") this.reportId = data?.Report
     }
 
     this.dialog.openDialog("TEMP")
@@ -131,12 +116,83 @@ export class ReportsConfigComponent {
   editReport(report: IReport) {
   }
 
+  itemToBeDeleted: any = null
   deleteItem(Type: "CATE" | "REPORT", item: any) {
     this.formType = "DELETE"
     this.fieldType = Type
-    this.dialog.closeDialog()
+    this.itemToBeDeleted = item
+    this.dialog.openDialog("TEMP")
   }
   deleteSubmit() {
+
+    this.tempLoading = true
+
+    if (this.fieldType === "CATE") {
+      try {
+        this.http.delete(CreateReportCategory_AdminAPI + this.selectedCategory?.ReportCategoryId)
+          .subscribe((res: any) => {
+            this.tempCheck = true
+            this.tempMessage = res.Message
+            if (res.Success) {
+              this.tempSuccess = true
+              setTimeout(() => {
+                this.tempLoading = false
+                this.dialog.closeDialog()
+                this.tempSuccess = false
+                this.categories = this.categories.filter((category: IReportCategory) => category.ReportCategoryId !== res.Data.ReportCategoryId)
+              }, 1500);
+            } else {
+              this.tempSuccess = false
+              setTimeout(() => {
+                this.tempLoading = false
+              }, 1500);
+            }
+          })
+      } catch (err: any) {
+        this.tempSuccess = false
+        this.tempCheck = true
+        this.tempMessage = "Something went wrong"
+        setTimeout(() => {
+          this.tempLoading = false
+          this.tempCheck = false
+        }, 1500);
+      }
+
+    } else {
+      try {
+        this.http.delete(CreateReport_AdminAPI + this.itemToBeDeleted.ReportId)
+          .subscribe((res: any) => {
+            this.tempCheck = true
+            this.tempMessage = res.Message
+            if (res.Success) {
+              this.tempSuccess = true
+              setTimeout(() => {
+                this.tempLoading = false
+                this.dialog.closeDialog()
+                this.tempSuccess = false
+
+                this.reports = this.reports.filter((report: IReport) => report.ReportId !== res.Data.ReportId)
+                this.selectedReports = this.reports.filter((report: IReport) => report.ReportCategoryId === this.selectedCategory?.ReportCategoryId ? true : false)
+
+
+              }, 1500);
+            } else {
+              this.tempSuccess = false
+              setTimeout(() => {
+                this.tempLoading = false
+              }, 1500);
+            }
+          })
+      } catch (err: any) {
+        this.tempSuccess = false
+        this.tempCheck = true
+        this.tempMessage = "Something went wrong"
+        setTimeout(() => {
+          this.tempLoading = false
+          this.tempCheck = false
+        }, 1500);
+      }
+    }
 
   }
 
@@ -156,26 +212,6 @@ export class ReportsConfigComponent {
     }
 
     if (this.fieldType === "CATE") {
-      // new category
-
-
-
-      // setTimeout(() => {
-
-      //   this.tempCheck = true
-      //   this.tempSuccess = true
-      //   this.tempMessage = "qwerty"
-      //   setTimeout(() => {
-
-      //     this.tempLoading = false
-      //     this.dialog.closeDialog()
-      //     this.tempString = ""
-      //     this.tempData = null
-
-      //   }, 1500);
-
-      // }, 1500);
-
       try {
         this.http.post(CreateReportCategory_AdminAPI, { CategoryName: this.tempString })
           .subscribe((res: any) => {
@@ -187,7 +223,7 @@ export class ReportsConfigComponent {
                 this.tempLoading = false
                 this.dialog.closeDialog()
                 this.tempSuccess = false
-                this.categories.push(res.Data)
+                this.categories = [...this.categories, res.Data]
               }, 1500);
             } else {
               this.tempSuccess = false
@@ -205,23 +241,7 @@ export class ReportsConfigComponent {
           this.tempCheck = false
         }, 1500);
       }
-
-
     } else {
-      // new report
-      // setTimeout(() => {
-
-      //   this.tempCheck = true
-      //   this.tempMessage = "qwerty"
-      //   setTimeout(() => {
-
-      //     this.tempLoading = false
-      //     this.dialog.closeDialog()
-      //     this.tempSuccess = true
-      //     this.tempString = ""
-      //     this.tempData = null
-      //   }, 1500);
-      // }, 1500);
       try {
         this.http.post(CreateReport_AdminAPI, { text: this.tempString, CategoryId: this.selectedCategory?.ReportCategoryId })
           .subscribe((res: any) => {
@@ -232,9 +252,9 @@ export class ReportsConfigComponent {
               setTimeout(() => {
                 this.tempLoading = false
                 this.dialog.closeDialog()
-
                 this.tempSuccess = false
-                this.categories.push(res.Data)
+                this.reports = [...this.reports, res.Data]
+                this.selectedReports = [...this.selectedReports, res.Data]
               }, 1500);
             } else {
               this.tempSuccess = false
@@ -257,9 +277,6 @@ export class ReportsConfigComponent {
   submitUpdateForm() {
     this.tempLoading = true
 
-    console.log('object :>> ', this.tempString);
-    console.log('object :>> ', this.tempData);
-
     if (this.tempString.trim().length == 0) {
       this.tempCheck = true
       this.tempMessage = "Invalid field value"
@@ -272,39 +289,83 @@ export class ReportsConfigComponent {
     }
 
     if (this.fieldType === "CATE") {
-      // category
-      setTimeout(() => {
 
+      try {
+        this.http.put(CreateReportCategory_AdminAPI + this.selectedCategory?.ReportCategoryId, { CategoryName: this.tempString })
+          .subscribe((res: any) => {
+            this.tempCheck = true
+            this.tempMessage = res.Message
+            if (res.Success) {
+              this.tempSuccess = true
+              setTimeout(() => {
+                this.tempLoading = false
+                this.dialog.closeDialog()
+                this.tempSuccess = false
+                this.categories = this.categories.map((category: IReportCategory) => {
+                  if (category.ReportCategoryId === res.Data.ReportCategoryId) {
+                    return res.Data
+                  } else {
+                    return category
+                  }
+                })
+              }, 1500);
+            } else {
+              this.tempSuccess = false
+              setTimeout(() => {
+                this.tempLoading = false
+              }, 1500);
+            }
+          })
+      } catch (err: any) {
+        this.tempSuccess = false
         this.tempCheck = true
-        this.tempMessage = "qwerty"
+        this.tempMessage = "Something went wrong"
         setTimeout(() => {
-
           this.tempLoading = false
-          this.dialog.closeDialog()
-          this.tempSuccess = true
-          this.tempString = ""
-          this.tempData = null
-
+          this.tempCheck = false
         }, 1500);
+      }
 
-      }, 1500);
     } else {
-      //  report
-      setTimeout(() => {
+      try {
+        this.http.put(CreateReport_AdminAPI + this.reportId, { text: this.tempString, CategoryId: this.selectedCategory?.ReportCategoryId })
+          .subscribe((res: any) => {
+            this.tempCheck = true
+            this.tempMessage = res.Message
+            if (res.Success) {
+              this.tempSuccess = true
+              setTimeout(() => {
+                this.tempLoading = false
+                this.dialog.closeDialog()
+                this.tempSuccess = false
 
+                this.reports = this.reports.map((report: IReport) => {
+                  if (report.ReportId == res.Data.ReportId) {
+                    return res.Data
+                  } else {
+                    return report
+                  }
+                })
+                this.selectedReports = this.reports.filter((report: IReport) => report.ReportCategoryId === this.selectedCategory?.ReportCategoryId ? true : false)
+
+
+              }, 1500);
+            } else {
+              this.tempSuccess = false
+              setTimeout(() => {
+                this.tempLoading = false
+              }, 1500);
+            }
+          })
+      } catch (err: any) {
+        this.tempSuccess = false
         this.tempCheck = true
-        this.tempMessage = "qwerty"
+        this.tempMessage = "Something went wrong"
         setTimeout(() => {
-
           this.tempLoading = false
-          this.dialog.closeDialog()
-          this.tempSuccess = true
-          this.tempString = ""
-          this.tempData = null
-
+          this.tempCheck = false
         }, 1500);
-
-      }, 1500);
+      }
     }
 
   }

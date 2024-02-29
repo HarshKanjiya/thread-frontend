@@ -5,33 +5,56 @@ import { HttpService } from '../../../../Services/http-service.service';
 import { ToastService } from '../../../../Services/toast.service';
 import { GetPackageById_AdminAPI, UpdatePackage_AdminAPI } from '../../../../Utils/Endpoints';
 import { FormsModule } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-package-view',
   standalone: true,
   imports: [LoaderComponent, FormsModule],
   templateUrl: './package-view.component.html',
+  animations: [
+    trigger("initAnim", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(20px)" })
+        )
+      ])
+    ]),
+  ]
 })
 export class PackageViewComponent {
 
   loading: boolean = true
   error: any = ""
   packageData: any = null
-  tempObj = {
+  tempObj: any = {
     PackageName: "",
     AccentColor: "",
     Active: false,
     Discount: "",
     PackagePrice: "",
-    Perks: []
+    Perks: [],
+    Published: false
   }
-  editObj = {
+
+  editObj: any = {
     PackageName: { edit: false, loading: false },
-    AccentColor: { edit: false, loading: false },
-    Active: { edit: false, loading: false },
-    Discount: { edit: false, loading: false },
     PackagePrice: { edit: false, loading: false },
-    Perks: { edit: false, loading: false }
+    Discount: { edit: false, loading: false },
+    AccentColor: { edit: false, loading: false },
+    Perks: { edit: false, loading: false },
+    PerksChild: [],
+    Active: { edit: false, loading: false },
+    Published: { edit: false, loading: false },
   }
 
   constructor(private toast: ToastService, private httpService: HttpService, private route: ActivatedRoute, private router: Router) { }
@@ -56,6 +79,7 @@ export class PackageViewComponent {
         if (res.Success) {
           this.packageData = res.Data
           this.tempObj = { ...res.Data }
+          this.editObj.PerksChild = res.Data.Perks.map((i: any) => ({ edit: false }))
         } else {
           this.error = res.Message
         }
@@ -68,15 +92,36 @@ export class PackageViewComponent {
 
   enableDisableEdit(key: "PackageName" | "AccentColor" | "Active" | "Discount" | "PackagePrice" | "Perks", bool: boolean) {
     this.editObj[key].edit = bool
+    if (!bool) {
+      this.tempObj = { ...this.packageData }
+    }
   }
 
-  saveChanges(key: "PackageName" | "AccentColor" | "Active" | "Discount" | "PackagePrice" | "Perks",) {
+  saveChanges(key: "PackageName" | "AccentColor" | "Active" | "Discount" | "PackagePrice" | "Perks" | "Published",) {
     this.editObj[key].loading = true
     try {
+
+      if (key === "Published") {
+        if (this.tempObj.Published) {
+          this.tempObj.Published = false
+        } else {
+          this.tempObj.Published = true
+          this.tempObj.Active = true
+        }
+      }
+      if (key === "Active") {
+        if (this.tempObj.Active) {
+          this.tempObj.Active = false
+          this.tempObj.Published = false
+        } else {
+          this.tempObj.Active = true
+        }
+      }
+
+
       this.httpService.put(UpdatePackage_AdminAPI + this.packageData.PackageId, this.tempObj).subscribe((res: any) => {
         this.editObj[key].loading = false
         this.editObj[key].edit = false
-        console.log('res :>> ', res);
         if (res.Success) {
           this.packageData = res.Data
         } else {
@@ -87,6 +132,26 @@ export class PackageViewComponent {
       this.editObj[key].loading = false
       this.editObj[key].edit = false
       this.error = err.message
+    }
+  }
+
+  publishPackage() {
+    this.saveChanges("Published")
+  }
+
+  archivePackage() {
+    this.saveChanges("Active")
+  }
+
+  addFieldToPerks() {
+    this.tempObj.Perks.push("")
+    this.tempObj.PerksChild.push({ edit: false })
+  }
+  enablePerksEdit(index: number, bool: boolean) {
+    if (bool) {
+      this.editObj.PerksChild[index].edit = bool
+    } else {
+      this.tempObj = { ...this.packageData }
     }
   }
 }

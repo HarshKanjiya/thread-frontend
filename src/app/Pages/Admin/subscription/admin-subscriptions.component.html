@@ -29,8 +29,14 @@
   <div
     class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
   >
+    @if (loading) {
+    <loader class="h-full" />
+    }@else { @if (data.length == 0) {
+    <no-data-found class="h-full" />
+    }
     <div class="flex flex-col gap-3 h-max w-full">
       <!-- write here -->
     </div>
+    }
   </div>
 </div>

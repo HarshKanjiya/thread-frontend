@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
 import { CreateReportCategory_AdminAPI, GetAllPackages_AdminAPI, GetConstants_AdminAPI, GetSingleConstant_AdminAPI, SetSingleConstant_AdminAPI, getAllBugReports_AdminAPI, getAllUserReports_AdminAPI, getReportCategories_AdminAPI, getReports_AdminAPI } from '../../Utils/Endpoints';
-import { SET_ADMIN_APPEND_CONSTANTS, SET_ADMIN_BUG_REPORT, SET_ADMIN_CONSTANTS, SET_ADMIN_LOADING, SET_ADMIN_PACKAGES, SET_ADMIN_REPORT, SET_ADMIN_SUCCESS } from './AdminActions';
+import { SET_ADMIN_APPEND_CONSTANTS, SET_ADMIN_BUG_REPORT, SET_ADMIN_CONSTANTS, SET_ADMIN_LOADING, SET_ADMIN_PACKAGES, SET_ADMIN_REPORT, SET_ADMIN_REPORT_CATEGORIES, SET_ADMIN_SUCCESS } from './AdminActions';
 import { IAdminInitialState } from './AdminTypes';
 
 
@@ -115,7 +115,7 @@ export class AdminService {
         .subscribe((res: any) => {
           this.store.dispatch(SET_ADMIN_LOADING({ loading: false }))
           if (res?.Success) {
-            this.store.dispatch(SET_ADMIN_BUG_REPORT({ reports: res.Data }))
+            this.store.dispatch(SET_ADMIN_REPORT_CATEGORIES({ reportCategories: res.Data }))
           } else {
             this.store.dispatch(SET_ADMIN_PACKAGES({ packages: [] }))
           }

@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+<div @initAnim class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
   <div
     class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
   >
@@ -29,8 +29,148 @@
   <div
     class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
   >
-    <div class="flex flex-col gap-3 h-max w-full">
-      <!-- write here -->
+    <div class="flex flex-col gap-3 h-full w-full">
+      <div class="flex flex-col">
+        <p class="text-md text-gray-700 dark:text-gray-300">
+          Thease are all the users available on the platform.
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-600">
+          You can modify user's data from here.
+        </p>
+      </div>
+
+      <div class="flex gap-3 justify-between items-center">
+        <div class="flex gap-3">
+          <button
+            [disabled]="loading"
+            (click)="setFilterType('UNBAN')"
+            class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+              filterType === 'UNBAN'
+                ? 'bg-emerald-500'
+                : 'bg-gray-200 dark:bg-gray-800/60'
+            }}"
+          >
+            <div
+              class="w-2 h-2 bg-emerald-500 rounded-full ring ring-gray-200 dark:ring-gray-800"
+            ></div>
+            <p
+              class="transition-all duration-200 {{
+                filterType === 'UNBAN' ? 'text-white' : ''
+              }} "
+            >
+              Unblocked
+            </p>
+          </button>
+          <button
+            [disabled]="loading"
+            (click)="setFilterType('BAN')"
+            class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+              filterType === 'BAN'
+                ? 'bg-red-500'
+                : 'bg-gray-200 dark:bg-gray-800/60'
+            }}"
+          >
+            <div
+              class="w-2 h-2 bg-red-500 rounded-full ring ring-gray-200 dark:ring-gray-800"
+            ></div>
+            <p
+              class="transition-all duration-200 {{
+                filterType === 'BAN' ? 'text-white' : ''
+              }} "
+            >
+              Drafts
+            </p>
+          </button>
+          <button
+            [disabled]="loading"
+            (click)="setFilterType('ALL')"
+            class="px-3 py-1.5 rounded-md flex items-center gap-2 transition-all duration-200 disabled:opacity-50 {{
+              filterType === 'ALL'
+                ? 'bg-purple-400'
+                : 'bg-gray-200 dark:bg-gray-800/60'
+            }}"
+          >
+            <div
+              class="w-2 h-2 bg-purple-400 rounded-full ring ring-gray-200 dark:ring-gray-800"
+            ></div>
+            <p
+              class="transition-all duration-200 {{
+                filterType === 'ALL' ? 'text-white' : ''
+              }} "
+            >
+              All
+            </p>
+          </button>
+        </div>
+        <div>
+          <button
+            class="relative group select-none flex items-center justify-center rounded-md dark:bg-gray-800 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700/80 transition-all duration-150 p-2 h-10 w-10 disabled:bg-white dark:disabled:bg-gray-900"
+            (click)="
+              this.view == 'LIST' ? (this.view = 'TABLE') : (this.view = 'LIST')
+            "
+          >
+            @if(view == "LIST"){
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-6 w-6"
+            >
+              <rect width="7" height="7" x="3" y="3" rx="1" />
+              <rect width="7" height="7" x="3" y="14" rx="1" />
+              <path d="M14 4h7" />
+              <path d="M14 9h7" />
+              <path d="M14 15h7" />
+              <path d="M14 20h7" />
+            </svg>
+            }@else {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-6 w-6"
+            >
+              <path d="M12 15V9" />
+              <path d="M3 15h18" />
+              <path d="M3 9h18" />
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+            </svg>
+            }
+            <div
+              class="absolute z-100 whitespace-normal right-[110%] rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
+            >
+              {{ view === "LIST" ? "List view" : "Table view" }}
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- <div>
+      </div> -->
+
+      @if (view == "LIST") {
+      <app-users-list-view
+        [data]="users"
+        [loading]="loading"
+      ></app-users-list-view>
+      }@else {
+      <app-users-table-view
+        [data]="users"
+        [loading]="loading"
+      ></app-users-table-view>
+      }
     </div>
   </div>
 </div>
