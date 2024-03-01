@@ -34,7 +34,6 @@ import { IUserInitialState } from '../../reducers/User/UserTypes';
         )
       ])
     ]),
-
   ]
 })
 export class HeaderComponent {

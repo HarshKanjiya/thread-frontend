@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { AdminService } from '../../../reducers/Admin/Admin.service';
-import { Store } from '@ngrx/store';
-import { IAdminInitialState } from '../../../reducers/Admin/AdminTypes';
-import { LoaderComponent } from '../../../Components/loader/loader.component';
-import { NoDataFoundComponent } from '../../util/no-data-found/no-data-found.component';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Component } from '@angular/core';
+import { AdminService } from '../../../../reducers/Admin/Admin.service';
+import { Store } from '@ngrx/store';
+import { IAdminInitialState } from '../../../../reducers/Admin/AdminTypes';
+import { LoaderComponent } from '../../../../Components/loader/loader.component';
+import { NoDataFoundComponent } from '../../../util/no-data-found/no-data-found.component';
 
 @Component({
-  selector: 'app-bug-reports',
+  selector: 'app-users-analytics',
   standalone: true,
-  imports: [LoaderComponent,NoDataFoundComponent],
-  templateUrl: './bug-reports.component.html',
+  imports: [LoaderComponent, NoDataFoundComponent],
+  templateUrl: './users-analytics.component.html',
   animations: [
     trigger("enter", [
       transition(":enter", [
@@ -29,10 +29,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
       ])
     ]),
   ]
-
 })
-export class BugReportsComponent {
-
+export class UsersAnalyticsComponent {
   reports: any[] = []
   loading: boolean = false
 
@@ -45,5 +43,4 @@ export class BugReportsComponent {
   ngAfterViewInit() {
     this.adminService.getBugReports()
   }
-
 }

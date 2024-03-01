@@ -23,6 +23,7 @@ import { SettingPageComponent } from './Pages/Index/setting/setting-page.compone
 import { NotfoundPageComponent } from './Pages/util/notfound-page/notfound-page.component';
 import { AuthGuard } from './Utils/AuthGuard';
 import { PackageViewComponent } from './Pages/Admin/packages/package-view/package-view.component';
+import { UsersAnalyticsComponent } from './Pages/Admin/users/users-analytics/users-analytics.component';
 
 export const routes: Routes = [
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
       { path: "packages", component: PackagesComponent, pathMatch: "full", title: "Admin | Packages" },
       { path: "packages/:id", component: PackageViewComponent, pathMatch: "full", title: "Admin | Packages" },
       { path: "users", component: UsersComponent, pathMatch: "full", title: "Admin | Users" },
+      { path: "users/:id", component: UsersAnalyticsComponent, pathMatch: "full", title: "Admin | Users" },
       { path: "settings", component: SettingComponent, pathMatch: "full", title: "Admin | Settings" },
     ]
   },

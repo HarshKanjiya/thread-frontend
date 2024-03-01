@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+<div @initAnim class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
   <div
     class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
   >
@@ -54,7 +54,7 @@
   >
     <div class="flex flex-col gap-3 h-max w-full">
       <div class="flex gap-10 flex-wrap flex-row">
-        <div @initAnim class="flex flex-col gap-3 w-full sm:w-min ">
+        <div @initAnim class="flex flex-col gap-3 w-full sm:w-min">
           <h1 class="text-lg font-bold">Stripe</h1>
           <div
             class="flex items-center w-full sm:w-[500px] rounded-md overflow-hidden bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-800 text-sm"
@@ -537,7 +537,7 @@
 
       <div class="flex flex-col gap-2 w-full pt-6">
         @if (pairs.length > 0) {
-        <h1 @initAnim class="text-lg font-bold">Other Environment variables</h1>
+        <h1 class="text-lg font-bold">Other Environment variables</h1>
         } @for (item of pairs; track $index) { @if (true ) {
         <div
           @initAnim

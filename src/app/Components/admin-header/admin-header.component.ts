@@ -2,6 +2,9 @@ import { Component, Signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ThemeService } from '../../Services/theme.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { UserService } from '../../reducers/User/User.service';
+import { Store } from '@ngrx/store';
+import { IUserInitialState } from '../../reducers/User/UserTypes';
 
 @Component({
   selector: 'app-admin-header',
@@ -34,13 +37,21 @@ export class AdminHeaderComponent {
   currentTheme: Signal<boolean> = computed(() => this.theme.darkTheme())
 
 
-  constructor(public theme: ThemeService, public router: Router) {
+  loading: boolean = false
+  constructor(public theme: ThemeService, public router: Router, private userService: UserService, private store: Store<any>) {
+  }
+
+  ngOnInit() {
+    this.store.select("User").subscribe((res: IUserInitialState) => {
+      this.loading = res.loading
+    })
   }
 
   changeTheme() {
     this.theme.darkTheme.set(!this.theme.darkTheme())
   }
 
-
-
+  signOut() {
+    this.userService.signOut()
+  }
 }

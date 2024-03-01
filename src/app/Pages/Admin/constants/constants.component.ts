@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
         style({ opacity: 1, transform: "translateY(0)" }),
         animate(
           "150ms ease-in-out",
-          style({ opacity: 0, transform: "translateY(-20px)" })
+          style({ opacity: 0, transform: "translateY(20px)" })
         )
       ])
     ]),

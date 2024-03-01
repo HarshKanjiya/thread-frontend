@@ -20,15 +20,13 @@
         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
-      <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
+      <h1 class="text-2xl h-[40px] font-semibold text-gray-800 dark:text-white">
         Users
       </h1>
     </div>
   </div>
 
-  <div
-    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
-  >
+  <div class="min-h-max h-full flex-1 w-full">
     <div class="flex flex-col gap-3 h-full w-full">
       <div class="flex flex-col">
         <p class="text-md text-gray-700 dark:text-gray-300">
@@ -159,18 +157,19 @@
 
       <!-- <div>
       </div> -->
-
-      @if (view == "LIST") {
-      <app-users-list-view
-        [data]="users"
-        [loading]="loading"
-      ></app-users-list-view>
-      }@else {
-      <app-users-table-view
-        [data]="users"
-        [loading]="loading"
-      ></app-users-table-view>
-      }
+      <div class="flex-1 w-full">
+        @if (view == "LIST") {
+        <app-users-list-view
+          [data]="users"
+          [loading]="loading"
+        ></app-users-list-view>
+        }@else {
+        <app-users-table-view
+          [orignalData]="users"
+          [loading]="loading"
+        ></app-users-table-view>
+        }
+      </div>
     </div>
   </div>
 </div>

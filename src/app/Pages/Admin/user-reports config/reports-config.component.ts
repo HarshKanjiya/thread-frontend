@@ -36,6 +36,22 @@ import { CreateReportCategory_AdminAPI, CreateReport_AdminAPI } from '../../../U
         )
       ])
     ]),
+    trigger("init", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-20px)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 1, transform: "translateY(0)" })
+        )
+      ]),
+      transition(":leave", [
+        style({ opacity: 1, transform: "translateY(0)" }),
+        animate(
+          "150ms ease-in-out",
+          style({ opacity: 0, transform: "translateY(20px)" })
+        )
+      ])
+    ]),
     trigger("rotateEnter", [
       transition(":enter", [
         style({ opacity: 0, transform: "rotate(-360deg)" }),

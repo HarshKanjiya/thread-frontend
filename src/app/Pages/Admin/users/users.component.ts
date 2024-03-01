@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 import { NoDataFoundComponent } from '../../util/no-data-found/no-data-found.component';
 import { LoaderComponent } from '../../../Components/loader/loader.component';
 import { FormsModule } from '@angular/forms';
@@ -38,7 +38,7 @@ export class UsersComponent {
   users: any[] = []
 
   filterType: "UNBAN" | "BAN" | "ALL" = "UNBAN"
-  view: "LIST" | "TABLE" = "LIST";
+  view: "LIST" | "TABLE" = "TABLE";
 
   constructor(private http: HttpService, private toast: ToastService) { }
 
@@ -56,6 +56,7 @@ export class UsersComponent {
         this.loading = false
         if (res.Success) {
           this.users = res.Data
+          console.log('object :>> ', res.Data);
         } else {
           this.toast.makeToast("ERROR", res.message || "Something went wrong")
         }

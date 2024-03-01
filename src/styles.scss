@@ -85,7 +85,7 @@
   background: #a0a0a0;
 }
 .custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
-  background: red;
+  // background: red;
 }
 
 .modal-open {
@@ -163,4 +163,13 @@ body {
 
 .height-transition {
   transition: height 200ms;
+}
+
+.custom-table-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgb(55 65 81 / 0.2);
+}
+.custom-table-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(55 65 81/0.6);
 }
