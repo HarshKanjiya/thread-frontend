@@ -6,7 +6,7 @@ export const LoginAPI = "auth/login" // POST //& DONE
 export const RegisterAPI = "auth/register" // POST //& DONE
 export const LogOutAPI = "auth/signout" // GET //& DONE
 export const CheckUserNameAPI = "auth/check/" // + USERNAME // GET //& DONE
-export const GetNewAccessTokenAPI = "auth/token" // GET
+export const GetNewAccessTokenAPI = "auth/token" // GET  //& DONE
 export const GetSessionDataAPI = "auth/session" //& DONE
 
 
@@ -40,7 +40,7 @@ export const BlockAPI = "action/block"
 
 
 // Notification
-export const GetMyNotifAPI = "notification/getall/" // + USERID // GET
+export const GetMyNotifAPI = "notification/getall/" // + USERID // GET  //& DONE
 export const MarkAsDoneNotifAPI = "notification/markseen" // POST // Pass Array of Notifs Ids
 export const DeleteNotifAPI = ""
 
@@ -62,11 +62,12 @@ export const DeleteConstant_AdminAPI = "admin/env/" //& DONE
 export const SetSingleConstant_AdminAPI = "admin/env" //& DONE
 export const UpdateSingleConstant_AdminAPI = "admin/env/new" //& DONE
 
-export const getReports_AdminAPI = "admin/reports"
-export const getAllUserReports_AdminAPI = "admin/reports/users"
-export const getAllBugReports_AdminAPI = "admin/reports/bugs"
-export const getReportCategories_AdminAPI = "admin/reports/category"
-export const CreateReport_AdminAPI = "admin/report/"
-export const CreateReportCategory_AdminAPI = "admin/report/category/"
+export const getReports_AdminAPI = "admin/reports"  //& DONE
+export const getAllUserReports_AdminAPI = "admin/reports/users"  //& DONE
+export const getAllBugReports_AdminAPI = "admin/reports/bugs"  //& DONE
+export const getReportCategories_AdminAPI = "admin/reports/category"  //& DONE
+export const CreateReport_AdminAPI = "admin/report/"  //& DONE
+export const CreateReportCategory_AdminAPI = "admin/report/category/"  //& DONE
 
-export const getUsers_AdminAPI = "auth/admin/users/"
+export const getUsers_AdminAPI = "auth/admin/users/"  //& DONE
+export const getSingleUser_AdminAPI = "auth/admin/user/"

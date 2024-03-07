@@ -72,13 +72,13 @@ export class ConstantsComponent {
     SecretKey: false
   }
 
-  secretKeyLoading: any = {
+  secretKeyLoading = {
     STRIPE: false,
     CLOUDINARY: false,
     JWT: false
   }
 
-  defaultConstants = ["STRIPE_PUBLIC", "STRIPE_SECRET", "CLOUDINARY_CLOUD_NAME", "CLOUDINARY_API_KEY", "CLOUDINARY_SECRET", "MAIL_SERVICE_EMAIL", "JWT_SECRET_KEY"]
+  defaultConstants = ["STRIPE_PUBLIC", "STRIPE_SECRET", "CLOUDINARY_CLOUD_NAME", "CLOUDINARY_API_KEY", "CLOUDINARY_SECRET", "MAIL_SERVICE_EMAIL",]
 
   stripePublic: any = {}
   stripeSecret: any = {}
@@ -95,10 +95,14 @@ export class ConstantsComponent {
       .subscribe((res: any) => {
         this.loading = res.loading;
         this.pairs = res.constants.filter((pair: any) => this.defaultConstants.indexOf(pair.Key) === -1 ? true : false)
+        console.log('constants :>> ', res.constants);
         if (res.constants) {
           this.stripePublic = res.constants.find((x: any) => x.Key === 'STRIPE_PUBLIC' ? true : false);
           this.stripeSecret = res.constants.find((x: any) => x.Key === 'STRIPE_SECRET' ? true : false);
-
+          this.cloudinaryCloudName = res.constants.find((x: any) => x?.Key === 'CLOUDINARY_CLOUD_NAME' ? true : false);
+          this.cloudinaryApiKey = res.constants.find((x: any) => x?.Key === 'CLOUDINARY_API_KEY' ? true : false);
+          this.cloudinaryApiSecret = res.constants.find((x: any) => x?.Key === 'CLOUDINARY_SECRET' ? true : false);
+          this.mailService = res.constants.find((x: any) => x?.Key === 'MAIL_SERVICE_EMAIL' ? true : false);
         }
       })
   }
@@ -169,23 +173,27 @@ export class ConstantsComponent {
     }
   }
 
-  getSecret(type: "STRIPE" | "CLOUDINARY" | "JWT", key: string) {
+  getSecret(type: "STRIPE" | "CLOUDINARY", key: string) {
     switch (type) {
       case "STRIPE":
         this.secretKeyLoading.STRIPE = true
         break
       case "CLOUDINARY":
-        this.secretKeyLoading.STRIPE = true
-        break
-      case "JWT":
-        this.secretKeyLoading.STRIPE = true
+        this.secretKeyLoading.CLOUDINARY = true
         break
     }
 
     try {
       this.http.get(GetSingleConstant_AdminAPI + key).subscribe((res: any) => {
         if (res.Success) {
-          this.stripeSecret = res.Data
+          switch (type) {
+            case "STRIPE":
+              this.stripeSecret = res.Data
+              break
+            case "CLOUDINARY":
+              this.cloudinaryApiSecret = res.Data
+              break
+          }
         } else {
           this.toast.makeToast("WARN", "Value does not exist")
         }
@@ -200,12 +208,10 @@ export class ConstantsComponent {
         this.secretKeyLoading.STRIPE = false
         break
       case "CLOUDINARY":
-        this.secretKeyLoading.STRIPE = false
-        break
-      case "JWT":
-        this.secretKeyLoading.STRIPE = false
+        this.secretKeyLoading.CLOUDINARY = false
         break
     }
+
 
   }
 

@@ -5,6 +5,9 @@ import { Store } from '@ngrx/store';
 import { IAdminInitialState } from '../../../../reducers/Admin/AdminTypes';
 import { LoaderComponent } from '../../../../Components/loader/loader.component';
 import { NoDataFoundComponent } from '../../../util/no-data-found/no-data-found.component';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../../../../Services/http-service.service';
+import { getSingleUser_AdminAPI } from '../../../../Utils/Endpoints';
 
 @Component({
   selector: 'app-users-analytics',
@@ -31,16 +34,38 @@ import { NoDataFoundComponent } from '../../../util/no-data-found/no-data-found.
   ]
 })
 export class UsersAnalyticsComponent {
-  reports: any[] = []
-  loading: boolean = false
+  dataSource : any = {
+    userData: {
+      data: null,
+      loading: false
+    }
+  }
 
-  constructor(private adminService: AdminService, private store: Store<any>) {
-    this.store.select("Admin").subscribe((res: IAdminInitialState) => {
-      this.reports = res.bugReports
-    })
+  constructor(private adminService: AdminService, private http: HttpService, private store: Store<any>, private route: ActivatedRoute) {
   }
 
   ngAfterViewInit() {
-    this.adminService.getBugReports()
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.getUserData(params['id'])
+      }
+    });
+  }
+
+
+
+  getUserData(id: string) {
+    try {
+      this.dataSource.userData.loading = true
+      this.http.get(getSingleUser_AdminAPI + id).subscribe((res: any) => {
+        this.dataSource.userData.loading = false
+        if (res.Success) {
+          this.dataSource.userData.data = res.Data
+        }
+      })
+    } catch (err: any) {
+      this.dataSource.userData.loading = false
+
+    }
   }
 }

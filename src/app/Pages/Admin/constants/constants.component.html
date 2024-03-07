@@ -70,7 +70,7 @@
               <p class="px-3 py-2 truncate">{{ stripePublic?.Value }}</p>
 
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (mailService.Value && stripePublic?.Value?.length > 0) {
+                @if (stripePublic?.Value && stripePublic?.Value?.length > 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
                   (click)="copyToClipboard(stripePublic.Value)"
@@ -227,7 +227,7 @@
                 {{ cloudinaryCloudName?.Value }}
               </p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (cloudinaryCloudName.Value &&
+                @if (cloudinaryCloudName?.Value &&
                 cloudinaryCloudName?.Value?.length > 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
@@ -296,7 +296,7 @@
                 <P class="px-3 py-2 truncate blur-sm select-none read-only"
                   >QWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOPQWERTYUIOP</P
                 >
-                @if (secretKeyLoading.STRIPE) {
+                @if (secretKeyLoading.CLOUDINARY) {
                 <div
                   class="absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:backdrop-blur transition-all duration-150"
                 >
@@ -317,7 +317,7 @@
                 </div>
                 }@else {
                 <button
-                  (click)="getSecret('STRIPE', cloudinaryApiSecret.Key)"
+                  (click)="getSecret('CLOUDINARY', cloudinaryApiSecret?.Key)"
                   class="h-8 w-8 rounded-md cursor-pointer absolute origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:backdrop-blur transition-all duration-150"
                 >
                   <svg
@@ -344,7 +344,7 @@
                 {{ cloudinaryApiSecret?.Value }}
               </p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (mailService.Value && cloudinaryApiSecret?.Value?.length >
+                @if (mailService?.Value && cloudinaryApiSecret?.Value?.length >
                 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
@@ -410,7 +410,7 @@
             >
               <p class="px-3 py-2 truncate">{{ cloudinaryApiKey?.Value }}</p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (cloudinaryApiKey.Value && cloudinaryApiKey?.Value?.length >
+                @if (cloudinaryApiKey?.Value && cloudinaryApiKey?.Value?.length >
                 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
@@ -480,7 +480,7 @@
             >
               <p class="px-3 py-2 truncate">{{ mailService?.Value }}</p>
               <div class="flex items-center bg-white dark:bg-gray-800">
-                @if (mailService.Value && mailService?.Value?.length > 0) {
+                @if (mailService?.Value && mailService?.Value?.length > 0) {
                 <button
                   class="p-2.5 transition-all duration-150 hover:bg-zinc-200 dark:hover:bg-gray-700 outline-none border-none"
                   (click)="copyToClipboard(cloudinaryApiKey.Value)"

@@ -31,7 +31,7 @@
         <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4" />
       </svg>
       <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
-        Bug reports
+        {{ dataSource.userData.data?.UserName }}
       </h1>
     </div>
   </div>
@@ -39,14 +39,8 @@
   <div
     class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
   >
-    @if (loading) {
-    <loader class="h-full" />
-    }@else { @if (reports.length == 0) {
-    <no-data-found class="h-full" />
-    }
     <div class="flex flex-col gap-3 h-max w-full">
       <!-- write here -->
     </div>
-    }
   </div>
 </div>

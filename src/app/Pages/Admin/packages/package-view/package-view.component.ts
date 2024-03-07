@@ -45,6 +45,8 @@ export class PackageViewComponent {
     Perks: [],
     Published: false
   }
+  tempPerks: string[] = []
+  perksChanged:boolean = false
 
   editObj: any = {
     PackageName: { edit: false, loading: false },
@@ -79,6 +81,8 @@ export class PackageViewComponent {
         if (res.Success) {
           this.packageData = res.Data
           this.tempObj = { ...res.Data }
+          this.tempPerks = [...res.Data.Perks]
+
           this.editObj.PerksChild = res.Data.Perks.map((i: any) => ({ edit: false }))
         } else {
           this.error = res.Message
@@ -95,6 +99,11 @@ export class PackageViewComponent {
     if (!bool) {
       this.tempObj = { ...this.packageData }
     }
+
+    if (key === "Perks") {
+      this.editObj.PerksChild?.map(((i: any) => i.edit = false))
+    }
+
   }
 
   saveChanges(key: "PackageName" | "AccentColor" | "Active" | "Discount" | "PackagePrice" | "Perks" | "Published",) {
@@ -118,10 +127,18 @@ export class PackageViewComponent {
         }
       }
 
+      if (key === "Perks") {
+        this.tempObj.Perks = this.tempPerks
+      }
 
       this.httpService.put(UpdatePackage_AdminAPI + this.packageData.PackageId, this.tempObj).subscribe((res: any) => {
         this.editObj[key].loading = false
         this.editObj[key].edit = false
+
+        if (key === "Perks") {
+          this.editObj.PerksChild?.map(((i: any) => i.edit = false))
+        }
+
         if (res.Success) {
           this.packageData = res.Data
         } else {
@@ -144,14 +161,23 @@ export class PackageViewComponent {
   }
 
   addFieldToPerks() {
-    this.tempObj.Perks.push("")
-    this.tempObj.PerksChild.push({ edit: false })
+    this.tempObj.Perks?.push("")
+    this.editObj.PerksChild?.push({ edit: false })
+  }
+  removePerk(index: number) {
+    this.tempObj.Perks?.splice(index, 1)
+    this.editObj.PerksChild.splice(index, 1)
   }
   enablePerksEdit(index: number, bool: boolean) {
     if (bool) {
       this.editObj.PerksChild[index].edit = bool
     } else {
-      this.tempObj = { ...this.packageData }
+      this.editObj.PerksChild[index].edit = bool
+      this.tempPerks = [...this.packageData.Perks]
     }
+  }
+  savePerksEdit(index: number) {
+    this.editObj.PerksChild[index].edit = false
+
   }
 }

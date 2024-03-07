@@ -76,7 +76,7 @@
                 filterType === 'BAN' ? 'text-white' : ''
               }} "
             >
-              Drafts
+              Blocked
             </p>
           </button>
           <button
@@ -107,7 +107,7 @@
               this.view == 'LIST' ? (this.view = 'TABLE') : (this.view = 'LIST')
             "
           >
-            @if(view == "LIST"){
+            @if(view == "TABLE"){
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -149,7 +149,7 @@
             <div
               class="absolute z-100 whitespace-normal right-[110%] rounded-lg dark:bg-gray-950 bg-white shadow-2xl dark:shadow-xl py-2 px-3 text-xs w-max focus:outline-none hidden transition-all duration-150 group-hover:block border-gray-300 dark:border-gray-800 border"
             >
-              {{ view === "LIST" ? "List view" : "Table view" }}
+              {{ view === "TABLE" ? "List view" : "Table view" }}
             </div>
           </button>
         </div>
