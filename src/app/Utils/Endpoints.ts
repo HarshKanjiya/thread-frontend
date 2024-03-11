@@ -49,6 +49,11 @@ export const GetActivePackagesAPI = "packages" // GET
 export const GetPackageByIdAPI = "packages/" // PACKAGE_ID // GET
 export const InitPaymentAPI = "buy/init" // POST
 
+// reports
+export const getReportCategoriesAPI = "admin/report/reportcategories"
+export const getAvailableReportsAPI = "admin/report/report/"
+
+
 // Admin
 export const GetAllPackages_AdminAPI = "packages/admin/all/" // GET //& DONE
 export const GetPackageById_AdminAPI = "packages/admin/" // + PACKAGE_ID // GET //& DONE

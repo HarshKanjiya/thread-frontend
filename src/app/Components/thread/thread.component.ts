@@ -4,12 +4,13 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserActionService } from '../../reducers/UserAction/UserAction.service';
 import { CarouselComponent } from '../carousel/carousel.component';
+import { ReportModelComponent } from '../report-model/report-model.component';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [CarouselComponent, RouterLink,],
+  imports: [CarouselComponent, RouterLink, ReportModelComponent],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
   animations: [
@@ -49,6 +50,8 @@ import { CarouselComponent } from '../carousel/carousel.component';
 })
 export class ThreadComponent {
   @Input() ThreadData: any
+
+  OpenReport: boolean = false
 
   likeCount: number = 0;
   liked: boolean = false
@@ -194,8 +197,13 @@ export class ThreadComponent {
       case "delete":
         break;
       case "report":
+        this.OpenReport = true
         break;
     }
+  }
 
+  closeReportModel(e:any){
+    console.log('POSITION [  ]');
+    this.OpenReport = false
   }
 }

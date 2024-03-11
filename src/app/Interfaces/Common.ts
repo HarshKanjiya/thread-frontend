@@ -1,4 +1,4 @@
-export interface INotification{
+export interface INotification {
   NotificationId: string,
   ReceiverId: string,
   CasterId: string,
@@ -8,5 +8,11 @@ export interface INotification{
   CreatedAt: Date,
   Type: "MENTION" | "REPLY" | "LIKE" | "FOLLOW" | "REPOST",
   verifiedSender?: false,
-  Seen:boolean
+  Seen: boolean
+}
+
+export interface ResDTO {
+  Success?: boolean
+  Message?: string
+  Data?: any
 }

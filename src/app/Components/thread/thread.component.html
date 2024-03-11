@@ -353,3 +353,7 @@
     </div>
   </div>
 </div>
+
+@if (OpenReport) {
+<app-report-model (close)="closeReportModel($event)"></app-report-model>
+}
