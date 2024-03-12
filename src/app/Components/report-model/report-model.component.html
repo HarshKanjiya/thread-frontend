@@ -14,12 +14,63 @@
   >
     <div
       @inOutPaneAnimation
-      class="flex w-full h-full justify-center p-4 text-center items-center sm:p-0 flex-col"
+      class="flex w-full p-4 justify-end text-center items-start sm:p-0 flex-col h-full border-box text-black dark:text-neutral-500"
     >
-      <div (click)="stopPropagation($event)">
-        <ng-content></ng-content>
+      <!-- cdkDrag
+    cdkDragLockAxis="y"
+    (cdkDragEnded)="dragEnded($event)" -->
+      <div
+        @model
+        (click)="stopPropagation($event)"
+        class="w-full sm:w-full min-h-[70%] flex flex-col items-center gap-2 bg-white dark:bg-neutral-900 rounded-tl-xl rounded-tr-xl sm:rounded-tl-3xl sm:rounded-tr-3xl"
+      >
+        <div
+          class="border-b border-neutral-600 dark:border-neutral-800 w-full flex flex-col items-center justify-center gap-2 p-3 sm:px-5 sm:py-3 sm:pt-4"
+        >
+          <!-- <div
+            cdkDragHandle
+            class="w-20 sm:w-28 cursor-grab h-[5px] rounded-full bg-black dark:bg-neutral-700"
+          ></div> -->
+          <p class="font-bold">Report</p>
+        </div>
+        <div class="h-full w-full sm:w-[450px] md:w-[450px] lg:w-[600px]">
+          @if (loading) {
+          <loader class="h-full" />
+          }@else {
+
+          <div class="flex flex-col items-center justify-start">
+            <div>Report this Post</div>
+            @for (item of Categories; track $index) {
+            <button
+              class="border-none outline-none w-full px-1.5 py-2 flex justify-between items-center transition-all duration-150 hover:bg-neutral-200 dark:hover:bg-neutral-800/60 focus:bg-neutral-200 dark:focus:bg-neutral-800/60  rounded-md"
+            >
+              <p>{{ item.CategoryName }}</p>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-black dark:stroke-neutral-500 h-4 w-4"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </div>
+            </button>
+            @if($index !== Categories.length - 1){
+            <div
+              class="w-[98%] mx-auto h-[1px] bg-neutral-600 dark:bg-neutral-800"
+            ></div>
+            } }
+          </div>
+          }
+        </div>
       </div>
     </div>
   </div>
 </div>
-

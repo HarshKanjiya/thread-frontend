@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { UserActionService } from '../../reducers/UserAction/UserAction.service';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { ReportModelComponent } from '../report-model/report-model.component';
+import { DialogService } from '../../Services/dialog.service';
 // import { CarouselComponent, CarouselInnerComponent, CarouselItemComponent } from '@coreui/angular';
 
 @Component({
@@ -51,8 +52,6 @@ import { ReportModelComponent } from '../report-model/report-model.component';
 export class ThreadComponent {
   @Input() ThreadData: any
 
-  OpenReport: boolean = false
-
   likeCount: number = 0;
   liked: boolean = false
 
@@ -61,7 +60,7 @@ export class ThreadComponent {
 
   UserData: any = null
 
-  constructor(private store: Store<any>, private ActionService: UserActionService) {
+  constructor(private store: Store<any>, private ActionService: UserActionService, public dialog: DialogService) {
   }
 
   @ViewChild("menu") menu !: ElementRef
@@ -197,13 +196,13 @@ export class ThreadComponent {
       case "delete":
         break;
       case "report":
-        this.OpenReport = true
+        this.dialog.openDialog("TEMP")
+
         break;
     }
   }
 
-  closeReportModel(e:any){
+  closeReportModel(e: any) {
     console.log('POSITION [  ]');
-    this.OpenReport = false
   }
 }

@@ -354,6 +354,6 @@
   </div>
 </div>
 
-@if (OpenReport) {
+@if (dialog.dialogVisible() === "TEMP") {
 <app-report-model (close)="closeReportModel($event)"></app-report-model>
 }
