@@ -38,7 +38,7 @@ export class UsersComponent {
   users: any[] = []
 
   filterType: "UNBAN" | "BAN" | "ALL" = "UNBAN"
-  view: "LIST" | "TABLE" = "TABLE";
+  view: "LIST" | "TABLE" = "LIST";
 
   constructor(private http: HttpService, private toast: ToastService) { }
 

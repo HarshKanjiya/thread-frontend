@@ -158,17 +158,13 @@
       <!-- <div>
       </div> -->
       <div class="flex-1 w-full">
-        @if (view == "LIST") {
-        <app-users-list-view
-          [data]="users"
-          [loading]="loading"
-        ></app-users-list-view>
+        @if (loading) {
+        <loader />
+        } @else { @if (view == "LIST") {
+        <app-users-list-view [orignalData]="users"></app-users-list-view>
         }@else {
-        <app-users-table-view
-          [orignalData]="users"
-          [loading]="loading"
-        ></app-users-table-view>
-        }
+        <app-users-table-view [orignalData]="users"></app-users-table-view>
+        } }
       </div>
     </div>
   </div>

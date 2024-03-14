@@ -56,7 +56,6 @@ export enum FilterTypes {
 })
 export class UsersTableViewComponent {
   @Input() orignalData: any[] = []
-  @Input() loading: boolean = false
 
   // @ViewChildren("menu") menus !: QueryList<any>
   @ViewChild("sortingMenu") menu2 !: ElementRef

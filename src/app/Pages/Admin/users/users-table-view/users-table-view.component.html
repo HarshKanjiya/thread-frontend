@@ -162,12 +162,12 @@
   <div
     class="overflow-x-hidden overflow-y-auto divide-y divide-gray-300 dark:divide-gray-700/60 flex w-full h-full flex-col mt-1 custom-table-scrollbar"
   >
-    @if(loading){
-    <loader class="h-full" />
-    } @else { @if(data?.length === 0){
+    @if(data?.length === 0){
     <no-data-found class="h-full" />
     }@else { @for (item of data; track $index) {
-    <div class="w-[99.5%] flex items-center justify-between py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-sm">
+    <div
+      class="w-[99.5%] flex items-center justify-between py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-sm"
+    >
       <div class="flex items-center gap-3">
         <div class="w-10 flex items-center justify-center">
           {{ $index + 1 }}
@@ -262,6 +262,6 @@
         </div>
       </div>
     </div>
-    }}}
+    }}
   </div>
 </div>
