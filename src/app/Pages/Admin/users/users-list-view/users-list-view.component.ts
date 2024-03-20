@@ -95,7 +95,7 @@ export class UsersListViewComponent {
   menuClickHandler(type: string) {
     switch (type) {
       case "profile":
-        this.router.navigate(['admin/users', this.selectedItem])
+        this.router.navigate(['admin/users', this.selectedItem.UserId])
         break;
       case "ban":
         break;

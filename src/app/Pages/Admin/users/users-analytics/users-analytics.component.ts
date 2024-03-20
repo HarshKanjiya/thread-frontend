@@ -57,12 +57,14 @@ export class UsersAnalyticsComponent {
   getUserData(id: string) {
     try {
       this.dataSource.userData.loading = true
-      this.http.get(getSingleUser_AdminAPI + id).subscribe((res: any) => {
-        this.dataSource.userData.loading = false
-        if (res.Success) {
-          this.dataSource.userData.data = res.Data
-        }
-      })
+      setTimeout(()=>{
+        this.http.get(getSingleUser_AdminAPI + id).subscribe((res: any) => {
+          this.dataSource.userData.loading = false
+          if (res.Success) {
+            this.dataSource.userData.data = res.Data
+          }
+        })
+      },1000)
     } catch (err: any) {
       this.dataSource.userData.loading = false
 

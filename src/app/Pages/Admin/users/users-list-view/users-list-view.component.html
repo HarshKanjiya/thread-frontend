@@ -160,43 +160,33 @@
 
   <!-- body -->
   <div
-    class="overflow-x-hidden overflow-y-auto flex flex-row items-start w-full h-full flex-wrap mt-1 custom-table-scrollbar"
+    class="overflow-x-hidden overflow-y-auto w-full h-full grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-1 custom-table-scrollbar"
   >
     @if(data?.length === 0){
-    <no-data-found class="h-full" />
+    <no-data-found class="h-full w-full" />
     }@else { @for (item of data; track $index) {
     <div
-      class="flex w-[150px] h-max flex-col relative items-center justify-between py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-sm"
+      class="flex h-[140px] w-[140px] m-auto flex-col relative items-center justify-between p-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-md"
     >
-      <p class="absolute top-5 left-5 flex items-center justify-center">
+      <p class="top-2 left-2 absolute font-bold opacity-20 text-xl">
         {{ $index + 1 }}
       </p>
       <div class="relative">
+        @if (item.Reports) {
         <div
           class="absolute -right-1 top-0 group flex gap-2 items-center justify-center"
         >
-          {{ $index }}
-          @if(item?.Reports > 10){
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="stroke-red-500 h-5 w-5"
+          <p
+            class="flex items-center justify-center w-3.5 h-3.5 rounded-full absolute top-0 right-0 text-[12px] p-0.5 text-center text-white bg-red-500"
           >
-            <path
-              d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
-            />
-            <path d="M12 9v4" />
-            <path d="M12 17h.01" />
-          </svg>
-          }
+            3
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
+            ></span>
+          </p>
         </div>
+        }
+
         <img
           class="h-16 w-16 rounded-full"
           src="{{
@@ -206,15 +196,19 @@
           }}"
         />
       </div>
-      <div class="flex items-center  w-full justify-between gap-3">
-        <p class="text-ellipsis overflow-clip ">{{ item?.UserName }}</p>
+      <div class="flex items-center w-full justify-between gap-3">
+        <p class="text-ellipsis overflow-clip flex-1">{{ item?.UserName }}</p>
         <div
           #menu
-          class="relative flex-1 group min-w-16 flex items-center justify-center"
+          class="relative group flex items-center justify-center"
         >
           <button
             (click)="
-              item.openMenu ? (item.openMenu = false) : (item.openMenu = true)
+              this.selectedItem
+                ? this.selectedItem == item
+                  ? (this.selectedItem = null)
+                  : (this.selectedItem = item)
+                : (this.selectedItem = item)
             "
             class="p-1 rounded-md transition-all duration-150 hover:bg-gray-300/60 dark:hover:bg-gray-800/60"
           >
@@ -235,7 +229,7 @@
               <circle cx="12" cy="19" r="1" />
             </svg>
           </button>
-          @if (item.openMenu) {
+          @if (selectedItem == item) {
           <div
             @dropBody
             class="absolute z-10 text-sm right-[10%] w-max flex flex-col justify-between overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-300 dark:border-gray-800 {{
