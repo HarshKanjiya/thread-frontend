@@ -139,7 +139,7 @@ export class UserService {
 
       this.http.post(VerifyOtpAPI, data).subscribe((res: any) => {
         this.store.dispatch(SET_USER_LOADING({ loading: false }))
-
+        console.log('res :>> ', res);
         if (res.Success) {
           this.store.dispatch(SET_USER_DATA({ data: res.Data }))
           this.router.navigate(['/'])

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NgOtpInputConfig, NgOtpInputModule } from 'ng-otp-input';
 import { UserService } from '../../../../reducers/User/User.service';
+import { IUserInitialState } from '../../../../reducers/User/UserTypes';
 
 @Component({
   selector: 'app-otp-verify',
@@ -28,8 +29,9 @@ export class OtpVerifyComponent {
   allowResendOtp: boolean = false
 
   constructor(private store: Store<any>, private userService: UserService) {
-    store.select("User").subscribe((res: any) => {
+    store.select("User").subscribe((res: IUserInitialState) => {
       this.email = res.temp?.Email
+      this.loading = res.loading
     })
   }
 
@@ -55,7 +57,6 @@ export class OtpVerifyComponent {
   }
 
   onOtpChange(e: any) {
-    console.log('e :>> ', e);
     this.otp = e
   }
 
