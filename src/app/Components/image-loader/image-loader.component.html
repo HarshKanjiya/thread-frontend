@@ -1,0 +1,6 @@
+<div [class]="'grid place-content-center overflow-hidden ' + class">
+  @if(loading){
+  <loader  />
+  }
+  <img [hidden]="loading" [src]="src" class="h-full w-full aspect-square" [alt]="alt" (load)="afterImgLoad()" />
+</div>

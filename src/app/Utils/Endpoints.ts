@@ -76,3 +76,12 @@ export const CreateReportCategory_AdminAPI = "admin/report/category/"  //& DONE
 
 export const getUsers_AdminAPI = "auth/admin/users/"  //& DONE
 export const getSingleUser_AdminAPI = "auth/admin/user/"
+export const getUserPosts_AdminAPI = "thread/admin/user/"
+
+
+// sockets
+export const notificationSocket_API = ""
+export const userDataSocket_API = ""
+export const postDataSocket_API = ""
+export const ActionDataSocket_API = ""
+export const ReportsDataSocket_API = ""
