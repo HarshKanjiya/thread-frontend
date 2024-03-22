@@ -25,6 +25,7 @@
     "@angular/ssr": "^17.0.7",
     "@coreui/angular": "^4.7.10",
     "@coreui/coreui": "^4.3.2",
+    "@ctrl/ngx-emoji-mart": "^9.2.0",
     "@microsoft/signalr": "^8.0.0",
     "@ngrx/effects": "^17.1.0",
     "@ngrx/store": "^17.1.0",

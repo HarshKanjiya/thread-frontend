@@ -1,3 +1,4 @@
+@if(!editProfile){
 <div #stickyMenu class="flex items-center justify-between py-4">
   <div class="flex flex-col">
     <p class="text-2xl font-bold">{{ userData?.Name }}</p>
@@ -48,6 +49,7 @@
 </div>
 
 <button
+  (click)="editProfile = true"
   class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
 >
   Edit Profile
@@ -114,3 +116,6 @@
   <p>You have reached the depth of the Earth 🌍</p>
   <p>There are no more threads to show.</p>
 </div>
+}@else {
+<edit-profile (onClose)="this.editProfile = false" />
+}

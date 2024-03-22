@@ -8,6 +8,8 @@ export const LogOutAPI = "auth/signout" // GET //& DONE
 export const CheckUserNameAPI = "auth/check/" // + USERNAME // GET //& DONE
 export const GetNewAccessTokenAPI = "auth/token" // GET  //& DONE
 export const GetSessionDataAPI = "auth/session" //& DONE
+export const removeSessionAPI = "auth/session/" //& DONE
+export const getDevicesAPI = "auth/devices/" //& DONE
 
 
 //Otp

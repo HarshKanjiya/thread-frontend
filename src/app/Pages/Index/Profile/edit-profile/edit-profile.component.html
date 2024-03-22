@@ -1,0 +1,386 @@
+<div #stickyMenu class="flex items-start justify-between gap-8 py-4">
+  <div class="flex flex-1 flex-col gap-5">
+    <div
+      class="flex gap-3 items-center w-full rounded-md bg-white dark:bg-black text-sm relative"
+    >
+      <p class="absolute text-xs -top-3 opacity-50">Name</p>
+      <div
+        class="text-ellipsis overflow-hidden flex items-center gap-3 w-full {{
+          editObj.nameEdit ? 'justify-between' : ''
+        }}"
+      >
+        <input
+          [(ngModel)]="tempData.Name"
+          [disabled]="!editObj.nameEdit"
+          maxlength="30"
+          class=" h-min my-auto flex-1 py-0.5 px-3 pl-0 outline-none bg-white dark:bg-black border-t-0 border-l-0 border-r-0 text-2xl font-bold {{
+            editObj.nameEdit
+              ? 'border-b  border-neutral-400 dark:border-neutral-800'
+              : 'border-b border-white dark:border-black select-none w-min'
+          }}"
+        />
+
+        <div
+          class="flex items-center bg-white dark:bg-black overflow-hidden min-w-min"
+        >
+          @if(!editObj.nameEdit){
+          <button
+            (click)="editObj.nameEdit = true"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+          </button>
+          }@else {
+          <button
+            (click)="editObj.nameEdit = false"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex gap-3 items-center w-full rounded-md bg-white dark:bg-black text-sm relative"
+    >
+      <p class="absolute text-xs -top-3 opacity-50">User Name</p>
+
+      <div
+        class="text-ellipsis overflow-hidden flex items-center gap-3 w-full {{
+          editObj.nameEdit ? 'justify-between' : ''
+        }}"
+      >
+        <input
+          [(ngModel)]="tempData.UserName"
+          [disabled]="!editObj.uNameEdit"
+          maxlength="30"
+          class=" h-min my-auto flex-1 py-0.5 px-3 pl-0 outline-none bg-white dark:bg-black border-t-0 border-l-0 border-r-0 text-md  {{
+            editObj.uNameEdit
+              ? 'border-b border-neutral-400 dark:border-neutral-800'
+              : 'border-b border-white dark:border-black select-none w-min'
+          }}"
+        />
+
+        <div
+          class="flex items-center bg-white dark:bg-black overflow-hidden min-w-min"
+        >
+          @if(!editObj.uNameEdit){
+          <button
+            (click)="editObj.uNameEdit = true"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+          </button>
+          }@else {
+          <button
+            (click)="editObj.uNameEdit = false"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex gap-3 items-center w-full rounded-md bg-white dark:bg-black text-sm relative"
+    >
+      <p class="absolute text-xs -top-3 opacity-50">Status</p>
+
+      <div
+        class="text-ellipsis overflow-hidden flex items-center gap-3 w-full {{
+          editObj.statusEdit ? 'justify-between' : ''
+        }}"
+      >
+        <!-- <P
+          class="h-min my-auto flex-1 py-0.5 px-3 pl-0 outline-none bg-white dark:bg-black border-t-0 border-l-0 border-r-0 text-md"
+          innerHTML="{{ tempData.Status ? '&#x'+ tempData.Status +';':'None'}}"
+          >
+        </P> -->
+        @if (editObj.statusEdit) {
+        <emoji-mart
+          class="absolute z-50 top-[100%]"
+          (emojiClick)="setStatus($event)"
+        ></emoji-mart>
+        }
+
+        <div
+          class="flex items-center bg-white dark:bg-black overflow-hidden min-w-min"
+        >
+          @if(!editObj.statusEdit){
+          <button
+            (click)="editObj.statusEdit = true"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+          </button>
+          }@else {
+          <button
+            (click)="editObj.statusEdit = false"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex gap-3 items-center w-full rounded-md bg-white dark:bg-black text-sm relative"
+    >
+      <p class="absolute text-xs -top-3 opacity-50">Bio</p>
+
+      <div
+        class="text-ellipsis overflow-hidden flex items-center gap-3 w-full {{
+          editObj.bioEdit ? 'justify-between' : ''
+        }}"
+      >
+        <input
+          placeholder="Bio"
+          [(ngModel)]="tempData.Bio"
+          [disabled]="!editObj.bioEdit"
+          maxlength="30"
+          class=" h-min my-auto flex-1 py-0.5 px-3 pl-0 outline-none bg-white dark:bg-black border-t-0 border-l-0 border-r-0 text-md  {{
+            editObj.bioEdit
+              ? 'border-b border-neutral-400 dark:border-neutral-800'
+              : 'border-b border-white dark:border-black select-none w-min'
+          }}"
+        />
+
+        <div
+          class="flex items-center bg-white dark:bg-black overflow-hidden min-w-min"
+        >
+          @if(!editObj.bioEdit){
+          <button
+            (click)="editObj.bioEdit = true"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+          </button>
+          }@else {
+          <button
+            (click)="editObj.bioEdit = false"
+            class="p-2.5 transition-all duration-150 hover:bg-white dark:hover:bg-neutral-800 outline-none border-none rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="stroke-neutral-600 dark:stroke-white h-4 w-4"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative w-20 h-20 rounded-full group transition-all duration-200"
+  >
+    <div #menu>
+      <div>
+        <button
+          class="border-none outline-none h-full w-full hidden group-hover:grid place-content-center absolute z-0 bg-black bg-opacity-25 backdrop-blur-sm transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="stroke-neutral-600 dark:stroke-white h-6 w-6"
+          >
+            <path
+              d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+            />
+            <circle cx="12" cy="13" r="3" />
+          </svg>
+        </button>
+
+        @if (imageOptions) {
+        <div
+          @dropBody
+          class="absolute z-10 top-[100%] right-[10%] w-min min-w-[100px] flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800"
+        >
+          <button
+            type="button"
+            class="editBtn relative cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3 after:hover:bg-black dark:after:bg-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-4 w-4 stroke-black dark:stroke-white"
+            >
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+
+            <span>Edit</span>
+          </button>
+          <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+          <button
+            type="button"
+            class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-4 w-4 stroke-black dark:stroke-white"
+            >
+              <path d="M3 6h18" />
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+            </svg>
+            <span>Delete</span>
+          </button>
+          <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+        </div>
+        }
+      </div>
+    </div>
+    @if (userData?.AvatarURL.trim().length > 0) {
+    <img class="w-full h-full aspect-square rounded-full" [src]="userData?.AvatarURL" />
+    }@else {
+    <img
+      class="w-full h-full aspect-square rounded-full"
+      src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
+    />
+    }
+  </div>
+</div>
+
+<div class="flex items-center gap-4">
+  <button
+  (click)="onClose.emit()"
+  class="w-full bg-white dark:bg-black border border-white dark:border-black rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
+  >
+    <p class="text-sm">Discard</p>
+  </button>
+  <button
+    class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
+  >
+    <p class="text-sm">Save</p>
+  </button>
+</div>
