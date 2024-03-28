@@ -43,14 +43,14 @@ export class SocketService {
     this.startUserConnection();
     this.addUserDataListener();
 
-    this.startPostConnection();
-    this.addPostDataListener();
+    // this.startPostConnection();
+    // this.addPostDataListener();
 
-    this.startActionConnection();
-    this.addActionDataListener();
+    // this.startActionConnection();
+    // this.addActionDataListener();
 
-    this.startReportConnection();
-    this.addReportDataListener();
+    // this.startReportConnection();
+    // this.addReportDataListener();
   }
 
   private startUserConnection = () => {
@@ -69,46 +69,46 @@ export class SocketService {
   };
 
   private startPostConnection = () => {
-    this.userConnection = new HubConnectionBuilder()
+    this.postConnection = new HubConnectionBuilder()
       .withUrl(postDataSocket_API)
       .build();
-    this.userConnection
+    this.postConnection
       .start()
       .then(() => console.log('Post connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
   private addPostDataListener = () => {
-    this.userConnection.on('[TRANSFER] postData', (data: any) => {
+    this.postConnection.on('[TRANSFER] postData', (data: any) => {
       console.log(data);
     });
   };
 
   private startActionConnection = () => {
-    this.userConnection = new HubConnectionBuilder()
+    this.actionConnection = new HubConnectionBuilder()
       .withUrl(ActionDataSocket_API)
       .build();
-    this.userConnection
+    this.actionConnection
       .start()
       .then(() => console.log('Action connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
   private addActionDataListener = () => {
-    this.userConnection.on('[TRANSFER] actionData', (data: any) => {
+    this.actionConnection.on('[TRANSFER] actionData', (data: any) => {
       console.log(data);
     });
   };
 
   private startReportConnection = () => {
-    this.userConnection = new HubConnectionBuilder()
+    this.reportConnection = new HubConnectionBuilder()
       .withUrl(ReportsDataSocket_API)
       .build();
-    this.userConnection
+    this.reportConnection
       .start()
       .then(() => console.log('Report connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
   private addReportDataListener = () => {
-    this.userConnection.on('[TRANSFER] reportData', (data: any) => {
+    this.reportConnection.on('[TRANSFER] reportData', (data: any) => {
       console.log(data);
     });
   };

@@ -38,6 +38,7 @@
     "moment": "^2.30.1",
     "ng-otp-input": "^1.9.3",
     "ngx-cookie-service": "^17.1.0",
+    "ngx-stripe": "^17.1.1",
     "primeng": "^17.3.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

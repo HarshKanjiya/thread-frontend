@@ -83,7 +83,7 @@ export const getUserPosts_AdminAPI = "thread/admin/user/"
 
 // sockets
 export const notificationSocket_API = ""
-export const userDataSocket_API = ""
+export const userDataSocket_API = "auth/admin/hub/user"
 export const postDataSocket_API = ""
 export const ActionDataSocket_API = ""
 export const ReportsDataSocket_API = ""
