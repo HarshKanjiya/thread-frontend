@@ -60,7 +60,6 @@ export class CarouselComponent {
   ngOnInit() {
     this.preloadImages();
   }
-
   preloadImages() {
     for (const slide of this.slides) {
       new Image().src = slide.src;

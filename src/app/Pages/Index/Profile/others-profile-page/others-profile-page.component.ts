@@ -8,6 +8,9 @@ import { LoaderComponent } from '../../../../Components/loader/loader.component'
 import { IUserInitialState } from '../../../../reducers/User/UserTypes';
 import { UserService } from '../../../../reducers/User/User.service';
 import { SET_USER_OTHER_USER } from '../../../../reducers/User/UserActions';
+import { HttpService } from '../../../../Services/http-service.service';
+import { FollowAPI } from '../../../../Utils/Endpoints';
+import { ToastService } from '../../../../Services/toast.service';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -52,14 +55,21 @@ export class OthersProfilePageComponent {
 
   menuPosition: any = null;
   userData: any = null
+  requesterData: any = null
+
+  followed: boolean = false
   userPosts: any[] = []
   initialLoad: boolean = true
   userNameFromURL: string = ""
 
-  constructor(private store: Store<any>, private router: Router, private postService: PostService, private userService: UserService, private cd: ChangeDetectorRef, private route: ActivatedRoute) {
+  constructor(private store: Store<any>, private http: HttpService, private toast: ToastService, private postService: PostService, private userService: UserService, private cd: ChangeDetectorRef, private route: ActivatedRoute) {
     this.store.select("User").subscribe((res: IUserInitialState) => {
+      if (res.userData) {
+        this.requesterData = res.userData
+      }
       if (res.otherUserData) {
-        this.userData = res.otherUserData.user
+        this.userData = res.otherUserData
+        this.followed = res.otherUserData.FollowedByMe
         this.userPosts = [...res.otherUserData?.posts]
       }
       if (res.userData !== null && this.initialLoad && this.userNameFromURL !== "") {
@@ -112,5 +122,21 @@ export class OthersProfilePageComponent {
   setSelectedTab(val: "THREADS" | "REPOSTS") {
     this.selectedTab = val
     this.getPosts()
+  }
+
+  followLoading: boolean = false;
+  followUser() {
+    this.followLoading = true
+    let temp = { CasterId: this.requesterData.UserId, ReceiverId: this.userData.user.UserId, Type: "FOLLOW" }
+    try {
+      this.http.post(FollowAPI, temp).subscribe((res: any) => {
+        if (res.Success) {
+          this.followed = !this.followed
+          this.toast.makeToast("MESSAGE", this.userData.user.Name + " followed")
+        }
+      })
+    } catch (err: any) {
+      this.toast.makeToast('ERROR', err.message ?? "Failed to perform Action")
+    }
   }
 }

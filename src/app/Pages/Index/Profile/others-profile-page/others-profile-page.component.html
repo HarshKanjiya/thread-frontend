@@ -9,8 +9,7 @@
     }@else {
     <img
       class="w-20 h-20 rounded-full"
-      src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
-    />
+      src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=" />
     }
   </div>
 </div>
@@ -35,38 +34,37 @@
 
     <p class="text-sm">{{ userData?.FollowersCount }} Followers</p> -->
     <button
-      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
-    >
+      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150">
       <p class="text-sm">{{ userData?.FollowersCount }} Followers</p>
     </button>
     <button
-      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150"
-    >
+      class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150">
       <p class="text-sm">{{ userData?.FollowingCount }} Following</p>
     </button>
   </div>
 </div>
 
-<!-- <button
-  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm"
->
-  Edit Profile
-</button> -->
+<button
+  (click)="followUser()"
+  class="w-full bg-white dark:bg-black border border-neutral-400 dark:border-neutral-800 rounded-lg py-2 text-sm hover:border-neutral-600 dark:hover:border-neutral-700 transition-all duration-150">
+  {{ followed ? "Followed":"Follow" }}
+</button>
+
+@if(!userData?.Private){
 
 <div
-  class="relative border-b border-neutral-400 dark:border-neutral-700 flex justify-around text-sm mt-2 sm:mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
+  class="relative flex justify-around text-sm mt-2 sm:mt-3 bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg overflow-hidden {{
     sticky ? 'sticky top-[40px] sm:top-[75px] z-50 ' : 'w-full'
-  }} "
->
+  }} ">
   <button
     class="flex-1 py-4 {{
       selectedTab === 'THREADS'
         ? 'text-black dark:text-white'
         : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
-    (click)="setSelectedTab('THREADS')"
-  >
-    Threads {{ selectedTab === "THREADS" ? "(" + userPosts.length + ")" : "" }}
+    (click)="setSelectedTab('THREADS')">
+    Threads
+    <!-- {{ selectedTab === "THREADS" ? "(" + userPosts.length + ")" : "" }} -->
   </button>
   <!-- <button
     class="flex-1 py-4 {{
@@ -84,17 +82,16 @@
         ? 'text-black dark:text-white'
         : 'text-neutral-400 dark:text-neutral-600'
     }} transition-all duration-200"
-    (click)="setSelectedTab('REPOSTS')"
-  >
-    Reposts {{ selectedTab === "REPOSTS" ? "(" + userPosts.length + ")" : "" }}
+    (click)="setSelectedTab('REPOSTS')">
+    Reposts
+    <!-- {{ selectedTab === "REPOSTS" ? "(" + userPosts.length + ")" : "" }} -->
   </button>
 
   <!-- {{ selectedTab === 'REPLIES' ? 'left-[33%]' : '' }} -->
   <div
     class="absolute bottom-0 w-[50%] h-[2px] bg-black dark:bg-white transition-all duration-200
     {{ selectedTab === 'THREADS' ? 'left-0' : '' }}
-    {{ selectedTab === 'REPOSTS' ? 'left-[50%]' : '' }} "
-  ></div>
+    {{ selectedTab === 'REPOSTS' ? 'left-[50%]' : '' }} "></div>
 </div>
 
 <div #loader></div>
@@ -109,8 +106,32 @@
 </div>
 
 <div
-  class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm"
->
+  class="pt-32 pb-20 w-full contents-[' '] flex items-center justify-end flex-col text-sm">
   <p>You have reached the depth of the Earth 🌍</p>
   <p>There are no more threads to show.</p>
 </div>
+
+}@else {
+<div class="p-4 mt-20 flex items-center justify-center">
+  <div class="flex flex-col gap-6 items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="stroke-black dark:stroke-white h-11 w-11">
+      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+    <div class="flex flex-col justify-center items-center text-sm">
+      <p>This account is private</p>
+      <p>follow account to view posts</p>
+    </div>
+  </div>
+</div>
+}

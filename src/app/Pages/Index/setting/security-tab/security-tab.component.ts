@@ -28,7 +28,11 @@ export class SecurityTabComponent {
 
 
   getTime(time: string) {
-    return moment(time).format('Do MMM YYYY, h:mm a')
+    return moment(time).toNow()
+  }
+
+  getExpiry(time: string) {
+    return moment(time) <= moment().subtract(7, "days")
   }
 
   removeSession(item: any) {

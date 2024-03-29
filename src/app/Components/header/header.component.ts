@@ -55,7 +55,9 @@ export class HeaderComponent {
   @ViewChild('mobileMenu') mobileMenu!: ElementRef;
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
-    this.setIsOpen();
+    if (!this.menu.nativeElement.contains(event.target) && this.isOpen) {
+      this.setIsOpen()
+    }
   }
 
   constructor(
@@ -95,7 +97,6 @@ export class HeaderComponent {
     switch (val) {
       case 'theme':
         this.changeTheme();
-        this.setIsOpen();
         break;
       case 'report':
         this.dialog.openDialog('REPORT_BUG');
@@ -107,6 +108,7 @@ export class HeaderComponent {
       case 'admin':
         this.router.navigate(['admin']);
     }
+    this.setIsOpen();
   }
 
   changeTheme() {
