@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
+import { SocketService } from '../../../Services/socket.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -27,5 +28,8 @@ import { Component } from '@angular/core';
   ]
 })
 export class AdminHomeComponent {
-
+  constructor(private SocketService:SocketService){}
+  ngOnInit(){
+    this.SocketService.AdminSocketConnection()
+  }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { HttpService } from '../../Services/http-service.service';
 import { ToastService } from '../../Services/toast.service';
-import { CheckUserNameAPI, GetMyNotifAPI, GetSessionDataAPI, GetUserPRofileAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
+import { CheckUserNameAPI, GetMyNotifAPI, GetSessionDataAPI, GetUserPRofileAPI, LogOutAPI, LoginAPI, RegisterAPI, SendOtpAPI, UpdatePasswordAPI, UpdateProfileAPI, VerifyOtpAPI } from '../../Utils/Endpoints';
 import { SET_USER_DATA, SET_USER_LOADING, SET_USER_NOTIF, SET_USER_OTHER_USER, SET_USER_TEMP } from './UserActions';
 import { ICheckValidUsername, ILoginUser, ISendMeOtp, ISignupUser, IUserInitialState, IVerifyMyOtp } from './UserTypes';
 
@@ -139,7 +139,7 @@ export class UserService {
 
       this.http.post(VerifyOtpAPI, data).subscribe((res: any) => {
         this.store.dispatch(SET_USER_LOADING({ loading: false }))
-
+        console.log('res :>> ', res);
         if (res.Success) {
           this.store.dispatch(SET_USER_DATA({ data: res.Data }))
           this.router.navigate(['/'])
@@ -179,8 +179,49 @@ export class UserService {
     }
   }
 
-  updateProfile() { }
-  updatePassword() { }
+  updateProfile(data: any) {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+
+      this.http.put(UpdateProfileAPI + data.UserId, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+
+        if (res.Success) {
+          this.store.dispatch(SET_USER_DATA({ data: null }))
+          this.getMySession()
+          this.toast.makeToast('MESSAGE', res.Message ?? "Profile Updated")
+        } else {
+          this.toast.makeToast('ERROR', res.Message ?? "Failed to update Profile")
+        }
+      })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      console.log('Error in profile update :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
+  updatePassword(data: any) {
+    this.store.dispatch(SET_USER_LOADING({ loading: true }))
+    try {
+
+      this.http.put(UpdatePasswordAPI + data.UserId, data).subscribe((res: any) => {
+        this.store.dispatch(SET_USER_LOADING({ loading: false }))
+
+        if (res.Success) {
+          this.getMySession()
+          this.toast.makeToast('MESSAGE', res.Message ?? "Password Updated")
+        } else {
+          this.toast.makeToast('ERROR', res.Message ?? "Failed to update Password")
+        }
+      })
+
+    } catch (e: any) {
+      this.store.dispatch(SET_USER_LOADING({ loading: false }))
+      console.log('Error in profile update :', e.loading);
+      this.toast.makeToast('ERROR', "Something went Wrong")
+    }
+  }
 
   FollowUser() { }
   MuteUser() { }

@@ -8,6 +8,8 @@ export const LogOutAPI = "auth/signout" // GET //& DONE
 export const CheckUserNameAPI = "auth/check/" // + USERNAME // GET //& DONE
 export const GetNewAccessTokenAPI = "auth/token" // GET  //& DONE
 export const GetSessionDataAPI = "auth/session" //& DONE
+export const removeSessionAPI = "auth/session/" //& DONE
+export const getDevicesAPI = "auth/devices/" //& DONE
 
 
 //Otp
@@ -76,3 +78,12 @@ export const CreateReportCategory_AdminAPI = "admin/report/category/"  //& DONE
 
 export const getUsers_AdminAPI = "auth/admin/users/"  //& DONE
 export const getSingleUser_AdminAPI = "auth/admin/user/"
+export const getUserPosts_AdminAPI = "thread/admin/user/"
+
+
+// sockets
+export const notificationSocket_API = ""
+export const userDataSocket_API = "auth/admin/hub/user"
+export const postDataSocket_API = ""
+export const ActionDataSocket_API = ""
+export const ReportsDataSocket_API = ""

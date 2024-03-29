@@ -14,119 +14,113 @@ import { IUserInitialState } from '../../reducers/User/UserTypes';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CreatePostPopUpComponent, DropdownComponent, CustomPopupComponent, TextareaAutoresizeDirective],
+  imports: [
+    RouterLink,
+    CreatePostPopUpComponent,
+    DropdownComponent,
+    CustomPopupComponent,
+    TextareaAutoresizeDirective,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
-    trigger("dropBody", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(-20px)" }),
+    trigger('dropBody', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
         animate(
-          "150ms ease-in-out",
-          style({ opacity: 1, transform: "translateY(0)" })
-        )
+          '150ms ease-in-out',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
       ]),
-      transition(":leave", [
-        style({ opacity: 1, transform: "translateY(0)" }),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'translateY(0)' }),
         animate(
-          "150ms ease-in-out",
-          style({ opacity: 0, transform: "translateY(-20px)" })
-        )
-      ])
+          '150ms ease-in-out',
+          style({ opacity: 0, transform: 'translateY(-20px)' })
+        ),
+      ]),
     ]),
-  ]
+  ],
 })
 export class HeaderComponent {
-
-  userData: any = null
+  userData: any = null;
 
   visible: boolean = false;
-  backButtonVisibility: boolean = false
-  isOpen: boolean = false
+  backButtonVisibility: boolean = false;
+  isOpen: boolean = false;
 
-  loading: boolean = false
+  loading: boolean = false;
 
-
-  @ViewChild("menu") menu !: ElementRef
-  @ViewChild("mobileMenu") mobileMenu !: ElementRef
+  @ViewChild('menu') menu!: ElementRef;
+  @ViewChild('mobileMenu') mobileMenu!: ElementRef;
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
-    if (!this.menu.nativeElement.contains(event.target) && !this.mobileMenu.nativeElement.contains(event.target) && this.isOpen) {
-      // Clicked outside the element, handle it here
+    if (!this.menu.nativeElement.contains(event.target) && this.isOpen) {
       this.setIsOpen()
     }
   }
 
-
-  constructor(private themeService: ThemeService, public router: Router, public dialog: DialogService, private location: Location, private store: Store<any>, private userService: UserService) {
-
-    store.select("User").subscribe((res: IUserInitialState) => {
+  constructor(
+    private themeService: ThemeService,
+    public router: Router,
+    public dialog: DialogService,
+    private location: Location,
+    private store: Store<any>,
+    private userService: UserService
+  ) {
+    store.select('User').subscribe((res: IUserInitialState) => {
       if (res?.userData) {
-        this.userData = res.userData
+        this.userData = res.userData;
         // console.log('object :>> ', res);
       }
-    })
+    });
 
-    this.router.events.subscribe(
-      (ev) => {
-        if (ev instanceof NavigationEnd) {
-          if (["/", "/search", "/activity"].indexOf(ev.url) > -1 || router.url.indexOf("user") > -1) {
-            this.backButtonVisibility = false
-          } else {
-            this.backButtonVisibility = true
-          }
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        if (
+          ['/', '/search', '/activity'].indexOf(ev.url) > -1 ||
+          router.url.indexOf('user') > -1
+        ) {
+          this.backButtonVisibility = false;
+        } else {
+          this.backButtonVisibility = true;
         }
       }
-    )
+    });
   }
-
 
   setIsOpen() {
-    this.isOpen = !this.isOpen
+    this.isOpen = !this.isOpen;
   }
 
-
-
   menuClickHandler(val: string) {
-
     switch (val) {
       case 'theme':
         this.changeTheme();
-        this.setIsOpen()
-        break
+        break;
       case 'report':
-        this.dialog.openDialog("REPORT_BUG")
-        this.setIsOpen()
-        break
+        this.dialog.openDialog('REPORT_BUG');
+        this.setIsOpen();
+        break;
       case 'logout':
-        this.userService.signOut()
-        break
-      case "admin":
-        this.router.navigate(['admin'])
+        this.userService.signOut();
+        break;
+      case 'admin':
+        this.router.navigate(['admin']);
     }
-  }
-
-  showDialog() {
-    this.visible = !this.visible;
+    this.setIsOpen();
   }
 
   changeTheme() {
-    this.themeService.darkTheme.set(!this.themeService.darkTheme())
-  }
-
-  openDialog() {
-    this.dialog.openDialog("CREATE_THREAD")
+    this.themeService.darkTheme.set(!this.themeService.darkTheme());
   }
 
   removePopUp() {
-    this.dialog.closeDialog()
+    this.dialog.closeDialog();
   }
 
   BackButtonClick() {
-
-    this.location.back()
-    this.removePopUp()
-
+    this.location.back();
+    this.removePopUp();
   }
-
 }

@@ -1,11 +1,9 @@
 @if(ThreadData?.Type == "REPOST"){
 <div
   [routerLink]="['/thread/' + ThreadData?.ReferenceId]"
-  class="flex items-center gap-3 border-t-[1px] border-neutral-400 dark:border-neutral-700 pt-3 cursor-pointer"
->
+  class="flex items-center gap-3 border-t-[1px] border-neutral-400 dark:border-neutral-700 pt-3 cursor-pointer">
   <div
-    class="w-6 h-6 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
-  >
+    class="w-6 h-6 transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
@@ -19,17 +17,14 @@
       stroke-linecap="round"
       stroke-linejoin="round"
       xml:space="preserve"
-      class="fill-black dark:fill-white"
-    >
+      class="fill-black dark:fill-white">
       <g
-        transform="matrix(6.123233995736767e-17,-1.0000000000000002,1.0000000000000002,6.123233995736767e-17,-0.5000102519989014,24.499989748001113)"
-      >
+        transform="matrix(6.123233995736767e-17,-1.0000000000000002,1.0000000000000002,6.123233995736767e-17,-0.5000102519989014,24.499989748001113)">
         <path
           fill-rule="evenodd"
           d="M1.293 9.793a1 1 0 0 0 1.414 1.414L4 9.914V15.5a3 3 0 0 0 3 3h5a1 1 0 1 0 0-2H7a1 1 0 0 1-1-1V9.914l1.293 1.293a1 1 0 0 0 1.414-1.414l-3-3a1 1 0 0 0-1.414 0zm21.414 5.414a1 1 0 0 0-1.414-1.414L20 15.086V9.5a3 3 0 0 0-3-3h-5a1 1 0 1 0 0 2h5a1 1 0 0 1 1 1v5.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.414 0z"
           clip-rule="evenodd"
-          opacity="1"
-        ></path>
+          opacity="1"></path>
       </g>
     </svg>
   </div>
@@ -43,8 +38,7 @@
     ThreadData?.Type !== 'REPOST'
       ? 'border-t-[1px] border-neutral-400 dark:border-neutral-700'
       : ''
-  }} "
->
+  }} ">
   <div class="flex flex-col justify-between gap-2 items-center min-h-max">
     <img
       class="h-8 w-8 rounded-full"
@@ -52,11 +46,9 @@
         ThreadData?.AuthorAvatarURL
           ? ThreadData?.AuthorAvatarURL
           : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACUCAMAAAA02EJtAAAAMFBMVEXk5ueutLfn6eqqsLTM0NLq7O26v8KnrrHf4eLHy82xt7rS1dfY29zU2Nnb3t/DyMryEXPkAAAD7klEQVR4nO2c2XLkIAwAQdz4+v+/XRg7GydxPICwoCr0U3bz0iULcYkwNhgMBoPBYDAYDAaDwaArlAJm54B9/dgtwGanPT/wWlro0RbYOmlh+Jnwz21hndmCmjcv+E+E0M6q1nonwOoLzf+4bvIA7GbuTLngUx9pAMvlp/8qq20Hrmp75/nCz81drX4b0h0jm5umiUZX1zSukCwaEC1drX8veI7r1s41/esfrrKRq9oSR9SJNnUApvvCf4lfW5iu+aJxLmgR1txE3TELuSvI/ETdseSqhaJcUFes8qDSj6xS0RhWUlFEUIMrqSpLXU9dQTtnzeWiAU+oCg4RVE46vULeiuoHjm4Pawtm/zOazBQ1/iN+plJVZdP/J4JsIaCQplyQbQktWpVswsJV1QjVuIIJreqpVCValVOpOrSpIFpfQ9op1R1mqP5tVbJcxVcAqo0AerXCyYoVW9CmZKtA/BqATBWwCSAclapC7le4mKjWq+iZlW4XwFbs3orwiA0ZVcITNig4Wj9Deca64FTpRLNvgb4iNOWtO+okiGpZdagW3Vkc0J2tvECcWoiFVpWx4tJKHFRMvaK/ECwsArTDf6f04KLFbWBZCpCPqZ0C01bdC9nFtc1lcAQyN1mC6lTtyjWvJcCT3wSfUBlloHVbGCzJ5VW3brYD+77NLmJoL4F/IekIi2yPeot637/YRfdiBKwTN7LGN5qiLoHfs0D4qbXdNxST2n+Lbfin35ZuWoI/iY3hmxbGiJelMVy7pc8edsZehdMuUjonp9ke/9EpEFA78ccuTeF4ZjFNMaYBKeW0zOv+i24I0YtZ6i+nWK83OXeQCADWLk7zfSj9Wq7Cr8MIW9sNMVA2xvKu+H8pXCG+UxNbYFPJqUV8gkOqCXbSt9/8Jrom2FLlLrDl+mlNKsZvJA9FACbspUXEy6dlwcrEYfQOIdyTWRuWJB55YXGW9c/JKlnj05/x8pniNet6Ef1APHCDcbN2RspulbMgYftUjJcVjzFDSOt/+09MvU0irJh25QSEr5SxKv0ApZwqSQDuyY//QZVmBuR1aoYrMgng4TQ9uyKng+dq1E88qhCQxTSCOYCt0KaW6Vqqim1QKKCwDoCkqFLfKLosAnxHdQFFbU2JB+fVXfNvYRTp4D+Rna6AbKRBkPsaC9VHgyQvBbAPqjDkdgw0E+WxYygjBUoeflcka9JqUPzPpG8KVMNMjeQ8HGo4/HdSi0CFlz9I0l+6th1UEZ9Yr1qW/wOTGNS5eVC5SMyACo8p0KTNWOinnzVI6x1Sjev/i7S/dwBdqCZNWNim/zokjavJiPak/ZmmVfZA2tMR6IIk1cEf4h/bxDWtKov23AAAAABJRU5ErkJggg=='
-      }}"
-    />
+      }}" />
     <div
-      class="w-[2.5px] rounded-md h-max flex-1 content-[' '] bg-neutral-300 dark:bg-neutral-800"
-    ></div>
+      class="w-[2.5px] rounded-md h-max flex-1 content-[' '] bg-neutral-300 dark:bg-neutral-800"></div>
 
     <img class="h-4 w-4 rounded-full" [src]="UserData?.AvatarURL" />
   </div>
@@ -65,7 +57,8 @@
     <!-- time and more -->
 
     <div class="flex justify-between items-center">
-      <p class="font-semibold">{{ ThreadData?.AuthorName }}</p>
+      <a [routerLink]="['user/'+ThreadData.AuthorUserName]"
+        class="font-semibold">{{ ThreadData?.AuthorName }}</a>
 
       <div class="flex gap-3 items-center">
         <p class="text-sm text-neutral-400 dark:text-neutral-500">
@@ -77,9 +70,8 @@
             <button
               type="button"
               (click)="setIsOpen()"
-              class="h-6 w-6 rounded-full"
-            >
-              <div class="">
+              class="h-6 w-6 rounded-full">
+              <div class>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -88,8 +80,7 @@
                   fill="none"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="fill-neutral-700 dark:fill-neutral-300"
-                >
+                  class="fill-neutral-700 dark:fill-neutral-300">
                   <circle cx="12" cy="12" r="1.5" />
                   <circle cx="18" cy="12" r="1.5" />
                   <circle cx="6" cy="12" r="1.5" />
@@ -100,13 +91,12 @@
             @if (isOpen) {
             <div
               @dropBody
-              class="absolute z-10 top-[100%] right-[10%] w-min min-w-[100px] flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800"
-            >
+              class="absolute z-10 top-[100%] right-[10%] w-min min-w-[100px] flex flex-col justify-between overflow-hidden bg-white dark:bg-black rounded-2xl border border-neutral-300 dark:border-neutral-800">
+              @if(ThreadData.AuthorId === UserData.UserId){
               <button
                 type="button"
                 class="editBtn relative cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3 after:hover:bg-black dark:after:bg-white"
-                (click)="menuClickHandler('edit')"
-              >
+                (click)="menuClickHandler('edit')">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -117,8 +107,7 @@
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="h-4 w-4 stroke-black dark:stroke-white"
-                >
+                  class="h-4 w-4 stroke-black dark:stroke-white">
                   <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                   <path d="m15 5 4 4" />
                 </svg>
@@ -129,8 +118,7 @@
               <button
                 type="button"
                 class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3"
-                (click)="menuClickHandler('delete')"
-              >
+                (click)="menuClickHandler('delete')">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -141,8 +129,7 @@
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="h-4 w-4 stroke-black dark:stroke-white"
-                >
+                  class="h-4 w-4 stroke-black dark:stroke-white">
                   <path d="M3 6h18" />
                   <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
                   <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -150,11 +137,11 @@
                 <span>Delete</span>
               </button>
               <hr class="w-full border-neutral-300 dark:border-neutral-700" />
+              }
               <button
                 type="button"
                 class="cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900 px-4 py-2 w-full flex justify-start items-center gap-3 text-sm pt-3"
-                (click)="menuClickHandler('report')"
-              >
+                (click)="menuClickHandler('report')">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -165,11 +152,9 @@
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="h-4 w-4 stroke-red-500"
-                >
+                  class="h-4 w-4 stroke-red-500">
                   <path
-                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                  />
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   <path d="M12 7v2" />
                   <path d="M12 13h.01" />
                 </svg>
@@ -202,15 +187,13 @@
         @for (item of ThreadData?.Content?.Options; track $index) {
         <button
           (click)="choseOption(item, $index)"
-          class="rounded-lg relative outline -outline-offset-2 outline-[1.5px] outline-neutral-400 dark:outline-neutral-800 overflow-hidden flex items-center justify-between"
-        >
+          class="rounded-lg relative outline -outline-offset-2 outline-[1.5px] outline-neutral-400 dark:outline-neutral-800 overflow-hidden flex items-center justify-between">
           <!-- class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 w-full origin-left -z-1 opacity-50 scale-x-[{{0.66}}] " -->
           <div
             [style.width]="
               getWidth(ratings?.TotalResponse, ratings?.Responses[$index]) + '%'
             "
-            class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 origin-left -z-1 opacity-50 transition-all duration-150 ease-in"
-          ></div>
+            class="absolute contents-[' '] h-full left-0 bg-neutral-400 dark:bg-neutral-800 origin-left -z-1 opacity-50 transition-all duration-150 ease-in"></div>
           <!-- (click)="" -->
           <div class="p-3 flex gap-3 items-center">
             <div
@@ -218,15 +201,13 @@
                 item.OptionId === selectedPollOptionId
                   ? 'bg-black dark:bg-white'
                   : 'bg-white dark:bg-black'
-              }}"
-            >
+              }}">
               <div
                 class="h-1.5 w-1.5 rounded-full  contents-[' '] group {{
                   item.OptionId === selectedPollOptionId
                     ? 'bg-white dark:bg-black'
                     : 'w-0 h-0'
-                }}"
-              ></div>
+                }}"></div>
             </div>
             <p>{{ item?.Value }}</p>
           </div>
@@ -240,8 +221,7 @@
     <div class="flex py-1 gap-2">
       <button
         (click)="likeThread($event)"
-        class="flex items-center justify-center overflow-hidden rounded-lg relative h-8 w-8 p-0.5"
-      >
+        class="flex items-center justify-center overflow-hidden rounded-lg relative h-8 w-8 p-0.5">
         @if(liked){
         <svg
           @likeAnim
@@ -250,13 +230,11 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="h-8 w-8 p-0.5 transition-all duration-100 hover:scale-105 stroke-rose-500 fill-rose-500 absolute"
-        >
+          class="h-8 w-8 p-0.5 transition-all duration-100 hover:scale-105 stroke-rose-500 fill-rose-500 absolute">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-          />
+            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
         }@else {
         <svg
@@ -266,19 +244,16 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="h-8 w-8 p-0.5 transition-all duration-100 hover:scale-105 stroke-black dark:stroke-white absolute"
-        >
+          class="h-8 w-8 p-0.5 transition-all duration-100 hover:scale-105 stroke-black dark:stroke-white absolute">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-          />
+            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
         }
       </button>
       <div
-        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
-      >
+        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -287,14 +262,12 @@
           stroke-width="1.5"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="h-8 w-8 p-1 fill-white dark:fill-black stroke-black dark:stroke-white transform scale-x-[-1]"
-        >
+          class="h-8 w-8 p-1 fill-white dark:fill-black stroke-black dark:stroke-white transform scale-x-[-1]">
           <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
         </svg>
       </div>
       <div
-        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
-      >
+        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
@@ -308,23 +281,19 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           xml:space="preserve"
-          class="h-8 w-8 p-1 fill-black dark:fill-white"
-        >
+          class="h-8 w-8 p-1 fill-black dark:fill-white">
           <g
-            transform="matrix(6.123233995736767e-17,-1.0000000000000002,1.0000000000000002,6.123233995736767e-17,-0.5000102519989014,24.499989748001113)"
-          >
+            transform="matrix(6.123233995736767e-17,-1.0000000000000002,1.0000000000000002,6.123233995736767e-17,-0.5000102519989014,24.499989748001113)">
             <path
               fill-rule="evenodd"
               d="M1.293 9.793a1 1 0 0 0 1.414 1.414L4 9.914V15.5a3 3 0 0 0 3 3h5a1 1 0 1 0 0-2H7a1 1 0 0 1-1-1V9.914l1.293 1.293a1 1 0 0 0 1.414-1.414l-3-3a1 1 0 0 0-1.414 0zm21.414 5.414a1 1 0 0 0-1.414-1.414L20 15.086V9.5a3 3 0 0 0-3-3h-5a1 1 0 1 0 0 2h5a1 1 0 0 1 1 1v5.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.414 0z"
               clip-rule="evenodd"
-              opacity="1"
-            ></path>
+              opacity="1"></path>
           </g>
         </svg>
       </div>
       <div
-        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg"
-      >
+        class="transition-all duration-150 flex items-center justify-center overflow-hidden rounded-lg">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -335,20 +304,17 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="h-8 w-8 p-1 lucide lucide-send"
-        >
+          class="h-8 w-8 p-1 lucide lucide-send">
           <path d="m22 2-7 20-4-9-9-4Z" />
           <path d="M22 2 11 13" />
         </svg>
       </div>
     </div>
     <div
-      class="flex gap-3 items-center text-sm font-light text-neutral-400 dark:text-neutral-500"
-    >
+      class="flex gap-3 items-center text-sm font-light text-neutral-400 dark:text-neutral-500">
       <p>{{ ThreadData?.Replies }} replies</p>
       <div
-        class="w-[3px] h-[3px] rounded-full bg-neutral-400 dark:bg-neutral-500"
-      ></div>
+        class="w-[3px] h-[3px] rounded-full bg-neutral-400 dark:bg-neutral-500"></div>
       <p>{{ likeCount }} likes</p>
     </div>
   </div>

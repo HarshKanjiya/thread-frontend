@@ -94,7 +94,7 @@ export class CreatePostComponent {
 
   textAreaCounter(e: any) {
 
-    if (this.count < 10) {
+    if (this.count <= 100) {
       this.count = e.target.value.trim().length
       this.threadInputText = e.target.value.trim()
     }

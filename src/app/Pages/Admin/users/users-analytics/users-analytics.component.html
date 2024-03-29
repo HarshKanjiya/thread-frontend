@@ -1,46 +1,397 @@
-<div class="flex flex-col gap-2 w-full p-3 sm:p-5 h-full">
+<div class="flex flex-col gap-4 w-full p-3 sm:p-5 h-full">
   <div
     @enter
     class="w-full flex items-center justify-between sticky top-0 backdrop-blur-md"
   >
-    <div class="flex h-[40px] items-center gap-3">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="stroke-neutral-600 dark:stroke-white h-6 w-6"
-      >
-        <path d="m8 2 1.88 1.88" />
-        <path d="M14.12 3.88 16 2" />
-        <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1" />
-        <path
-          d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"
-        />
-        <path d="M12 20v-9" />
-        <path d="M6.53 9C4.6 8.8 3 7.1 3 5" />
-        <path d="M6 13H2" />
-        <path d="M3 21c0-2.1 1.7-3.9 3.8-4" />
-        <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4" />
-        <path d="M22 13h-4" />
-        <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4" />
-      </svg>
-      <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
-        {{ dataSource.userData.data?.UserName }}
-      </h1>
+    <div class="flex h-[50px] items-center gap-3">
+      <div>
+        <image-loader
+          class="h-9 w-9 rounded-full"
+          [src]="dataSource.userData.data?.AvatarURL"
+        ></image-loader>
+      </div>
+      @if(!dataSource.userData.data || dataSource.userData.loading){
+      <div class="flex justify-start flex-col gap-1 w-[130px] animate-pulse">
+        <div class="h-[20px] bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+        <div class="h-[14px] bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+      </div>
+      }@else {
+      <div class="flex justify-start flex-col">
+        <h1
+          class="text-lg leading-5 font-semibold text-gray-800 dark:text-white"
+        >
+          {{ dataSource.userData.data?.UserName }}
+        </h1>
+        <p class="text-s opacity-70">User Analitics</p>
+      </div>
+      }
     </div>
   </div>
 
   <div
-    class="overflow-y-scroll custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
+    class="overflow-y-auto custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark min-h-max h-full flex-1 w-full"
   >
-    <div class="flex flex-col gap-3 h-max w-full">
-      <!-- write here -->
+    <div class="grid grid-cols-6 grid-flow-dense gap-4 w-full">
+      <!-- Personal Info -->
+      <div
+        class="flex flex-col col-span-2 bg-gray-200/60 dark:bg-gray-700 rounded-lg"
+      >
+        <div class="py-3 px-3 border-b border-gray-300 dark:border-gray-800">
+          <h2 class="font-bold text-gray-500 dark:text-gray-300">
+            Personal Information
+          </h2>
+        </div>
+        @if(dataSource.userData.loading){
+        <div class="h-[232px] w-full">
+          <loader />
+        </div>
+        }@else{
+        <div class="grid grid-cols-2 gap-2 py-2">
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <path d="M18 20a6 6 0 0 0-12 0" />
+                <circle cx="12" cy="10" r="4" />
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >User Name</span
+              >
+              <p>{{ dataSource.userData.data?.UserName }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <path d="m3 15 4-8 4 8" />
+                <path d="M4 13h6" />
+                <circle cx="18" cy="12" r="3" />
+                <path d="M21 9v6" />
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Name</span
+              >
+              <p>{{ dataSource.userData.data?.Name }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8" />
+                <path
+                  d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"
+                />
+                <path d="M2 21h20" />
+                <path d="M7 8v3" />
+                <path d="M12 8v3" />
+                <path d="M17 8v3" />
+                <path d="M7 4h0.01" />
+                <path d="M12 4h0.01" />
+                <path d="M17 4h0.01" />
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Birth Date</span
+              >
+              <p>{{ dataSource.userData.data?.Birthdate }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                id="gender"
+                class="fill-gray-800 dark:fill-gray-300 h-6 w-6 stroke-[0.5] stroke-neutral-500"
+              >
+                <path
+                  class=""
+                  d="M44.5,15.67v6.72a.5.5,0,0,1-.5.5H41.95a.5.5,0,0,1-.5-.5V20.38l-2.03,2.03a11.081,11.081,0,0,1,2.23,6.67c0,.34-.02.68-.04,1.01a.584.584,0,0,1,.02.19A11.062,11.062,0,0,1,22.8,37.01a11.137,11.137,0,0,1-3.2-6.92c-.01-.11-.02-.22-.02-.33a12.2,12.2,0,0,0,3.14-2.1,7.428,7.428,0,0,0-.13,1.42,8.01,8.01,0,1,0,13.67-5.66,8.62,8.62,0,0,0-1.89-1.41h-.01a8.083,8.083,0,0,0-2.19-.79,8.192,8.192,0,0,0-1.57-.15,8.045,8.045,0,0,0-4.45,1.36,7.588,7.588,0,0,0-1.21.99,7.028,7.028,0,0,0-.52.57,7.632,7.632,0,0,0-.73,1.07c-.02.01-.03.02-.02.03a10.771,10.771,0,0,1-2.28,2.39,12.913,12.913,0,0,1-1.78,1.15c-.01.01-.02.01-.03.02a.612.612,0,0,1-.12.05,10.77,10.77,0,0,1-3.34,1.04.06.06,0,0,1-.04.01v2.29H18.3a.5.5,0,0,1,.5.5v2.05a.5.5,0,0,1-.5.5H16.08v2.25a.508.508,0,0,1-.5.5H13.53a.5.5,0,0,1-.5-.5V35.09H10.82a.5.5,0,0,1-.5-.5V32.54a.5.5,0,0,1,.5-.5h2.21V29.75A11,11,0,0,1,3.5,18.8a11.133,11.133,0,0,1,2.04-6.4,11,11,0,0,1,9.02-4.65,11.325,11.325,0,0,1,1.68.13,10.947,10.947,0,0,1,7.99,5.56v.01a10.937,10.937,0,0,1,1.32,4.26v.05c.01.12.03.24.03.36a9.971,9.971,0,0,0-1.33.72,11.331,11.331,0,0,0-1.82,1.38A8,8,0,1,0,7.66,22.87a8.113,8.113,0,0,0,4.65,3.62,8.632,8.632,0,0,0,.88.2,7.971,7.971,0,0,0,7.58-2.85c.01-.01.01-.01.01-.02.1-.12.2-.25.29-.38.01-.01.01-.02.03-.03.021-.043.308-.453.33-.52,0,0,.006-.007.01-.01a11,11,0,0,1,2.81-2.85,8.913,8.913,0,0,1,.82-.52,9.739,9.739,0,0,1,1.92-.88,11.093,11.093,0,0,1,10.27,1.63l2.03-2.04H37.28a.5.5,0,0,1-.5-.5V15.67a.5.5,0,0,1,.5-.5H44A.5.5,0,0,1,44.5,15.67Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Gender</span
+              >
+              <p class="lowercase">{{ dataSource.userData.data?.Gender }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <p
+                class="absolute text-xs -top-1.5 -right-3 rounded-full h-4 w-4 grid place-content-center"
+              >
+                1
+              </p>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Email (Primary)</span
+              >
+              <p>{{ dataSource.userData.data?.Email }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <p
+                class="absolute text-xs -top-1.5 -right-3 rounded-full h-4 w-4 grid place-content-center"
+              >
+                2
+              </p>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Email (secondary)</span
+              >
+              <p>{{ dataSource.userData.data?.Email }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Phone Number</span
+              >
+              <p>{{ dataSource.userData.data?.PhoneNumber | phoneFormat }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 flex items-center gap-3">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-gray-800 dark:stroke-gray-300 h-6 w-6"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+              </svg>
+            </div>
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Account Status</span
+              >
+              <p>
+                {{ dataSource.userData.data?.Private ? "Private" : "Public" }}
+              </p>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Coutns -->
+      <div
+        class="flex flex-col col-span-1 bg-gray-200/60 dark:bg-gray-700 rounded-lg"
+      >
+        <div class="py-3 px-3 border-b border-gray-300 dark:border-gray-800">
+          <h2 class="font-bold text-gray-500 dark:text-gray-300">Counts</h2>
+        </div>
+        @if(dataSource.userData.loading){
+        <div class="h-[232px] w-full">
+          <loader />
+        </div>
+        }@else{
+        <div class="grid grid-cols-2 gap-2 py-2">
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Followers Count</span
+              >
+              <p>{{ dataSource.userData.data?.FollowersCount }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Following Count</span
+              >
+              <p>{{ dataSource.userData.data?.FollowingCount }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Posts Count</span
+              >
+              <p>{{ dataSource.userData.data?.PostsCount }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Replies Count</span
+              >
+              <p>{{ dataSource.userData.data?.RepliesCount }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Active Sessions</span
+              >
+              <p>{{ dataSource.userData.data?.Devices?.length }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1.5">
+            <div class="relative">
+              <span
+                class="text-xs opacity-50 leading-3 flex flex-col items-start justify-center"
+                >Total Sessions</span
+              >
+              <p>{{ dataSource.userData.data?.Devices?.length }}</p>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Reports and ban -->
+      <div
+        class="flex flex-col col-span-3 row-span-1 bg-gray-200/60 dark:bg-gray-700 rounded-lg"
+      >
+        <div class="py-3 px-3 border-b border-gray-300 dark:border-gray-800">
+          <h2 class="font-bold text-gray-500 dark:text-gray-300">
+            Recent Posts
+          </h2>
+        </div>
+        @if(dataSource.userData.loading){
+        <div class="h-[232px] w-full">
+          <loader />
+        </div>
+        }@else{
+        <div
+          class="h-[232px] overflow-y-scroll flex flex-col custom-scrollbar custom-scrollbar-light dark:custom-scrollbar-dark gap-2 py-2 px-3"
+        >
+          @for (item of dataSource.Posts.data.Posts; track $index) {
+          <div class="w-full flex gap-3 items-start justify-start">
+            <div class="py-2">
+              <image-loader
+                class="h-7 w-7 rounded-full"
+                [src]="dataSource.userData.data?.AvatarURL"
+              ></image-loader>
+            </div>
+            <div class="flex flex-col gap-1">
+              <p class="text-sm">{{ item.AuthorUserName }}</p>
+              <div>
+                <p>{{ item.Content.Text }}</p>
+                @if(item.Content.Files.length > 0){
+                <app-carousel [slides]="item.Content.Files"></app-carousel>
+                }
+              </div>
+              <div></div>
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
     </div>
   </div>
 </div>

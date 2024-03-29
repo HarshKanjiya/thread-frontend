@@ -5,14 +5,15 @@ import { Store } from '@ngrx/store';
 import { IUserInitialState } from '../../../../reducers/User/UserTypes';
 import { LoaderComponent } from '../../../../Components/loader/loader.component';
 import { NoDataFoundComponent } from '../../../util/no-data-found/no-data-found.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import moment from 'moment';
 
 
 @Component({
   selector: 'app-activity',
   standalone: true,
-  imports: [LoaderComponent, NoDataFoundComponent,RouterLink],
+  imports: [LoaderComponent, NoDataFoundComponent, RouterLink],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss',
   animations: [
@@ -44,13 +45,13 @@ export class ActivityComponent {
   loading: boolean = false
   initialLoad: boolean = true
 
-  constructor(private UserService: UserService, private store: Store<any>) {
+  constructor(private UserService: UserService, private store: Store<any>, private router: Router) {
     store.select("User").subscribe((res: IUserInitialState) => {
       this.loading = res.loading
       this.userData = res.userData
       this.data = res.notificatinos
 
-      if(this.initialLoad && this.userData){
+      if (this.initialLoad && this.userData) {
         this.getNotifs("ALL")
         this.initialLoad = false
       }
@@ -62,42 +63,18 @@ export class ActivityComponent {
     this.UserService.getMyNotification(this.userData?.UserId, type)
   }
 
-  getTimePassed(createdAt: Date) {
-    console.log('createAt :>> ', createdAt, Date.now());
-
-    // @ts-ignore
-    return (Date.now() - createdAt).toLocaleString()
+  getTimePassed(time: any) {
+    return moment(time).toNow()
   }
 
-
-  timeDifference(createAt: any): string {
-    const currentTime = new Date();
-    const postDate = new Date(createAt);
-    const difference = currentTime.getTime() - postDate.getTime();
-
-    const seconds = Math.floor(difference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-
-
-    if (hours >= 8760) {
-      return `${Math.floor(hours / 8760)}y`
+  redirect(item: any) {
+    switch (item.Type) {
+      case "FOLLOW":
+        this.router.navigate(["user", item.CasterUserName])
+        break
+      case "REPLY":
+        this.router.navigate(["thread", item.HelperId])
+        break
     }
-    if (hours >= 720 && hours < 8760) {
-      return `${Math.floor(hours / 720)}m`
-    }
-    if (hours >= 24 && hours < 168) {
-      return `${Math.floor(hours / 24)}d`
-    }
-    if (hours > 0 && hours < 24) {
-      return `${hours}h`;
-    }
-    if (hours <= 0 && minutes > 0) {
-      return `${minutes}m`;
-    }
-    if (hours < 0 && minutes < 0) {
-      return `${seconds}s`;
-    }
-    return "1y"
   }
 }

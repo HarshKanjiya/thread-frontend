@@ -79,7 +79,6 @@ export class ThreadComponent {
       this.UserData = res.userData
     })
 
-    console.log('object :>> ', this.ThreadData);
     if (this.ThreadData) {
       this.liked = this.ThreadData.LikedByMe
       this.likeCount = this.ThreadData.Likes

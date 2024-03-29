@@ -1,5 +1,5 @@
 <div
-  class="hidden w-full px-5 py-1 sm:flex fixed z-20 gap-5 justify-center items-center bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg"
+  class="hidden w-full px-5 py-1 sm:flex fixed z-[100] gap-5 justify-center items-center bg-white dark:bg-[rgba(16,16,16,0.3)] backdrop-blur-lg"
 >
   <div class="w-full max-w-[1220px]">
     <div class="flex w-full justify-between items-center">
@@ -126,7 +126,7 @@
           </button>
 
           <button
-            (click)="openDialog()"
+            (click)="dialog.openDialog('CREATE_THREAD')"
             class="button-anim rounded-lg  py-3 flex justify-center items-center hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.06)] {{
               backButtonVisibility ? 'px-3.5' : 'px-6'
             }}"

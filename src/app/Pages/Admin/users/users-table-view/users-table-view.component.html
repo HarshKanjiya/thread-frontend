@@ -1,11 +1,9 @@
 <div
   @initAnim
-  class="w-full p-1 h-[510px] overflow-hidden max-h-full flex flex-col items-center border border-gray-300 dark:border-gray-700 rounded-lg"
->
+  class="w-full p-1 h-[510px] overflow-hidden max-h-full flex flex-col items-center">
   <!-- header -->
   <div
-    class="w-full flex items-center justify-between py-2 px-3 rounded-md bg-gray-200 dark:bg-gray-800/60 pr-6"
-  >
+    class="w-full flex items-center justify-between py-2 px-3 rounded-md bg-gray-200 dark:bg-gray-800/60 pr-6">
     <div class="flex items-center gap-3">
       <div class="w-10 flex items-center justify-center">No.</div>
       <div #sortingMenu class="relative flex items-center gap-2">
@@ -16,8 +14,7 @@
               ? (filterSelector = '')
               : (filterSelector = 'user')
           "
-          class="p-1 rounded-md transition-all duration-150 hover:bg-gray-700/60"
-        >
+          class="p-1 rounded-md transition-all duration-150 hover:bg-gray-700/60">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -28,8 +25,7 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="stroke-black dark:stroke-white h-5 w-5"
-          >
+            class="stroke-black dark:stroke-white h-5 w-5">
             <path d="m7 15 5 5 5-5" />
             <path d="m7 9 5-5 5 5" />
           </svg>
@@ -37,13 +33,11 @@
         @if (filterSelector === 'user') {
         <div
           @dropBody
-          class="absolute z-10 text-sm top-[100%] -left-5 w-max flex flex-col justify-between overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-300 dark:border-gray-800"
-        >
+          class="absolute z-10 text-sm top-[100%] -left-5 w-max flex flex-col justify-between overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-300 dark:border-gray-800">
           <button
             type="button"
             class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-            (click)="filterData(FilterTypes.USER_AC)"
-          >
+            (click)="filterData(FilterTypes.USER_AC)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -54,8 +48,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="stroke-black dark:stroke-white h-5 w-5"
-            >
+              class="stroke-black dark:stroke-white h-5 w-5">
               <path d="m3 16 4 4 4-4" />
               <path d="M7 20V4" />
               <path d="M20 8h-5" />
@@ -68,8 +61,7 @@
           <button
             type="button"
             class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-            (click)="filterData(FilterTypes.USER_DC)"
-          >
+            (click)="filterData(FilterTypes.USER_DC)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -80,8 +72,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="stroke-black dark:stroke-white h-5 w-5"
-            >
+              class="stroke-black dark:stroke-white h-5 w-5">
               <path d="m3 8 4-4 4 4" />
               <path d="M7 4v16" />
               <path d="M15 4h5l-5 6h5" />
@@ -94,8 +85,7 @@
           <button
             type="button"
             class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-            (click)="filterData(FilterTypes.USER_DEFAULT_REVERSE)"
-          >
+            (click)="filterData(FilterTypes.USER_DEFAULT_REVERSE)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -106,11 +96,9 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="stroke-black dark:stroke-white h-5 w-5"
-            >
+              class="stroke-black dark:stroke-white h-5 w-5">
               <path
-                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
-              />
+                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
               <path d="M18 14h-8" />
               <path d="M15 18h-5" />
               <path d="M10 6h8v4h-8V6Z" />
@@ -121,8 +109,7 @@
           <button
             type="button"
             class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-            (click)="filterData(FilterTypes.USER_DEFAULT)"
-          >
+            (click)="filterData(FilterTypes.USER_DEFAULT)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -133,11 +120,9 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="stroke-black dark:stroke-white h-5 w-5"
-            >
+              class="stroke-black dark:stroke-white h-5 w-5">
               <path
-                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
-              />
+                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
               <path d="M18 14h-8" />
               <path d="M15 18h-5" />
               <path d="M10 6h8v4h-8V6Z" />
@@ -160,14 +145,10 @@
 
   <!-- body -->
   <div
-    class="overflow-x-hidden overflow-y-auto divide-y divide-gray-300 dark:divide-gray-700/60 flex w-full h-full flex-col mt-1 custom-table-scrollbar"
-  >
-    @if(data?.length === 0){
-    <no-data-found class="h-full" />
-    }@else { @for (item of data; track $index) {
+    class="overflow-x-hidden overflow-y-auto divide-y divide-gray-300 dark:divide-gray-700/60 flex w-full h-full flex-col mt-1 custom-table-scrollbar">
+    @for (item of data; track $index) {
     <div
-      class="w-[99.5%] flex items-center justify-between py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-sm"
-    >
+      class="w-[99.5%] flex items-center justify-between py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-150 rounded-sm">
       <div class="flex items-center gap-3">
         <div class="w-10 flex items-center justify-center">
           {{ $index + 1 }}
@@ -179,15 +160,13 @@
               item?.AvatarURL
                 ? item?.AvatarURL
                 : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACUCAMAAAA02EJtAAAAMFBMVEXk5ueutLfn6eqqsLTM0NLq7O26v8KnrrHf4eLHy82xt7rS1dfY29zU2Nnb3t/DyMryEXPkAAAD7klEQVR4nO2c2XLkIAwAQdz4+v+/XRg7GydxPICwoCr0U3bz0iULcYkwNhgMBoPBYDAYDAaDwaArlAJm54B9/dgtwGanPT/wWlro0RbYOmlh+Jnwz21hndmCmjcv+E+E0M6q1nonwOoLzf+4bvIA7GbuTLngUx9pAMvlp/8qq20Hrmp75/nCz81drX4b0h0jm5umiUZX1zSukCwaEC1drX8veI7r1s41/esfrrKRq9oSR9SJNnUApvvCf4lfW5iu+aJxLmgR1txE3TELuSvI/ETdseSqhaJcUFes8qDSj6xS0RhWUlFEUIMrqSpLXU9dQTtnzeWiAU+oCg4RVE46vULeiuoHjm4Pawtm/zOazBQ1/iN+plJVZdP/J4JsIaCQplyQbQktWpVswsJV1QjVuIIJreqpVCValVOpOrSpIFpfQ9op1R1mqP5tVbJcxVcAqo0AerXCyYoVW9CmZKtA/BqATBWwCSAclapC7le4mKjWq+iZlW4XwFbs3orwiA0ZVcITNig4Wj9Deca64FTpRLNvgb4iNOWtO+okiGpZdagW3Vkc0J2tvECcWoiFVpWx4tJKHFRMvaK/ECwsArTDf6f04KLFbWBZCpCPqZ0C01bdC9nFtc1lcAQyN1mC6lTtyjWvJcCT3wSfUBlloHVbGCzJ5VW3brYD+77NLmJoL4F/IekIi2yPeot637/YRfdiBKwTN7LGN5qiLoHfs0D4qbXdNxST2n+Lbfin35ZuWoI/iY3hmxbGiJelMVy7pc8edsZehdMuUjonp9ke/9EpEFA78ccuTeF4ZjFNMaYBKeW0zOv+i24I0YtZ6i+nWK83OXeQCADWLk7zfSj9Wq7Cr8MIW9sNMVA2xvKu+H8pXCG+UxNbYFPJqUV8gkOqCXbSt9/8Jrom2FLlLrDl+mlNKsZvJA9FACbspUXEy6dlwcrEYfQOIdyTWRuWJB55YXGW9c/JKlnj05/x8pniNet6Ef1APHCDcbN2RspulbMgYftUjJcVjzFDSOt/+09MvU0irJh25QSEr5SxKv0ApZwqSQDuyY//QZVmBuR1aoYrMgng4TQ9uyKng+dq1E88qhCQxTSCOYCt0KaW6Vqqim1QKKCwDoCkqFLfKLosAnxHdQFFbU2JB+fVXfNvYRTp4D+Rna6AbKRBkPsaC9VHgyQvBbAPqjDkdgw0E+WxYygjBUoeflcka9JqUPzPpG8KVMNMjeQ8HGo4/HdSi0CFlz9I0l+6th1UEZ9Yr1qW/wOTGNS5eVC5SMyACo8p0KTNWOinnzVI6x1Sjev/i7S/dwBdqCZNWNim/zokjavJiPak/ZmmVfZA2tMR6IIk1cEf4h/bxDWtKov23AAAAABJRU5ErkJggg=='
-            }}"
-          />
+            }}" />
           <p>{{ item?.UserName }}</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
         <div
-          class="relative group min-w-16 flex gap-2 items-center justify-center"
-        >
+          class="relative group min-w-16 flex gap-2 items-center justify-center">
           {{ $index }}
           @if(item?.Reports > 10){
           <svg
@@ -200,11 +179,9 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="stroke-red-500 h-5 w-5"
-          >
+            class="stroke-red-500 h-5 w-5">
             <path
-              d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
-            />
+              d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
             <path d="M12 9v4" />
             <path d="M12 17h.01" />
           </svg>
@@ -212,12 +189,10 @@
         </div>
         <div
           #menu
-          class="relative group min-w-16 flex items-center justify-center"
-        >
+          class="relative group min-w-16 flex items-center justify-center">
           <button
             (click)="actionmenuClickHandler(item)"
-            class="p-1 rounded-md transition-all duration-150 hover:bg-gray-300/60 dark:hover:bg-gray-800/60"
-          >
+            class="p-1 rounded-md transition-all duration-150 hover:bg-gray-300/60 dark:hover:bg-gray-800/60">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -228,8 +203,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="stroke-black dark:stroke-white h-5 w-5"
-            >
+              class="stroke-black dark:stroke-white h-5 w-5">
               <circle cx="12" cy="12" r="1" />
               <circle cx="12" cy="5" r="1" />
               <circle cx="12" cy="19" r="1" />
@@ -240,21 +214,18 @@
             @dropBody
             class="absolute z-10 text-sm right-[10%] w-max flex flex-col justify-between overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-300 dark:border-gray-800 {{
               $index > data.length - 3 ? 'bottom-[100%]' : 'top-[100%]'
-            }}"
-          >
+            }}">
             <button
               type="button"
               class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-fit flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-              (click)="menuClickHandler('profile')"
-            >
+              (click)="menuClickHandler('profile')">
               View Profile
             </button>
             <hr class="w-full border-gray-300 dark:border-gray-700" />
             <button
               type="button"
               class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700/60 px-4 py-2 w-full flex justify-start items-center gap-2 text-sm pt-3 border-none outline-none focus:bg-gray-200 dark:focus:bg-gray-700/60 transition-all duration-150"
-              (click)="menuClickHandler('ban')"
-            >
+              (click)="menuClickHandler('ban')">
               Ban User
             </button>
           </div>
@@ -262,6 +233,6 @@
         </div>
       </div>
     </div>
-    }}
+    }
   </div>
 </div>

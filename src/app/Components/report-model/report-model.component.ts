@@ -67,7 +67,7 @@ export class ReportModelComponent {
 
   constructor(public dialog: DialogService, private http: HttpService, private toast: ToastService) { }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.getReportCategory()
   }
 

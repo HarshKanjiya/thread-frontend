@@ -5,31 +5,25 @@ import { Store } from '@ngrx/store';
 import { ThreadComponent } from '../../../../Components/thread/thread.component';
 import { PostService } from '../../../../reducers/Post/Post.service';
 import { LoaderComponent } from '../../../../Components/loader/loader.component';
+import { EditProfileComponent } from "../edit-profile/edit-profile.component";
 
 @Component({
   selector: 'app-my-profile-page',
   standalone: true,
-  imports: [ThreadComponent, LoaderComponent],
   templateUrl: './myProfile-page.component.html',
   animations: [
     trigger("body", [
       transition(":enter", [
         style({ opacity: 0, }),
-        animate(
-          "150ms ease-in-out",
-          style({ opacity: 1, })
-        )
+        animate("150ms ease-in-out", style({ opacity: 1, }))
       ]),
       transition(":leave", [
         style({ opacity: 1, }),
-        animate(
-          "150ms ease-in-out",
-          style({ opacity: 0, })
-        )
+        animate("150ms ease-in-out", style({ opacity: 0, }))
       ])
     ])
-  ]
-
+  ],
+  imports: [ThreadComponent, LoaderComponent, EditProfileComponent]
 })
 export class MyProfilePageComponent {
 
@@ -40,6 +34,7 @@ export class MyProfilePageComponent {
 
   userLoading: boolean = false;
   postLoading: boolean = false;
+  editProfile: boolean = false;
 
   intialLoad: boolean = true
 
@@ -80,7 +75,7 @@ export class MyProfilePageComponent {
 
 
   ngAfterViewInit() {
-    this.menuPosition = this.menuElement.nativeElement.offsetTop
+    this.menuPosition = this.menuElement?.nativeElement.offsetTop
   }
 
   myProfile: boolean = false

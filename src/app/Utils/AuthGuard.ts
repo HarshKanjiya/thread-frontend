@@ -16,8 +16,6 @@ export class AuthGuard {
     let aToken = this.cookie.get("AccessToken")
     let user = this.cookie.get("UserName")
 
-    if (!aToken) this.userService.getMySession()
-
     if (rToken && user) {
       this.userService.getMySession()
 
