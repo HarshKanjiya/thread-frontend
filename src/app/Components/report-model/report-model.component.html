@@ -36,13 +36,33 @@
         <div class="h-full w-full sm:w-[450px] md:w-[450px] lg:w-[600px]">
           @if (loading) {
           <loader class="h-full" />
+          }@else { @if(Reports.length > 0){
+          <div>
+            @for (item of Reports; track $index) {
+            <button>
+              {{ item.Text }}
+            </button>
+            }
+          </div>
           }@else {
 
-          <div class="flex flex-col items-center justify-start">
-            <div>Report this Post</div>
+          <div class="flex flex-col gap-1 items-center justify-start">
+            <div class="text-left py-3">
+              Your report is anonymous, except if you're reporting an
+              intellectual property infringement. if someone is in immediate
+              danger, call the local emergency services - don't wait.
+            </div>
+
+            <p
+              class="font-bold text-left w-full py-3 border-b mb-1 border-neutral-600 dark:border-neutral-800"
+            >
+              Why are you reporting this post?
+            </p>
+
             @for (item of Categories; track $index) {
             <button
-              class="border-none outline-none w-full px-1.5 py-2 flex justify-between items-center transition-all duration-150 hover:bg-neutral-200 dark:hover:bg-neutral-800/60 focus:bg-neutral-200 dark:focus:bg-neutral-800/60  rounded-md"
+              (click)="getReports(item.ReportCategoryId)"
+              class="border-none outline-none w-full px-1.5 py-2 flex justify-between items-center transition-all duration-150 hover:bg-neutral-200 dark:hover:bg-neutral-800/60 focus:bg-neutral-200 dark:focus:bg-neutral-800/60 rounded-md"
             >
               <p>{{ item.CategoryName }}</p>
               <div>
@@ -62,13 +82,9 @@
                 </svg>
               </div>
             </button>
-            @if($index !== Categories.length - 1){
-            <div
-              class="w-[98%] mx-auto h-[1px] bg-neutral-600 dark:bg-neutral-800"
-            ></div>
-            } }
+            }
           </div>
-          }
+          } }
         </div>
       </div>
     </div>

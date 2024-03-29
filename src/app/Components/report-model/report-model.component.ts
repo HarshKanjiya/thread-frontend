@@ -99,6 +99,7 @@ export class ReportModelComponent {
 
   getReports(id: string) {
     this.loading = true
+    this.Reports = []
     try {
       this.http.get(getAvailableReportsAPI + id).subscribe((res: ResDTO) => {
         this.loading = false

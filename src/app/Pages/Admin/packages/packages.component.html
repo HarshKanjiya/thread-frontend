@@ -146,7 +146,7 @@
       </div>
 
       <div
-        class="w-full overflow-x-hidden overflow-y-auto flex flex-row gap-3 flex-wrap items-start justify-start"
+        class="w-full h-full overflow-x-hidden overflow-y-auto flex flex-row gap-3 flex-wrap items-start justify-start"
       >
         @if(packages.length > 0){ @for (item of packages; track $index) {
         <div
@@ -179,7 +179,7 @@
         } }@else { @if(loading){
         <loader class="w-full" />
         }@else {
-        <no-data-found class="w-full" message="Packages not found!" />
+        <no-data-found class="w-full h-full" message="Packages not found!" />
         } }
       </div>
     </div>
